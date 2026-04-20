@@ -1,37 +1,50 @@
 import React from 'react';
 import CourseCard from '../components/CourseCard';
 
+interface Course {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  progress: number;
+}
+
 const Home: React.FC = () => {
-  const courses = [
+  const courses: Course[] = [
     {
       id: 1,
       title: 'Python基础',
       description: 'Python编程语言的基础概念、语法和应用',
-      icon: '📱'
+      icon: '📱',
+      progress: 75
     },
     {
       id: 2,
       title: '数据分析技术',
       description: '使用Python进行数据清洗、分析和可视化',
-      icon: '📊'
+      icon: '📊',
+      progress: 50
     },
     {
       id: 3,
       title: '数据采集与处理',
       description: '网络数据采集技术和数据预处理方法',
-      icon: '🔍'
+      icon: '🔍',
+      progress: 40
     },
     {
       id: 4,
       title: '供应链数据分析',
       description: '供应链管理中的数据分析方法和应用',
-      icon: '📦'
+      icon: '📦',
+      progress: 25
     },
     {
       id: 5,
       title: '数据库原理与应用',
       description: '数据库设计、SQL语言和数据库管理系统',
-      icon: '💾'
+      icon: '💾',
+      progress: 60
     }
   ];
 
