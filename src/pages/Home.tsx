@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CourseCard from '../components/CourseCard';
 
 interface Course {
@@ -10,7 +10,7 @@ interface Course {
 }
 
 const Home: React.FC = () => {
-  const courses: Course[] = [
+  const [courses, setCourses] = useState<Course[]>([
     {
       id: 1,
       title: 'Python基础',
@@ -46,7 +46,32 @@ const Home: React.FC = () => {
       icon: '💾',
       progress: 60
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    // 从localStorage加载课程数据
+    const loadCourseData = () => {
+      const storedCourses = localStorage.getItem('courses');
+      if (storedCourses) {
+        try {
+          const parsedCourses = JSON.parse(storedCourses);
+          // 只提取需要的字段
+          const updatedCourses = parsedCourses.map((course: any) => ({
+            id: course.id,
+            title: course.title,
+            description: course.description,
+            icon: course.icon,
+            progress: course.progress
+          }));
+          setCourses(updatedCourses);
+        } catch (error) {
+          console.error('Failed to parse stored courses:', error);
+        }
+      }
+    };
+    
+    loadCourseData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
