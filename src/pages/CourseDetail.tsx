@@ -368,23 +368,24 @@ const CourseDetail: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-800 mb-4">课程内容</h3>
               <div className="space-y-3">
                 {currentCourse.lessons.map((lesson) => (
-                  <div key={lesson.id} className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div 
+                    key={lesson.id} 
+                    onClick={() => toggleLessonCompletion(lesson.id)}
+                    className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                  >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center">
-                        <button 
-                          onClick={() => toggleLessonCompletion(lesson.id)}
-                          className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mr-3 cursor-pointer ${
-                            lesson.completed 
-                              ? 'bg-green-100 text-green-600' 
-                              : 'bg-gray-200 text-gray-400 hover:bg-gray-300'
-                          }`}
-                        >
+                        <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mr-3 ${
+                          lesson.completed 
+                            ? 'bg-green-100 text-green-600' 
+                            : 'bg-gray-200 text-gray-400'
+                        }`}>
                           {lesson.completed ? (
                             <span className="text-sm">✓</span>
                           ) : (
                             <span className="text-sm">{lesson.id}</span>
                           )}
-                        </button>
+                        </div>
                         <h4 className="font-medium text-gray-800">{lesson.title}</h4>
                       </div>
                       <span className={`text-sm font-medium ${
