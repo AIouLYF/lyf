@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第3章 库存数据分析 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第3章
+    </div>
+
+    <h2>第3章 库存数据分析</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论4课时 + 上机6课时</p>
+
+    <div class="knowledge-card">
+      <h3>3.1 库存周转率</h3>
+      <p><strong>库存周转率</strong> = 销售成本 / 平均库存</p>
+      <p>周转率越高，说明库存卖得越快，资金占用越少。</p>
+      <p><strong>平均库存</strong> = (期初库存 + 期末库存) / 2</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.2 库存周转天数</h3>
+      <p><strong>库存周转天数</strong> = 平均库存 / 日均销售成本 = 365 / 库存周转率</p>
+      <p>天数越短越好，说明库存变现速度越快。但过短可能导致缺货风险。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.3 ABC分类法</h3>
+      <p>按物料金额占比排序，将物料分为三类：</p>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>A类</strong>：前70%金额，约10%品种 → 重点管控</li>
+        <li><strong>B类</strong>：中间20%金额，约20%品种 → 常规管控</li>
+        <li><strong>C类</strong>：后10%金额，约70%品种 → 简单管控</li>
+      </ul>
+      <p>这是帕累托法则（二八定律）在库存管理中的应用。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.4 安全库存</h3>
+      <p>为防止断货而多备的库存。</p>
+      <p><strong>简化公式</strong>：安全库存 = 平均日销量 x 提前期 x 安全系数（一般取1.5~2）</p>
+      <p>安全库存不是越多越好，过高会增加资金占用和仓储成本。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.5 EOQ经济订货批量（了解）</h3>
+      <p>使订货成本和持有成本之和最小的订货量。</p>
+      <p><strong>公式</strong>：EOQ = sqrt(2DS/H)</p>
+      <p>D为年需求量，S为每次订货成本，H为单位年持有成本。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.6 Python示例：库存ABC分类</h3>
+      <div class="code-block">import pandas as pd
+
+df = pd.read_csv("库存数据.csv")
+df["金额"] = df["库存数量"] * df["单价"]
+df = df.sort_values("金额", ascending=False)
+df["累计金额"] = df["金额"].cumsum()
+df["累计金额占比"] = df["累计金额"] / df["金额"].sum()
+
+def abc_classify(p):
+    if p &lt;= 0.7: return "A"
+    elif p &lt;= 0.9: return "B"
+    else: return "C"
+
+df["ABC分类"] = df["累计金额占比"].apply(abc_classify)
+print(df[["物料名称", "金额", "累计金额占比", "ABC分类"]].head(10))</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>库存周转率越高越好吗？有没有可能太高了？</li>
+        <li>ABC分类中，A类品种少但金额大，应该怎么管理？</li>
+        <li>安全库存是不是越多越好？为什么？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>实训数据集：用Excel自建20行库存数据（物料名称、库存数量、单价、月销量），用于练习ABC分类和周转率</li>
+        <li>工具安装：Python pandas（pip install pandas）；Excel确保有"数据透视表"功能</li>
+        <li>线上教程：知乎搜索"ABC分类法实操"，找带Excel截图的教程</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch3">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch3-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">库存周转率的计算公式是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch3-q1',0)"><div class="option-radio"></div><span class="option-label">A. 销售收入 / 平均库存</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch3-q1',1)"><div class="option-radio"></div><span class="option-label">B. 销售成本 / 平均库存</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch3-q1',2)"><div class="option-radio"></div><span class="option-label">C. 平均库存 / 销售成本</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch3-q1',3)"><div class="option-radio"></div><span class="option-label">D. 期末库存 / 销售成本</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q1',1,'库存周转率 = 销售成本 / 平均库存。注意是销售成本不是销售收入。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B</strong>。库存周转率 = 销售成本 / 平均库存。注意是"销售成本"不是"销售收入"，因为库存是按成本计价的。周转率越高，说明库存变现越快。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch3-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">ABC分类法中，A类物料的金额占比通常约为？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch3-q2',0)"><div class="option-radio"></div><span class="option-label">A. 10%</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch3-q2',1)"><div class="option-radio"></div><span class="option-label">B. 30%</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch3-q2',2)"><div class="option-radio"></div><span class="option-label">C. 70%</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch3-q2',3)"><div class="option-radio"></div><span class="option-label">D. 90%</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q2',2,'A类物料品种约占10%，但金额约占70%。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>C. 70%</strong>。A类物料品种约占10%，但金额约占70%。这是帕累托法则（二八定律）在库存管理中的应用。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch3-q3" data-type="choice">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">安全库存的主要作用是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch3-q3',0)"><div class="option-radio"></div><span class="option-label">A. 降低采购成本</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch3-q3',1)"><div class="option-radio"></div><span class="option-label">B. 防止缺货</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch3-q3',2)"><div class="option-radio"></div><span class="option-label">C. 提高库存周转率</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch3-q3',3)"><div class="option-radio"></div><span class="option-label">D. 减少仓库面积</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q3',1,'安全库存是为防止断货而多备的库存。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 防止缺货</strong>。安全库存是为防止断货而设置的缓冲库存，用于覆盖提前期内的需求波动。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch3-q4" data-type="fill">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">填空题</span>
+        <div class="question-text">安全库存的简化计算公式：安全库存 = 平均日销量 x ________ x 安全系数。</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q4','提前期','提前期是从下单到收货的天数。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>提前期</strong>（或交货期/补货周期）。提前期是从下单到收货的天数。安全库存是为了覆盖提前期内的需求波动而设置的缓冲库存。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch3-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">库存周转天数越短，说明库存管理效率越低。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch3-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch3-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q5','false','周转天数越短，资金占用越少，管理效率越高。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。库存周转天数越短，说明库存从入库到销售出去的时间越短，资金占用越少，管理效率越高。但过短可能导致缺货风险。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch3')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch3')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch2.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第2章 采购数据分析</a>
+      <a href="ch4.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第4章 物流数据分析 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

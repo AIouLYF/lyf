@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3章 运算符与表达式 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                <a href="#">单元一：基础入门</a> &gt;
+                第3章 运算符与表达式
+            </div>
+            <h2>第3章 运算符与表达式</h2>
+            <div class="knowledge-card"><h3>核心知识点</h3><ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;"><li><strong>算术运算符：</strong><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>//</code> <code>%</code> <code>**</code>。</li><li><strong>比较运算符：</strong><code>==</code> <code>!=</code> <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code>。</li><li><strong>逻辑运算符：</strong><code>and</code>、<code>or</code>、<code>not</code>。</li><li><strong>赋值运算符：</strong><code>=</code> <code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code>。</li><li><strong>优先级：</strong>括号 &gt; 幂 &gt; 乘除 &gt; 加减 &gt; 比较 &gt; 逻辑。</li></ul></div><div class="knowledge-card"><h3>代码示例</h3><div class="code-block">price = 200
+discount = 0.8
+final_price = price * discount
+print("折后价：", final_price)
+
+is_vip = True
+amount = 150
+free_shipping = amount >= 100 and is_vip
+print("是否包邮：", free_shipping)</div></div><div class="self-check"><h4>自学自检小问题</h4><ol><li><code>10 / 3</code> 和 <code>10 // 3</code> 的结果分别是什么？</li><li><code>5 &gt; 3 and 2 &gt; 4</code> 的结果是True还是False？</li><li>如果我想先算加法再算乘法，应该怎么做？</li></ol></div>
+            <div class="quiz-container" id="quiz-ch3">
+                <div class="quiz-header">
+                    <div class="quiz-title">本章配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">表达式 10 // 3 的结果是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 3.33</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 3</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 1</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 3.0</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, '//是整除，10/3=3.33...整除为3。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>//是整除，10/3=3.33...整除为3。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">表达式 5 % 2 的结果是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 2.5</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 2</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 1</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 0</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 2, '%是取余，5除以2商2余1。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>%是取余，5除以2商2余1。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q3" data-type="choice" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">表达式 3 + 5 * 2 的结果是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q3', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 16</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q3', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 13</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q3', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 11</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q3', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 10</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, '乘法优先，5*2=10，3+10=13。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>乘法优先，5*2=10，3+10=13。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q4" data-type="choice" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">以下表达式的值为True的是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q4', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 5 > 10</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q4', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 3 == 3.0</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q4', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. "abc" == "ABC"</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q4', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. not True</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, '3==3.0比较数值相等为True。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>3==3.0比较数值相等为True。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q5" data-type="fill" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">表达式 2 ** 3 的结果是 ______。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q5', '8', '**是幂运算，2**3=8。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>**是幂运算，2**3=8。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q6" data-type="fill" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">逻辑运算符包括 and、______ 和 not。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q6', 'or', '三个逻辑运算符：and、or、not。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>三个逻辑运算符：and、or、not。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q7" data-type="tf" data-score="2">
+    <span class="question-number">第7题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">10 / 2 的结果是整数5。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'false', 'Python 3中10/2=5.0（浮点型）。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python 3中10/2=5.0（浮点型）。</p>
+    </div>
+</div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch3')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-ch3')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch2.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">&larr; 上一章</a>
+                <a href="ch4.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">下一章 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

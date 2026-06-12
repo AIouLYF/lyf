@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析概述 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第1章 数据分析概述</span>
+            </div>
+            <h2>第1章 数据分析概述</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点1.1：什么是数据分析？</h3>
+                <p>数据分析就是用数据来回答问题、支持决策的过程。简单说，就是把原始数据变成有用信息，再用信息指导行动。</p>
+                <p>举个例子：奶茶店每天记录销量，月底看看哪种口味卖得最好、哪天生意最好、下雨天对销量有没有影响——这就是数据分析。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点1.2：数据分析6步流程</h3>
+                <ol class="step-list">
+                    <li><strong>明确问题</strong>：先想清楚要解决什么业务问题。比如"为什么最近销售额下降了？"</li>
+                    <li><strong>收集数据</strong>：从数据库、Excel表格、问卷、网络等渠道获取相关数据。</li>
+                    <li><strong>清洗处理</strong>：删除重复、填补缺失、修正错误，让数据变得"干净"。</li>
+                    <li><strong>分析建模</strong>：用统计方法或模型找出数据中的规律和关系。</li>
+                    <li><strong>可视化呈现</strong>：把分析结果做成图表，让人一眼看懂。</li>
+                    <li><strong>输出建议</strong>：基于分析结果给出可执行的业务建议。</li>
+                </ol>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点1.3：商务数据分析师岗位</h3>
+                <p>高职毕业生常见的数据分析岗位：电商数据运营、门店数据专员、供应链数据助理、市场分析助理等。</p>
+                <p>核心能力要求：Excel熟练 + 会写SQL查数据 + 会基础Python + 会Tableau/Power BI做报表 + 懂业务。</p>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：B站"戴师兄数据分析"入门系列（前3集）</li>
+                    <li>数据集：和鲸社区"超市销售数据集"（CSV格式，约5000行）</li>
+                    <li>工具安装：Tableau Public官网下载（免费）https://public.tableau.com</li>
+                    <li>阅读材料：《深入浅出数据分析》第1章（图书馆可借）</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch1">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/4</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch1-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">数据分析流程的第一步是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch1-q1',0)"><div class="option-radio"></div><span class="option-label">A. 收集数据</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch1-q1',1)"><div class="option-radio"></div><span class="option-label">B. 明确问题</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch1-q1',2)"><div class="option-radio"></div><span class="option-label">C. 清洗处理</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch1-q1',3)"><div class="option-radio"></div><span class="option-label">D. 可视化呈现</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q1',1,'数据分析的第一步是明确问题。只有先明确要解决什么业务问题，才能确定需要收集什么数据。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>数据分析的第一步是明确问题。只有先明确要解决什么业务问题，才能确定需要收集什么数据。</div>
+                </div>
+                <div class="quiz-question" id="ch1-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">数据分析流程的最后一步是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch1-q2',0)"><div class="option-radio"></div><span class="option-label">A. 可视化呈现</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch1-q2',1)"><div class="option-radio"></div><span class="option-label">B. 分析建模</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch1-q2',2)"><div class="option-radio"></div><span class="option-label">C. 输出建议</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch1-q2',3)"><div class="option-radio"></div><span class="option-label">D. 收集数据</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q2',2,'数据分析的最后一步是输出建议。基于分析结果给出可执行的业务建议，才算完成分析闭环。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>数据分析的最后一步是输出建议。基于分析结果给出可执行的业务建议，才算完成分析闭环。</div>
+                </div>
+                <div class="quiz-question" id="ch1-q3" data-type="fill">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">数据分析的6个步骤依次是：明确问题→<input class='fill-input' placeholder='填写答案'>→清洗处理→分析建模→可视化呈现→<input class='fill-input' placeholder='填写答案'>。</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q3','收集数据','第一个空：收集数据。明确问题后需要从各种渠道获取相关数据。第二个空：输出建议。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>第一个空：收集数据。明确问题后需要从各种渠道获取相关数据。第二个空：输出建议。</div>
+                </div>
+                <div class="quiz-question" id="ch1-q4" data-type="tf">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">商务数据分析师的核心工具包括Excel、SQL、Python和Tableau。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q4','true','正确。商务数据分析师需要掌握Excel、SQL、Python和Tableau/Power BI等核心工具。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。商务数据分析师需要掌握Excel、SQL、Python和Tableau/Power BI等核心工具。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/4</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch1')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch1')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <span style="color:var(--text-lighter);">上一章：无（本章为第一章）</span>
+                <a href="ch2.html" style="color:var(--primary);font-weight:500;">下一章：第2章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目1：数据读取与基础操作 - pandas数据分析实战训练营</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">pandas数据分析实战训练营</a> &gt;
+                <span>项目1：数据读取与基础操作</span>
+            </div>
+
+            <h2>项目1：数据读取与基础操作</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">数据集：学生成绩表 | 难度：入门 | 预计用时：45分钟</p>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>学会安装和导入pandas库</li>
+                    <li>掌握CSV和Excel文件的读取方法</li>
+                    <li>会用head、tail、info、describe查看数据基本信息</li>
+                    <li>理解并能进行简单的数据类型转换</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. pandas是什么？</strong></p>
+                <p>pandas是Python中最流行的数据处理库，名字来源于"Panel Data"（面板数据）。你可以把它想象成一个超级强大的Excel表格工具，但它用代码来操作，处理几万行、几十万行数据都非常快。</p>
+
+                <p style="margin-top:16px;"><strong>2. 安装pandas</strong></p>
+                <p>如果你安装了Anaconda，pandas已经自带了。如果没有，在命令行输入：</p>
+                <div class="code-block">pip install pandas</div>
+
+                <p style="margin-top:16px;"><strong>3. 导入pandas</strong></p>
+                <p>按照行业惯例，我们通常给pandas起别名<code>pd</code>，这样写代码更简洁：</p>
+                <div class="code-block">import pandas as pd</div>
+
+                <p style="margin-top:16px;"><strong>4. 读取数据文件</strong></p>
+                <p>pandas可以读取多种格式的数据，最常用的两种：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>pd.read_csv('文件名.csv')</code>：读取CSV文件（纯文本表格，体积小）</li>
+                    <li><code>pd.read_excel('文件名.xlsx')</code>：读取Excel文件（需要安装openpyxl库）</li>
+                </ul>
+
+                <p style="margin-top:16px;"><strong>5. 查看数据基本信息</strong></p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>df.head()</code>：查看前5行数据，快速了解表格长什么样</li>
+                    <li><code>df.tail()</code>：查看最后5行数据</li>
+                    <li><code>df.info()</code>：查看每列的数据类型、非空值数量，检查有没有缺失</li>
+                    <li><code>df.describe()</code>：对数值列做统计描述（平均值、最大最小值等）</li>
+                </ul>
+
+                <p style="margin-top:16px;"><strong>6. 数据类型转换</strong></p>
+                <p>有时候数字被读成了文字（字符串），需要转换：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>df['列名'] = df['列名'].astype(int)</code>：转成整数</li>
+                    <li><code>df['列名'] = df['列名'].astype(float)</code>：转成小数</li>
+                    <li><code>df['列名'] = pd.to_numeric(df['列名'])</code>：智能转成数字</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block"># 第一步：导入pandas
+import pandas as pd
+
+# 第二步：读取学生成绩表（CSV格式）
+df = pd.read_csv('students.csv')
+
+# 第三步：查看数据基本信息
+print("=== 前5行数据 ===")
+print(df.head())
+
+print("\n=== 数据形状（行数, 列数）===")
+print(df.shape)
+
+print("\n=== 数据类型与非空值 ===")
+print(df.info())
+
+print("\n=== 数值列统计描述 ===")
+print(df.describe())
+
+# 第四步：数据类型转换
+# 假设'语文'列被读成了字符串，需要转成数字
+df['语文'] = pd.to_numeric(df['语文'], errors='coerce')
+df['数学'] = pd.to_numeric(df['数学'], errors='coerce')
+df['英语'] = pd.to_numeric(df['英语'], errors='coerce')
+
+print("\n=== 转换后的数据类型 ===")
+print(df.dtypes)
+
+# 第五步：查看最后几行
+print("\n=== 最后3行 ===")
+print(df.tail(3))</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <ol class="step-list">
+                    <li>打开Jupyter Notebook，新建一个笔记本</li>
+                    <li>在第一行输入 <code>import pandas as pd</code>，按Shift+Enter运行</li>
+                    <li>准备数据文件：创建一个students.csv文件，包含姓名、语文、数学、英语四列</li>
+                    <li>用 <code>df = pd.read_csv('students.csv')</code> 读取数据</li>
+                    <li>运行 <code>df.head()</code> 查看数据是否正确读入</li>
+                    <li>运行 <code>df.info()</code> 检查数据类型，看数字列是否被识别为int或float</li>
+                    <li>如果有类型不对，用 <code>astype()</code> 或 <code>pd.to_numeric()</code> 转换</li>
+                    <li>运行 <code>df.describe()</code> 查看各科成绩的平均分、最高最低分</li>
+                </ol>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>配套数据集：students.csv</h3>
+                <p>你可以用以下数据创建students.csv文件进行练习：</p>
+                <div class="code-block">姓名,语文,数学,英语
+张三,85,90,88
+李四,78,82,80
+王五,92,95,94
+赵六,65,70,68
+钱七,88,85,90
+孙八,74,78,76
+周九,90,92,91
+吴十,80,84,82</div>
+            </div>
+
+            <div class="quiz-container" id="quiz-p1">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习题</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/6</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="p1-q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">pandas通常用什么别名导入？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p1-q1', 0)"><div class="option-radio"></div><span class="option-label">A. pd</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p1-q1', 1)"><div class="option-radio"></div><span class="option-label">B. ps</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p1-q1', 2)"><div class="option-radio"></div><span class="option-label">C. pds</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p1-q1', 3)"><div class="option-radio"></div><span class="option-label">D. pan</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q1', 0, '行业惯例使用 import pandas as pd，别名pd。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>行业惯例使用 <code>import pandas as pd</code>，别名pd。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p1-q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">读取CSV文件应该使用哪个函数？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p1-q2', 0)"><div class="option-radio"></div><span class="option-label">A. pd.read_excel()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p1-q2', 1)"><div class="option-radio"></div><span class="option-label">B. pd.read_csv()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p1-q2', 2)"><div class="option-radio"></div><span class="option-label">C. pd.load_csv()</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p1-q2', 3)"><div class="option-radio"></div><span class="option-label">D. pd.open_csv()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q2', 1, 'pd.read_csv() 是pandas读取CSV文件的标准函数。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>pd.read_csv()</code> 是pandas读取CSV文件的标准函数。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p1-q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">df.head(3) 会显示什么？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p1-q3', 0)"><div class="option-radio"></div><span class="option-label">A. 最后3行</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p1-q3', 1)"><div class="option-radio"></div><span class="option-label">B. 前3行</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p1-q3', 2)"><div class="option-radio"></div><span class="option-label">C. 第3行</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p1-q3', 3)"><div class="option-radio"></div><span class="option-label">D. 前5行</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q3', 1, 'head()显示前N行，默认5行，传入3则显示前3行。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>head()</code>显示前N行，默认5行，传入3则显示前3行。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p1-q4" data-type="tf" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">df.info() 可以查看每列的数据类型和非空值数量。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('p1-q4', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('p1-q4', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q4', 'true', 'info()方法会输出每列的名称、非空值数量和数据类型。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>info()</code>方法会输出每列的名称、非空值数量和数据类型。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p1-q5" data-type="fill" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">查看数值列统计描述（均值、最大最小值等）的方法是 <code>df.______()</code></div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q5', 'describe', 'describe()方法会对所有数值列计算计数、均值、标准差、最小值、四分位数、最大值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>describe()</code>方法会对所有数值列计算计数、均值、标准差、最小值、四分位数、最大值。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p1-q6" data-type="choice" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">将某列转换为整数类型，应该使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p1-q6', 0)"><div class="option-radio"></div><span class="option-label">A. df['列名'].to_int()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p1-q6', 1)"><div class="option-radio"></div><span class="option-label">B. df['列名'].astype(int)</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p1-q6', 2)"><div class="option-radio"></div><span class="option-label">C. df['列名'].convert(int)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p1-q6', 3)"><div class="option-radio"></div><span class="option-label">D. df['列名'].change(int)</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q6', 1, 'astype()是pandas中转换数据类型的标准方法。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>astype()</code>是pandas中转换数据类型的标准方法。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p1')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p1')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/6</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了pandas最基础的操作：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>安装并导入pandas库（<code>import pandas as pd</code>）</li>
+                    <li>用 <code>read_csv()</code> 和 <code>read_excel()</code> 读取数据文件</li>
+                    <li>用 <code>head()</code>、<code>tail()</code> 快速查看数据</li>
+                    <li>用 <code>info()</code> 检查数据结构和缺失情况</li>
+                    <li>用 <code>describe()</code> 获取数值列的统计信息</li>
+                    <li>用 <code>astype()</code> 和 <code>pd.to_numeric()</code> 转换数据类型</li>
+                </ul>
+                <p style="margin-top:12px;">掌握了这些基础操作，你就已经迈出了数据分析的第一步！下一个项目我们将学习如何处理数据中的"脏数据"。</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="index.html" style="color:var(--primary);font-weight:500;">&larr; 返回首页</a>
+                <a href="p2.html" style="color:var(--primary);font-weight:500;">下一项目：数据清洗与预处理 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>期末综合考查 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">数据库原理与应用</a> / 期末考查
+    </div>
+
+        <div class="exam-container" id="exam1">
+      <div class="exam-paper-header">
+        <div class="exam-paper-title">数据库原理与应用 期末综合考查卷</div>
+        <div class="exam-paper-info"><span>满分：100分</span><span>及格：60分</span><span>时间：120分钟</span><span>闭卷</span></div>
+      </div>      <p style="font-size:0.875rem;color:var(--text-light);margin-bottom:20px;">
+        考试说明：本试卷分为理论客观题（40分）和综合实操题（60分）两部分。请在答题区域写明答案。
+      </p>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">第一部分：理论客观题（共40分）</h3>
+      <h4 style="font-size:1rem;font-weight:600;margin:16px 0 12px;">一、单项选择题（每题2分，共20分）</h4>
+      <div class="quiz-question" id="f_q1" data-type="choice" data-score="2">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">以下不属于数据库管理系统的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. MySQL</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. Oracle</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. Excel</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. SQL Server</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q1', 2, `正确答案：C（Excel）。Excel是电子表格软件，不是DBMS。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（Excel）。Excel是电子表格软件，不是DBMS。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q2" data-type="choice" data-score="2">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">在SQL中，用于删除表结构的命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. DELETE</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. DROP</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. REMOVE</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. CLEAR</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q2', 1, `正确答案：B（DROP）。DROP删除表结构，DELETE删除数据。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（DROP）。DROP删除表结构，DELETE删除数据。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q3" data-type="choice" data-score="2">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">以下聚合函数中，用于计算平均值的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. COUNT</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. SUM</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. AVG</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. MAX</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q3', 2, `正确答案：C（AVG）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（AVG）。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q4" data-type="choice" data-score="2">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">要查询表中的前10条记录，应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. TOP 10</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. LIMIT 10</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. FIRST 10</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. ROW 10</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q4', 1, `正确答案：B（LIMIT 10）。MySQL中使用LIMIT。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（LIMIT 10）。MySQL中使用LIMIT。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q5" data-type="choice" data-score="2">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">在E-R图中，联系用（ ）图形表示</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 矩形</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 椭圆</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 菱形</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 圆形</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q5', 2, `正确答案：C（菱形）。实体用矩形，属性用椭圆，联系用菱形。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（菱形）。实体用矩形，属性用椭圆，联系用菱形。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q6" data-type="choice" data-score="2">
+        <span class="question-number">第6题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">以下哪个关键字用于对分组后的结果进行过滤（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q6', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. WHERE</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q6', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. HAVING</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q6', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. GROUP BY</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q6', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. ORDER BY</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q6', 1, `正确答案：B（HAVING）。WHERE过滤行，HAVING过滤分组。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（HAVING）。WHERE过滤行，HAVING过滤分组。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q7" data-type="choice" data-score="2">
+        <span class="question-number">第7题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">外键的作用是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q7', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 加快查询速度</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q7', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 保证实体完整性</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q7', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 建立表间关联，保证参照完整性</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q7', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 限制数据类型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q7', 2, `正确答案：C（建立表间关联，保证参照完整性）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（建立表间关联，保证参照完整性）。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q8" data-type="choice" data-score="2">
+        <span class="question-number">第8题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">事务的四个特性不包括（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q8', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 原子性</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q8', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 一致性</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q8', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 并发性</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q8', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 持久性</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q8', 2, `正确答案：C（并发性）。ACID：原子性、一致性、隔离性、持久性。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（并发性）。ACID：原子性、一致性、隔离性、持久性。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q9" data-type="choice" data-score="2">
+        <span class="question-number">第9题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">以下哪种连接会返回两个表中所有的匹配记录（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q9', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. LEFT JOIN</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q9', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. RIGHT JOIN</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q9', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. INNER JOIN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q9', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. FULL JOIN</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q9', 2, `正确答案：C（INNER JOIN）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（INNER JOIN）。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q10" data-type="choice" data-score="2">
+        <span class="question-number">第10题</span>
+        <span class="question-type-badge">选择题 (2分)</span>
+        <div class="question-text">数据库备份的主要目的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('f_q10', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 提高查询速度</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('f_q10', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 防止数据丢失，便于灾难恢复</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('f_q10', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 减少存储空间</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('f_q10', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 优化表结构</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q10', 1, `正确答案：B（防止数据丢失，便于灾难恢复）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（防止数据丢失，便于灾难恢复）。
+        </div>
+      </div>
+      <h4 style="font-size:1rem;font-weight:600;margin:16px 0 12px;">二、判断题（每题2分，共10分）</h4>
+      <div class="quiz-question" id="f_q11" data-type="tf" data-score="2">
+        <span class="question-number">第11题</span>
+        <span class="question-type-badge">判断题 (2分)</span>
+        <div class="question-text">一个表只能有一个主键，但可以有多个外键。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('f_q11', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('f_q11', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q11', true, `正确答案：正确。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q12" data-type="tf" data-score="2">
+        <span class="question-number">第12题</span>
+        <span class="question-type-badge">判断题 (2分)</span>
+        <div class="question-text">VARCHAR类型比CHAR类型更节省存储空间。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('f_q12', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('f_q12', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q12', true, `正确答案：正确。VARCHAR变长存储，通常更省空间。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。VARCHAR变长存储，通常更省空间。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q13" data-type="tf" data-score="2">
+        <span class="question-number">第13题</span>
+        <span class="question-type-badge">判断题 (2分)</span>
+        <div class="question-text">子查询的效率一定比连接查询高。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('f_q13', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('f_q13', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q13', false, `正确答案：错误。通常连接查询效率更高。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。通常连接查询效率更高。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q14" data-type="tf" data-score="2">
+        <span class="question-number">第14题</span>
+        <span class="question-type-badge">判断题 (2分)</span>
+        <div class="question-text">视图中的数据是实际存储在数据库中的。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('f_q14', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('f_q14', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q14', false, `正确答案：错误。视图是虚拟表，不实际存储数据。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。视图是虚拟表，不实际存储数据。
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q15" data-type="tf" data-score="2">
+        <span class="question-number">第15题</span>
+        <span class="question-type-badge">判断题 (2分)</span>
+        <div class="question-text">第三范式要求满足第二范式，且不存在传递依赖。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('f_q15', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('f_q15', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('f_q15', true, `正确答案：正确。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">第二部分：综合实操题（共60分）</h3>
+      <p style="font-size:0.875rem;color:var(--text-light);margin-bottom:16px;">背景：某电商平台需要建立数据库系统管理商品、客户和订单信息。</p>
+      <div class="quiz-question" id="f_q16" data-type="code" data-score="15">
+        <span class="question-number">第16题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">根据以下需求创建customer表和product表：客户信息（客户编号、客户姓名、手机号、注册日期、会员等级），商品信息（商品编号、商品名称、商品分类、单价、库存数量）。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('f_q16', `CREATE TABLE customer (\n  customer_id INT PRIMARY KEY AUTO_INCREMENT,\n  customer_name VARCHAR(50) NOT NULL,\n  phone CHAR(11),\n  reg_date DATE,\n  level VARCHAR(20)\n);\n\nCREATE TABLE product (\n  product_id CHAR(10) PRIMARY KEY,\n  product_name VARCHAR(100) NOT NULL,\n  category VARCHAR(50),\n  price DECIMAL(10,2),\n  stock INT DEFAULT 0\n);`, `评分：customer表正确(7分)、product表正确(8分)。注意数据类型选择和约束设置。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：customer表正确(7分)、product表正确(8分)。注意数据类型选择和约束设置。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q17" data-type="code" data-score="15">
+        <span class="question-number">第17题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">编写SQL语句完成以下查询（基于已创建的表）：
+1. 查询所有会员等级为'VIP'的客户信息
+2. 统计各商品分类的商品数量和平均单价
+3. 查询每个客户的订单数量和总消费金额（假设有orders表：order_id, customer_id, order_date, amount, status）</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('f_q17', `-- 1. VIP客户\nSELECT * FROM customer WHERE level = 'VIP';\n\n-- 2. 各分类统计\nSELECT category, COUNT(*) AS cnt, AVG(price) AS avg_price\nFROM product GROUP BY category;\n\n-- 3. 客户消费统计\nSELECT c.customer_name, COUNT(o.order_id) AS order_cnt, SUM(o.amount) AS total\nFROM customer c LEFT JOIN orders o ON c.customer_id = o.customer_id\nGROUP BY c.customer_id, c.customer_name;`, `评分：每小题5分。注意WHERE条件、GROUP BY分组、LEFT JOIN和聚合函数的正确使用。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：每小题5分。注意WHERE条件、GROUP BY分组、LEFT JOIN和聚合函数的正确使用。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q18" data-type="code" data-score="15">
+        <span class="question-number">第18题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">编写SQL语句完成以下操作：
+1. 创建一个视图v_customer_order，显示客户编号、客户姓名、订单编号、订单金额
+2. 将商品编号为'P001'的库存增加100
+3. 写出使用mysqldump备份该电商数据库的命令</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('f_q18', `-- 1. 创建视图\nCREATE VIEW v_customer_order AS\nSELECT c.customer_id, c.customer_name, o.order_id, o.amount\nFROM customer c JOIN orders o ON c.customer_id = o.customer_id;\n\n-- 2. 增加库存\nUPDATE product SET stock = stock + 100 WHERE product_id = 'P001';\n\n-- 3. 备份命令\nmysqldump -u root -p shop_db > backup.sql`, `评分：视图(5分)、UPDATE(5分)、mysqldump(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：视图(5分)、UPDATE(5分)、mysqldump(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="f_q19" data-type="code" data-score="15">
+        <span class="question-number">第19题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">编写SQL语句：
+1. 查询购买了商品编号为'P001'的客户姓名和购买数量（假设有order_detail表：order_id, product_id, quantity, subtotal）
+2. 查询没有任何订单记录的客户姓名</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('f_q19', `-- 1. 购买P001的客户\nSELECT c.customer_name, od.quantity\nFROM customer c\nJOIN orders o ON c.customer_id = o.customer_id\nJOIN order_detail od ON o.order_id = od.order_id\nWHERE od.product_id = 'P001';\n\n-- 2. 没有订单的客户\nSELECT c.customer_name\nFROM customer c\nLEFT JOIN orders o ON c.customer_id = o.customer_id\nWHERE o.order_id IS NULL;`, `评分：三表连接(5分)、LEFT JOIN + IS NULL(5分)、条件正确(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：三表连接(5分)、LEFT JOIN + IS NULL(5分)、条件正确(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button class="quiz-submit-btn" onclick="submitExam('exam1')">提交试卷</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam1')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav" style="margin-top:32px;">
+      <a href="index.html" class="nav-prev">&laquo; 返回课程总览</a>
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1章 供应链概述 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第1章
+    </div>
+
+    <h2>第1章 供应链概述</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论4课时 + 上机2课时</p>
+
+    <!-- 核心知识点 -->
+    <div class="knowledge-card">
+      <h3>1.1 什么是供应链</h3>
+      <p>供应链（Supply Chain）是指把原材料变成产品，再送到消费者手中的整个链条。包括<strong>供应商 → 制造商 → 仓库 → 零售商 → 顾客</strong>。</p>
+      <p>供应链管理的核心目标是在正确的时间、将正确的产品、以正确的数量、送到正确的地点，同时使总成本最低。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.2 供应链五大流程（SCOR模型简化版）</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>计划（Plan）</strong>：预测需求、制定生产计划、安排资源</li>
+        <li><strong>采购（Source）</strong>：选择供应商、下单采购、验收物料</li>
+        <li><strong>生产（Make）</strong>：制造产品、质量控制、包装</li>
+        <li><strong>配送（Deliver）</strong>：仓储管理、订单处理、运输配送</li>
+        <li><strong>退货（Return）</strong>：退换货处理、废品回收</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.3 牛鞭效应</h3>
+      <p>牛鞭效应（Bullwhip Effect）是指需求端的<strong>小波动</strong>会沿着供应链向上游<strong>逐级放大</strong>，导致上游库存积压。</p>
+      <p><strong>产生原因：</strong>信息延迟、需求预测修正、批量订购、价格波动、短缺博弈。</p>
+      <p><strong>缓解措施：</strong>信息共享（如EDI/VMI）、缩短供应链层级、减少批量订购、稳定价格。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.4 供应链中的数据节点</h3>
+      <p>供应链中每个环节都会产生数据，常见的5类数据包括：</p>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>订单数据</strong>：客户订单量、订单金额、下单时间</li>
+        <li><strong>库存数据</strong>：各节点库存量、安全库存、周转率</li>
+        <li><strong>物流跟踪数据</strong>：运输状态、配送时效、签收信息</li>
+        <li><strong>供应商交货数据</strong>：交货准时率、质量合格率、交货数量</li>
+        <li><strong>销售数据</strong>：销售额、销售趋势、客户反馈</li>
+      </ul>
+      <p>每个节点都能用数据分析发现问题，是供应链数据分析的基础。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.5 高职层次的供应链分析重点</h3>
+      <p>不追求复杂网络优化算法，而是掌握<strong>"用数据看供应链健康度"</strong>的能力。重点在于：</p>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li>理解数据在供应链各环节中的位置和作用</li>
+        <li>能用Excel和Python完成基础的数据计算和分析</li>
+        <li>能用可视化图表展示供应链运营状况</li>
+        <li>能基于数据提出改进建议</li>
+      </ul>
+    </div>
+
+    <!-- 自检问题 -->
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>我能画出从原材料到消费者的供应链流程图吗？</li>
+        <li>牛鞭效应为什么会导致上游库存积压？</li>
+        <li>供应链中常见的5类数据分别是什么？</li>
+      </ol>
+    </div>
+
+    <!-- 拓展素材 -->
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>B站搜索"供应链入门"，找播放量高的科普视频（推荐30分钟以内的）</li>
+        <li>菜鸟教程：供应链管理基础</li>
+        <li>阅读材料：《供应链管理：高职高专版》第一章（学校图书馆或超星学习通）</li>
+        <li>实训数据集：自行在Excel中创建一张"模拟供应链流程表"，包含5个节点、每个节点的输入/输出/耗时</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch1">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <!-- 选择题1 -->
+      <div class="quiz-question" id="ch1-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">供应链的五大流程不包括以下哪一项？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch1-q1',0)"><div class="option-radio"></div><span class="option-label">A. 计划（Plan）</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch1-q1',1)"><div class="option-radio"></div><span class="option-label">B. 采购（Source）</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch1-q1',2)"><div class="option-radio"></div><span class="option-label">C. 售后服务</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch1-q1',3)"><div class="option-radio"></div><span class="option-label">D. 配送（Deliver）</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q1',2,'供应链五大流程是计划、采购、制造、配送、退货，不包括售后服务。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>C. 售后服务</strong>。供应链五大流程（SCOR模型简化版）为：计划（Plan）、采购（Source）、生产（Make）、配送（Deliver）、退货（Return），不包含售后服务。
+        </div>
+      </div>
+
+      <!-- 选择题2 -->
+      <div class="quiz-question" id="ch1-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">牛鞭效应产生的主要原因是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch1-q2',0)"><div class="option-radio"></div><span class="option-label">A. 供应商太多</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch1-q2',1)"><div class="option-radio"></div><span class="option-label">B. 信息延迟和需求预测修正</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch1-q2',2)"><div class="option-radio"></div><span class="option-label">C. 运输成本太高</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch1-q2',3)"><div class="option-radio"></div><span class="option-label">D. 库存周转太慢</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q2',1,'牛鞭效应的本质是信息在供应链中传递时的延迟和逐级放大。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 信息延迟和需求预测修正</strong>。牛鞭效应的本质是信息在供应链中传递时的延迟和逐级放大，导致上游供应商面临更大的库存波动和不确定性。
+        </div>
+      </div>
+
+      <!-- 判断题1 -->
+      <div class="quiz-question" id="ch1-q3" data-type="tf">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">牛鞭效应会导致供应链上游的库存波动比下游更大。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch1-q3','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch1-q3','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q3','true','牛鞭效应是指需求端的微小波动沿着供应链向上游逐级放大。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>正确</strong>。牛鞭效应（Bullwhip Effect）是指需求端的微小波动沿着供应链向上游逐级放大，导致上游供应商面临更大的库存波动和不确定性。
+        </div>
+      </div>
+
+      <!-- 判断题2 -->
+      <div class="quiz-question" id="ch1-q4" data-type="tf">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">供应链越长，牛鞭效应越明显。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch1-q4','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch1-q4','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q4','true','供应链环节越多，信息传递延迟越长，波动放大越严重。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>正确</strong>。供应链环节越多，信息传递延迟越长，波动放大越严重。因此缩短供应链层级是缓解牛鞭效应的有效措施之一。
+        </div>
+      </div>
+
+      <!-- 判断题3 -->
+      <div class="quiz-question" id="ch1-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">供应链中的数据只包括销售数据。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch1-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch1-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch1-q5','false','供应链数据还包括采购、库存、物流、供应商交货等多类数据。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。供应链中的数据包括订单数据、库存数据、物流跟踪数据、供应商交货数据、销售数据等5大类，远不止销售数据。
+        </div>
+      </div>
+
+      <!-- 提交与重置 -->
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch1')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch1')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <!-- 上一章/下一章导航 -->
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <span style="color:var(--text-light);font-size:0.875rem;">上一章：无（本章为第一章）</span>
+      <a href="ch2.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第2章 采购数据分析 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

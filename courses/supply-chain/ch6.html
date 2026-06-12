@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第6章 供应商评估分析 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第6章
+    </div>
+
+    <h2>第6章 供应商评估分析</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论4课时 + 上机4课时</p>
+
+    <div class="knowledge-card">
+      <h3>6.1 供应商评分卡</h3>
+      <p>从多个维度给供应商打分，常见维度：</p>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>质量</strong>（合格率）</li>
+        <li><strong>交货</strong>（准时率）</li>
+        <li><strong>价格</strong>（竞争力）</li>
+        <li><strong>服务</strong>（响应速度）</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.2 交货准时率</h3>
+      <p><strong>交货准时率</strong> = 准时交货批次 / 总交货批次 x 100%</p>
+      <p>是衡量供应商履约能力的核心指标。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.3 质量合格率</h3>
+      <p><strong>质量合格率</strong> = 合格品数量 / 交货总数量 x 100%</p>
+      <p>直接影响生产效率和产品质量。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.4 多维度加权评分</h3>
+      <p>给每个维度设权重（如质量30%、交货30%、价格25%、服务15%），加权求和得到综合得分。</p>
+      <p><strong>公式</strong>：综合得分 = 质量得分x质量权重 + 交货得分x交货权重 + 价格得分x价格权重 + 服务得分x服务权重</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.5 供应商分级</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li>综合得分 >= 90：<strong>优秀</strong></li>
+        <li>80 ~ 89：<strong>良好</strong></li>
+        <li>70 ~ 79：<strong>合格</strong></li>
+        <li>&lt; 70：<strong>待改进</strong></li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.6 Python示例：供应商加权评分</h3>
+      <div class="code-block">import pandas as pd
+
+df = pd.read_excel("供应商数据.xlsx")
+# 假设列：供应商,质量合格率,交货准时率,价格得分,服务得分
+df["综合得分"] = (df["质量合格率"]*0.30 +
+                 df["交货准时率"]*0.30 +
+                 df["价格得分"]*0.25 +
+                 df["服务得分"]*0.15)
+df = df.sort_values("综合得分", ascending=False)
+print(df[["供应商", "综合得分"]])</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>供应商评分卡为什么要多维度，而不是只看价格？</li>
+        <li>权重设置是谁来定的？不同企业权重一样吗？</li>
+        <li>如果一家供应商价格很低但质量很差，加权评分能反映出来吗？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>实训数据集：自建5~8家供应商的模拟数据，包含质量、交货、价格、服务四个维度得分</li>
+        <li>阅读材料：搜索"供应商评估KPI体系"，了解制造业常用指标</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch6">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch6-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">供应商评分卡中，交货准时率的权重通常？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch6-q1',0)"><div class="option-radio"></div><span class="option-label">A. 最低</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch6-q1',1)"><div class="option-radio"></div><span class="option-label">B. 最高或较高</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch6-q1',2)"><div class="option-radio"></div><span class="option-label">C. 为0</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch6-q1',3)"><div class="option-radio"></div><span class="option-label">D. 随机设置</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q1',1,'交货准时率直接影响生产连续性，权重通常较高。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 最高或较高</strong>。交货准时率直接影响生产连续性，与质量合格率一起通常占据最高的权重（各约30%）。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch6-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下哪个不是常用的预测误差指标？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch6-q2',0)"><div class="option-radio"></div><span class="option-label">A. MAE</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch6-q2',1)"><div class="option-radio"></div><span class="option-label">B. RMSE</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch6-q2',2)"><div class="option-radio"></div><span class="option-label">C. ROI</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch6-q2',3)"><div class="option-radio"></div><span class="option-label">D. MAPE</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q2',2,'ROI是投资回报率，不是预测误差指标。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>C. ROI</strong>。ROI（Return on Investment）是投资回报率，属于财务指标，不是预测误差指标。MAE、RMSE、MAPE都是常用的预测误差衡量指标。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch6-q3" data-type="choice">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">供应商综合得分为86分，属于哪个等级？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch6-q3',0)"><div class="option-radio"></div><span class="option-label">A. 优秀</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch6-q3',1)"><div class="option-radio"></div><span class="option-label">B. 良好</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch6-q3',2)"><div class="option-radio"></div><span class="option-label">C. 合格</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch6-q3',3)"><div class="option-radio"></div><span class="option-label">D. 待改进</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q3',1,'80~89分为良好等级。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 良好</strong>。供应商分级标准：>=90优秀，80~89良好，70~79合格，&lt;70待改进。86分属于良好等级。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch6-q4" data-type="tf">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">供应商评估时，价格越低得分应该越高，其他因素可以忽略。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch6-q4','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch6-q4','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q4','false','供应商评估需要多维度综合考量。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。供应商评估需要多维度综合考量，包括质量、交货、价格、服务等。只看价格可能导致质量差、交货不准时等问题，最终增加总成本。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch6-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">不同企业的供应商评估权重设置应该是一样的。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch6-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch6-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q5','false','不同企业根据自身业务特点，权重设置不同。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。不同企业根据自身行业特点和战略重点，权重设置不同。例如食品企业可能更重视质量（权重更高），而快消品企业可能更重视交货和价格。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch6')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch6')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch5.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第5章 需求预测分析</a>
+      <a href="ch7.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第7章 供应链成本分析 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

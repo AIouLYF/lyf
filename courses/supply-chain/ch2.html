@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2章 采购数据分析 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第2章
+    </div>
+
+    <h2>第2章 采购数据分析</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论4课时 + 上机4课时</p>
+
+    <div class="knowledge-card">
+      <h3>2.1 采购KPI指标</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>采购成本节约率</strong> = (预算价 - 实际价) / 预算价 x 100%</li>
+        <li><strong>采购周期</strong> = 下单到入库的天数</li>
+        <li><strong>供应商准时交货率</strong> = 准时交货次数 / 总交货次数 x 100%</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.2 多供应商报价分析</h3>
+      <p>同一物料多个供应商报价，用Excel列表对比，计算最低价、平均价、价差幅度。注意不能只看单价，还要考虑运费、最小订货量、交货周期等。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.3 采购成本结构</h3>
+      <p>采购总成本 = 物料成本 + 运输成本 + 关税/税费 + 采购管理费用。总成本最低才是真的好，不能只看单价。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.4 采购趋势分析</h3>
+      <p>按月汇总采购金额，画折线图看波动，找出旺季和淡季。通过趋势分析可以优化采购计划，降低采购成本。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.5 采购集中度</h3>
+      <p>采购集中度 = 前N大供应商采购金额 / 总采购金额。过高有风险（供应商依赖），过低管理成本高。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.6 Python示例：计算采购平均价和最低价</h3>
+      <div class="code-block">import pandas as pd
+
+df = pd.read_excel("采购数据.xlsx")
+# 按物料分组，计算平均采购价和最低价
+summary = df.groupby("物料名称")["单价"].agg(["mean", "min", "max"])
+print(summary)</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>采购成本节约率怎么算？如果预算100元，实际花了85元，节约率是多少？</li>
+        <li>为什么选供应商不能只看单价，还要看总成本？</li>
+        <li>我能用Excel数据透视表按月汇总采购金额吗？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>实训数据集：Kaggle采购数据集（搜索"procurement"，下载CSV后用Excel打开）</li>
+        <li>工具安装：确保电脑已安装Microsoft Excel 2016及以上版本；Python安装pandas库（pip install pandas openpyxl）</li>
+        <li>线上教程：B站搜索"Excel数据透视表教程"，学习分组汇总</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch2">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <!-- 选择题1 -->
+      <div class="quiz-question" id="ch2-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">采购成本节约率的计算公式是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch2-q1',0)"><div class="option-radio"></div><span class="option-label">A. (实际价-预算价)/实际价</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch2-q1',1)"><div class="option-radio"></div><span class="option-label">B. (预算价-实际价)/预算价</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch2-q1',2)"><div class="option-radio"></div><span class="option-label">C. 实际价/预算价</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch2-q1',3)"><div class="option-radio"></div><span class="option-label">D. (预算价-实际价)/实际价</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q1',1,'节约率 = (预算价-实际价)/预算价 x 100%。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B</strong>。采购成本节约率 = (预算价-实际价)/预算价 x 100%。注意分母是预算价，不是实际价。
+        </div>
+      </div>
+
+      <!-- 选择题2 -->
+      <div class="quiz-question" id="ch2-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下哪项不属于采购KPI？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch2-q2',0)"><div class="option-radio"></div><span class="option-label">A. 采购成本节约率</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch2-q2',1)"><div class="option-radio"></div><span class="option-label">B. 库存周转率</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch2-q2',2)"><div class="option-radio"></div><span class="option-label">C. 供应商准时交货率</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch2-q2',3)"><div class="option-radio"></div><span class="option-label">D. 采购周期</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q2',1,'库存周转率是库存管理指标，不是采购KPI。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 库存周转率</strong>。库存周转率是库存管理指标，不是采购KPI。采购KPI包括采购成本节约率、供应商准时交货率、采购周期等。
+        </div>
+      </div>
+
+      <!-- 选择题3 -->
+      <div class="quiz-question" id="ch2-q3" data-type="choice">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">采购集中度是指？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch2-q3',0)"><div class="option-radio"></div><span class="option-label">A. 采购金额/销售金额</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch2-q3',1)"><div class="option-radio"></div><span class="option-label">B. 前N大供应商采购金额/总采购金额</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch2-q3',2)"><div class="option-radio"></div><span class="option-label">C. 供应商数量/采购品种数</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch2-q3',3)"><div class="option-radio"></div><span class="option-label">D. 采购成本/总成本</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q3',1,'采购集中度反映采购依赖少数供应商的程度。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B</strong>。采购集中度 = 前N大供应商采购金额/总采购金额，反映采购依赖少数供应商的程度。过高有风险，过低管理成本高。
+        </div>
+      </div>
+
+      <!-- 判断题1 -->
+      <div class="quiz-question" id="ch2-q4" data-type="tf">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">采购时只看单价最低的供应商一定是最优选择。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch2-q4','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch2-q4','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q4','false','还要考虑运费、质量、交货、服务等总成本。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。采购决策不能只看单价，还要考虑运费、质量、交货周期、服务等总成本因素。单价最低的供应商总到厂成本不一定最低。
+        </div>
+      </div>
+
+      <!-- 判断题2 -->
+      <div class="quiz-question" id="ch2-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">采购成本节约率可能为负数。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch2-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch2-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q5','true','如果实际采购价高于预算价，节约率为负，表示超支。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>正确</strong>。如果实际采购价高于预算价，节约率为负数，表示超支。例如预算100元，实际花了110元，节约率 = (100-110)/100 = -10%。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch2')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch2')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch1.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第1章 供应链概述</a>
+      <a href="ch3.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第3章 库存数据分析 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

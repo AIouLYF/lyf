@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单元三考查 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">数据库原理与应用</a> / 单元三考查（第5-6章）
+    </div>
+
+        <div class="exam-container" id="exam1">
+      <div class="exam-paper-header">
+        <div class="exam-paper-title">单元三考查卷：多表连接与嵌套查询</div>
+        <div class="exam-paper-info"><span>满分：100分</span><span>时间：60分钟</span><span>闭卷</span></div>
+      </div>      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">一、选择题（每题5分，共20分）</h3>
+      <div class="quiz-question" id="e3_q1" data-type="choice" data-score="5">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">要返回左表所有记录，右表不匹配的记录用NULL填充，应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e3_q1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. INNER JOIN</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e3_q1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. LEFT JOIN</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e3_q1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. RIGHT JOIN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e3_q1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. CROSS JOIN</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q1', 1, `正确答案：B（LEFT JOIN）。LEFT JOIN保证左表所有记录都出现在结果中。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（LEFT JOIN）。LEFT JOIN保证左表所有记录都出现在结果中。
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q2" data-type="choice" data-score="5">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">子查询返回多行结果时，外层查询应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e3_q2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. =</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e3_q2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. ></span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e3_q2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. IN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e3_q2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 以上都可以</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q2', 2, `正确答案：C（IN）。多行子查询需用IN、ANY或ALL。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（IN）。多行子查询需用IN、ANY或ALL。
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q3" data-type="choice" data-score="5">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">三表连接查询时，至少需要几个JOIN条件？（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e3_q3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 1个</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e3_q3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 2个</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e3_q3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 3个</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e3_q3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 不需要</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q3', 1, `正确答案：B（2个）。N个表连接至少需要N-1个连接条件。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（2个）。N个表连接至少需要N-1个连接条件。
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q4" data-type="choice" data-score="5">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">EXISTS的作用是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e3_q4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 判断子查询结果是否为空</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e3_q4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 返回子查询所有行</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e3_q4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 删除子查询结果</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e3_q4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 创建临时表</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q4', 0, `正确答案：A。EXISTS判断子查询是否返回记录，返回布尔值。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：A。EXISTS判断子查询是否返回记录，返回布尔值。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">二、判断题（每题5分，共20分）</h3>
+      <div class="quiz-question" id="e3_q5" data-type="tf" data-score="5">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">笛卡尔积是没有连接条件的两表相乘，结果集行数等于两表行数之积。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e3_q5', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e3_q5', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q5', true, `正确答案：正确。没有WHERE/ON条件时会产生笛卡尔积。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。没有WHERE/ON条件时会产生笛卡尔积。
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q6" data-type="tf" data-score="5">
+        <span class="question-number">第6题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">子查询的效率一定比连接查询高。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e3_q6', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e3_q6', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q6', false, `正确答案：错误。通常连接查询效率更高，子查询逻辑更清晰。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。通常连接查询效率更高，子查询逻辑更清晰。
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q7" data-type="tf" data-score="5">
+        <span class="question-number">第7题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">NOT EXISTS在子查询没有返回任何记录时条件为真。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e3_q7', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e3_q7', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q7', true, `正确答案：正确。NOT EXISTS与EXISTS相反。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。NOT EXISTS与EXISTS相反。
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q8" data-type="tf" data-score="5">
+        <span class="question-number">第8题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">LEFT JOIN的结果一定比INNER JOIN的结果多。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e3_q8', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e3_q8', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3_q8', true, `正确答案：正确。LEFT JOIN包含左表所有记录，INNER JOIN只包含匹配记录。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。LEFT JOIN包含左表所有记录，INNER JOIN只包含匹配记录。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">三、SQL实操题（60分）</h3>
+      <div class="quiz-question" id="e3_q9" data-type="code" data-score="10">
+        <span class="question-number">第9题</span>
+        <span class="question-type-badge">实操题 (10分)</span>
+        <div class="question-text">已知student(sno,sname,ssex,sage,sdept)、course(cno,cname,ccredit)、sc(sno,cno,grade)。编写SQL：查询每个学生的学号、姓名和选修的课程名。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e3_q9', `SELECT s.sno, s.sname, c.cname\nFROM student s\nJOIN sc ON s.sno = sc.sno\nJOIN course c ON sc.cno = c.cno;`, `评分：三表连接正确(6分)、字段选择正确(4分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：三表连接正确(6分)、字段选择正确(4分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q10" data-type="code" data-score="10">
+        <span class="question-number">第10题</span>
+        <span class="question-type-badge">实操题 (10分)</span>
+        <div class="question-text">编写SQL：查询没有选修任何课程的学生姓名（使用LEFT JOIN）。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e3_q10', `SELECT s.sname\nFROM student s\nLEFT JOIN sc ON s.sno = sc.sno\nWHERE sc.sno IS NULL;`, `评分：LEFT JOIN正确(5分)、IS NULL判断正确(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：LEFT JOIN正确(5分)、IS NULL判断正确(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q11" data-type="code" data-score="10">
+        <span class="question-number">第11题</span>
+        <span class="question-type-badge">实操题 (10分)</span>
+        <div class="question-text">编写SQL：查询选修了'数据库原理'且成绩大于80分的学生姓名和成绩。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e3_q11', `SELECT s.sname, sc.grade\nFROM student s\nJOIN sc ON s.sno = sc.sno\nJOIN course c ON sc.cno = c.cno\nWHERE c.cname = '数据库原理' AND sc.grade > 80;`, `评分：三表连接(5分)、WHERE条件(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：三表连接(5分)、WHERE条件(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q12" data-type="code" data-score="10">
+        <span class="question-number">第12题</span>
+        <span class="question-type-badge">实操题 (10分)</span>
+        <div class="question-text">编写SQL：查询成绩高于平均成绩的学生学号和成绩（使用子查询）。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e3_q12', `SELECT sno, grade FROM sc\nWHERE grade > (SELECT AVG(grade) FROM sc);`, `评分：子查询求AVG正确(5分)、外层比较正确(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：子查询求AVG正确(5分)、外层比较正确(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q13" data-type="code" data-score="10">
+        <span class="question-number">第13题</span>
+        <span class="question-type-badge">实操题 (10分)</span>
+        <div class="question-text">编写SQL：查询至少选修了两门课程的学生姓名。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e3_q13', `SELECT s.sname\nFROM student s\nJOIN sc ON s.sno = sc.sno\nGROUP BY s.sno, s.sname\nHAVING COUNT(*) >= 2;`, `评分：JOIN连接(3分)、GROUP BY(3分)、HAVING COUNT(4分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：JOIN连接(3分)、GROUP BY(3分)、HAVING COUNT(4分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e3_q14" data-type="code" data-score="10">
+        <span class="question-number">第14题</span>
+        <span class="question-type-badge">实操题 (10分)</span>
+        <div class="question-text">编写SQL：查询选修了全部课程的学生（使用NOT EXISTS，难度较大，写出思路即可）。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e3_q14', `SELECT s.sno, s.sname\nFROM student s\nWHERE NOT EXISTS (\n  SELECT * FROM course c\n  WHERE NOT EXISTS (\n    SELECT * FROM sc\n    WHERE sc.sno = s.sno AND sc.cno = c.cno\n  )\n);`, `评分：双层NOT EXISTS结构(7分)、关联条件(3分)。此题难度大，写出思路即可给部分分。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：双层NOT EXISTS结构(7分)、关联条件(3分)。此题难度大，写出思路即可给部分分。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button class="quiz-submit-btn" onclick="submitExam('exam1')">提交试卷</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam1')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav" style="margin-top:32px;">
+      <a href="index.html" class="nav-prev">&laquo; 返回课程总览</a>
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

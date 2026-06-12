@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第5章 数据转换与整合 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第5章 数据转换与整合</span>
+                </div>
+                <h2>第5章 数据转换与整合</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论4课时 + 上机4课时 | 难度：中等</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>5.1 数据合并（merge / concat）</h3>
+                    <p>实际工作中，数据往往分散在多个文件或表格里。数据合并就是把多个表按一定规则拼在一起，像拼积木一样。
+
+<strong>merge：</strong>按共同列把两个表横向拼接，类似SQL的JOIN。
+<strong>concat：</strong>把多个表纵向或横向堆叠。</p>
+                <div class="code-block">import pandas as pd
+
+# 读取两个表
+df1 = pd.read_csv('students.csv')   # 学生基本信息
+df2 = pd.read_csv('scores.csv')     # 学生成绩
+
+# 按"学号"列合并（内连接：只保留两边都有的学号）
+df_merged = pd.merge(df1, df2, on='学号', how='inner')
+
+# how参数说明：
+# 'inner' - 内连接：只保留两边都有的
+# 'left'  - 左连接：保留左边全部，右边没有就填NaN
+# 'right' - 右连接：保留右边全部
+# 'outer' - 外连接：两边都保留
+
+# 纵向拼接（比如1月数据和2月数据）
+df_jan = pd.read_csv('jan.csv')
+df_feb = pd.read_csv('feb.csv')
+df_all = pd.concat([df_jan, df_feb], ignore_index=True)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>5.2 数据透视（pivot_table）</h3>
+                    <p>数据透视表就是按某些维度对数据进行汇总统计。比如你想知道"每个班级、每门课的平均分"，就需要透视。</p>
+                <div class="code-block"># 创建透视表：按班级和科目统计平均分
+pivot = df.pivot_table(
+    values='分数',        # 要统计的数值列
+    index='班级',         # 行维度
+    columns='科目',       # 列维度
+    aggfunc='mean'        # 统计方式：mean平均、sum求和、count计数
+)
+print(pivot)
+
+# 多级透视
+pivot2 = df.pivot_table(
+    values='销售额',
+    index=['年份', '月份'],
+    columns='地区',
+    aggfunc='sum',
+    fill_value=0          # 空值填0
+)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>5.3 数据重塑（melt / pivot）</h3>
+                    <p><strong>宽格式</strong>：每行是一条记录，每列是一个属性，像Excel表格。
+<strong>长格式</strong>：把多列"融化"成两列（变量名+值），适合某些分析场景。
+melt把宽变长，pivot把长变宽。</p>
+                <div class="code-block"># 宽格式 → 长格式（melt）
+df_long = pd.melt(
+    df,
+    id_vars=['姓名'],           # 保持不变的列
+    value_vars=['语文', '数学', '英语'],  # 要融化的列
+    var_name='科目',            # 新列名：原来的列名
+    value_name='分数'           # 新列名：原来的值
+)
+
+# 长格式 → 宽格式（pivot）
+df_wide = df_long.pivot(
+    index='姓名',
+    columns='科目',
+    values='分数'
+)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>5.4 分组聚合（groupby）</h3>
+                    <p>分组聚合就是"先分组，再计算"。比如按"地区"分组，计算每个地区的总销售额。这是数据分析中最常用的操作之一。</p>
+                <div class="code-block"># 按单列分组，计算平均值
+df.groupby('班级')['成绩'].mean()
+
+# 按多列分组
+df.groupby(['班级', '性别'])['成绩'].mean()
+
+# 多种统计方式同时计算
+df.groupby('班级')['成绩'].agg(['mean', 'max', 'min', 'count'])
+
+# 对不同列用不同统计方式
+df.groupby('班级').agg({
+    '成绩': 'mean',
+    '出勤率': 'mean',
+    '学号': 'count'
+})</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>5.5 数据标准化与归一化</h3>
+                    <p>不同列的数据范围可能差很多（比如年龄18-60，收入3000-50000），直接比较不公平。<strong>标准化</strong>就是把数据缩放到同一尺度。</p>
+                <div class="code-block"># Min-Max归一化：缩放到0-1之间
+df['收入_归一'] = (df['收入'] - df['收入'].min()) / (df['收入'].max() - df['收入'].min())
+
+# Z-score标准化：均值为0，标准差为1
+df['成绩_标准'] = (df['成绩'] - df['成绩'].mean()) / df['成绩'].std()
+
+# 使用sklearn（更专业）
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+scaler = MinMaxScaler()
+df[['收入', '年龄']] = scaler.fit_transform(df[['收入', '年龄']])</div>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>官方文档：Pandas合并与重塑（pandas.pydata.org/docs/user_guide/merging.html）</li>
+                    <li>视频教程：B站搜索"Pandas groupby详解"</li>
+                    <li>练习数据集：Kaggle的Superstore销售数据集（练习透视表和分组）</li>
+                    <li>在线练习：DataCamp的"Data Manipulation with Pandas"课程</li>
+                    <li>工具：Excel的数据透视表功能（对比学习，理解原理）</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>merge和concat有什么区别？分别在什么场景使用？</li>
+                    <li>pivot_table中的aggfunc参数可以填哪些值？各代表什么含义？</li>
+                    <li>groupby之后可以接哪些操作？写出至少3种。</li>
+                    <li>宽格式和长格式各有什么优缺点？什么时候需要转换？</li>
+                    <li>Min-Max归一化和Z-score标准化的结果范围分别是多少？</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch5">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q5_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">将两个DataFrame按共同列横向拼接，应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q5_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pd.concat()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q5_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pd.merge()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q5_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.join()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q5_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.append()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q5_1', 1, `pd.merge()按共同列进行横向拼接（类似SQL JOIN）。pd.concat()主要用于纵向堆叠。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            pd.merge()按共同列进行横向拼接（类似SQL JOIN）。pd.concat()主要用于纵向堆叠。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q5_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">以下哪个函数用于按指定列对DataFrame进行分组？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q5_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">merge()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q5_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">concat()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q5_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">groupby()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q5_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pivot()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q5_2', 2, `groupby()用于按指定列对数据进行分组，后续可接聚合函数如mean()、sum()等。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            groupby()用于按指定列对数据进行分组，后续可接聚合函数如mean()、sum()等。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q5_3" data-type="choice">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">Min-Max归一化后，数据的范围是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q5_3', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">(-1, 1)</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q5_3', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">(0, 1)</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q5_3', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">均值为0</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q5_3', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">标准差为1</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q5_3', 1, `Min-Max归一化将数据缩放到0到1之间。Z-score标准化才是均值为0、标准差为1。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            Min-Max归一化将数据缩放到0到1之间。Z-score标准化才是均值为0、标准差为1。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q5_4" data-type="choice">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">df.pivot_table中的aggfunc='mean'表示？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q5_4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求和</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q5_4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">计数</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q5_4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求平均值</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q5_4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求最大值</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q5_4', 2, `aggfunc='mean'表示对数据进行求平均值操作。sum是求和，count是计数，max是求最大值。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            aggfunc='mean'表示对数据进行求平均值操作。sum是求和，count是计数，max是求最大值。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q5_5" data-type="fill">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">Pandas中，将两个DataFrame按共同列拼接的函数是 ______，将多个DataFrame纵向堆叠的函数是 ______。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q5_5', 'pd.merge()；pd.concat()', `pd.merge()用于按共同列横向拼接（类似SQL JOIN），pd.concat()用于纵向或横向堆叠多个DataFrame。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            pd.merge()用于按共同列横向拼接（类似SQL JOIN），pd.concat()用于纵向或横向堆叠多个DataFrame。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch5')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch5')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="ch4.html">上一章</a>
+                    <a href="ch6.html">下一章</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

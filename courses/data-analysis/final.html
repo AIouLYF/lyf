@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期末综合考查卷 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>期末综合考查卷</span>
+            </div>
+            <h2>数据分析技术 · 期末综合考查卷</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">广东科学技术职业学院商学院 · 商务数据分析与应用专业</p>
+            <div class="exam-container" id="final-exam">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">数据分析技术 · 期末综合考查卷</div>
+                    <div class="exam-paper-info">
+                        <span>考查范围：全部8章</span>
+                        <span>满分：100分</span>
+                        <span>时间：120分钟</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="f-q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">数据分析流程的正确顺序是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q1',0)"><div class="option-radio"></div><span class="option-label">A. 收集→清洗→明确问题→分析→可视化→建议</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q1',1)"><div class="option-radio"></div><span class="option-label">B. 明确问题→收集→清洗→分析→可视化→建议</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q1',2)"><div class="option-radio"></div><span class="option-label">C. 明确问题→收集→分析→清洗→可视化→建议</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q1',3)"><div class="option-radio"></div><span class="option-label">D. 收集→明确问题→清洗→分析→建议→可视化</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q1',1,'正确顺序是明确问题→收集→清洗→分析→可视化→建议。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确顺序是明确问题→收集→清洗→分析→可视化→建议。</div>
+                </div>
+                <div class="quiz-question" id="f-q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">下列哪种情况适合用中位数描述集中趋势？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q2',0)"><div class="option-radio"></div><span class="option-label">A. 班级学生身高</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q2',1)"><div class="option-radio"></div><span class="option-label">B. 公司员工收入（有少数高管）</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q2',2)"><div class="option-radio"></div><span class="option-label">C. 产品合格率</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q2',3)"><div class="option-radio"></div><span class="option-label">D. 日平均气温</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q2',1,'收入数据有极端值，用中位数更好。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>收入数据有极端值，用中位数更好。</div>
+                </div>
+                <div class="quiz-question" id="f-q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">标准差反映的是数据的？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q3',0)"><div class="option-radio"></div><span class="option-label">A. 集中程度</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q3',1)"><div class="option-radio"></div><span class="option-label">B. 分散程度</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q3',2)"><div class="option-radio"></div><span class="option-label">C. 对称程度</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q3',3)"><div class="option-radio"></div><span class="option-label">D. 样本大小</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q3',1,'标准差反映数据的分散程度。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>标准差反映数据的分散程度。</div>
+                </div>
+                <div class="quiz-question" id="f-q4" data-type="choice" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">在假设检验中，若P=0.02，alpha=0.05，则应该？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q4',0)"><div class="option-radio"></div><span class="option-label">A. 接受原假设</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q4',1)"><div class="option-radio"></div><span class="option-label">B. 拒绝原假设</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q4',2)"><div class="option-radio"></div><span class="option-label">C. 无法判断</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q4',3)"><div class="option-radio"></div><span class="option-label">D. 重新抽样</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q4',1,'0.02&lt;0.05，应拒绝原假设。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>0.02&lt;0.05，应拒绝原假设。</div>
+                </div>
+                <div class="quiz-question" id="f-q5" data-type="choice" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">回归方程 Y = 100 + 5X 中，X每增加1单位，Y平均？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q5',0)"><div class="option-radio"></div><span class="option-label">A. 增加1</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q5',1)"><div class="option-radio"></div><span class="option-label">B. 增加5</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q5',2)"><div class="option-radio"></div><span class="option-label">C. 增加100</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q5',3)"><div class="option-radio"></div><span class="option-label">D. 减少5</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q5',1,'斜率b=5，X每增加1单位Y平均增加5。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>斜率b=5，X每增加1单位Y平均增加5。</div>
+                </div>
+                <div class="quiz-question" id="f-q6" data-type="choice" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">R-squared越接近1，说明？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q6',0)"><div class="option-radio"></div><span class="option-label">A. 模型解释力越强</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q6',1)"><div class="option-radio"></div><span class="option-label">B. 模型解释力越弱</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q6',2)"><div class="option-radio"></div><span class="option-label">C. 样本量越大</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q6',3)"><div class="option-radio"></div><span class="option-label">D. 预测越不准确</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q6',0,'R-squared越接近1，模型解释力越强。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>R-squared越接近1，模型解释力越强。</div>
+                </div>
+                <div class="quiz-question" id="f-q7" data-type="choice" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">要展示各产品销售额占比，最适合的图表是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q7',0)"><div class="option-radio"></div><span class="option-label">A. 折线图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q7',1)"><div class="option-radio"></div><span class="option-label">B. 散点图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q7',2)"><div class="option-radio"></div><span class="option-label">C. 饼图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q7',3)"><div class="option-radio"></div><span class="option-label">D. 箱线图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q7',2,'饼图最适合展示占比。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>饼图最适合展示占比。</div>
+                </div>
+                <div class="quiz-question" id="f-q8" data-type="choice" data-score="2">
+                    <span class="question-number">第8题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">时间序列中，每年固定周期重复出现的波动称为？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q8',0)"><div class="option-radio"></div><span class="option-label">A. 趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q8',1)"><div class="option-radio"></div><span class="option-label">B. 季节变动</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q8',2)"><div class="option-radio"></div><span class="option-label">C. 循环变动</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q8',3)"><div class="option-radio"></div><span class="option-label">D. 随机波动</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q8',1,'每年固定周期重复出现的是季节变动。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>每年固定周期重复出现的是季节变动。</div>
+                </div>
+                <div class="quiz-question" id="f-q9" data-type="choice" data-score="2">
+                    <span class="question-number">第9题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">Tableau中，用来计算汇总值的字段类型是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q9',0)"><div class="option-radio"></div><span class="option-label">A. 维度</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q9',1)"><div class="option-radio"></div><span class="option-label">B. 度量</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q9',2)"><div class="option-radio"></div><span class="option-label">C. 参数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q9',3)"><div class="option-radio"></div><span class="option-label">D. 计算字段</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q9',1,'度量用于计算汇总值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>度量用于计算汇总值。</div>
+                </div>
+                <div class="quiz-question" id="f-q10" data-type="choice" data-score="2">
+                    <span class="question-number">第10题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">SCQA框架中，C代表？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q10',0)"><div class="option-radio"></div><span class="option-label">A. 结论</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q10',1)"><div class="option-radio"></div><span class="option-label">B. 冲突/问题</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q10',2)"><div class="option-radio"></div><span class="option-label">C. 条件</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q10',3)"><div class="option-radio"></div><span class="option-label">D. 比较</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q10',1,'C代表Complication（冲突/问题）。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>C代表Complication（冲突/问题）。</div>
+                </div>
+                <div class="quiz-question" id="f-q11" data-type="choice" data-score="2">
+                    <span class="question-number">第11题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">下列哪个指标最容易受极端值影响？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q11',0)"><div class="option-radio"></div><span class="option-label">A. 中位数</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q11',1)"><div class="option-radio"></div><span class="option-label">B. 众数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q11',2)"><div class="option-radio"></div><span class="option-label">C. 均值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q11',3)"><div class="option-radio"></div><span class="option-label">D. 四分位数</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q11',2,'均值最容易受极端值影响。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>均值最容易受极端值影响。</div>
+                </div>
+                <div class="quiz-question" id="f-q12" data-type="choice" data-score="2">
+                    <span class="question-number">第12题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">数据分布右偏时，用什么填充缺失值更稳健？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q12',0)"><div class="option-radio"></div><span class="option-label">A. 均值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q12',1)"><div class="option-radio"></div><span class="option-label">B. 中位数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q12',2)"><div class="option-radio"></div><span class="option-label">C. 最大值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q12',3)"><div class="option-radio"></div><span class="option-label">D. 0</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q12',1,'右偏分布用中位数填充更稳健。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>右偏分布用中位数填充更稳健。</div>
+                </div>
+                <div class="quiz-question" id="f-q13" data-type="choice" data-score="2">
+                    <span class="question-number">第13题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">箱线图中，IQR指的是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q13',0)"><div class="option-radio"></div><span class="option-label">A. 最大值-最小值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q13',1)"><div class="option-radio"></div><span class="option-label">B. Q3-Q1</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q13',2)"><div class="option-radio"></div><span class="option-label">C. Q2-Q1</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q13',3)"><div class="option-radio"></div><span class="option-label">D. 均值-中位数</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q13',1,'IQR = Q3 - Q1。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>IQR = Q3 - Q1。</div>
+                </div>
+                <div class="quiz-question" id="f-q14" data-type="choice" data-score="2">
+                    <span class="question-number">第14题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">回归方程 Y = 50 + 2X 中，R-squared=0.75，说明？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q14',0)"><div class="option-radio"></div><span class="option-label">A. X每增加1，Y增加50</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q14',1)"><div class="option-radio"></div><span class="option-label">B. X能解释Y 75%的变异</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q14',2)"><div class="option-radio"></div><span class="option-label">C. X和Y完全无关</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q14',3)"><div class="option-radio"></div><span class="option-label">D. 预测一定准确</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q14',1,'R-squared=0.75表示X能解释Y 75%的变异。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>R-squared=0.75表示X能解释Y 75%的变异。</div>
+                </div>
+                <div class="quiz-question" id="f-q15" data-type="choice" data-score="2">
+                    <span class="question-number">第15题</span>
+                    <span class="question-type-badge">选择题 (2分)</span>
+                    <div class="question-text">3期移动平均预测第10期，应使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('f-q15',0)"><div class="option-radio"></div><span class="option-label">A. 第7、8、9期</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('f-q15',1)"><div class="option-radio"></div><span class="option-label">B. 第8、9、10期</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('f-q15',2)"><div class="option-radio"></div><span class="option-label">C. 第1-9期</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('f-q15',3)"><div class="option-radio"></div><span class="option-label">D. 第10期本身</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q15',0,'使用第7、8、9期的平均值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>使用第7、8、9期的平均值。</div>
+                </div>
+                <div class="quiz-question" id="f-q16" data-type="tf" data-score="2">
+                    <span class="question-number">第16题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">置信区间越宽，估计的精确度越高。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('f-q16','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('f-q16','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q16','false','越宽精确度越低。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>越宽精确度越低。</div>
+                </div>
+                <div class="quiz-question" id="f-q17" data-type="tf" data-score="2">
+                    <span class="question-number">第17题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">相关系数r=-0.9表示强负相关。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('f-q17','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('f-q17','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q17','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-question" id="f-q18" data-type="tf" data-score="2">
+                    <span class="question-number">第18题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">移动平均期数越多，对近期变化越不敏感。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('f-q18','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('f-q18','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q18','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-question" id="f-q19" data-type="tf" data-score="2">
+                    <span class="question-number">第19题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">在Tableau中，销售额应该作为维度使用。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('f-q19','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('f-q19','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q19','false','销售额是度量。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>销售额是度量。</div>
+                </div>
+                <div class="quiz-question" id="f-q20" data-type="tf" data-score="2">
+                    <span class="question-number">第20题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">Executive Summary应该放在报告最前面。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('f-q20','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('f-q20','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('f-q20','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/100分</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitExam('final-exam')">提交试卷</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('final-exam')">重置试卷</button>
+                </div>
+            </div>
+
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="index.html" style="color:var(--primary);font-weight:500;">← 返回课程总览</a>
+                <span style="color:var(--text-lighter);">期末考查（最后一页）</span>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

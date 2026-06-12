@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理 - 单元考查卷（三） - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>数据采集与处理 - 单元考查卷（三）</span>
+                </div>
+                <h2>数据采集与处理 - 单元考查卷（三）</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">考查范围：第6-8章 | 满分100分 | 考试时间90分钟</p>
+
+                <div class="exam-container" id="exam3">
+                    <div class="exam-paper-header">
+                        <div class="exam-paper-title">数据采集与处理 - 单元考查卷（三）</div>
+                        <div class="exam-paper-info">
+                            <span>考查范围：第6-8章 | 满分100分 | 考试时间90分钟</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="exam3_q1" data-type="choice" data-score="3">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">数据质量维度中，"数据是否最新"属于哪个维度？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam3_q1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">完整性</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam3_q1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">准确性</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam3_q1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">及时性</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam3_q1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">一致性</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q1', 2, `及时性关注数据是否足够新鲜。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            及时性关注数据是否足够新鲜。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q2" data-type="choice" data-score="3">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">Pandas中，将DataFrame写入MySQL数据库应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam3_q2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_csv()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam3_q2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_excel()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam3_q2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_sql()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam3_q2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_json()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q2', 2, `to_sql()用于写入SQL数据库。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            to_sql()用于写入SQL数据库。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q3" data-type="choice" data-score="3">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">robots.txt文件的主要作用是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam3_q3', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加速网页加载</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam3_q3', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">告诉爬虫哪些页面可以访问</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam3_q3', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加密网站数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam3_q3', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">记录用户访问日志</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q3', 1, `robots.txt告诉爬虫哪些页面可以访问。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            robots.txt告诉爬虫哪些页面可以访问。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q4" data-type="choice" data-score="3">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">爬虫设置User-Agent的主要目的是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam3_q4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加快请求速度</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam3_q4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">模拟浏览器，绕过检测</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam3_q4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">压缩响应数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam3_q4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">缓存网页内容</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q4', 1, `设置User-Agent是为了模拟真实浏览器。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            设置User-Agent是为了模拟真实浏览器。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q5" data-type="choice" data-score="3">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">以下哪种行为可能违反数据采集合规要求？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam3_q5', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">采集公开的商品价格信息用于学习</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam3_q5', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">遵守robots协议，控制请求频率</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam3_q5', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">采集用户的身份证号并出售</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam3_q5', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">使用API获取授权数据</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q5', 2, `采集并出售个人信息属于违法行为。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            采集并出售个人信息属于违法行为。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q6" data-type="tf" data-score="5">
+                        <span class="question-number">第6题</span>
+                        <span class="question-type-badge">判断题 (5分)</span>
+                        <div class="question-text">使用爬虫采集公开的商品价格信息用于个人学习研究，属于合法行为。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('exam3_q6', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('exam3_q6', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q6', 'true', `采集公开信息用于正当学习研究，遵守robots协议和控制频率，一般属于合法行为。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            采集公开信息用于正当学习研究，遵守robots协议和控制频率，一般属于合法行为。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q7" data-type="tf" data-score="5">
+                        <span class="question-number">第7题</span>
+                        <span class="question-type-badge">判断题 (5分)</span>
+                        <div class="question-text">robots.txt具有法律强制力，违反会被判刑。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('exam3_q7', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('exam3_q7', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam3_q7', 'false', `robots.txt是行业约定，无法律强制力，但违反可能涉及其他法律。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            robots.txt是行业约定，无法律强制力，但违反可能涉及其他法律。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q8" data-type="code" data-score="25">
+                        <span class="question-number">第8题</span>
+                        <span class="question-type-badge">实操题 (25分)</span>
+                        <div class="question-text">给定一个包含用户信息的DataFrame，请编写数据质量评估脚本，计算并输出：1）整体完整率；2）每列完整率；3）重复记录数；4）生成质量报告CSV。</div>
+                        <textarea class="code-editor-area" placeholder="在此编写你的代码..."></textarea>
+                        <button class="quiz-submit-btn" onclick="submitCodeQuestion('exam3_q8', `import pandas as pd
+
+df = pd.read_csv('users.csv')
+
+# 1. 整体完整率
+total_cells = df.shape[0] * df.shape[1]
+missing_cells = df.isnull().sum().sum()
+overall = (1 - missing_cells / total_cells) * 100
+print(f'整体完整率: {overall:.2f}%')
+
+# 2. 每列完整率
+col_completeness = (1 - df.isnull().sum() / len(df)) * 100
+print('各列完整率(%):')
+print(col_completeness)
+
+# 3. 重复记录数
+dup_count = df.duplicated().sum()
+print(f'重复记录数: {dup_count}')
+
+# 4. 生成质量报告CSV
+report = {
+    '总记录数': len(df),
+    '总字段数': len(df.columns),
+    '整体完整率(%)': round(overall, 2),
+    '重复记录数': dup_count,
+}
+pd.DataFrame([report]).to_csv('quality_report.csv', index=False)
+print('质量报告已保存')`, `评分标准：整体完整率(6分) + 每列完整率(5分) + 重复记录数(5分) + 生成CSV报告(5分) + 代码规范(4分)`)">提交代码</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">参考答案与解析</div>
+                            <div class="reference-code" style="white-space:pre;"></div>
+                            评分标准：整体完整率(6分) + 每列完整率(5分) + 重复记录数(5分) + 生成CSV报告(5分) + 代码规范(4分)
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam3_q9" data-type="code" data-score="25">
+                        <span class="question-number">第9题</span>
+                        <span class="question-type-badge">实操题 (25分)</span>
+                        <div class="question-text">编写一个合规的爬虫脚本，采集某公开网站的文章标题和发布时间。要求：1）设置合理的User-Agent；2）每次请求间隔2-4秒随机延时；3）先查看并打印robots.txt内容；4）将结果保存为CSV；5）代码中包含合规注释。</div>
+                        <textarea class="code-editor-area" placeholder="在此编写你的代码..."></textarea>
+                        <button class="quiz-submit-btn" onclick="submitCodeQuestion('exam3_q9', `import requests
+from bs4 import BeautifulSoup
+import csv
+import time
+import random
+
+# 合规检查：先查看robots.txt
+robots_url = 'https://www.example.com/robots.txt'
+try:
+    robots = requests.get(robots_url, timeout=5).text
+    print('robots.txt内容：')
+    print(robots)
+except:
+    print('无法获取robots.txt')
+
+# 设置请求头，模拟浏览器
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+}
+
+# 采集数据（仅采集公开内容，不涉及个人信息）
+results = []
+for page in range(1, 4):
+    url = f'https://www.example.com/articles?page={page}'
+    try:
+        resp = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(resp.text, 'lxml')
+        articles = soup.find_all('article')
+        for a in articles:
+            title = a.find('h2').text.strip() if a.find('h2') else ''
+            date = a.find('time')['datetime'] if a.find('time') else ''
+            results.append([title, date])
+    except Exception as e:
+        print(f'第{page}页采集失败: {e}')
+    
+    # 合规：随机延时2-4秒
+    time.sleep(random.uniform(2, 4))
+
+# 保存为CSV
+with open('articles.csv', 'w', newline='', encoding='utf-8-sig') as f:
+    writer = csv.writer(f)
+    writer.writerow(['标题', '发布时间'])
+    writer.writerows(results)
+print(f'共采集{len(results)}条数据，已保存到articles.csv')`, `评分标准：查看robots.txt(4分) + User-Agent(4分) + 随机延时2-4秒(5分) + 采集标题和时间(6分) + 保存CSV(3分) + 合规注释(3分)`)">提交代码</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">参考答案与解析</div>
+                            <div class="reference-code" style="white-space:pre;"></div>
+                            评分标准：查看robots.txt(4分) + User-Agent(4分) + 随机延时2-4秒(5分) + 采集标题和时间(6分) + 保存CSV(3分) + 合规注释(3分)
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitExam('exam3')">提交试卷</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam3')">重置试卷</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="index.html">返回总览</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

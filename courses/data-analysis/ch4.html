@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据可视化（Excel/Tableau） - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第4章 数据可视化（Excel/Tableau）</span>
+            </div>
+            <h2>第4章 数据可视化（Excel/Tableau）</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点4.1：图表选择原则</h3>
+                <table class="data-table">
+                    <tr><th>分析目的</th><th>推荐图表</th><th>不推荐</th></tr>
+                    <tr><td>比较大小</td><td>柱状图、条形图</td><td>饼图（类别&gt;5时）</td></tr>
+                    <tr><td>看趋势变化</td><td>折线图、面积图</td><td>柱状图</td></tr>
+                    <tr><td>看占比构成</td><td>饼图、堆积柱状图</td><td>折线图</td></tr>
+                    <tr><td>看分布情况</td><td>直方图、箱线图</td><td>饼图</td></tr>
+                    <tr><td>看两个变量关系</td><td>散点图</td><td>柱状图</td></tr>
+                    <tr><td>看地理分布</td><td>地图</td><td>柱状图</td></tr>
+                </table>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点4.2：Excel高级图表</h3>
+                <p><strong>组合图</strong>：同时展示柱状图和折线图。选中数据→插入→组合图。</p>
+                <p><strong>数据透视图</strong>：基于数据透视表快速生成动态图表。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点4.3：Tableau Public入门</h3>
+                <ul class="check-list">
+                    <li><strong>维度</strong>：分类变量，如"地区""产品类别"</li>
+                    <li><strong>度量</strong>：数值变量，如销售额、利润</li>
+                    <li><strong>工作表</strong>：单个图表</li>
+                    <li><strong>仪表板</strong>：多个工作表组合，可联动筛选</li>
+                </ul>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点4.4：可视化设计规范</h3>
+                <ul class="check-list">
+                    <li>一个图表只传达一个核心信息</li>
+                    <li>颜色不超过6种</li>
+                    <li>添加清晰的标题和坐标轴标签</li>
+                    <li>避免3D效果、渐变填充等花哨装饰</li>
+                </ul>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：Tableau官方免费培训视频</li>
+                    <li>数据集：Tableau自带"示例-超市"数据集</li>
+                    <li>工具安装：Tableau Public（免费版）</li>
+                    <li>阅读材料：《数据可视化》（陈为）第1-3章</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch4">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch4-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">要展示各产品类别销售额占比，最适合的图表是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch4-q1',0)"><div class="option-radio"></div><span class="option-label">A. 折线图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch4-q1',1)"><div class="option-radio"></div><span class="option-label">B. 饼图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch4-q1',2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch4-q1',3)"><div class="option-radio"></div><span class="option-label">D. 箱线图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q1',1,'饼图专门用于展示各部分占总体的比例关系。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>饼图专门用于展示各部分占总体的比例关系。</div>
+                </div>
+                <div class="quiz-question" id="ch4-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">Tableau中，用来分组的字段类型是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch4-q2',0)"><div class="option-radio"></div><span class="option-label">A. 度量</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch4-q2',1)"><div class="option-radio"></div><span class="option-label">B. 维度</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch4-q2',2)"><div class="option-radio"></div><span class="option-label">C. 参数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch4-q2',3)"><div class="option-radio"></div><span class="option-label">D. 集</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q2',1,'维度是分类变量，用来分组。度量是数值变量，用来计算汇总值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>维度是分类变量，用来分组。度量是数值变量，用来计算汇总值。</div>
+                </div>
+                <div class="quiz-question" id="ch4-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">下列哪种图表最适合展示两个连续变量的关系？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch4-q3',0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch4-q3',1)"><div class="option-radio"></div><span class="option-label">B. 柱状图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch4-q3',2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch4-q3',3)"><div class="option-radio"></div><span class="option-label">D. 雷达图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q3',2,'散点图最适合展示两个连续变量之间的关系。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>散点图最适合展示两个连续变量之间的关系。</div>
+                </div>
+                <div class="quiz-question" id="ch4-q4" data-type="tf">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">在Tableau中，销售额应该作为维度使用。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q4','false','错误。销售额是数值型变量，应该作为度量使用。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>错误。销售额是数值型变量，应该作为度量使用。</div>
+                </div>
+                <div class="quiz-question" id="ch4-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">柱状图的Y轴必须从0开始，以避免误导读者。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q5','true','正确。Y轴不从0开始会夸大柱子之间的高度差异。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。Y轴不从0开始会夸大柱子之间的高度差异。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch4')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch4')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch3.html" style="color:var(--primary);font-weight:500;">← 上一章：第3章</a>
+                <a href="ch5.html" style="color:var(--primary);font-weight:500;">下一章：第5章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第2章 数据类型与变量 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                <a href="#">单元一：基础入门</a> &gt;
+                第2章 数据类型与变量
+            </div>
+            <h2>第2章 数据类型与变量</h2>
+            <div class="knowledge-card"><h3>核心知识点</h3><ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;"><li><strong>整型 int：</strong>没有小数点的数字，如 <code>100</code>、<code>-5</code>。</li><li><strong>浮点型 float：</strong>带小数点的数字，如 <code>19.99</code>、<code>3.14</code>。</li><li><strong>字符串 str：</strong>用引号包裹的文本，如 <code>"商品A"</code>。</li><li><strong>布尔型 bool：</strong>只有 <code>True</code> 和 <code>False</code>。</li><li><strong>变量：</strong>给数据取名字。命名规则：字母、数字、下划线，不能数字开头，不能用保留字。</li><li><strong>类型转换：</strong><code>int()</code>、<code>float()</code>、<code>str()</code>、<code>bool()</code>。</li></ul></div><div class="knowledge-card"><h3>代码示例</h3><div class="code-block">price = 19.99          # float
+quantity = 10          # int
+total = price * quantity
+print("总金额：" + str(total))
+
+name = input("请输入商品名称：")
+num = int(input("请输入数量："))</div></div><div class="resource-list"><h4>自学拓展素材</h4><ul><li>实训数据集：自行在Excel中创建10行模拟商品数据</li><li>廖雪峰Python教程：<a href="https://www.liaoxuefeng.com/wiki/1016959663602400" target="_blank">数据类型和变量</a></li></ul></div><div class="self-check"><h4>自学自检小问题</h4><ol><li>变量名 <code>2name</code> 合法吗？<code>product_name</code> 呢？</li><li>如何把用户输入的"50"变成可以做加减乘除的数字？</li><li><code>"50" + 10</code> 会报错吗？为什么？</li></ol></div>
+            <div class="quiz-container" id="quiz-ch2">
+                <div class="quiz-header">
+                    <div class="quiz-title">本章配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/8</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">以下变量名合法的是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 2student</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. student-name</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. _score</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. class</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 2, '_score合法。2student数字开头不合法，class是保留字。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>_score合法。2student数字开头不合法，class是保留字。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">将字符串"100"转换为整数，应使用？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. str("100")</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. int("100")</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. float("100")</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. bool("100")</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'int()将字符串转换为整数。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>int()将字符串转换为整数。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q3" data-type="choice" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">变量 x = 10.5 的数据类型是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q3', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. int</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q3', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. str</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q3', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. float</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q3', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. bool</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 2, '10.5带小数点，属于浮点型。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>10.5带小数点，属于浮点型。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q4" data-type="fill" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">Python中用 ______ 函数获取用户从键盘输入的内容。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 'input', 'input()获取键盘输入，返回字符串。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>input()获取键盘输入，返回字符串。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q5" data-type="fill" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">字符串可以用 ______ 或 ______ 引号包裹。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q5', '单引号', '可以用单引号或双引号。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>可以用单引号或双引号。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q6" data-type="tf" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">变量名区分大小写，name和Name是不同的变量。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q6', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q6', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q6', 'true', 'Python变量名区分大小写。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python变量名区分大小写。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q7" data-type="tf" data-score="2">
+    <span class="question-number">第7题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">布尔型只有两个值：True和False。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', '布尔型确实只有True和False。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>布尔型确实只有True和False。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q8" data-type="tf" data-score="2">
+    <span class="question-number">第8题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">input() 获取的用户输入默认是字符串类型。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q8', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q8', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q8', 'true', 'input()返回值始终是字符串。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>input()返回值始终是字符串。</p>
+    </div>
+</div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch2')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-ch2')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/8</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch1.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">&larr; 上一章</a>
+                <a href="ch3.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">下一章 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

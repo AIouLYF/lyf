@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间序列分析简介 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第7章 时间序列分析简介</span>
+            </div>
+            <h2>第7章 时间序列分析简介</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点7.1：什么是时间序列？</h3>
+                <p>按时间顺序排列的数据点。目的：理解过去变化规律，预测未来走势。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点7.2：时间序列的四种成分</h3>
+                <ul class="check-list">
+                    <li><strong>趋势</strong>：长期上升或下降方向</li>
+                    <li><strong>季节</strong>：固定周期内的重复波动</li>
+                    <li><strong>循环</strong>：非固定周期的波动，与经济周期相关</li>
+                    <li><strong>随机</strong>：不可预测的随机波动</li>
+                </ul>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点7.3：移动平均法</h3>
+                <p>用最近几期的平均值作为下一期的预测值。</p>
+                <p>期数越多越平滑，但对近期变化越不敏感。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点7.4：Excel移动平均实操</h3>
+                <p>数据→数据分析→移动平均→输入区域→间隔填3→输出区域→确定。</p>
+                <p>或手动：=AVERAGE(B2:B4) 向下拖拽填充。</p>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：B站"时间序列分析入门"</li>
+                    <li>数据集：国家统计局月度CPI数据</li>
+                    <li>工具：Excel（自带移动平均功能）</li>
+                    <li>阅读材料：《预测原理》（汉克）第3-4章</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch7">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch7-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">时间序列中，每年固定月份出现的波动属于？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch7-q1',0)"><div class="option-radio"></div><span class="option-label">A. 趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch7-q1',1)"><div class="option-radio"></div><span class="option-label">B. 季节</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch7-q1',2)"><div class="option-radio"></div><span class="option-label">C. 循环</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch7-q1',3)"><div class="option-radio"></div><span class="option-label">D. 随机</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q1',1,'每年固定周期重复出现的波动是季节成分。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>每年固定周期重复出现的波动是季节成分。</div>
+                </div>
+                <div class="quiz-question" id="ch7-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">3期移动平均预测第10期，应使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch7-q2',0)"><div class="option-radio"></div><span class="option-label">A. 第7、8、9期</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch7-q2',1)"><div class="option-radio"></div><span class="option-label">B. 第8、9、10期</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch7-q2',2)"><div class="option-radio"></div><span class="option-label">C. 第1-9期</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch7-q2',3)"><div class="option-radio"></div><span class="option-label">D. 第10期本身</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q2',0,'预测第10期使用第7、8、9期的平均值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>预测第10期使用第7、8、9期的平均值。</div>
+                </div>
+                <div class="quiz-question" id="ch7-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">移动平均法的主要作用是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch7-q3',0)"><div class="option-radio"></div><span class="option-label">A. 消除趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch7-q3',1)"><div class="option-radio"></div><span class="option-label">B. 平滑随机波动</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch7-q3',2)"><div class="option-radio"></div><span class="option-label">C. 放大季节性</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch7-q3',3)"><div class="option-radio"></div><span class="option-label">D. 检测异常值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q3',1,'移动平均法的主要作用是平滑随机波动。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>移动平均法的主要作用是平滑随机波动。</div>
+                </div>
+                <div class="quiz-question" id="ch7-q4" data-type="tf">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">移动平均的期数越多，对近期变化的反应越敏感。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q4','false','错误。期数越多，对近期变化越不敏感，但更平滑。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>错误。期数越多，对近期变化越不敏感，但更平滑。</div>
+                </div>
+                <div class="quiz-question" id="ch7-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">时间序列的循环成分与经济周期相关，周期不固定。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q5','true','正确。循环成分是非固定周期的波动，与经济周期相关。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。循环成分是非固定周期的波动，与经济周期相关。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch7')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch7')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch6.html" style="color:var(--primary);font-weight:500;">← 上一章：第6章</a>
+                <a href="ch8.html" style="color:var(--primary);font-weight:500;">下一章：第8章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单元考查卷（三） - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>单元考查卷（三）</span>
+            </div>
+            <h2>单元考查卷（三）</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">第5-6章（统计推断基础 + 回归分析入门）</p>
+            <div class="exam-container" id="exam3">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">数据分析技术 · 单元考查卷（三）</div>
+                    <div class="exam-paper-info">
+                        <span>考查范围：第5-6章（统计推断基础 + 回归分析入门）</span>
+                        <span>满分：100分</span>
+                        <span>时间：90分钟</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="e3-q1" data-type="choice" data-score="3">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">假设检验中，P值表示？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q1',0)"><div class="option-radio"></div><span class="option-label">A. 原假设为真的概率</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q1',1)"><div class="option-radio"></div><span class="option-label">B. 备择假设为真的概率</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q1',2)"><div class="option-radio"></div><span class="option-label">C. 在原假设成立时观察到当前结果的概率</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q1',3)"><div class="option-radio"></div><span class="option-label">D. 犯第一类错误的概率</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q1',2,'P值是在原假设成立时观察到当前结果的概率。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>P值是在原假设成立时观察到当前结果的概率。</div>
+                </div>
+                <div class="quiz-question" id="e3-q2" data-type="choice" data-score="3">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">显著性水平alpha通常取？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q2',0)"><div class="option-radio"></div><span class="option-label">A. 0.01</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q2',1)"><div class="option-radio"></div><span class="option-label">B. 0.05</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q2',2)"><div class="option-radio"></div><span class="option-label">C. 0.10</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q2',3)"><div class="option-radio"></div><span class="option-label">D. 以上都可以</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q2',3,'alpha可以取0.01、0.05或0.10，取决于具体场景。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>alpha可以取0.01、0.05或0.10，取决于具体场景。</div>
+                </div>
+                <div class="quiz-question" id="e3-q3" data-type="choice" data-score="3">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">回归方程 Y = 10 + 3X 中，X=5时的预测值是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q3',0)"><div class="option-radio"></div><span class="option-label">A. 15</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q3',1)"><div class="option-radio"></div><span class="option-label">B. 25</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q3',2)"><div class="option-radio"></div><span class="option-label">C. 30</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q3',3)"><div class="option-radio"></div><span class="option-label">D. 50</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q3',1,'Y = 10 + 3*5 = 25。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Y = 10 + 3*5 = 25。</div>
+                </div>
+                <div class="quiz-question" id="e3-q4" data-type="choice" data-score="3">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">R-squared = 0.64 表示？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q4',0)"><div class="option-radio"></div><span class="option-label">A. X和Y完全无关</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q4',1)"><div class="option-radio"></div><span class="option-label">B. X能解释Y 64%的变异</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q4',2)"><div class="option-radio"></div><span class="option-label">C. 预测误差为64%</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q4',3)"><div class="option-radio"></div><span class="option-label">D. 相关系数为0.64</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q4',1,'R-squared=0.64表示X能解释Y 64%的变异。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>R-squared=0.64表示X能解释Y 64%的变异。</div>
+                </div>
+                <div class="quiz-question" id="e3-q5" data-type="choice" data-score="3">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">在Excel回归分析输出中，判断自变量是否显著应看？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q5',0)"><div class="option-radio"></div><span class="option-label">A. R Square</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q5',1)"><div class="option-radio"></div><span class="option-label">B. P-value</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q5',2)"><div class="option-radio"></div><span class="option-label">C. 截距</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q5',3)"><div class="option-radio"></div><span class="option-label">D. 残差</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q5',1,'P-value&lt;0.05说明变量显著。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>P-value&lt;0.05说明变量显著。</div>
+                </div>
+                <div class="quiz-question" id="e3-q6" data-type="choice" data-score="3">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">95%置信区间意味着？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q6',0)"><div class="option-radio"></div><span class="option-label">A. 总体参数有95%概率落在区间</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q6',1)"><div class="option-radio"></div><span class="option-label">B. 重复抽样95次约95次包含总体参数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q6',2)"><div class="option-radio"></div><span class="option-label">C. 样本均值95%概率等于总体均值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q6',3)"><div class="option-radio"></div><span class="option-label">D. 以上都不对</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q6',1,'正确含义是重复抽样中约95次包含总体参数。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确含义是重复抽样中约95次包含总体参数。</div>
+                </div>
+                <div class="quiz-question" id="e3-q7" data-type="choice" data-score="3">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">相关系数r = 0.8 表示？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q7',0)"><div class="option-radio"></div><span class="option-label">A. 强正相关</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q7',1)"><div class="option-radio"></div><span class="option-label">B. 强负相关</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q7',2)"><div class="option-radio"></div><span class="option-label">C. 弱相关</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q7',3)"><div class="option-radio"></div><span class="option-label">D. 无相关</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q7',0,'r=0.8接近1，是强正相关。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>r=0.8接近1，是强正相关。</div>
+                </div>
+                <div class="quiz-question" id="e3-q8" data-type="choice" data-score="3">
+                    <span class="question-number">第8题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">一元线性回归中，斜率b>0表示？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q8',0)"><div class="option-radio"></div><span class="option-label">A. X增加时Y减少</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q8',1)"><div class="option-radio"></div><span class="option-label">B. X增加时Y增加</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q8',2)"><div class="option-radio"></div><span class="option-label">C. X和Y无关</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q8',3)"><div class="option-radio"></div><span class="option-label">D. 模型不显著</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q8',1,'斜率b>0表示X增加时Y也增加。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>斜率b>0表示X增加时Y也增加。</div>
+                </div>
+                <div class="quiz-question" id="e3-q9" data-type="choice" data-score="3">
+                    <span class="question-number">第9题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">Python中，sklearn的LinearRegression用于？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q9',0)"><div class="option-radio"></div><span class="option-label">A. 分类</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q9',1)"><div class="option-radio"></div><span class="option-label">B. 聚类</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q9',2)"><div class="option-radio"></div><span class="option-label">C. 线性回归</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q9',3)"><div class="option-radio"></div><span class="option-label">D. 降维</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q9',2,'LinearRegression用于线性回归。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>LinearRegression用于线性回归。</div>
+                </div>
+                <div class="quiz-question" id="e3-q10" data-type="choice" data-score="3">
+                    <span class="question-number">第10题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">下列哪项不是回归分析的前提假设？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e3-q10',0)"><div class="option-radio"></div><span class="option-label">A. 线性关系</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e3-q10',1)"><div class="option-radio"></div><span class="option-label">B. 正态分布</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e3-q10',2)"><div class="option-radio"></div><span class="option-label">C. 样本量必须大于1000</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e3-q10',3)"><div class="option-radio"></div><span class="option-label">D. 残差独立</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q10',2,'样本量不必须大于1000，通常n&gt;=30即可。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>样本量不必须大于1000，通常n&gt;=30即可。</div>
+                </div>
+                <div class="quiz-question" id="e3-q11" data-type="tf" data-score="2">
+                    <span class="question-number">第11题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">P值越小，越有理由拒绝原假设。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e3-q11','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e3-q11','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q11','true','正确。P值越小，原假设成立时看到当前数据的可能性越小。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。P值越小，原假设成立时看到当前数据的可能性越小。</div>
+                </div>
+                <div class="quiz-question" id="e3-q12" data-type="tf" data-score="2">
+                    <span class="question-number">第12题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">R-squared越接近1，模型解释力越强。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e3-q12','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e3-q12','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q12','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-question" id="e3-q13" data-type="tf" data-score="2">
+                    <span class="question-number">第13题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">相关系数r的范围是0到1。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e3-q13','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e3-q13','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q13','false','r的范围是-1到1。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>r的范围是-1到1。</div>
+                </div>
+                <div class="quiz-question" id="e3-q14" data-type="tf" data-score="2">
+                    <span class="question-number">第14题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">回归方程Y=50+2X中，截距为2。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e3-q14','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e3-q14','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q14','false','截距是50，斜率是2。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>截距是50，斜率是2。</div>
+                </div>
+                <div class="quiz-question" id="e3-q15" data-type="tf" data-score="2">
+                    <span class="question-number">第15题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">置信区间越窄，估计越精确。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e3-q15','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e3-q15','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e3-q15','true','正确。区间越窄，估计越精确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。区间越窄，估计越精确。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/100分</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitExam('exam3')">提交试卷</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam3')">重置试卷</button>
+                </div>
+            </div>
+
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="index.html" style="color:var(--primary);font-weight:500;">← 返回课程总览</a>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

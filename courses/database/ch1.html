@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1章 数据库概述 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / 数据库概述
+    </div>
+
+    <h2>第1章 数据库概述</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>1.1 数据与信息</h3>
+      <p><strong>数据（Data）</strong>是描述事物的符号记录，是信息的载体。<strong>信息（Information）</strong>是数据经过加工处理后有意义的内容。</p>
+      <p>例如："120"是数据，"商品价格为120元"是信息。数据是未经加工的原始材料，信息是加工后的有用成果。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.2 数据库（DB）</h3>
+      <p><strong>数据库（Database，DB）</strong>是长期存储在计算机内、有组织的、可共享的数据集合。就像一个大仓库，但比仓库更有条理。</p>
+      <p>数据库具有以下特点：</p>
+      <ul>
+        <li>数据按一定的数据模型组织、描述和存储</li>
+        <li>可为各种用户共享</li>
+        <li>冗余度较小</li>
+        <li>数据独立性较高</li>
+        <li>易扩展</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.3 数据库管理系统（DBMS）</h3>
+      <p><strong>数据库管理系统（Database Management System，DBMS）</strong>是位于用户与操作系统之间的一层数据管理软件，是数据库系统的核心软件。</p>
+      <p>常见的DBMS有：MySQL、Oracle、SQL Server、PostgreSQL、SQLite等。它相当于仓库管理员，负责数据的存储、管理、查询和维护。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.4 数据库系统（DBS）</h3>
+      <p><strong>数据库系统（Database System，DBS）</strong>是由数据库、数据库管理系统（及其开发工具）、应用系统、数据库管理员和用户构成的完整系统。</p>
+      <p>简单理解：<strong>DBS = DB + DBMS + 应用程序 + DBA + 用户</strong></p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.5 数据模型</h3>
+      <p>数据模型是对现实世界数据特征的抽象。常见的数据模型有：</p>
+      <ul>
+        <li><strong>层次模型（Hierarchical Model）：</strong>用树形结构表示数据之间的联系，如早期的IMS系统</li>
+        <li><strong>网状模型（Network Model）：</strong>用图结构表示数据之间的联系，如DBTG系统</li>
+        <li><strong>关系模型（Relational Model）：</strong>用二维表格结构表示数据及其联系，是目前主流的数据模型</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.6 关系数据库特点</h3>
+      <p>关系数据库以二维表存储数据，表与表之间通过关联建立联系，使用SQL语言操作。其核心优势：</p>
+      <ul>
+        <li>数据结构简单清晰，用户易懂易用</li>
+        <li>有严格的理论基础（关系代数）</li>
+        <li>数据独立性高</li>
+        <li>使用统一的SQL语言操作</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>1.7 MySQL安装步骤（Windows）</h3>
+      <ol>
+        <li>访问MySQL官网下载MySQL Installer（选择Windows版本）</li>
+        <li>运行安装程序，选择"Server only"或"Full"安装类型</li>
+        <li>配置root密码（务必记住，后续连接需要）</li>
+        <li>保持默认端口3306，完成安装</li>
+        <li>打开命令提示符，输入 <code>mysql -u root -p</code> 测试连接</li>
+        <li>安装Navicat或DBeaver，新建连接，输入主机localhost、端口3306、用户名root和密码</li>
+      </ol>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>DB、DBMS、DBS三者的区别和联系是什么？</li>
+        <li>为什么现在主流数据库都是关系型数据库？</li>
+        <li>MySQL安装后，如何验证是否安装成功？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank">B站：MySQL基础入门（免费）</a></li>
+        <li><a href="https://www.runoob.com/mysql/mysql-tutorial.html" target="_blank">菜鸟教程：MySQL教程（免费）</a></li>
+        <li><a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQL官方下载地址</a></li>
+        <li><a href="https://navicat.com/en/download/navicat-for-mysql" target="_blank">Navicat下载（有试用版）</a></li>
+        <li><a href="https://dbeaver.io/download/" target="_blank">DBeaver（免费开源数据库工具）</a></li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch1">
+      <div class="quiz-header">
+        <div class="quiz-title">第1章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q1_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">数据库管理系统英文缩写是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q1_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">DB</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q1_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">DBMS</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q1_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">DBS</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q1_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">SQL</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q1_1', 1, `正确答案：B（DBMS）。DB是数据库，DBS是数据库系统，SQL是结构化查询语言。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（DBMS）。DB是数据库，DBS是数据库系统，SQL是结构化查询语言。
+        </div>
+      </div>
+      <div class="quiz-question" id="q1_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">数据库系统的核心软件是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q1_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据库</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q1_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据库管理系统</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q1_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">操作系统</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q1_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据模型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q1_2', 1, `正确答案：B（数据库管理系统DBMS）。DBMS是数据库系统的核心，负责管理数据库的数据。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（数据库管理系统DBMS）。DBMS是数据库系统的核心，负责管理数据库的数据。
+        </div>
+      </div>
+      <div class="quiz-question" id="q1_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下不属于数据模型的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q1_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">层次模型</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q1_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">网状模型</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q1_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">关系模型</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q1_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">表格模型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q1_3', 3, `正确答案：D（表格模型）。三大经典数据模型是层次模型、网状模型和关系模型。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：D（表格模型）。三大经典数据模型是层次模型、网状模型和关系模型。
+        </div>
+      </div>
+      <div class="quiz-question" id="q1_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">目前主流的数据库数据模型是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q1_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">层次模型</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q1_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">网状模型</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q1_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">关系模型</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q1_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">面向对象模型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q1_4', 2, `正确答案：C（关系模型）。关系模型以二维表为基础，使用SQL操作，是目前最广泛使用的数据模型。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（关系模型）。关系模型以二维表为基础，使用SQL操作，是目前最广泛使用的数据模型。
+        </div>
+      </div>
+      <div class="quiz-question" id="q1_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">数据库系统（DBS）包含以下哪些组成部分？</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q1_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">仅数据库</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q1_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据库和数据库管理系统</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q1_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据库、DBMS、应用程序、用户和硬件</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q1_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">仅数据库管理系统</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q1_5', 2, `正确答案：C。DBS = DB + DBMS + 应用程序 + DBA + 用户 + 硬件，是一个完整的系统。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C。DBS = DB + DBMS + 应用程序 + DBA + 用户 + 硬件，是一个完整的系统。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch1')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch1')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <span></span>
+<a href="ch2.html" class="nav-next">第2章 关系数据库基础 &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

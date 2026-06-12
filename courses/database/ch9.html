@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第9章 MySQL数据库管理 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / MySQL数据库管理
+    </div>
+
+    <h2>第9章 MySQL数据库管理</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>9.1 用户管理</h3>
+      <div class="code-block">-- 创建用户
+CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'password123';
+
+-- 授权
+GRANT SELECT, INSERT ON school.* TO 'testuser'@'localhost';
+
+-- 刷新权限
+FLUSH PRIVILEGES;
+
+-- 撤销权限
+REVOKE INSERT ON school.* FROM 'testuser'@'localhost';
+
+-- 查看用户权限
+SHOW GRANTS FOR 'testuser'@'localhost';</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>9.2 索引（Index）</h3>
+      <p>索引是加速数据查询的数据结构，类似于书的目录。常用类型：</p>
+      <ul>
+        <li><strong>普通索引（INDEX）：</strong>最基本的索引，无约束</li>
+        <li><strong>唯一索引（UNIQUE INDEX）：</strong>值必须唯一</li>
+        <li><strong>主键索引（PRIMARY KEY）：</strong>特殊的唯一索引，且不能为NULL</li>
+      </ul>
+      <div class="code-block">-- 创建索引
+CREATE INDEX idx_name ON student(sname);
+
+-- 查看索引
+SHOW INDEX FROM student;
+
+-- 删除索引
+DROP INDEX idx_name ON student;</div>
+      <p>注意：索引不是越多越好，索引会降低INSERT/UPDATE/DELETE的效率，且占用存储空间。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>9.3 视图（View）</h3>
+      <p>视图是基于查询结果的虚拟表，可以简化复杂查询，提高安全性。</p>
+      <div class="code-block">-- 创建视图
+CREATE VIEW v_student_grade AS
+SELECT s.sno, s.sname, c.cname, sc.grade
+FROM student s JOIN sc ON s.sno=sc.sno
+JOIN course c ON sc.cno=c.cno;
+
+-- 查询视图（像查表一样）
+SELECT * FROM v_student_grade WHERE sname='张三';
+
+-- 删除视图
+DROP VIEW v_student_grade;</div>
+      <p>视图中的数据不是实际存储的，每次查询视图时都会执行其定义的SELECT语句。</p>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>索引的作用是什么？是不是索引越多越好？</li>
+        <li>视图和表有什么区别？视图中的数据可以修改吗？</li>
+        <li>如何给一个用户只授予查询权限？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.runoob.com/mysql/mysql-index.html" target="_blank">菜鸟教程：MySQL索引</a></li>
+        <li><a href="https://www.runoob.com/mysql/mysql-view.html" target="_blank">菜鸟教程：MySQL视图</a></li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch9">
+      <div class="quiz-header">
+        <div class="quiz-title">第9章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q9_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">创建MySQL用户的命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q9_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">ADD USER</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q9_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">CREATE USER</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q9_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">NEW USER</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q9_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">INSERT USER</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q9_1', 1, `正确答案：B（CREATE USER）。语法：CREATE USER '用户名'@'主机' IDENTIFIED BY '密码';`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（CREATE USER）。语法：CREATE USER '用户名'@'主机' IDENTIFIED BY '密码';
+        </div>
+      </div>
+      <div class="quiz-question" id="q9_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">索引的作用是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q9_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">节省存储空间</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q9_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['加速数据查询']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q9_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">保证数据完整性</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q9_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">限制数据类型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q9_2', 1, `正确答案：B（加速数据查询）。索引类似于书的目录，可以加快查找速度。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（加速数据查询）。索引类似于书的目录，可以加快查找速度。
+        </div>
+      </div>
+      <div class="quiz-question" id="q9_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">视图是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q9_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">实际存储数据的表</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q9_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['基于查询结果的虚拟表']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q9_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据库的备份</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q9_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">一种索引</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q9_3', 1, `正确答案：B（基于查询结果的虚拟表）。视图不实际存储数据，每次查询时执行定义的SQL。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（基于查询结果的虚拟表）。视图不实际存储数据，每次查询时执行定义的SQL。
+        </div>
+      </div>
+      <div class="quiz-question" id="q9_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">授权用户查询权限的命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q9_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">ALLOW SELECT</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q9_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">GRANT SELECT</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q9_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">PERMIT SELECT</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q9_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">GIVE SELECT</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q9_4', 1, `正确答案：B（GRANT SELECT）。语法：GRANT 权限 ON 数据库.表 TO 用户;`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（GRANT SELECT）。语法：GRANT 权限 ON 数据库.表 TO 用户;
+        </div>
+      </div>
+      <div class="quiz-question" id="q9_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">关于索引，以下说法正确的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q9_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">索引越多越好</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q9_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['索引会降低写入效率']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q9_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">索引不需要维护</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q9_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">所有字段都应该建索引</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q9_5', 1, `正确答案：B。索引虽然加快查询，但会降低INSERT/UPDATE/DELETE效率，且占用存储空间。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。索引虽然加快查询，但会降低INSERT/UPDATE/DELETE效率，且占用存储空间。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch9')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch9')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch8.html" class="nav-prev">&laquo; 第8章 数据库设计基础（E-R图）</a>
+<a href="ch10.html" class="nav-next">第10章 数据库安全与备份 &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

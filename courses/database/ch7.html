@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第7章 SQL数据操作语言DML - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / SQL数据操作语言DML
+    </div>
+
+    <h2>第7章 SQL数据操作语言DML</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>7.1 INSERT - 插入数据</h3>
+      <div class="code-block">-- 插入单行
+INSERT INTO student(sno, sname, ssex, sage, sdept)
+VALUES('2023001', '李四', '男', 20, '计算机系');
+
+-- 插入多行
+INSERT INTO student VALUES
+('2023002', '王五', '女', 19, '商学院'),
+('2023003', '赵六', '男', 21, '电子系');
+
+-- 从其他表插入
+INSERT INTO student_backup SELECT * FROM student;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.2 UPDATE - 修改数据</h3>
+      <div class="code-block">-- 修改单条记录
+UPDATE student SET sage = 21 WHERE sno = '2023001';
+
+-- 批量修改
+UPDATE student SET sdept = '商学院' WHERE sdept = '经管系';
+
+-- 修改多个字段
+UPDATE student SET sage = 22, sdept = '信息系' WHERE sno = '2023001';</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.3 DELETE - 删除数据</h3>
+      <div class="code-block">-- 删除指定记录（必须有WHERE！）
+DELETE FROM student WHERE sno = '2023001';
+
+-- 删除满足条件的记录
+DELETE FROM student WHERE sage < 18;
+
+-- 清空表（保留结构，效率更高且不可回滚）
+TRUNCATE TABLE student;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.4 DELETE vs TRUNCATE</h3>
+      <ul>
+        <li><strong>DELETE：</strong>DML语句，逐行删除，可以回滚，触发器生效，速度较慢</li>
+        <li><strong>TRUNCATE：</strong>DDL语句，整表清空，不可回滚，不触发触发器，速度更快</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.5 重要提醒</h3>
+      <p style="color:#ef4444;font-weight:600;">UPDATE和DELETE必须带WHERE条件，否则会影响全表数据！操作前建议先备份。</p>
+      <div class="code-block">-- 危险！会修改全表所有记录
+UPDATE student SET sage = 20;
+
+-- 安全！只修改指定记录
+UPDATE student SET sage = 20 WHERE sno = '2023001';</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>DELETE和TRUNCATE有什么区别？</li>
+        <li>UPDATE语句如果不写WHERE会发生什么？</li>
+        <li>如何安全地批量更新数据？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.runoob.com/mysql/mysql-insert-query.html" target="_blank">菜鸟教程：MySQL插入/更新/删除</a></li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch7">
+      <div class="quiz-header">
+        <div class="quiz-title">第7章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q7_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">SQL中用于插入数据的命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q7_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">ADD</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q7_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">INSERT</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q7_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">CREATE</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q7_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">UPDATE</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q7_1', 1, `正确答案：B（INSERT）。INSERT用于向表中插入新数据。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（INSERT）。INSERT用于向表中插入新数据。
+        </div>
+      </div>
+      <div class="quiz-question" id="q7_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">DELETE语句不带WHERE条件时，会（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q7_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">报错</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q7_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['删除表中所有记录，保留表结构']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q7_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">删除表结构</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q7_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">不做任何操作</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q7_2', 1, `正确答案：B。DELETE不带WHERE会删除全表数据，但表结构保留。TRUNCATE效果类似但更快。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。DELETE不带WHERE会删除全表数据，但表结构保留。TRUNCATE效果类似但更快。
+        </div>
+      </div>
+      <div class="quiz-question" id="q7_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">DELETE和TRUNCATE的区别是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q7_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">没有区别</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q7_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['DELETE可回滚，TRUNCATE不可回滚']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q7_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">TRUNCATE可回滚，DELETE不可</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q7_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">DELETE更慢但不可回滚</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q7_3', 1, `正确答案：B。DELETE是DML可回滚，TRUNCATE是DDL不可回滚且速度更快。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。DELETE是DML可回滚，TRUNCATE是DDL不可回滚且速度更快。
+        </div>
+      </div>
+      <div class="quiz-question" id="q7_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">UPDATE语句必须包含的关键字是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q7_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">FROM</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q7_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">WHERE</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q7_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">SET</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q7_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">VALUES</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q7_4', 2, `正确答案：C（SET）。UPDATE语法：UPDATE 表名 SET 字段=值 WHERE 条件。SET是必须的，WHERE建议但非必须。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（SET）。UPDATE语法：UPDATE 表名 SET 字段=值 WHERE 条件。SET是必须的，WHERE建议但非必须。
+        </div>
+      </div>
+      <div class="quiz-question" id="q7_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">批量插入多条记录的语法是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q7_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">多次INSERT</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q7_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['INSERT INTO ... VALUES (...), (...), (...)']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q7_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">INSERT ALL</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q7_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">BATCH INSERT</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q7_5', 1, `正确答案：B。MySQL支持在VALUES中用逗号分隔多条记录实现批量插入。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。MySQL支持在VALUES中用逗号分隔多条记录实现批量插入。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch7')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch7')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch6.html" class="nav-prev">&laquo; 第6章 SQL数据查询语言DQL（嵌套查询/子查询）</a>
+<a href="ch8.html" class="nav-next">第8章 数据库设计基础（E-R图） &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

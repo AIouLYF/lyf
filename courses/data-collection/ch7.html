@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第7章 数据存储与管理 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第7章 数据存储与管理</span>
+                </div>
+                <h2>第7章 数据存储与管理</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论4课时 + 上机4课时 | 难度：中等</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>7.1 保存为CSV文件</h3>
+                    <p>CSV是最通用的数据交换格式，纯文本、体积小、几乎所有软件都能打开。注意中文编码问题。</p>
+                <div class="code-block">import pandas as pd
+
+# 保存为CSV（推荐带BOM的utf-8，Excel打开不乱码）
+df.to_csv('output.csv', index=False, encoding='utf-8-sig')
+
+# 参数说明：
+# index=False  不保存行索引
+# encoding='utf-8-sig'  带BOM的UTF-8，Excel直接打开中文不乱码
+
+# 只保存指定列
+df[['姓名', '成绩']].to_csv('subset.csv', index=False)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>7.2 保存为Excel文件</h3>
+                    <p>Excel格式适合需要给非技术人员查看的场景，可以设置多个工作表。</p>
+                <div class="code-block"># 保存为Excel（需要openpyxl库）
+df.to_excel('output.xlsx', sheet_name='数据', index=False)
+
+# 保存多个工作表
+with pd.ExcelWriter('report.xlsx') as writer:
+    df1.to_excel(writer, sheet_name='原始数据', index=False)
+    df2.to_excel(writer, sheet_name='清洗后', index=False)
+    df3.to_excel(writer, sheet_name='统计汇总', index=False)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>7.3 保存为JSON文件</h3>
+                    <p>JSON是Web开发中最常用的数据格式，API之间传递数据几乎都是JSON。</p>
+                <div class="code-block"># DataFrame转JSON
+df.to_json('output.json', orient='records', force_ascii=False)
+
+# orient参数：
+# 'records' - 每行一个对象，最常用
+# 'index'   - 以行索引为键
+# 'columns' - 以列名为键
+
+# 读取JSON
+df = pd.read_json('output.json')</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>7.4 写入MySQL数据库</h3>
+                    <p>当数据量大、需要多人共享、需要频繁查询时，应该使用数据库。MySQL是最流行的开源关系型数据库。</p>
+                <div class="code-block"># 安装依赖：pip install pymysql sqlalchemy
+
+from sqlalchemy import create_engine
+import pandas as pd
+
+# 创建数据库连接
+# 格式：mysql+pymysql://用户名:密码@主机:端口/数据库名
+engine = create_engine('mysql+pymysql://root:密码@localhost:3306/testdb')
+
+# 写入数据表（如果表不存在则自动创建）
+df.to_sql('students', engine, if_exists='replace', index=False)
+
+# if_exists参数：
+# 'replace' - 如果表存在，删除重建
+# 'append'  - 如果表存在，追加数据
+# 'fail'    - 如果表存在，报错
+
+# 从数据库读取数据
+df_from_db = pd.read_sql('SELECT * FROM students WHERE 成绩 > 80', engine)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>7.5 数据备份策略</h3>
+                    <p>数据是宝贵的资产，一定要做好备份。基本策略：定期备份、多地存储、版本保留。</p>
+                <div class="code-block">import shutil
+from datetime import datetime
+
+# 策略1：带时间戳的文件备份
+now = datetime.now().strftime('%Y%m%d_%H%M%S')
+shutil.copy('important_data.csv', f'backup/important_data_{now}.csv')
+
+# 策略2：自动保留最近N个备份
+import os
+import glob
+
+backup_files = sorted(glob.glob('backup/*.csv'))
+if len(backup_files) > 10:  # 只保留最近10个
+    for old in backup_files[:-10]:
+        os.remove(old)</div>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>官方文档：SQLAlchemy文档（docs.sqlalchemy.org）</li>
+                    <li>视频教程：B站搜索"Python操作MySQL数据库"</li>
+                    <li>工具：Navicat或DBeaver（图形化数据库管理工具，免费版够用）</li>
+                    <li>练习：在本地安装MySQL，创建数据库，完成数据的写入和查询</li>
+                    <li>阅读：了解云数据库（阿里云RDS、腾讯云数据库）的基本概念</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>CSV和Excel各有什么优缺点？什么场景选哪个？</li>
+                    <li>to_csv的encoding参数为什么要用'utf-8-sig'而不是'utf-8'？</li>
+                    <li>to_sql的if_exists参数三个选项有什么区别？</li>
+                    <li>为什么数据量大时推荐用数据库而不是Excel？</li>
+                    <li>写出一个自动备份并保留最近5个版本的代码思路。</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch7">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q7_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">Pandas中，将DataFrame写入MySQL数据库应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q7_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_csv()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q7_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_excel()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q7_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_sql()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q7_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_json()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q7_1', 2, `df.to_sql()用于将DataFrame写入SQL数据库。to_csv()保存为CSV，to_excel()保存为Excel，to_json()保存为JSON。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            df.to_sql()用于将DataFrame写入SQL数据库。to_csv()保存为CSV，to_excel()保存为Excel，to_json()保存为JSON。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q7_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">将DataFrame保存为Excel文件，应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q7_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_csv()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q7_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_excel()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q7_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_sql()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q7_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_json()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q7_2', 1, `df.to_excel()用于将DataFrame保存为Excel文件。需要安装openpyxl库作为引擎。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            df.to_excel()用于将DataFrame保存为Excel文件。需要安装openpyxl库作为引擎。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q7_3" data-type="tf">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">to_csv的encoding参数使用'utf-8-sig'是为了让Excel打开中文不乱码。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q7_3', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q7_3', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q7_3', 'true', `utf-8-sig带BOM（字节顺序标记），Excel能正确识别编码，打开时中文不会乱码。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            utf-8-sig带BOM（字节顺序标记），Excel能正确识别编码，打开时中文不会乱码。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q7_4" data-type="fill">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">to_sql的if_exists参数有三个选项：'replace'、'append'和______。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q7_4', 'fail', `if_exists参数三个选项：replace（删除重建）、append（追加数据）、fail（表存在则报错）。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            if_exists参数三个选项：replace（删除重建）、append（追加数据）、fail（表存在则报错）。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q7_5" data-type="choice">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">为什么数据量大时推荐使用数据库而不是Excel？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q7_5', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">数据库更便宜</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q7_5', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">数据库支持并发访问和高效查询</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q7_5', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">Excel不能保存数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q7_5', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">数据库界面更美观</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q7_5', 1, `数据库支持并发访问、高效查询、事务处理、权限管理等，适合大数据量和多人协作场景。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            数据库支持并发访问、高效查询、事务处理、权限管理等，适合大数据量和多人协作场景。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch7')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch7')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="ch6.html">上一章</a>
+                    <a href="ch8.html">下一章</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

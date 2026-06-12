@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第4章 流程控制 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                <a href="#">单元二：数据结构</a> &gt;
+                第4章 流程控制
+            </div>
+            <h2>第4章 流程控制</h2>
+            <div class="knowledge-card"><h3>核心知识点</h3><ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;"><li><strong>if 分支：</strong><code>if</code> &rarr; <code>elif</code> &rarr; <code>else</code>。</li><li><strong>for 循环：</strong>遍历序列。<code>for i in range(n):</code></li><li><strong>while 循环：</strong>条件为真就重复。避免死循环。</li><li><strong>break：</strong>退出循环。<strong>continue：</strong>跳过本轮。</li></ul></div><div class="knowledge-card"><h3>代码示例</h3><div class="code-block">score = 85
+if score >= 90:
+    grade = "优秀"
+elif score >= 80:
+    grade = "良好"
+elif score >= 60:
+    grade = "及格"
+else:
+    grade = "不及格"
+print(grade)
+
+for i in range(1, 11):
+    print(i, "的平方是", i**2)</div></div><div class="resource-list"><h4>自学拓展素材</h4><ul><li>实训任务：用for循环计算1到100的累加和</li><li>实训任务：用while循环实现"猜数字"小游戏</li></ul></div><div class="self-check"><h4>自学自检小问题</h4><ol><li><code>range(5)</code> 会生成哪些数字？</li><li>if后面必须加什么符号？</li><li>break和continue的区别是什么？</li></ol></div>
+            <div class="quiz-container" id="quiz-ch4">
+                <div class="quiz-header">
+                    <div class="quiz-title">本章配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/6</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">range(1, 5) 生成的序列是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 1,2,3,4,5</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 1,2,3,4</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 0,1,2,3,4</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 0,1,2,3,4,5</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'range(1,5)生成1到4。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>range(1,5)生成1到4。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">以下代码的输出？<br><code>for i in range(3): print(i, end=" ")</code></div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 1 2 3</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 0 1 2</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 0 1 2 3</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 1 2</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'range(3)生成0,1,2。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>range(3)生成0,1,2。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q3" data-type="choice" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">while循环中，哪个语句可以立即退出循环？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q3', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. exit</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q3', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. break</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q3', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. continue</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q3', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. return</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'break立即退出循环。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>break立即退出循环。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q4" data-type="choice" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">以下代码的输出？<br><code>for i in range(2, 6, 2): print(i, end=" ")</code></div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q4', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 2 4 6</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q4', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 2 4</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q4', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 2 3 4 5</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q4', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 2 4 6 8</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, 'range(2,6,2)生成2,4。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>range(2,6,2)生成2,4。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q5" data-type="tf" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">for循环只能用于遍历列表。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'false', 'for循环可遍历任何可迭代对象。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>for循环可遍历任何可迭代对象。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q6" data-type="tf" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">continue语句会终止整个循环。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q6', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q6', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q6', 'false', 'continue只跳过当前轮次。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>continue只跳过当前轮次。</p>
+    </div>
+</div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch4')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-ch4')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/6</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch3.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">&larr; 上一章</a>
+                <a href="ch5.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">下一章 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

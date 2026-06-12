@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单元考查卷（四） - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>单元考查卷（四）</span>
+            </div>
+            <h2>单元考查卷（四）</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">第7-8章（时间序列分析 + 商业智能报告撰写）</p>
+            <div class="exam-container" id="exam4">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">数据分析技术 · 单元考查卷（四）</div>
+                    <div class="exam-paper-info">
+                        <span>考查范围：第7-8章（时间序列分析 + 商业智能报告撰写）</span>
+                        <span>满分：100分</span>
+                        <span>时间：90分钟</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="e4-q1" data-type="choice" data-score="3">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">时间序列中，每年固定月份出现的波动属于？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q1',0)"><div class="option-radio"></div><span class="option-label">A. 趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q1',1)"><div class="option-radio"></div><span class="option-label">B. 季节</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q1',2)"><div class="option-radio"></div><span class="option-label">C. 循环</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q1',3)"><div class="option-radio"></div><span class="option-label">D. 随机</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q1',1,'每年固定周期重复出现的是季节成分。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>每年固定周期重复出现的是季节成分。</div>
+                </div>
+                <div class="quiz-question" id="e4-q2" data-type="choice" data-score="3">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">3期移动平均预测第10期，应使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q2',0)"><div class="option-radio"></div><span class="option-label">A. 第7、8、9期</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q2',1)"><div class="option-radio"></div><span class="option-label">B. 第8、9、10期</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q2',2)"><div class="option-radio"></div><span class="option-label">C. 第1-9期</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q2',3)"><div class="option-radio"></div><span class="option-label">D. 第10期本身</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q2',0,'使用第7、8、9期的平均值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>使用第7、8、9期的平均值。</div>
+                </div>
+                <div class="quiz-question" id="e4-q3" data-type="choice" data-score="3">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">移动平均法的主要作用是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q3',0)"><div class="option-radio"></div><span class="option-label">A. 消除趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q3',1)"><div class="option-radio"></div><span class="option-label">B. 平滑随机波动</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q3',2)"><div class="option-radio"></div><span class="option-label">C. 放大季节性</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q3',3)"><div class="option-radio"></div><span class="option-label">D. 检测异常值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q3',1,'移动平均法主要作用是平滑随机波动。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>移动平均法主要作用是平滑随机波动。</div>
+                </div>
+                <div class="quiz-question" id="e4-q4" data-type="choice" data-score="3">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">数据分析报告的核心结构不包括？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q4',0)"><div class="option-radio"></div><span class="option-label">A. 背景与目的</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q4',1)"><div class="option-radio"></div><span class="option-label">B. 数据来源</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q4',2)"><div class="option-radio"></div><span class="option-label">C. 详细代码</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q4',3)"><div class="option-radio"></div><span class="option-label">D. 结论与建议</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q4',2,'详细代码不属于报告核心结构。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>详细代码不属于报告核心结构。</div>
+                </div>
+                <div class="quiz-question" id="e4-q5" data-type="choice" data-score="3">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">SCQA框架中的Q代表？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q5',0)"><div class="option-radio"></div><span class="option-label">A. Quality</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q5',1)"><div class="option-radio"></div><span class="option-label">B. Question</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q5',2)"><div class="option-radio"></div><span class="option-label">C. Quantity</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q5',3)"><div class="option-radio"></div><span class="option-label">D. Query</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q5',1,'Q代表Question（疑问）。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Q代表Question（疑问）。</div>
+                </div>
+                <div class="quiz-question" id="e4-q6" data-type="choice" data-score="3">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">柱状图的Y轴应该从什么开始？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q6',0)"><div class="option-radio"></div><span class="option-label">A. 最小值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q6',1)"><div class="option-radio"></div><span class="option-label">B. 0</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q6',2)"><div class="option-radio"></div><span class="option-label">C. 均值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q6',3)"><div class="option-radio"></div><span class="option-label">D. 中位数</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q6',1,'柱状图Y轴必须从0开始。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>柱状图Y轴必须从0开始。</div>
+                </div>
+                <div class="quiz-question" id="e4-q7" data-type="choice" data-score="3">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">时间序列中，与经济周期相关的是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q7',0)"><div class="option-radio"></div><span class="option-label">A. 趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q7',1)"><div class="option-radio"></div><span class="option-label">B. 季节</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q7',2)"><div class="option-radio"></div><span class="option-label">C. 循环</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q7',3)"><div class="option-radio"></div><span class="option-label">D. 随机</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q7',2,'循环成分与经济周期相关。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>循环成分与经济周期相关。</div>
+                </div>
+                <div class="quiz-question" id="e4-q8" data-type="choice" data-score="3">
+                    <span class="question-number">第8题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">下列哪项不是好的数据报告标题？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q8',0)"><div class="option-radio"></div><span class="option-label">A. "Q3销售额同比增长15%"</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q8',1)"><div class="option-radio"></div><span class="option-label">B. "销售额分析"</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q8',2)"><div class="option-radio"></div><span class="option-label">C. "新品上线后转化率提升22%"</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q8',3)"><div class="option-radio"></div><span class="option-label">D. "华东区客户流失率降至5%"</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q8',1,'"销售额分析"太笼统，不是好的标题。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>"销售额分析"太笼统，不是好的标题。</div>
+                </div>
+                <div class="quiz-question" id="e4-q9" data-type="choice" data-score="3">
+                    <span class="question-number">第9题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">移动平均预测属于什么预测方法？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q9',0)"><div class="option-radio"></div><span class="option-label">A. 定性</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q9',1)"><div class="option-radio"></div><span class="option-label">B. 时间序列</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q9',2)"><div class="option-radio"></div><span class="option-label">C. 因果</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q9',3)"><div class="option-radio"></div><span class="option-label">D. 回归</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q9',1,'移动平均属于时间序列预测方法。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>移动平均属于时间序列预测方法。</div>
+                </div>
+                <div class="quiz-question" id="e4-q10" data-type="choice" data-score="3">
+                    <span class="question-number">第10题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">Executive Summary应该放在报告的哪里？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e4-q10',0)"><div class="option-radio"></div><span class="option-label">A. 报告最后</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e4-q10',1)"><div class="option-radio"></div><span class="option-label">B. 附录中</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e4-q10',2)"><div class="option-radio"></div><span class="option-label">C. 报告最前面</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e4-q10',3)"><div class="option-radio"></div><span class="option-label">D. 每页底部</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q10',2,'Executive Summary放在报告最前面。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Executive Summary放在报告最前面。</div>
+                </div>
+                <div class="quiz-question" id="e4-q11" data-type="tf" data-score="2">
+                    <span class="question-number">第11题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">移动平均的期数越多，对近期变化越不敏感。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e4-q11','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e4-q11','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q11','true','正确。期数越多越不敏感但更平滑。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。期数越多越不敏感但更平滑。</div>
+                </div>
+                <div class="quiz-question" id="e4-q12" data-type="tf" data-score="2">
+                    <span class="question-number">第12题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">时间序列的四种成分是趋势、季节、循环和随机。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e4-q12','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e4-q12','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q12','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-question" id="e4-q13" data-type="tf" data-score="2">
+                    <span class="question-number">第13题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">报告中的图表越多越好，展示所有数据。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e4-q13','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e4-q13','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q13','false','每页只讲一个观点，图表不是越多越好。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>每页只讲一个观点，图表不是越多越好。</div>
+                </div>
+                <div class="quiz-question" id="e4-q14" data-type="tf" data-score="2">
+                    <span class="question-number">第14题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">SCQA中的C代表Complication（冲突/问题）。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e4-q14','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e4-q14','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q14','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-question" id="e4-q15" data-type="tf" data-score="2">
+                    <span class="question-number">第15题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">Excel中移动平均功能在数据→数据分析→移动平均中。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e4-q15','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e4-q15','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e4-q15','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/100分</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitExam('exam4')">提交试卷</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam4')">重置试卷</button>
+                </div>
+            </div>
+
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="index.html" style="color:var(--primary);font-weight:500;">← 返回课程总览</a>
+                <a href="final.html" style="color:var(--primary);font-weight:500;">期末考查 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

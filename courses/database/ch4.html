@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第4章 SQL数据查询语言DQL（单表查询） - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / SQL数据查询语言DQL（单表查询）
+    </div>
+
+    <h2>第4章 SQL数据查询语言DQL（单表查询）</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>4.1 SELECT基本结构</h3>
+      <div class="code-block">SELECT 字段列表
+FROM 表名
+WHERE 条件
+GROUP BY 分组字段
+HAVING 分组过滤条件
+ORDER BY 排序字段 [ASC|DESC]
+LIMIT 起始位置, 记录数;</div>
+      <p>SQL查询语句的执行顺序：FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.2 WHERE条件运算符</h3>
+      <ul>
+        <li>比较运算符：=、&lt;&gt;、&gt;、&lt;、&gt;=、&lt;=</li>
+        <li>范围：BETWEEN...AND...</li>
+        <li>集合：IN、NOT IN</li>
+        <li>模糊匹配：LIKE（%匹配任意字符序列，_匹配单个字符）</li>
+        <li>空值判断：IS NULL、IS NOT NULL</li>
+        <li>逻辑运算：AND、OR、NOT</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.3 聚合函数</h3>
+      <ul>
+        <li><strong>COUNT(*)：</strong>统计行数</li>
+        <li><strong>SUM(字段)：</strong>求和</li>
+        <li><strong>AVG(字段)：</strong>求平均值</li>
+        <li><strong>MAX(字段)：</strong>求最大值</li>
+        <li><strong>MIN(字段)：</strong>求最小值</li>
+      </ul>
+      <div class="code-block">-- 统计学生总数
+SELECT COUNT(*) FROM student;
+
+-- 计算平均年龄
+SELECT AVG(sage) FROM student;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.4 GROUP BY - 分组查询</h3>
+      <p>GROUP BY按指定字段分组，通常配合聚合函数使用。</p>
+      <div class="code-block">-- 统计各系学生人数
+SELECT sdept, COUNT(*) AS 人数
+FROM student
+GROUP BY sdept;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.5 HAVING - 分组过滤</h3>
+      <p>HAVING对分组后的结果进行过滤。注意：WHERE是过滤行，HAVING是过滤组。</p>
+      <div class="code-block">-- 查询人数超过3人的系
+SELECT sdept, COUNT(*) AS 人数
+FROM student
+GROUP BY sdept
+HAVING COUNT(*) > 3;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.6 ORDER BY - 排序</h3>
+      <p>ASC升序（默认），DESC降序。</p>
+      <div class="code-block">-- 查询年龄最大的前3名学生
+SELECT * FROM student ORDER BY sage DESC LIMIT 3;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.7 DISTINCT - 去重</h3>
+      <div class="code-block">-- 查询有哪些系
+SELECT DISTINCT sdept FROM student;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.8 LIMIT - 分页</h3>
+      <div class="code-block">-- 查询第2页，每页5条
+SELECT * FROM student LIMIT 5, 5;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.9 典型查询示例</h3>
+      <div class="code-block">-- 查询所有男生信息
+SELECT * FROM student WHERE ssex='男';
+
+-- 查询姓"张"的学生
+SELECT * FROM student WHERE sname LIKE '张%';
+
+-- 统计各系学生人数
+SELECT sdept, COUNT(*) AS 人数 FROM student GROUP BY sdept;
+
+-- 查询年龄最大的前3名学生
+SELECT * FROM student ORDER BY sage DESC LIMIT 3;</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>WHERE和HAVING的区别是什么？</li>
+        <li>COUNT(*)和COUNT(字段名)有什么区别？</li>
+        <li>LIKE '%张%' 和 LIKE '张%' 分别匹配什么？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.runoob.com/mysql/mysql-select-query.html" target="_blank">菜鸟教程：MySQL查询数据</a></li>
+        <li>实训数据集：电商订单表（order_id, customer_id, product_name, quantity, price, order_date）</li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch4">
+      <div class="quiz-header">
+        <div class="quiz-title">第4章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q4_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下哪个关键字用于消除查询结果中的重复行？（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q4_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">ORDER BY</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q4_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">GROUP BY</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q4_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">DISTINCT</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q4_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">LIMIT</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q4_1', 2, `正确答案：C（DISTINCT）。DISTINCT用于去重；ORDER BY用于排序；GROUP BY用于分组；LIMIT用于限制返回行数。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（DISTINCT）。DISTINCT用于去重；ORDER BY用于排序；GROUP BY用于分组；LIMIT用于限制返回行数。
+        </div>
+      </div>
+      <div class="quiz-question" id="q4_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">查询时对分组后的结果进行过滤，应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q4_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">WHERE</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q4_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">HAVING</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q4_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">GROUP BY</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q4_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">ORDER BY</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q4_2', 1, `正确答案：B（HAVING）。WHERE过滤行，HAVING过滤分组结果。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（HAVING）。WHERE过滤行，HAVING过滤分组结果。
+        </div>
+      </div>
+      <div class="quiz-question" id="q4_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">COUNT(*)和COUNT(字段名)的区别是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q4_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">没有区别</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q4_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">COUNT(*)不统计NULL值</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q4_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">COUNT(字段名)不统计该字段为NULL的行</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q4_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">COUNT(*)更快</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q4_3', 2, `正确答案：C。COUNT(*)统计所有行；COUNT(字段名)只统计该字段非NULL的行。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C。COUNT(*)统计所有行；COUNT(字段名)只统计该字段非NULL的行。
+        </div>
+      </div>
+      <div class="quiz-question" id="q4_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">LIKE '张%' 匹配的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q4_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">以'张'结尾的</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q4_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">以'张'开头的</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q4_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">包含'张'的</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q4_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">等于'张'的</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q4_4', 1, `正确答案：B（以'张'开头的）。%匹配任意字符序列，所以'张%'匹配以张开头的所有字符串。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（以'张'开头的）。%匹配任意字符序列，所以'张%'匹配以张开头的所有字符串。
+        </div>
+      </div>
+      <div class="quiz-question" id="q4_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">要查询表中的前10条记录，应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q4_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">TOP 10</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q4_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">LIMIT 10</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q4_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">FIRST 10</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q4_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">ROW 10</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q4_5', 1, `正确答案：B（LIMIT 10）。MySQL中使用LIMIT限制返回行数。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（LIMIT 10）。MySQL中使用LIMIT限制返回行数。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch4')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch4')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch3.html" class="nav-prev">&laquo; 第3章 SQL数据定义语言DDL</a>
+<a href="ch5.html" class="nav-next">第5章 SQL数据查询语言DQL（多表连接查询） &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

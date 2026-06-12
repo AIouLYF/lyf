@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第3章 SQL数据定义语言DDL - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / SQL数据定义语言DDL
+    </div>
+
+    <h2>第3章 SQL数据定义语言DDL</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>3.1 CREATE DATABASE - 创建数据库</h3>
+      <div class="code-block">CREATE DATABASE school;
+CREATE DATABASE IF NOT EXISTS school;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.2 USE - 选择数据库</h3>
+      <div class="code-block">USE school;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.3 CREATE TABLE - 创建表</h3>
+      <p>创建表时需定义字段名、数据类型和约束。</p>
+      <div class="code-block">CREATE TABLE student (
+  sno CHAR(10) PRIMARY KEY,
+  sname VARCHAR(20) NOT NULL,
+  ssex CHAR(2),
+  sage INT,
+  sdept VARCHAR(20)
+);</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.4 常用数据类型</h3>
+      <ul>
+        <li><strong>INT：</strong>整数类型</li>
+        <li><strong>DECIMAL(M,N)：</strong>定点小数，如DECIMAL(10,2)表示共10位，小数2位</li>
+        <li><strong>VARCHAR(N)：</strong>变长字符串，按实际长度存储</li>
+        <li><strong>CHAR(N)：</strong>定长字符串，不足补空格</li>
+        <li><strong>DATE：</strong>日期（格式YYYY-MM-DD）</li>
+        <li><strong>DATETIME：</strong>日期时间（格式YYYY-MM-DD HH:MM:SS）</li>
+        <li><strong>TEXT：</strong>长文本</li>
+        <li><strong>BLOB：</strong>二进制大对象</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.5 约束</h3>
+      <ul>
+        <li><strong>PRIMARY KEY：</strong>主键约束，唯一且非空</li>
+        <li><strong>NOT NULL：</strong>非空约束</li>
+        <li><strong>UNIQUE：</strong>唯一约束，值不能重复（可以为NULL）</li>
+        <li><strong>DEFAULT：</strong>默认值约束</li>
+        <li><strong>FOREIGN KEY ... REFERENCES ...：</strong>外键约束</li>
+        <li><strong>CHECK：</strong>检查约束（MySQL 8.0+支持）</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.6 ALTER TABLE - 修改表结构</h3>
+      <div class="code-block">-- 添加新字段
+ALTER TABLE student ADD COLUMN email VARCHAR(50);
+
+-- 修改字段类型
+ALTER TABLE student MODIFY COLUMN sname VARCHAR(30);
+
+-- 删除字段
+ALTER TABLE student DROP COLUMN email;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>3.7 DROP - 删除表或数据库</h3>
+      <div class="code-block">-- 删除表（数据和结构都删除）
+DROP TABLE student;
+
+-- 删除数据库
+DROP DATABASE school;</div>
+      <p style="color:#ef4444;font-weight:600;">注意：DROP操作不可逆，请谨慎使用！</p>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>VARCHAR和CHAR有什么区别？什么情况下用CHAR更好？</li>
+        <li>PRIMARY KEY和UNIQUE约束有什么区别？</li>
+        <li>如何给一个已存在的表添加新字段？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.runoob.com/mysql/mysql-create-database.html" target="_blank">菜鸟教程：MySQL创建数据库与表</a></li>
+        <li>实训数据集：学生管理系统（student、course、sc三张表结构）</li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch3">
+      <div class="quiz-header">
+        <div class="quiz-title">第3章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q3_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">创建数据库的SQL命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q3_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">NEW DATABASE</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q3_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">CREATE DATABASE</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q3_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">ADD DATABASE</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q3_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">INSERT DATABASE</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q3_1', 1, `正确答案：B（CREATE DATABASE）。SQL中使用CREATE关键字来创建数据库和表。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（CREATE DATABASE）。SQL中使用CREATE关键字来创建数据库和表。
+        </div>
+      </div>
+      <div class="quiz-question" id="q3_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下数据类型中，适合存储金额的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q3_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">INT</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q3_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">VARCHAR</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q3_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">DECIMAL(10,2)</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q3_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">DATE</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q3_2', 2, `正确答案：C（DECIMAL(10,2)）。DECIMAL是定点小数，适合精确存储货币金额。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（DECIMAL(10,2)）。DECIMAL是定点小数，适合精确存储货币金额。
+        </div>
+      </div>
+      <div class="quiz-question" id="q3_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">删除表的SQL命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q3_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">DELETE TABLE</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q3_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">DROP TABLE</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q3_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">REMOVE TABLE</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q3_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">CLEAR TABLE</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q3_3', 1, `正确答案：B（DROP TABLE）。DROP删除表结构和数据；DELETE只删除数据，保留结构。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（DROP TABLE）。DROP删除表结构和数据；DELETE只删除数据，保留结构。
+        </div>
+      </div>
+      <div class="quiz-question" id="q3_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">PRIMARY KEY和UNIQUE的区别是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q3_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">没有区别</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q3_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">PRIMARY KEY可以为NULL，UNIQUE不能</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q3_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">PRIMARY KEY不能为NULL且唯一，UNIQUE可以为NULL</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q3_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">UNIQUE只能有一个</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q3_4', 2, `正确答案：C。PRIMARY KEY既唯一又非空；UNIQUE只保证唯一，允许NULL值。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C。PRIMARY KEY既唯一又非空；UNIQUE只保证唯一，允许NULL值。
+        </div>
+      </div>
+      <div class="quiz-question" id="q3_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">修改表结构的SQL命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q3_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">UPDATE TABLE</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q3_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">ALTER TABLE</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q3_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">MODIFY TABLE</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q3_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">CHANGE TABLE</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q3_5', 1, `正确答案：B（ALTER TABLE）。ALTER TABLE用于添加、修改、删除字段等结构操作。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（ALTER TABLE）。ALTER TABLE用于添加、修改、删除字段等结构操作。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch3')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch3')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch2.html" class="nav-prev">&laquo; 第2章 关系数据库基础</a>
+<a href="ch4.html" class="nav-next">第4章 SQL数据查询语言DQL（单表查询） &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

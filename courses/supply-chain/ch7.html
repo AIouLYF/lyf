@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第7章 供应链成本分析 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第7章
+    </div>
+
+    <h2>第7章 供应链成本分析</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论4课时 + 上机2课时</p>
+
+    <div class="knowledge-card">
+      <h3>7.1 总拥有成本（TCO）</h3>
+      <p>不只是买价，还包括运输、仓储、检验、售后、资金占用等所有相关成本。</p>
+      <p><strong>TCO = 采购价格 + 运输费用 + 仓储成本 + 检验成本 + 售后成本 + 资金占用成本 + 其他</strong></p>
+      <p>管理层更关注TCO而非单纯采购价，因为TCO反映真实的总支出。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.2 作业成本法（ABC成本法，了解）</h3>
+      <p>把间接费用按"作业"分摊到产品上。例如：采购部门的费用按采购订单数分摊。</p>
+      <p>这种方法能更准确地反映各产品/物料对间接资源的消耗。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.3 成本结构分析</h3>
+      <p>用<strong>饼图</strong>或<strong>瀑布图</strong>展示各项成本占比，一眼看出哪里花钱最多。</p>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>饼图/环形图</strong>：适合展示各项成本的占比</li>
+        <li><strong>瀑布图</strong>：适合展示成本增减变化过程</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.4 成本趋势分析</h3>
+      <p>按月/季度追踪各项成本变化，发现异常波动。通过折线图展示成本趋势，及时发现成本异常上升的情况。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>7.5 降本切入点</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li>采购谈判：与供应商协商长期协议价或批量折扣</li>
+        <li>批量折扣：增加单次采购量降低单位成本</li>
+        <li>运输方式优化：选择性价比最高的运输方式</li>
+        <li>库存周转提升：减少资金占用和仓储成本</li>
+        <li>减少加急订单：加急运输成本远高于正常运输</li>
+      </ul>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>TCO和采购价有什么区别？为什么管理层更关注TCO？</li>
+        <li>瀑布图和饼图各自适合展示什么类型的成本信息？</li>
+        <li>库存周转率提升为什么能降低成本？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>实训数据集：自建一份供应链成本明细表，包含10个成本项目及6个月的数据</li>
+        <li>工具安装：Excel即可，学习插入"瀑布图"（Excel 2016+支持）</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch7">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch7-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">总拥有成本（TCO）不包括？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch7-q1',0)"><div class="option-radio"></div><span class="option-label">A. 采购价格</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch7-q1',1)"><div class="option-radio"></div><span class="option-label">B. 运输费用</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch7-q1',2)"><div class="option-radio"></div><span class="option-label">C. 员工工资</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch7-q1',3)"><div class="option-radio"></div><span class="option-label">D. 质量检验费用</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q1',2,'员工工资属于企业固定成本，一般不计入特定物料的TCO。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>C. 员工工资</strong>。员工工资属于企业固定成本，一般不计入特定物料的TCO。TCO包括采购价格、运输费用、仓储成本、检验费用、售后成本等与该物料直接相关的成本。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch7-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">成本结构分析最适合用哪种图表？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch7-q2',0)"><div class="option-radio"></div><span class="option-label">A. 折线图</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch7-q2',1)"><div class="option-radio"></div><span class="option-label">B. 饼图或环形图</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch7-q2',2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch7-q2',3)"><div class="option-radio"></div><span class="option-label">D. 雷达图</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q2',1,'饼图/环形图适合展示各项成本的占比。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 饼图或环形图</strong>。饼图和环形图适合展示各项成本在总成本中的占比，一目了然地看出哪项成本最高。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch7-q3" data-type="choice">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">瀑布图最适合展示？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch7-q3',0)"><div class="option-radio"></div><span class="option-label">A. 时间序列趋势</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch7-q3',1)"><div class="option-radio"></div><span class="option-label">B. 成本增减变化过程</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch7-q3',2)"><div class="option-radio"></div><span class="option-label">C. 地理分布</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch7-q3',3)"><div class="option-radio"></div><span class="option-label">D. 相关性关系</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q3',1,'瀑布图展示从起始值到最终值的增减变化过程。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 成本增减变化过程</strong>。瀑布图能清晰展示从起始值经过各项增减变化到达最终值的过程，非常适合分析成本构成和变化。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch7-q4" data-type="tf">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">TCO（总拥有成本）只包括采购价格和运输费用。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch7-q4','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch7-q4','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q4','false','TCO还包括仓储、检验、售后、资金占用等成本。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。TCO（总拥有成本）包括采购价格、运输费用、仓储成本、检验成本、售后成本、资金占用成本等所有与该物料相关的成本，远不止采购价和运费。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch7-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">库存周转率提升可以降低供应链总成本。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch7-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch7-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch7-q5','true','周转率提升减少资金占用和仓储成本。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>正确</strong>。库存周转率提升意味着库存变现速度加快，可以减少资金占用成本、仓储成本和库存损耗，从而降低供应链总成本。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch7')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch7')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch6.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第6章 供应商评估分析</a>
+      <a href="ch8.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第8章 供应链可视化报告 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

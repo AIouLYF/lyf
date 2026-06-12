@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目8 数据可视化（Matplotlib/Seaborn） - Pandas数据分析实战训练营 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">Pandas数据分析实战训练营</a> &gt;
+                项目8 数据可视化（Matplotlib/Seaborn）
+            </div>
+            <h2>项目8 数据可视化（Matplotlib/Seaborn）</h2>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>理解数据可视化的作用和选择图表的原则</li>
+                    <li>掌握 pandas 内置的 <code>.plot()</code> 快速绘图</li>
+                    <li>学会用 Matplotlib 绘制折线图、柱状图、饼图、散点图</li>
+                    <li>学会用 Seaborn 绘制热力图、箱线图</li>
+                    <li>能够根据数据类型选择合适的图表</li>
+                    <li>掌握图表美化的基本技巧</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. 为什么要做数据可视化？</strong></p>
+                <p>人脑处理图像的速度比处理文字快 6 万倍。一张好的图表，能让老板在 3 秒内看懂数据趋势。做数据分析，最后一步通常就是把结果"画"出来。</p>
+
+                <p><strong>2. 如何选择合适的图表？</strong></p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><strong>折线图：</strong>看趋势变化（销售额随时间变化）</li>
+                    <li><strong>柱状图：</strong>比较不同类别的数值（各品类销售额对比）</li>
+                    <li><strong>饼图：</strong>看占比构成（各品类销售占比）</li>
+                    <li><strong>散点图：</strong>看两个变量的关系（价格 vs 销量）</li>
+                    <li><strong>热力图：</strong>看矩阵数据的密度（各地区各月份销售额）</li>
+                    <li><strong>箱线图：</strong>看数据分布和异常值</li>
+                </ul>
+
+                <p><strong>3. pandas 快速绘图</strong></p>
+                <p>pandas 的 Series 和 DataFrame 都有 <code>.plot()</code> 方法，底层调用的是 Matplotlib，适合快速出图。</p>
+                <div class="code-block"># Series 直接画折线图
+df['销售额'].plot()
+# DataFrame 画多线图
+df.plot(x='月份', y=['销售额', '利润'])</div>
+
+                <p><strong>4. Matplotlib 精细控制</strong></p>
+                <p>Matplotlib 是 Python 最基础的绘图库，可以精确控制图表的每一个元素：标题、坐标轴、颜色、图例等。</p>
+                <div class="code-block">import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 5))
+plt.plot(x, y, label='销售额')
+plt.title('月度销售额趋势')
+plt.xlabel('月份')
+plt.ylabel('金额（元）')
+plt.legend()
+plt.show()</div>
+
+                <p><strong>5. Seaborn 统计图表</strong></p>
+                <p>Seaborn 基于 Matplotlib，专门做统计可视化，代码更简洁，默认样式更美观。</p>
+                <div class="code-block">import seaborn as sns
+sns.heatmap(data, annot=True, fmt='.0f', cmap='YlOrRd')
+sns.boxplot(x='品类', y='销售额', data=df)</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 设置中文字体（Windows）
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# ========== 1. 创建模拟数据 ==========
+np.random.seed(42)
+
+# 月度销售数据
+months = ['1月', '2月', '3月', '4月', '5月', '6月']
+sales = [120, 135, 148, 162, 155, 178]
+profit = [25, 30, 35, 40, 38, 45]
+
+# 品类销售数据
+categories = ['食品', '饮料', '日用品', '家电', '服装']
+cat_sales = [320, 210, 180, 450, 290]
+
+# 详细订单数据（用于散点图和箱线图）
+n = 200
+df = pd.DataFrame({
+    '品类': np.random.choice(categories, n),
+    '销售额': np.random.randint(50, 2000, n),
+    '数量': np.random.randint(1, 20, n),
+    '客户评分': np.random.randint(1, 6, n)
+})
+
+# 热力图数据：地区 × 月份
+regions = ['华东', '华南', '华北', '西南']
+heatmap_data = np.random.randint(50, 300, size=(4, 6))
+heatmap_df = pd.DataFrame(heatmap_data, index=regions, columns=months)
+
+# ========== 2. 折线图：月度销售趋势 ==========
+plt.figure(figsize=(10, 5))
+plt.plot(months, sales, marker='o', linewidth=2, label='销售额', color='#2563eb')
+plt.plot(months, profit, marker='s', linewidth=2, label='利润', color='#16a34a')
+plt.title('2024年上半年销售额与利润趋势', fontsize=14, fontweight='bold')
+plt.xlabel('月份')
+plt.ylabel('金额（万元）')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+# ========== 3. 柱状图：品类销售额对比 ==========
+plt.figure(figsize=(10, 5))
+colors = ['#2563eb', '#0ea5e9', '#8b5cf6', '#f59e0b', '#ef4444']
+bars = plt.bar(categories, cat_sales, color=colors, edgecolor='white')
+plt.title('各品类销售额对比', fontsize=14, fontweight='bold')
+plt.xlabel('品类')
+plt.ylabel('销售额（万元）')
+# 在柱子上标注数值
+for bar, val in zip(bars, cat_sales):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
+             str(val), ha='center', va='bottom', fontweight='bold')
+plt.tight_layout()
+plt.show()
+
+# ========== 4. 饼图：品类销售占比 ==========
+plt.figure(figsize=(8, 8))
+plt.pie(cat_sales, labels=categories, autopct='%1.1f%%',
+        colors=colors, startangle=90, explode=(0.05, 0, 0, 0.05, 0))
+plt.title('各品类销售占比', fontsize=14, fontweight='bold')
+plt.show()
+
+# ========== 5. 散点图：数量 vs 销售额 ==========
+plt.figure(figsize=(10, 6))
+for i, cat in enumerate(categories):
+    mask = df['品类'] == cat
+    plt.scatter(df[mask]['数量'], df[mask]['销售额'],
+                label=cat, alpha=0.6, s=50, color=colors[i])
+plt.title('订单数量与销售额关系', fontsize=14, fontweight='bold')
+plt.xlabel('数量')
+plt.ylabel('销售额（元）')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+# ========== 6. 热力图：地区 × 月份 ==========
+plt.figure(figsize=(10, 6))
+sns.heatmap(heatmap_df, annot=True, fmt='d', cmap='YlOrRd',
+            linewidths=0.5, cbar_kws={'label': '销售额（万元）'})
+plt.title('各地区月度销售额热力图', fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()
+
+# ========== 7. 箱线图：各品类销售额分布 ==========
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='品类', y='销售额', data=df, palette='Set2')
+plt.title('各品类销售额分布（箱线图）', fontsize=14, fontweight='bold')
+plt.ylabel('销售额（元）')
+plt.tight_layout()
+plt.show()
+
+# ========== 8. pandas 内置 plot 快速绘图 ==========
+print("\n【pandas 快速绘图示例】")
+# 折线图
+df_ts = pd.DataFrame({'月份': months, '销售额': sales, '利润': profit})
+df_ts.set_index('月份')['销售额'].plot(kind='line', marker='o', title='pandas快速折线图')
+plt.show()
+
+# 柱状图
+df_ts.set_index('月份')['销售额'].plot(kind='bar', color='#2563eb', title='pandas快速柱状图')
+plt.show()
+
+# ========== 9. 组合图：柱状图 + 折线图 ==========
+fig, ax1 = plt.subplots(figsize=(10, 5))
+ax1.bar(months, sales, color='#2563eb', alpha=0.7, label='销售额')
+ax1.set_ylabel('销售额（万元）', color='#2563eb')
+ax2 = ax1.twinx()
+ax2.plot(months, [s/p*100 for s, p in zip(sales, profit)],
+         color='#ef4444', marker='o', linewidth=2, label='利润率(%)')
+ax2.set_ylabel('利润率（%）', color='#ef4444')
+plt.title('销售额与利润率组合图', fontsize=14, fontweight='bold')
+fig.legend(loc='upper left')
+plt.tight_layout()
+plt.show()
+</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <p><strong>步骤1：</strong>新建 Notebook，导入 pandas、numpy、matplotlib.pyplot、seaborn。</p>
+                <p><strong>步骤2：</strong>设置中文字体，解决中文乱码问题（根据系统选择 SimHei 或 Microsoft YaHei）。</p>
+                <p><strong>步骤3：</strong>运行折线图代码，观察销售额和利润的趋势变化。</p>
+                <p><strong>步骤4：</strong>运行柱状图代码，对比各品类的销售额，尝试修改颜色。</p>
+                <p><strong>步骤5：</strong>运行饼图代码，观察各品类的占比，尝试调整 explode 参数突出显示某个品类。</p>
+                <p><strong>步骤6：</strong>运行散点图代码，分析数量和销售额之间的关系。</p>
+                <p><strong>步骤7：</strong>运行热力图代码，观察哪个地区哪个月份销售额最高。</p>
+                <p><strong>步骤8：</strong>运行箱线图代码，找出哪个品类的销售额波动最大、异常值最多。</p>
+                <p><strong>步骤9：</strong>尝试用 pandas 的 <code>.plot()</code> 方法快速画折线图和柱状图，对比 Matplotlib 的写法。</p>
+            </div>
+
+            <div class="quiz-container" id="quiz-p8">
+                <div class="quiz-header">
+                    <div class="quiz-title">项目8 配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">想要展示销售额随时间的变化趋势，应该选择哪种图表？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 折线图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 热力图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, '折线图最适合展示数据随时间变化的趋势。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>折线图最适合展示数据随时间变化的趋势。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">想要比较不同品类的销售额大小，最适合用哪种图表？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 折线图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 柱状图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 饼图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 箱线图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, '柱状图通过柱子高度直观比较不同类别的数值大小。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>柱状图通过柱子高度直观比较不同类别的数值大小。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">想要看各品类销售额占总销售额的比例，应该用哪种图表？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. 散点图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. 热力图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. 饼图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. 箱线图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 2, '饼图专门用于展示各部分占总体的比例关系。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>饼图专门用于展示各部分占总体的比例关系。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">Seaborn 的 <code>sns.heatmap()</code> 最适合展示什么类型的数据？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. 单一变量的时间趋势</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. 两个分类变量交叉的数值矩阵</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. 数据的分布形状</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. 变量间的相关关系</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, '热力图用颜色深浅展示矩阵中每个单元格的数值大小，适合两个分类变量交叉的数据。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>热力图用颜色深浅展示矩阵中每个单元格的数值大小，适合两个分类变量交叉的数据。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">pandas 的 Series 和 DataFrame 可以直接调用 <code>.plot()</code> 方法画图。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'true', 'pandas 内置了 plot 方法，底层调用 Matplotlib，适合快速出图。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pandas 内置了 plot 方法，底层调用 Matplotlib，适合快速出图。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">Matplotlib 中，<code>plt.rcParams['font.sans-serif']</code> 的作用是设置 ______ 。</div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '中文字体', '设置中文字体可以解决图表中中文显示为方框的问题。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>设置中文字体可以解决图表中中文显示为方框的问题。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">箱线图可以直观地看出数据的中位数、四分位数和异常值。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', '箱线图中间的线是中位数，箱子上下边缘是四分位数，箱子外的点是异常值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>箱线图中间的线是中位数，箱子上下边缘是四分位数，箱子外的点是异常值。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p8')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p8')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了数据可视化的核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><strong>选图原则：</strong>趋势用折线、比较用柱状、占比用饼图、关系用散点、矩阵用热力图、分布用箱线。</li>
+                    <li><strong>pandas 快速绘图：</strong><code>.plot()</code> 一行代码出图，适合探索性分析。</li>
+                    <li><strong>Matplotlib 精细控制：</strong>可以控制标题、坐标轴、颜色、图例等每一个细节。</li>
+                    <li><strong>Seaborn 统计图表：</strong>热力图、箱线图等统计图表代码更简洁，样式更美观。</li>
+                    <li><strong>中文显示：</strong>记得设置中文字体，否则中文会变成方框。</li>
+                    <li><strong>组合图：</strong>可以用 <code>twinx()</code> 把柱状图和折线图画在一起，展示双轴数据。</li>
+                </ul>
+                <p>记住：图表不是越多越好，一张清晰、准确的图表胜过十张花哨的图表。选择合适的图表类型，才能让数据"说话"！</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p7.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：时间序列数据处理</a>
+                <a href="p9.html" style="color:var(--primary);font-weight:500;">下一项目：综合实战：销售数据分析报告 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

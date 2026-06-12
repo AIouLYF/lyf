@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计推断基础 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第5章 统计推断基础</span>
+            </div>
+            <h2>第5章 统计推断基础</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点5.1：总体与样本</h3>
+                <p><strong>总体</strong>：研究对象的全体。<strong>样本</strong>：从总体中抽取的一部分。</p>
+                <p>现实中很难调查总体，通常用样本统计量来估计总体参数。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点5.2：中心极限定理</h3>
+                <p>不管总体是什么分布，只要样本量足够大（通常n &gt;= 30），样本均值的分布就接近正态分布。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点5.3：置信区间</h3>
+                <p>置信区间表示"总体参数大概落在什么范围"。</p>
+                <div class="tip-box"><div class="tip-box-title">记忆口诀</div><p>置信度越高，区间越宽；样本量越大，区间越窄。</p></div>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点5.4：假设检验基本思想</h3>
+                <ul class="check-list">
+                    <li><strong>原假设H0</strong>：默认成立的假设（"被告无罪"）</li>
+                    <li><strong>备择假设H1</strong>：想要证明的假设（"被告有罪"）</li>
+                    <li><strong>P值</strong>：在原假设成立时观察到当前结果的概率</li>
+                    <li><strong>判断规则</strong>：P值 &lt; alpha（通常0.05），则拒绝原假设</li>
+                </ul>
+                <div class="tip-box success"><div class="tip-box-title">一句话总结</div><p>P值越小，越有理由拒绝原假设。</p></div>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点5.5：Excel假设检验实操</h3>
+                <p>数据→数据分析→t检验：双样本等方差假设→选择数据区域→确定。</p>
+                <p>关注"P(T&lt;=t)双尾"，若&lt;0.05则两组均值有显著差异。</p>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：B站"统计学简史"假设检验专题</li>
+                    <li>数据集：Kaggle "A/B测试数据集"</li>
+                    <li>工具：Excel数据分析工具包</li>
+                    <li>阅读材料：《统计学关我什么事》（小岛宽之）漫画版</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch5">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch5-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">在假设检验中，当P值小于显著性水平alpha时，我们？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch5-q1',0)"><div class="option-radio"></div><span class="option-label">A. 接受原假设</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch5-q1',1)"><div class="option-radio"></div><span class="option-label">B. 拒绝原假设</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch5-q1',2)"><div class="option-radio"></div><span class="option-label">C. 无法判断</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch5-q1',3)"><div class="option-radio"></div><span class="option-label">D. 重新抽样</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q1',1,'P值&lt;alpha说明有理由拒绝原假设。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>P值&lt;alpha说明有理由拒绝原假设。</div>
+                </div>
+                <div class="quiz-question" id="ch5-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">95%置信区间意味着？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch5-q2',0)"><div class="option-radio"></div><span class="option-label">A. 总体参数有95%概率落在区间</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch5-q2',1)"><div class="option-radio"></div><span class="option-label">B. 重复抽样95次约95次包含总体参数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch5-q2',2)"><div class="option-radio"></div><span class="option-label">C. 样本均值95%概率等于总体均值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch5-q2',3)"><div class="option-radio"></div><span class="option-label">D. 以上都不对</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q2',1,'95%置信区间的正确含义是重复抽样中约有95次包含总体参数。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>95%置信区间的正确含义是重复抽样中约有95次包含总体参数。</div>
+                </div>
+                <div class="quiz-question" id="ch5-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">假设检验中，P值表示？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch5-q3',0)"><div class="option-radio"></div><span class="option-label">A. 原假设为真的概率</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch5-q3',1)"><div class="option-radio"></div><span class="option-label">B. 备择假设为真的概率</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch5-q3',2)"><div class="option-radio"></div><span class="option-label">C. 在原假设成立时观察到当前结果的概率</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch5-q3',3)"><div class="option-radio"></div><span class="option-label">D. 犯第一类错误的概率</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q3',2,'P值是在原假设成立的前提下，观察到当前结果或更极端结果的概率。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>P值是在原假设成立的前提下，观察到当前结果或更极端结果的概率。</div>
+                </div>
+                <div class="quiz-question" id="ch5-q4" data-type="tf">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">置信区间越宽，估计的精确度越高。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q4','false','错误。置信区间越宽，精确度越低。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>错误。置信区间越宽，精确度越低。</div>
+                </div>
+                <div class="quiz-question" id="ch5-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">某A/B测试中P值=0.03，在alpha=0.05下应拒绝原假设。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q5','true','正确。0.03 &lt; 0.05，应拒绝原假设。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。0.03 &lt; 0.05，应拒绝原假设。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch5')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch5')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch4.html" style="color:var(--primary);font-weight:500;">← 上一章：第4章</a>
+                <a href="ch6.html" style="color:var(--primary);font-weight:500;">下一章：第6章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

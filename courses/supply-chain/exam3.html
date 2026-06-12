@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单元三考查（第5~6章） - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 单元三考查
+    </div>
+
+    <h2>单元三考查卷</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">第5~6章：需求预测分析 + 供应商评估分析</p>
+
+    <div class="exam-container" id="exam3">
+      <div class="exam-paper-header">
+        <div class="exam-paper-title">供应链数据分析 · 单元三考查</div>
+        <div class="exam-paper-info">
+          <span>满分：100分</span>
+          <span>时间：90分钟</span>
+          <span>闭卷</span>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom:16px;">一、单项选择题（每题3分，共30分）</h3>
+
+      <div class="quiz-question" id="e3-q1" data-type="choice" data-score="3">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">3期简单移动平均预测第4期，用的是哪几期的数据（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q1',0)"><div class="option-radio"></div><span class="option-label">A. 第1、2、3期</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q1',1)"><div class="option-radio"></div><span class="option-label">B. 第2、3、4期</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q1',2)"><div class="option-radio"></div><span class="option-label">C. 第1、2、4期</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q1',3)"><div class="option-radio"></div><span class="option-label">D. 第4、5、6期</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q1',0,'用第1、2、3期的平均值预测第4期。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>A</strong>。F4 = (A1+A2+A3)/3。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e3-q2" data-type="choice" data-score="3">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">指数平滑法中，alpha越大说明（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q2',0)"><div class="option-radio"></div><span class="option-label">A. 预测越平稳</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q2',1)"><div class="option-radio"></div><span class="option-label">B. 对最新变化越敏感</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q2',2)"><div class="option-radio"></div><span class="option-label">C. 预测误差越小</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q2',3)"><div class="option-radio"></div><span class="option-label">D. 不需要历史数据</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q2',1,'alpha越大，最新实际值权重越高。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。alpha越大，预测越跟随最新实际值。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e3-q3" data-type="choice" data-score="3">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">MAE（平均绝对误差）的计算公式是（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q3',0)"><div class="option-radio"></div><span class="option-label">A. sum((实际-预测)^2)/n</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q3',1)"><div class="option-radio"></div><span class="option-label">B. sum|实际-预测|/n</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q3',2)"><div class="option-radio"></div><span class="option-label">C. sqrt(sum((实际-预测)^2)/n)</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q3',3)"><div class="option-radio"></div><span class="option-label">D. sum(实际-预测)/n</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q3',1,'MAE = sum|实际-预测|/n。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。MAE = sum|实际-预测|/n。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e3-q4" data-type="choice" data-score="3">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">供应商评分卡中，交货准时率的权重通常（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q4',0)"><div class="option-radio"></div><span class="option-label">A. 最低</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q4',1)"><div class="option-radio"></div><span class="option-label">B. 最高或较高</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q4',2)"><div class="option-radio"></div><span class="option-label">C. 为0</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q4',3)"><div class="option-radio"></div><span class="option-label">D. 随机设置</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q4',1,'交货准时率直接影响生产连续性，权重通常较高。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。交货准时率直接影响生产连续性，权重通常较高。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e3-q5" data-type="choice" data-score="3">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">以下哪个不是常用的预测误差指标（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q5',0)"><div class="option-radio"></div><span class="option-label">A. MAE</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q5',1)"><div class="option-radio"></div><span class="option-label">B. RMSE</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q5',2)"><div class="option-radio"></div><span class="option-label">C. ROI</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q5',3)"><div class="option-radio"></div><span class="option-label">D. MAPE</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q5',2,'ROI是投资回报率，不是预测误差指标。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>C. ROI</strong>。ROI是投资回报率，不是预测误差指标。
+        </div>
+      </div>
+
+      <h3 style="margin:24px 0 16px;">二、计算题（每题10分，共20分）</h3>
+
+      <div class="quiz-question" id="e3-q6" data-type="choice" data-score="10">
+        <span class="question-number">6</span>
+        <span class="question-type-badge">计算题 10分</span>
+        <div class="question-text">
+          <strong>移动平均预测：</strong>某商品1~6月销售额（万元）分别为：100、110、105、120、115、125。用3期简单移动平均法预测第7个月的销售额。<br><br>
+          第7月预测值约为多少？
+        </div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q6',0)"><div class="option-radio"></div><span class="option-label">A. 113.3</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q6',1)"><div class="option-radio"></div><span class="option-label">B. 120.0</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q6',2)"><div class="option-radio"></div><span class="option-label">C. 125.0</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q6',3)"><div class="option-radio"></div><span class="option-label">D. 115.0</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q6',1,'F7 = (120+115+125)/3 = 120。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B. 120.0</strong>。<br>
+          第7月预测 = (5月115 + 6月115 + 6月125) 不对，应为 (120+115+125)/3 = 360/3 = <strong>120</strong>。<br>
+          MAE = (15+3.3+11.7)/3 = 10。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e3-q7" data-type="choice" data-score="10">
+        <span class="question-number">7</span>
+        <span class="question-type-badge">计算题 10分</span>
+        <div class="question-text">
+          <strong>供应商加权评分：</strong>某供应商交货准时率90%、质量合格率95%、价格得分80分、服务得分85分。权重分别为交货30%、质量30%、价格25%、服务15%。<br><br>
+          综合得分约为多少？属于哪个等级？
+        </div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q7',0)"><div class="option-radio"></div><span class="option-label">A. 88.25分，良好</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q7',1)"><div class="option-radio"></div><span class="option-label">B. 85.50分，良好</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q7',2)"><div class="option-radio"></div><span class="option-label">C. 90.25分，优秀</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q7',3)"><div class="option-radio"></div><span class="option-label">D. 78.75分，合格</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q7',0,'综合得分 = 90x0.30+95x0.30+80x0.25+85x0.15 = 88.25。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>A. 88.25分，良好</strong>。<br>
+          综合得分 = 90x0.30 + 95x0.30 + 80x0.25 + 85x0.15 = 27+28.5+20+12.75 = <strong>88.25分</strong>。<br>
+          80~89分为良好等级。
+        </div>
+      </div>
+
+      <h3 style="margin:24px 0 16px;">三、实操大题（共50分）</h3>
+
+      <div class="quiz-question" id="e3-q8" data-type="choice" data-score="25">
+        <span class="question-number">8</span>
+        <span class="question-type-badge">实操题 25分</span>
+        <div class="question-text">
+          <strong>指数平滑预测：</strong>数据1月~6月销售额为 80、85、82、90、88、95（万元），alpha=0.4，初始预测值F1=80。<br><br>
+          第7月预测值约为多少？
+        </div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q8',0)"><div class="option-radio"></div><span class="option-label">A. 86.32</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q8',1)"><div class="option-radio"></div><span class="option-label">B. 89.79</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q8',2)"><div class="option-radio"></div><span class="option-label">C. 92.15</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e3-q8',3)"><div class="option-radio"></div><span class="option-label">D. 85.20</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q8',1,'F7 = 0.4x95 + 0.6x86.32 = 89.79。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B. 89.79</strong>。<br>
+          F1=80, F2=80, F3=82, F4=82, F5=85.2, F6=86.32<br>
+          F7 = 0.4x95 + 0.6x86.32 = 38+51.79 = <strong>89.79</strong>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e3-q9" data-type="choice" data-score="25">
+        <span class="question-number">9</span>
+        <span class="question-type-badge">实操题 25分</span>
+        <div class="question-text">
+          <strong>供应商评分卡：</strong>三家供应商数据如下（权重：质量30%、交货30%、价格25%、服务15%）：<br>
+          V1：交货95%、质量98%、价格70分、服务85分<br>
+          V2：交货85%、质量92%、价格90分、服务75分<br>
+          V3：交货90%、质量95%、价格85分、服务90分<br><br>
+          哪家供应商综合得分最高？
+        </div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e3-q9',0)"><div class="option-radio"></div><span class="option-label">A. V1（88.15分）</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e3-q9',1)"><div class="option-radio"></div><span class="option-label">B. V2（86.85分）</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e3-q9',2)"><div class="option-radio"></div><span class="option-label">C. V3（90.25分）</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e3-q9',2,'V3综合得分 = 90x0.3+95x0.3+85x0.25+90x0.15 = 90.25，最高。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>C. V3（90.25分）</strong>。<br>
+          V1：28.5+29.4+17.5+12.75 = 88.15<br>
+          V2：25.5+27.6+22.5+11.25 = 86.85<br>
+          V3：27+28.5+21.25+13.5 = <strong>90.25</strong>（优秀）
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button class="quiz-submit-btn" onclick="submitExam('exam3')">提交试卷</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam3')">重置试卷</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/100</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="exam2.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 单元二考查</a>
+      <a href="exam4.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：单元四考查 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理 - 期末考查卷 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>数据采集与处理 - 期末考查卷</span>
+                </div>
+                <h2>数据采集与处理 - 期末考查卷</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">考查范围：全书1-8章 | 满分100分 | 考试时间120分钟 | 闭卷</p>
+
+                <div class="exam-container" id="final">
+                    <div class="exam-paper-header">
+                        <div class="exam-paper-title">数据采集与处理 - 期末考查卷</div>
+                        <div class="exam-paper-info">
+                            <span>考查范围：全书1-8章 | 满分100分 | 考试时间120分钟 | 闭卷</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="final_q1" data-type="choice" data-score="2">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">以下不属于结构化数据的是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">MySQL数据库表</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">Excel电子表格</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">网页HTML文档</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">CSV格式文件</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q1', 2, `网页HTML文档是非结构化数据，没有固定的行列结构。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            网页HTML文档是非结构化数据，没有固定的行列结构。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q2" data-type="choice" data-score="2">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">HTTP状态码404表示？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">请求成功</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">服务器错误</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">页面未找到</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">请求被拒绝</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q2', 2, `404表示页面未找到（Not Found）。200是成功，500是服务器错误，403是被拒绝。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            404表示页面未找到（Not Found）。200是成功，500是服务器错误，403是被拒绝。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q3" data-type="choice" data-score="2">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">BeautifulSoup中，soup.select('.item')的作用是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q3', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">查找id为item的元素</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q3', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">查找class为item的元素</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q3', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">查找标签名为item的元素</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q3', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">查找文本包含item的元素</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q3', 1, `.item表示选中class为item的元素。#item才表示id。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            .item表示选中class为item的元素。#item才表示id。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q4" data-type="choice" data-score="2">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">df.groupby('A')['B'].sum()的含义是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">按A列排序后求B列的和</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">按A列分组，求每组B列的和</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求A列和B列的总和</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">筛选A列等于B列的行</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q4', 1, `先按A列分组，然后对每组的B列求和。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            先按A列分组，然后对每组的B列求和。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q5" data-type="choice" data-score="2">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">以下哪个操作属于数据清洗？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q5', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">按城市分组统计销售额</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q5', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">删除重复记录</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q5', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">将两个表按ID合并</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q5', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">创建数据透视表</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q5', 1, `删除重复记录是数据清洗操作。其他属于数据转换/分析操作。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            删除重复记录是数据清洗操作。其他属于数据转换/分析操作。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q6" data-type="choice" data-score="2">
+                        <span class="question-number">第6题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">merge函数中how='outer'表示？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q6', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">只保留两边都有的记录</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q6', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">保留左表全部记录</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q6', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">保留两边所有记录</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q6', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">保留右表全部记录</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q6', 2, `outer表示外连接，保留两边的所有记录。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            outer表示外连接，保留两边的所有记录。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q7" data-type="choice" data-score="2">
+                        <span class="question-number">第7题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">箱线图法中，异常值通常定义为？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q7', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">大于均值的数据</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q7', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">小于Q1-1.5*IQR或大于Q3+1.5*IQR的数据</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q7', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">等于中位数的数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q7', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">标准差大于1的数据</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q7', 1, `箱线图法将异常值定义为小于Q1-1.5*IQR或大于Q3+1.5*IQR。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            箱线图法将异常值定义为小于Q1-1.5*IQR或大于Q3+1.5*IQR。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q8" data-type="choice" data-score="2">
+                        <span class="question-number">第8题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">将DataFrame保存为Excel文件，应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q8', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_csv()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q8', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_excel()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q8', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_sql()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q8', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.to_json()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q8', 1, `to_excel()保存为Excel文件。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            to_excel()保存为Excel文件。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q9" data-type="choice" data-score="2">
+                        <span class="question-number">第9题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">以下哪种行为最可能构成违法数据采集？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q9', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">采集公开新闻标题用于学术研究</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q9', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">高频率请求导致目标网站服务器瘫痪</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q9', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">使用API获取授权数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q9', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">遵守robots协议采集公开商品信息</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q9', 1, `高频率请求导致服务器瘫痪可能构成破坏计算机信息系统罪。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            高频率请求导致服务器瘫痪可能构成破坏计算机信息系统罪。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q10" data-type="choice" data-score="2">
+                        <span class="question-number">第10题</span>
+                        <span class="question-type-badge">选择题 (2分)</span>
+                        <div class="question-text">数据质量维度中，"同一客户在不同系统中姓名不一致"属于？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('final_q10', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">完整性问题</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('final_q10', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">准确性问题</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('final_q10', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">一致性问题</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('final_q10', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">及时性问题</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q10', 2, `同一数据在不同地方不一致是典型的数据一致性问题。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            同一数据在不同地方不一致是典型的数据一致性问题。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q11" data-type="tf" data-score="2">
+                        <span class="question-number">第11题</span>
+                        <span class="question-type-badge">判断题 (2分)</span>
+                        <div class="question-text">JSON格式中的键必须用双引号包裹。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('final_q11', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('final_q11', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q11', 'true', `标准JSON格式要求键必须用双引号包裹。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            标准JSON格式要求键必须用双引号包裹。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q12" data-type="tf" data-score="2">
+                        <span class="question-number">第12题</span>
+                        <span class="question-type-badge">判断题 (2分)</span>
+                        <div class="question-text">df.dropna()默认删除包含任何缺失值的行。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('final_q12', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('final_q12', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q12', 'true', `dropna()默认how='any'，即只要有一个缺失值就删除该行。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            dropna()默认how='any'，即只要有一个缺失值就删除该行。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q13" data-type="tf" data-score="2">
+                        <span class="question-number">第13题</span>
+                        <span class="question-type-badge">判断题 (2分)</span>
+                        <div class="question-text">Z-score标准化后的数据均值为0，标准差为1。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('final_q13', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('final_q13', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q13', 'true', `Z-score标准化的定义就是将数据转换为均值为0、标准差为1的分布。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            Z-score标准化的定义就是将数据转换为均值为0、标准差为1的分布。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q14" data-type="tf" data-score="2">
+                        <span class="question-number">第14题</span>
+                        <span class="question-type-badge">判断题 (2分)</span>
+                        <div class="question-text">robots.txt具有法律强制力，违反会被判刑。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('final_q14', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('final_q14', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q14', 'false', `robots.txt是行业约定，无法律强制力，但违反可能涉及其他法律。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            robots.txt是行业约定，无法律强制力，但违反可能涉及其他法律。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q15" data-type="tf" data-score="2">
+                        <span class="question-number">第15题</span>
+                        <span class="question-type-badge">判断题 (2分)</span>
+                        <div class="question-text">pd.merge()和pd.concat()都可以用于纵向拼接数据。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('final_q15', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('final_q15', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('final_q15', 'false', `pd.merge()用于横向拼接（按列合并），pd.concat()用于纵向或横向堆叠。两者用途不同。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            pd.merge()用于横向拼接（按列合并），pd.concat()用于纵向或横向堆叠。两者用途不同。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="final_q16" data-type="code" data-score="60">
+                        <span class="question-number">第16题</span>
+                        <span class="question-type-badge">实操题 (60分)</span>
+                        <div class="question-text">综合实操题（60分）：某电商分析公司需要采集某购物网站的手机商品信息，进行价格分析。
+
+任务1（15分）：使用Requests和BeautifulSoup编写爬虫，采集前3页商品信息（商品名称、价格、店铺名）。要求设置User-Agent，每页请求间隔2-4秒随机延时。
+
+任务2（15分）：使用Pandas对采集的数据进行清洗：删除缺失值行、将价格转为数值类型、删除重复商品、处理异常价格（如价格为0或超过50000的设为NaN）。
+
+任务3（15分）：数据分析：计算平均价格、最高价格、最低价格；按店铺统计商品数量；找出价格最低的5款商品。
+
+任务4（10分）：将清洗后的数据和分析结果保存：原始数据保存为CSV，分析结果保存为Excel（包含原始数据表和统计汇总表两个工作表）。
+
+任务5（5分）：代码规范：添加必要的注释，结构清晰，变量命名有意义。</div>
+                        <textarea class="code-editor-area" placeholder="在此编写你的代码..."></textarea>
+                        <button class="quiz-submit-btn" onclick="submitCodeQuestion('final_q16', `import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import time
+import random
+import re
+
+# 任务1：爬虫采集
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+all_products = []
+
+for page in range(1, 4):
+    url = f'https://search.example.com/keyword?page={page}'
+    try:
+        resp = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(resp.text, 'lxml')
+        items = soup.find_all('div', class_='product-item')
+        for item in items:
+            name = item.find('div', class_='name').text.strip()
+            price_text = item.find('div', class_='price').text.strip()
+            price = float(re.findall(r'\d+\.?\d*', price_text)[0]) if re.findall(r'\d+\.?\d*', price_text) else None
+            shop = item.find('div', class_='shop').text.strip() if item.find('div', class_='shop') else '未知'
+            all_products.append({'商品名': name, '价格': price, '店铺': shop})
+    except Exception as e:
+        print(f'第{page}页采集失败: {e}')
+    time.sleep(random.uniform(2, 4))
+
+df = pd.DataFrame(all_products)
+
+# 任务2：数据清洗
+df = df.dropna(subset=['商品名'])
+df['价格'] = pd.to_numeric(df['价格'], errors='coerce')
+df = df.drop_duplicates(subset=['商品名'])
+df.loc[(df['价格'] <= 0) | (df['价格'] > 50000), '价格'] = pd.NA
+
+# 任务3：数据分析
+print(f'平均价格: {df['价格'].mean():.2f}')
+print(f'最高价格: {df['价格'].max():.2f}')
+print(f'最低价格: {df['价格'].min():.2f}')
+shop_count = df.groupby('店铺')['商品名'].count()
+print('各店铺商品数量:')
+print(shop_count)
+top5_cheap = df.nsmallest(5, '价格')
+print('价格最低的5款商品:')
+print(top5_cheap)
+
+# 任务4：保存数据
+df.to_csv('products.csv', index=False, encoding='utf-8-sig')
+with pd.ExcelWriter('analysis_report.xlsx') as writer:
+    df.to_excel(writer, sheet_name='原始数据', index=False)
+    shop_count.to_excel(writer, sheet_name='统计汇总')
+print('数据已保存')`, `评分标准：
+任务1(15分)：导入库(1) + User-Agent(2) + 循环3页(3) + 解析商品(5) + 随机延时(2) + 异常处理(2)
+任务2(15分)：删除缺失值(3) + 价格转数值(4) + 删除重复(3) + 异常值处理(5)
+任务3(15分)：平均/最高/最低价格(5) + 按店铺统计(5) + 最低5款(5)
+任务4(10分)：保存CSV(3) + Excel多工作表(5) + 编码正确(2)
+任务5(5分)：注释(2) + 结构清晰(2) + 命名规范(1)
+
+及格线：理论>=20分，实操>=25分，总分>=60分。`)">提交代码</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">参考答案与解析</div>
+                            <div class="reference-code" style="white-space:pre;"></div>
+                            评分标准：
+任务1(15分)：导入库(1) + User-Agent(2) + 循环3页(3) + 解析商品(5) + 随机延时(2) + 异常处理(2)
+任务2(15分)：删除缺失值(3) + 价格转数值(4) + 删除重复(3) + 异常值处理(5)
+任务3(15分)：平均/最高/最低价格(5) + 按店铺统计(5) + 最低5款(5)
+任务4(10分)：保存CSV(3) + Excel多工作表(5) + 编码正确(2)
+任务5(5分)：注释(2) + 结构清晰(2) + 命名规范(1)
+
+及格线：理论>=20分，实操>=25分，总分>=60分。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitExam('final')">提交试卷</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('final')">重置试卷</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="index.html">返回总览</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

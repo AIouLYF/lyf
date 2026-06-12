@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <span>数据采集与处理</span>
+                </div>
+                <h2>数据采集与处理</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">商务数据分析与应用专业核心课程 | 64课时 | 4学分</p>
+
+                <!-- 课程基本信息 -->
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">1</div>
+                        <h3 class="info-card-title">课程基本信息与课时安排</h3>
+                    </div>
+                    <table class="data-table">
+                        <tr><th style="width:25%">项目</th><th>内容</th></tr>
+                        <tr><td><strong>课程名称</strong></td><td>数据采集与处理</td></tr>
+                        <tr><td><strong>课程性质</strong></td><td>专业核心课（必修课）</td></tr>
+                        <tr><td><strong>适用专业</strong></td><td>商务数据分析与应用（高职专科）</td></tr>
+                        <tr><td><strong>总课时</strong></td><td>64课时（理论讲授32课时 + 机房上机32课时）</td></tr>
+                        <tr><td><strong>学分</strong></td><td>4学分</td></tr>
+                        <tr><td><strong>先修课程</strong></td><td>Python基础、计算机应用基础</td></tr>
+                        <tr><td><strong>后续课程</strong></td><td>数据分析技术、商务智能与数据可视化</td></tr>
+                        <tr><td><strong>考核方式</strong></td><td>平时成绩30%（出勤10% + 作业10% + 课堂表现10%）+ 期末考查70%</td></tr>
+                    </table>
+                </div>
+
+                <!-- 章节课时分配 -->
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">2</div>
+                        <h3 class="info-card-title">章节课时分配表</h3>
+                    </div>
+                    <table class="data-table">
+                        <tr><th>章节</th><th>内容</th><th>理论</th><th>上机</th><th>小计</th></tr>
+                        <tr class="highlight-row"><td><strong>第1章</strong></td><td>数据采集概述</td><td>4</td><td>2</td><td><strong>6</strong></td></tr>
+                        <tr><td><strong>第2章</strong></td><td>网络爬虫基础</td><td>6</td><td>6</td><td><strong>12</strong></td></tr>
+                        <tr class="highlight-row"><td><strong>第3章</strong></td><td>API数据获取</td><td>4</td><td>4</td><td><strong>8</strong></td></tr>
+                        <tr><td><strong>第4章</strong></td><td>数据清洗与预处理</td><td>4</td><td>6</td><td><strong>10</strong></td></tr>
+                        <tr class="highlight-row"><td><strong>第5章</strong></td><td>数据转换与整合</td><td>4</td><td>4</td><td><strong>8</strong></td></tr>
+                        <tr><td><strong>第6章</strong></td><td>数据质量评估</td><td>4</td><td>4</td><td><strong>8</strong></td></tr>
+                        <tr class="highlight-row"><td><strong>第7章</strong></td><td>数据存储与管理</td><td>4</td><td>4</td><td><strong>8</strong></td></tr>
+                        <tr><td><strong>第8章</strong></td><td>爬虫反爬与合规</td><td>2</td><td>2</td><td><strong>4</strong></td></tr>
+                        <tr style="background:#eff6ff; font-weight:600;"><td colspan="2"><strong>合计</strong></td><td><strong>32</strong></td><td><strong>32</strong></td><td><strong>64</strong></td></tr>
+                    </table>
+                </div>
+
+                <!-- 课程模块导航 -->
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">3</div>
+                        <h3 class="info-card-title">课程模块导航</h3>
+                    </div>
+
+                    <h4 style="font-size:1.0625rem; font-weight:600; color:var(--text); margin-bottom:12px;">单元一：采集技术（第1-3章）</h4>
+                    <div class="tag-group"><span class="tag-item tag-key">课堂重点</span><span class="tag-item tag-practice">上机实操</span></div>
+                    <p style="font-size:0.9375rem; color:var(--text-light); line-height:1.7; margin:8px 0;">
+                        <strong>第1章</strong> 数据采集概述：数据采集基本概念、数据来源分类、采集流程、常用工具。<br>
+                        <strong>第2章</strong> 网络爬虫基础：HTTP协议、Requests库、BeautifulSoup解析、CSS选择器、异常处理。<br>
+                        <strong>第3章</strong> API数据获取：API概念、JSON格式、RESTful API调用、认证方式、分页处理。
+                    </p>
+                    <p style="margin:8px 0;">
+                        <a href="ch1.html" style="color:var(--primary); font-weight:500;">第1章 数据采集概述</a> &nbsp;|&nbsp;
+                        <a href="ch2.html" style="color:var(--primary); font-weight:500;">第2章 网络爬虫基础</a> &nbsp;|&nbsp;
+                        <a href="ch3.html" style="color:var(--primary); font-weight:500;">第3章 API数据获取</a> &nbsp;|&nbsp;
+                        <a href="exam1.html" style="color:var(--accent); font-weight:500;">单元一考查</a>
+                    </p>
+
+                    <h4 style="font-size:1.0625rem; font-weight:600; color:var(--text); margin:24px 0 12px;">单元二：数据处理（第4-5章）</h4>
+                    <div class="tag-group"><span class="tag-item tag-key">课堂重点</span><span class="tag-item tag-practice">上机实操</span></div>
+                    <p style="font-size:0.9375rem; color:var(--text-light); line-height:1.7; margin:8px 0;">
+                        <strong>第4章</strong> 数据清洗与预处理：缺失值、异常值、重复值处理，数据类型转换。<br>
+                        <strong>第5章</strong> 数据转换与整合：数据合并、透视表、分组聚合、标准化归一化。
+                    </p>
+                    <p style="margin:8px 0;">
+                        <a href="ch4.html" style="color:var(--primary); font-weight:500;">第4章 数据清洗与预处理</a> &nbsp;|&nbsp;
+                        <a href="ch5.html" style="color:var(--primary); font-weight:500;">第5章 数据转换与整合</a> &nbsp;|&nbsp;
+                        <a href="exam2.html" style="color:var(--accent); font-weight:500;">单元二考查</a>
+                    </p>
+
+                    <h4 style="font-size:1.0625rem; font-weight:600; color:var(--text); margin:24px 0 12px;">单元三：质量管理（第6-8章）</h4>
+                    <div class="tag-group"><span class="tag-item tag-key">课堂重点</span><span class="tag-item tag-theory">理论+实操</span></div>
+                    <p style="font-size:0.9375rem; color:var(--text-light); line-height:1.7; margin:8px 0;">
+                        <strong>第6章</strong> 数据质量评估：质量五维度、评估指标、质量报告。<br>
+                        <strong>第7章</strong> 数据存储与管理：CSV/Excel/JSON/MySQL存储、备份策略。<br>
+                        <strong>第8章</strong> 爬虫反爬与合规：反爬机制、应对策略、robots协议、法律法规。
+                    </p>
+                    <p style="margin:8px 0;">
+                        <a href="ch6.html" style="color:var(--primary); font-weight:500;">第6章 数据质量评估</a> &nbsp;|&nbsp;
+                        <a href="ch7.html" style="color:var(--primary); font-weight:500;">第7章 数据存储与管理</a> &nbsp;|&nbsp;
+                        <a href="ch8.html" style="color:var(--primary); font-weight:500;">第8章 爬虫反爬与合规</a> &nbsp;|&nbsp;
+                        <a href="exam3.html" style="color:var(--accent); font-weight:500;">单元三考查</a>
+                    </p>
+
+                    <h4 style="font-size:1.0625rem; font-weight:600; color:var(--text); margin:24px 0 12px;">期末考查</h4>
+                    <p style="margin:8px 0;">
+                        <a href="final.html" style="color:var(--accent); font-weight:600; font-size:1.0625rem;">数据采集与处理 - 期末考查卷</a>
+                    </p>
+                </div>
+
+                <!-- 学习目标 -->
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-card-icon">4</div>
+                        <h3 class="info-card-title">学习目标与达标标准</h3>
+                    </div>
+
+                    <h4 style="font-size:1.0625rem; font-weight:600; color:var(--text); margin-bottom:12px;">理论掌握程度达标标准</h4>
+                    <table class="data-table">
+                        <tr><th style="width:20%">能力层级</th><th style="width:40%">具体要求</th><th>考核方式</th></tr>
+                        <tr><td><strong>了解</strong></td><td>能说出数据采集的基本概念、数据来源类型、常见工具名称</td><td>课堂提问、选择题</td></tr>
+                        <tr><td><strong>理解</strong></td><td>能解释HTTP协议工作原理、API调用流程、数据质量维度含义</td><td>简答题、判断题</td></tr>
+                        <tr><td><strong>掌握</strong></td><td>能阐述爬虫工作原理、反爬机制类型、数据清洗步骤、合规要求</td><td>论述题、案例分析</td></tr>
+                    </table>
+
+                    <h4 style="font-size:1.0625rem; font-weight:600; color:var(--text); margin:24px 0 12px;">上机实操能力达标标准</h4>
+                    <table class="data-table">
+                        <tr><th style="width:20%">技能模块</th><th style="width:50%">达标要求</th><th>评分标准</th></tr>
+                        <tr><td><strong>爬虫编写</strong></td><td>能独立编写Python脚本，使用Requests获取网页，用BeautifulSoup解析并提取指定数据</td><td>代码可运行40% + 结果正确40% + 规范整洁20%</td></tr>
+                        <tr><td><strong>API调用</strong></td><td>能根据接口文档构造请求，处理JSON响应，提取所需字段并保存</td><td>请求正确30% + 解析正确40% + 保存正确30%</td></tr>
+                        <tr><td><strong>数据清洗</strong></td><td>能使用Pandas处理缺失值、异常值、重复值，完成数据类型转换</td><td>处理完整50% + 方法合理30% + 结果正确20%</td></tr>
+                        <tr><td><strong>数据存储</strong></td><td>能将数据保存为CSV/Excel，能连接MySQL进行读写操作</td><td>文件保存40% + 数据库操作40% + 规范正确20%</td></tr>
+                        <tr><td><strong>综合应用</strong></td><td>能完成"采集-清洗-转换-存储"完整流程的小型项目</td><td>流程完整40% + 功能实现40% + 代码质量20%</td></tr>
+                    </table>
+
+                    <div style="margin-top:20px; padding:16px; background:#eff6ff; border-radius:var(--radius); border-left:4px solid var(--primary);">
+                        <p style="font-size:0.9375rem; color:var(--text); line-height:1.7;">
+                            <strong>总评及格标准：</strong>平时成绩（30分）+ 期末考查（70分）>= 60分。其中期末考查理论部分不低于20分，实操部分不低于25分。上机实操考核采用"现场抽题+限时完成+代码演示"方式，学生需在规定时间内完成指定数据采集处理任务并展示运行结果。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目5：数据合并与连接 - pandas数据分析实战训练营</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">pandas数据分析实战训练营</a> &gt;
+                <span>项目5：数据合并与连接</span>
+            </div>
+
+            <h2>项目5：数据合并与连接</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">数据集：订单表+客户表+商品表 | 难度：进阶 | 预计用时：60分钟</p>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>掌握concat纵向和横向拼接数据</li>
+                    <li>理解merge的四种连接方式(inner/left/right/outer)</li>
+                    <li>学会指定连接键进行表连接</li>
+                    <li>了解join方法的使用场景</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. concat拼接</strong></p>
+                <p>concat就像把几张纸粘在一起，可以纵向粘（增加行），也可以横向粘（增加列）。</p>
+                <div class="code-block"># 纵向拼接（增加行）：把两个结构相同的表上下叠起来
+pd.concat([df1, df2], axis=0)
+
+# 横向拼接（增加列）：把两个表左右并排
+pd.concat([df1, df2], axis=1)
+
+# 忽略原来的行索引，重新编号
+pd.concat([df1, df2], axis=0, ignore_index=True)</div>
+
+                <p style="margin-top:16px;"><strong>2. merge连接</strong></p>
+                <p>merge就像SQL里的JOIN，根据两个表共有的列（连接键）把数据拼在一起。</p>
+                <div class="code-block"># 基本用法：按共有的列名自动连接
+pd.merge(df1, df2, on='客户ID')
+
+# 左右表的连接键名不同
+pd.merge(df1, df2, left_on='客户编号', right_on='客户ID')</div>
+
+                <p style="margin-top:16px;"><strong>3. 四种连接方式</strong></p>
+                <p>这是merge最重要的概念，用维恩图理解最直观：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><strong>inner（内连接）</strong>：只保留两个表都有的记录（交集）。最严格，可能丢失数据。</li>
+                    <li><strong>left（左连接）</strong>：保留左表所有记录，右表没有的填NaN。最常用！</li>
+                    <li><strong>right（右连接）</strong>：保留右表所有记录，左表没有的填NaN。</li>
+                    <li><strong>outer（外连接）</strong>：保留两个表所有记录（并集）。最宽松，不会丢失数据。</li>
+                </ul>
+                <div class="code-block"># 内连接：只保留两边都有的客户
+pd.merge(orders, customers, on='客户ID', how='inner')
+
+# 左连接：保留所有订单，没有客户信息的填NaN
+pd.merge(orders, customers, on='客户ID', how='left')
+
+# 右连接：保留所有客户，没有订单的也保留
+pd.merge(orders, customers, on='客户ID', how='right')
+
+# 外连接：保留所有订单和所有客户
+pd.merge(orders, customers, on='客户ID', how='outer')</div>
+
+                <p style="margin-top:16px;"><strong>4. join方法</strong></p>
+                <p>join是merge的简化版，默认按索引连接，适合索引已经对齐的情况：</p>
+                <div class="code-block"># 按索引连接
+df1.join(df2, how='left')
+
+# 按指定列连接（需要设置列为索引）
+df1.set_index('客户ID').join(df2.set_index('客户ID'))</div>
+
+                <p style="margin-top:16px;"><strong>5. 连接后的列名冲突</strong></p>
+                <p>如果两个表有同名的非连接列，pandas会自动加后缀区分：</p>
+                <div class="code-block"># 自定义后缀
+pd.merge(df1, df2, on='客户ID', suffixes=('_订单', '_客户'))</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+
+# 读取三个数据表
+orders = pd.read_csv('orders_table.csv')
+customers = pd.read_csv('customers_table.csv')
+products = pd.read_csv('products_table.csv')
+
+print("=== 订单表 ===")
+print(orders)
+
+print("\n=== 客户表 ===")
+print(customers)
+
+print("\n=== 商品表 ===")
+print(products)
+
+# ===== concat纵向拼接示例 =====
+# 假设有两批订单数据，结构相同
+batch1 = orders[orders['订单号'].isin(['O001', 'O002'])]
+batch2 = orders[orders['订单号'].isin(['O003', 'O004'])]
+all_orders = pd.concat([batch1, batch2], axis=0, ignore_index=True)
+print("\n=== concat拼接后的订单 ===")
+print(all_orders)
+
+# ===== merge连接：订单 + 客户 =====
+print("\n=== 订单与客户信息（左连接） ===")
+order_customer = pd.merge(orders, customers, on='客户ID', how='left')
+print(order_customer)
+
+# ===== merge连接：订单 + 商品 =====
+print("\n=== 订单与商品信息（左连接） ===")
+order_product = pd.merge(orders, products, on='商品ID', how='left')
+print(order_product)
+
+# ===== 三表连接：订单 + 客户 + 商品 =====
+print("\n=== 三表连接后的完整信息 ===")
+full = pd.merge(orders, customers, on='客户ID', how='left')
+full = pd.merge(full, products, on='商品ID', how='left')
+print(full)
+
+# ===== 四种连接方式对比 =====
+print("\n=== inner连接（只保留两边都有的） ===")
+inner_result = pd.merge(orders, customers, on='客户ID', how='inner')
+print(inner_result)
+
+print("\n=== outer连接（保留所有记录） ===")
+outer_result = pd.merge(orders, customers, on='客户ID', how='outer')
+print(outer_result)
+
+# ===== 连接键名不同的情况 =====
+# 假设客户表里的列叫'编号'而不是'客户ID'
+customers2 = customers.rename(columns={'客户ID': '编号'})
+print("\n=== 连接键名不同时 ===")
+merged = pd.merge(orders, customers2, left_on='客户ID', right_on='编号', how='left')
+print(merged)</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <ol class="step-list">
+                    <li>分别读取orders_table.csv、customers_table.csv、products_table.csv</li>
+                    <li>用 <code>head()</code> 查看三个表的结构和关键列</li>
+                    <li>用 <code>pd.concat()</code> 将两个结构相同的DataFrame纵向拼接</li>
+                    <li>用 <code>pd.merge()</code> 将订单表和客户表按"客户ID"左连接</li>
+                    <li>用 <code>pd.merge()</code> 将订单表和商品表按"商品ID"左连接</li>
+                    <li>尝试将三表依次连接，得到包含订单、客户、商品信息的完整表</li>
+                    <li>分别用inner、left、right、outer四种方式连接，观察结果差异</li>
+                    <li>练习left_on和right_on，处理连接键名不同的情况</li>
+                </ol>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>配套数据集</h3>
+                <p><strong>orders_table.csv（订单表）</strong></p>
+                <div class="code-block">订单号,客户ID,商品ID,数量,订单金额
+O001,C001,P001,2,1998
+O002,C002,P003,1,599
+O003,C001,P002,3,897
+O004,C003,P001,1,999
+O005,C004,P002,2,598</div>
+
+                <p style="margin-top:16px;"><strong>customers_table.csv（客户表）</strong></p>
+                <div class="code-block">客户ID,客户姓名,客户等级,注册城市
+C001,张三,金牌,广州
+C002,李四,银牌,深圳
+C003,王五,铜牌,北京
+C006,赵六,金牌,上海</div>
+
+                <p style="margin-top:16px;"><strong>products_table.csv（商品表）</strong></p>
+                <div class="code-block">商品ID,商品名称,商品类别,单价
+P001,智能手机,电子产品,999
+P002,蓝牙耳机,电子产品,299
+P003,运动手表,穿戴设备,599
+P004,平板电脑,电子产品,1999</div>
+            </div>
+
+            <div class="quiz-container" id="quiz-p5">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习题</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="p5-q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">将两个结构相同的DataFrame纵向拼接（增加行），应该用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p5-q1', 0)"><div class="option-radio"></div><span class="option-label">A. pd.merge([df1, df2])</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p5-q1', 1)"><div class="option-radio"></div><span class="option-label">B. pd.concat([df1, df2], axis=0)</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p5-q1', 2)"><div class="option-radio"></div><span class="option-label">C. pd.concat([df1, df2], axis=1)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p5-q1', 3)"><div class="option-radio"></div><span class="option-label">D. df1.append(df2)</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q1', 1, 'concat用于拼接，axis=0表示纵向（增加行），axis=1表示横向（增加列）。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>concat</code>用于拼接，<code>axis=0</code>表示纵向（增加行），<code>axis=1</code>表示横向（增加列）。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p5-q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">merge中保留左表所有记录，右表没有匹配的填NaN，这是哪种连接？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p5-q2', 0)"><div class="option-radio"></div><span class="option-label">A. inner</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p5-q2', 1)"><div class="option-radio"></div><span class="option-label">B. left</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p5-q2', 2)"><div class="option-radio"></div><span class="option-label">C. right</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p5-q2', 3)"><div class="option-radio"></div><span class="option-label">D. outer</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q2', 1, 'left（左连接）保留左表所有记录，右表没有匹配的行填NaN。这是最常用的连接方式。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>left</code>（左连接）保留左表所有记录，右表没有匹配的行填NaN。这是最常用的连接方式。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p5-q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">merge中只保留两个表都有的记录（交集），这是哪种连接？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p5-q3', 0)"><div class="option-radio"></div><span class="option-label">A. inner</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p5-q3', 1)"><div class="option-radio"></div><span class="option-label">B. left</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p5-q3', 2)"><div class="option-radio"></div><span class="option-label">C. right</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p5-q3', 3)"><div class="option-radio"></div><span class="option-label">D. outer</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q3', 0, 'inner（内连接）只保留两个表都有的记录，相当于集合的交集。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>inner</code>（内连接）只保留两个表都有的记录，相当于集合的交集。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p5-q4" data-type="tf" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">outer连接会保留两个表的所有记录，不会丢失任何数据。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('p5-q4', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('p5-q4', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q4', 'true', 'outer（外连接）保留两个表的所有记录，相当于集合的并集，不会丢失数据。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>outer</code>（外连接）保留两个表的所有记录，相当于集合的并集，不会丢失数据。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p5-q5" data-type="fill" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">左右表连接键名不同时，应使用 <code>pd.merge(df1, df2, left_on='A', right_on='B', how='left')</code>，其中left_on指定<input class="fill-input" placeholder="?" style="width:120px;display:inline;">表的连接键。</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q5', '左', 'left_on指定左表的连接键列名，right_on指定右表的连接键列名。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>left_on</code>指定左表的连接键列名，<code>right_on</code>指定右表的连接键列名。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p5-q6" data-type="choice" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">join方法默认按什么进行连接？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p5-q6', 0)"><div class="option-radio"></div><span class="option-label">A. 按第一个列</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p5-q6', 1)"><div class="option-radio"></div><span class="option-label">B. 按索引</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p5-q6', 2)"><div class="option-radio"></div><span class="option-label">C. 按列名相同的列</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p5-q6', 3)"><div class="option-radio"></div><span class="option-label">D. 随机匹配</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q6', 1, 'join()默认按索引进行连接，适合索引已经对齐的情况。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>join()</code>默认按索引进行连接，适合索引已经对齐的情况。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p5-q7" data-type="choice" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">pd.concat([df1, df2], axis=1) 的作用是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p5-q7', 0)"><div class="option-radio"></div><span class="option-label">A. 纵向拼接，增加行</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p5-q7', 1)"><div class="option-radio"></div><span class="option-label">B. 横向拼接，增加列</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p5-q7', 2)"><div class="option-radio"></div><span class="option-label">C. 按列合并</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p5-q7', 3)"><div class="option-radio"></div><span class="option-label">D. 删除重复列</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q7', 1, 'axis=1表示横向拼接（增加列），axis=0表示纵向拼接（增加行）。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>axis=1</code>表示横向拼接（增加列），<code>axis=0</code>表示纵向拼接（增加行）。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p5')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p5')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了数据合并与连接的核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>用 <code>pd.concat()</code> 纵向(axis=0)或横向(axis=1)拼接数据</li>
+                    <li>用 <code>pd.merge()</code> 按连接键将两个表连接</li>
+                    <li><code>inner</code>：只保留两边都有的记录（交集）</li>
+                    <li><code>left</code>：保留左表所有记录，最常用</li>
+                    <li><code>right</code>：保留右表所有记录</li>
+                    <li><code>outer</code>：保留所有记录（并集）</li>
+                    <li>用 <code>left_on</code> 和 <code>right_on</code> 处理连接键名不同的情况</li>
+                    <li>用 <code>join()</code> 按索引快速连接</li>
+                </ul>
+                <p style="margin-top:12px;">数据合并是实际工作中最常见的操作之一，因为业务数据通常分散在多个表中。掌握merge和concat，你就能把分散的数据整合成完整的分析视图。</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p4.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：数据分组与聚合分析</a>
+                <a href="p6.html" style="color:var(--primary);font-weight:500;">下一项目：数据透视表与交叉分析 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

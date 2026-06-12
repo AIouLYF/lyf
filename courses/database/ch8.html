@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第8章 数据库设计基础（E-R图） - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / 数据库设计基础（E-R图）
+    </div>
+
+    <h2>第8章 数据库设计基础（E-R图）</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>8.1 E-R图三要素</h3>
+      <ul>
+        <li><strong>实体（Entity）：</strong>矩形表示，如"学生""课程""教师"</li>
+        <li><strong>属性（Attribute）：</strong>椭圆表示，如"学号""姓名""性别"</li>
+        <li><strong>联系（Relationship）：</strong>菱形表示，如"选修""属于""讲授"</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.2 联系类型</h3>
+      <ul>
+        <li><strong>一对一（1:1）：</strong>如一个班级只有一个班长</li>
+        <li><strong>一对多（1:n）：</strong>如一个系有多个学生，一个学生只属于一个系</li>
+        <li><strong>多对多（m:n）：</strong>如一个学生选多门课，一门课被多个学生选</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.3 E-R图转关系模式</h3>
+      <ul>
+        <li><strong>每个实体</strong>转成一个表</li>
+        <li><strong>1:1联系：</strong>将一方主键加入另一方作为外键</li>
+        <li><strong>1:n联系：</strong>将1方主键加入n方作为外键</li>
+        <li><strong>m:n联系：</strong>单独建立一个关联表，包含双方主键</li>
+      </ul>
+      <div class="code-block">-- 学生-课程 m:n 联系转表
+CREATE TABLE sc (
+  sno CHAR(10),          -- 外键引用student
+  cno CHAR(4),           -- 外键引用course
+  grade DECIMAL(5,2),
+  PRIMARY KEY (sno, cno) -- 联合主键
+);</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.4 规范化基础（三大范式）</h3>
+      <ul>
+        <li><strong>第一范式（1NF）：</strong>每个字段值都是不可再分的原子值。如"联系方式"不能同时包含电话和邮箱。</li>
+        <li><strong>第二范式（2NF）：</strong>满足1NF，且非主键字段完全依赖于主键（消除部分依赖）。组合主键时才可能出现部分依赖。</li>
+        <li><strong>第三范式（3NF）：</strong>满足2NF，且非主键字段不传递依赖于主键（消除传递依赖）。如"系名"和"系主任"存在传递依赖。</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.5 数据库设计步骤</h3>
+      <ol>
+        <li><strong>需求分析：</strong>了解业务需求，确定需要存储哪些数据</li>
+        <li><strong>概念结构设计：</strong>绘制E-R图</li>
+        <li><strong>逻辑结构设计：</strong>将E-R图转换为关系模式</li>
+        <li><strong>物理结构设计：</strong>确定存储结构和访问方法</li>
+        <li><strong>数据库实施与维护：</strong>创建数据库、编写应用程序、持续优化</li>
+      </ol>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>学生和课程之间的"选修"联系是什么类型？如何转成表？</li>
+        <li>一个表中如果有"系名"和"系主任"两个字段，满足第几范式？如何改进？</li>
+        <li>绘制一个简单的图书管理系统E-R图（含读者、图书、借阅三个实体）</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.processon.com/" target="_blank">ProcessOn在线绘图工具（免费）</a></li>
+        <li>阅读材料：数据库设计案例——电商订单系统</li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch8">
+      <div class="quiz-header">
+        <div class="quiz-title">第8章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q8_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">E-R图中，实体用（ ）表示</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q8_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">椭圆</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q8_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">矩形</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q8_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">菱形</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q8_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">三角形</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q8_1', 1, `正确答案：B（矩形）。E-R图中：实体用矩形，属性用椭圆，联系用菱形。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（矩形）。E-R图中：实体用矩形，属性用椭圆，联系用菱形。
+        </div>
+      </div>
+      <div class="quiz-question" id="q8_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">学生和课程之间的“选修”联系属于（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q8_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">一对一</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q8_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">一对多</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q8_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">多对多</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q8_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">以上都不是</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q8_2', 2, `正确答案：C（多对多）。一个学生选多门课，一门课被多个学生选。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（多对多）。一个学生选多门课，一门课被多个学生选。
+        </div>
+      </div>
+      <div class="quiz-question" id="q8_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">多对多联系转换为关系模式时，需要（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q8_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">合并到其中一个实体表</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q8_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['建立独立的关联表']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q8_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">不需要转换</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q8_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">删除该联系</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q8_3', 1, `正确答案：B（建立独立的关联表）。m:n联系需要单独建表，包含双方主键作为联合主键。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（建立独立的关联表）。m:n联系需要单独建表，包含双方主键作为联合主键。
+        </div>
+      </div>
+      <div class="quiz-question" id="q8_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">第三范式（3NF）要求（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q8_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">字段不可再分</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q8_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['消除部分依赖']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q8_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">消除传递依赖</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q8_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">消除所有依赖</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q8_4', 2, `正确答案：C（消除传递依赖）。1NF消除非原子值，2NF消除部分依赖，3NF消除传递依赖。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（消除传递依赖）。1NF消除非原子值，2NF消除部分依赖，3NF消除传递依赖。
+        </div>
+      </div>
+      <div class="quiz-question" id="q8_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">E-R图中，联系用（ ）图形表示</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q8_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">矩形</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q8_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">椭圆</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q8_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">菱形</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q8_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">圆形</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q8_5', 2, `正确答案：C（菱形）。记住口诀：矩实椭属菱联系。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（菱形）。记住口诀：矩实椭属菱联系。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch8')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch8')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch7.html" class="nav-prev">&laquo; 第7章 SQL数据操作语言DML</a>
+<a href="ch9.html" class="nav-next">第9章 MySQL数据库管理 &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

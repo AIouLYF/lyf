@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单元考查卷（二） - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>单元考查卷（二）</span>
+            </div>
+            <h2>单元考查卷（二）</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">第3-4章（描述性统计分析 + 数据可视化）</p>
+            <div class="exam-container" id="exam2">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">数据分析技术 · 单元考查卷（二）</div>
+                    <div class="exam-paper-info">
+                        <span>考查范围：第3-4章（描述性统计分析 + 数据可视化）</span>
+                        <span>满分：100分</span>
+                        <span>时间：90分钟</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="e2-q1" data-type="choice" data-score="3">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">下列哪个指标最适合描述分类数据的集中趋势？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q1',0)"><div class="option-radio"></div><span class="option-label">A. 均值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q1',1)"><div class="option-radio"></div><span class="option-label">B. 中位数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q1',2)"><div class="option-radio"></div><span class="option-label">C. 众数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q1',3)"><div class="option-radio"></div><span class="option-label">D. 标准差</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q1',2,'众数最适合分类数据。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>众数最适合分类数据。</div>
+                </div>
+                <div class="quiz-question" id="e2-q2" data-type="choice" data-score="3">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">标准差越大，说明数据？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q2',0)"><div class="option-radio"></div><span class="option-label">A. 越集中</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q2',1)"><div class="option-radio"></div><span class="option-label">B. 越分散</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q2',2)"><div class="option-radio"></div><span class="option-label">C. 越对称</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q2',3)"><div class="option-radio"></div><span class="option-label">D. 样本量越大</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q2',1,'标准差越大，数据越分散。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>标准差越大，数据越分散。</div>
+                </div>
+                <div class="quiz-question" id="e2-q3" data-type="choice" data-score="3">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">要展示2020-2024年每年销售额变化趋势，应选用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q3',0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q3',1)"><div class="option-radio"></div><span class="option-label">B. 柱状图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q3',2)"><div class="option-radio"></div><span class="option-label">C. 折线图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q3',3)"><div class="option-radio"></div><span class="option-label">D. 散点图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q3',2,'折线图最适合展示趋势变化。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>折线图最适合展示趋势变化。</div>
+                </div>
+                <div class="quiz-question" id="e2-q4" data-type="choice" data-score="3">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">在Excel中，计算样本标准差的函数是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q4',0)"><div class="option-radio"></div><span class="option-label">A. STDEVP</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q4',1)"><div class="option-radio"></div><span class="option-label">B. STDEV.S</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q4',2)"><div class="option-radio"></div><span class="option-label">C. VAR.S</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q4',3)"><div class="option-radio"></div><span class="option-label">D. AVERAGE</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q4',1,'STDEV.S计算样本标准差。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>STDEV.S计算样本标准差。</div>
+                </div>
+                <div class="quiz-question" id="e2-q5" data-type="choice" data-score="3">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">Tableau中用来分组的字段类型是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q5',0)"><div class="option-radio"></div><span class="option-label">A. 度量</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q5',1)"><div class="option-radio"></div><span class="option-label">B. 维度</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q5',2)"><div class="option-radio"></div><span class="option-label">C. 参数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q5',3)"><div class="option-radio"></div><span class="option-label">D. 集</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q5',1,'维度是分类变量，用来分组。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>维度是分类变量，用来分组。</div>
+                </div>
+                <div class="quiz-question" id="e2-q6" data-type="choice" data-score="3">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">偏度>0表示数据分布？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q6',0)"><div class="option-radio"></div><span class="option-label">A. 左偏</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q6',1)"><div class="option-radio"></div><span class="option-label">B. 右偏</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q6',2)"><div class="option-radio"></div><span class="option-label">C. 对称</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q6',3)"><div class="option-radio"></div><span class="option-label">D. 均匀</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q6',1,'偏度>0表示右偏分布。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>偏度>0表示右偏分布。</div>
+                </div>
+                <div class="quiz-question" id="e2-q7" data-type="choice" data-score="3">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">数据透视表中，值区域默认的聚合方式是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q7',0)"><div class="option-radio"></div><span class="option-label">A. 计数</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q7',1)"><div class="option-radio"></div><span class="option-label">B. 求和</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q7',2)"><div class="option-radio"></div><span class="option-label">C. 平均</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q7',3)"><div class="option-radio"></div><span class="option-label">D. 最大值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q7',1,'默认聚合方式是求和。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>默认聚合方式是求和。</div>
+                </div>
+                <div class="quiz-question" id="e2-q8" data-type="choice" data-score="3">
+                    <span class="question-number">第8题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">下列哪种图表最适合展示两个连续变量的关系？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q8',0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q8',1)"><div class="option-radio"></div><span class="option-label">B. 柱状图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q8',2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q8',3)"><div class="option-radio"></div><span class="option-label">D. 雷达图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q8',2,'散点图最适合展示两变量关系。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>散点图最适合展示两变量关系。</div>
+                </div>
+                <div class="quiz-question" id="e2-q9" data-type="choice" data-score="3">
+                    <span class="question-number">第9题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">Python中，pandas的describe()方法默认不包括？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q9',0)"><div class="option-radio"></div><span class="option-label">A. 均值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q9',1)"><div class="option-radio"></div><span class="option-label">B. 中位数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q9',2)"><div class="option-radio"></div><span class="option-label">C. 众数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q9',3)"><div class="option-radio"></div><span class="option-label">D. 最大值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q9',2,'describe()默认不包含众数。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>describe()默认不包含众数。</div>
+                </div>
+                <div class="quiz-question" id="e2-q10" data-type="choice" data-score="3">
+                    <span class="question-number">第10题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">制作仪表板时，以下哪项不是好的设计原则？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e2-q10',0)"><div class="option-radio"></div><span class="option-label">A. 一页一个核心观点</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e2-q10',1)"><div class="option-radio"></div><span class="option-label">B. 使用3D效果增强视觉</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e2-q10',2)"><div class="option-radio"></div><span class="option-label">C. 添加清晰的标题</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e2-q10',3)"><div class="option-radio"></div><span class="option-label">D. 重要数据直接标注</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q10',1,'3D效果会干扰数据阅读，不是好的设计原则。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>3D效果会干扰数据阅读，不是好的设计原则。</div>
+                </div>
+                <div class="quiz-question" id="e2-q11" data-type="tf" data-score="2">
+                    <span class="question-number">第11题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">集中趋势的三种度量是均值、中位数和众数。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e2-q11','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e2-q11','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q11','true','正确。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。</div>
+                </div>
+                <div class="quiz-question" id="e2-q12" data-type="tf" data-score="2">
+                    <span class="question-number">第12题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">标准差越大，数据越集中。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e2-q12','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e2-q12','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q12','false','标准差越大，数据越分散。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>标准差越大，数据越分散。</div>
+                </div>
+                <div class="quiz-question" id="e2-q13" data-type="tf" data-score="2">
+                    <span class="question-number">第13题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">Tableau Public是收费的数据可视化工具。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e2-q13','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e2-q13','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q13','false','Tableau Public是免费的。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Tableau Public是免费的。</div>
+                </div>
+                <div class="quiz-question" id="e2-q14" data-type="tf" data-score="2">
+                    <span class="question-number">第14题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">饼图适合展示占比关系，不适合类别超过5个的情况。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e2-q14','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e2-q14','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q14','true','正确。类别太多时饼图难以阅读。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。类别太多时饼图难以阅读。</div>
+                </div>
+                <div class="quiz-question" id="e2-q15" data-type="tf" data-score="2">
+                    <span class="question-number">第15题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">柱状图的Y轴可以从非零值开始以突出差异。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e2-q15','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e2-q15','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e2-q15','false','柱状图Y轴必须从0开始，否则会误导读者。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>柱状图Y轴必须从0开始，否则会误导读者。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/100分</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitExam('exam2')">提交试卷</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam2')">重置试卷</button>
+                </div>
+            </div>
+
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="index.html" style="color:var(--primary);font-weight:500;">← 返回课程总览</a>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

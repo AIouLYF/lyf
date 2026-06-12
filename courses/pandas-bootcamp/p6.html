@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目6 数据透视表与交叉分析 - Pandas数据分析实战训练营 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">Pandas数据分析实战训练营</a> &gt;
+                项目6 数据透视表与交叉分析
+            </div>
+            <h2>项目6 数据透视表与交叉分析</h2>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>理解数据透视表的概念和用途</li>
+                    <li>掌握 <code>pivot_table()</code> 方法创建透视表</li>
+                    <li>学会使用 <code>crosstab()</code> 制作交叉表</li>
+                    <li>理解多级索引（MultiIndex）的结构</li>
+                    <li>学会添加 margins 总计行/列</li>
+                    <li>能够按地区和品类做透视分析</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. 什么是数据透视表？</strong></p>
+                <p>数据透视表就像Excel里的"透视表"功能，可以把一大堆数据按照不同的维度重新排列组合，快速看到汇总结果。比如你有几千条销售记录，想知道"每个地区每个品类的销售额是多少"，用透视表几秒钟就能搞定。</p>
+
+                <p><strong>2. pivot_table() 基本用法</strong></p>
+                <div class="code-block"># 基本语法
+df.pivot_table(
+    values='销售额',      # 要汇总的数值列
+    index='地区',         # 行方向的分组字段
+    columns='品类',       # 列方向的分组字段
+    aggfunc='sum'         # 汇总方式：sum/mean/count等
+)</div>
+
+                <p><strong>3. 交叉表 crosstab()</strong></p>
+                <p>交叉表专门用来统计频次，比如"每个地区各买了多少单"，它默认做计数（count），也可以指定其他聚合方式。</p>
+                <div class="code-block">pd.crosstab(
+    df['地区'],
+    df['品类'],
+    values=df['销售额'],
+    aggfunc='sum'
+)</div>
+
+                <p><strong>4. 多级索引 MultiIndex</strong></p>
+                <p>当 index 或 columns 传入列表时，就会生成多级索引。比如 <code>index=['地区','城市']</code> 会先按地区分组，再按城市分组。</p>
+
+                <p><strong>5. margins 总计</strong></p>
+                <p>加上 <code>margins=True</code> 参数，会自动在最下面和最右边加上"All"总计行和总计列，非常方便。</p>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+import numpy as np
+
+# ========== 1. 创建模拟超市销售数据 ==========
+np.random.seed(42)
+data = {
+    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],
+    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),
+    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),
+    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),
+    '销售额': np.random.randint(50, 2000, 100),
+    '数量': np.random.randint(1, 20, 100)
+}
+df = pd.DataFrame(data)
+print("原始数据预览：")
+print(df.head(10))
+
+# ========== 2. 基础透视表：按地区汇总销售额 ==========
+print("\n【按地区汇总销售额】")
+pt1 = df.pivot_table(values='销售额', index='地区', aggfunc='sum')
+print(pt1)
+
+# ========== 3. 二维透视表：地区 × 品类 ==========
+print("\n【地区 × 品类 销售额透视表】")
+pt2 = df.pivot_table(values='销售额', index='地区', columns='品类', aggfunc='sum')
+print(pt2)
+
+# ========== 4. 添加总计行/列 ==========
+print("\n【带总计的透视表】")
+pt3 = df.pivot_table(
+    values='销售额',
+    index='地区',
+    columns='品类',
+    aggfunc='sum',
+    margins=True,
+    margins_name='总计'
+)
+print(pt3)
+
+# ========== 5. 多级索引透视表 ==========
+print("\n【多级索引：地区+城市 × 品类】")
+pt4 = df.pivot_table(
+    values='销售额',
+    index=['地区', '城市'],
+    columns='品类',
+    aggfunc='sum',
+    fill_value=0
+)
+print(pt4.head(12))
+
+# ========== 6. 多种聚合方式 ==========
+print("\n【同时计算销售额的总和与平均】")
+pt5 = df.pivot_table(
+    values='销售额',
+    index='地区',
+    aggfunc=['sum', 'mean', 'count']
+)
+print(pt5)
+
+# ========== 7. 交叉表 crosstab ==========
+print("\n【交叉表：地区 vs 品类（订单数量）】")
+ct1 = pd.crosstab(df['地区'], df['品类'])
+print(ct1)
+
+print("\n【交叉表：地区 vs 品类（销售额汇总）】")
+ct2 = pd.crosstab(
+    df['地区'],
+    df['品类'],
+    values=df['销售额'],
+    aggfunc='sum'
+).fillna(0)
+print(ct2)
+
+# ========== 8. 归一化交叉表（占比） ==========
+print("\n【交叉表占比：每个地区的品类销售占比】")
+ct3 = pd.crosstab(df['地区'], df['品类'], normalize='index') * 100
+print(ct3.round(2))
+</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <p><strong>步骤1：</strong>打开 Jupyter Notebook，新建一个 Notebook 文件。</p>
+                <p><strong>步骤2：</strong>运行上面的"创建模拟超市销售数据"代码块，生成 100 条销售记录。</p>
+                <p><strong>步骤3：</strong>先做一个最简单的透视表：只按"地区"分组，汇总"销售额"，观察结果。</p>
+                <p><strong>步骤4：</strong>尝试二维透视表，把"品类"放到 columns 参数，看看表格变成什么样。</p>
+                <p><strong>步骤5：</strong>加上 <code>margins=True</code>，检查最下面和最右边是否出现了"总计"。</p>
+                <p><strong>步骤6：</strong>把 index 改成 <code>['地区','城市']</code> 列表，体验多级索引的效果。</p>
+                <p><strong>步骤7：</strong>用 <code>pd.crosstab()</code> 做一个地区和品类的交叉表，对比 pivot_table 的结果。</p>
+                <p><strong>步骤8：</strong>尝试 <code>normalize='index'</code>，把交叉表变成百分比形式。</p>
+            </div>
+
+            <div class="quiz-container" id="quiz-p6">
+                <div class="quiz-header">
+                    <div class="quiz-title">项目6 配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text"><code>pivot_table()</code> 中，<code>aggfunc='sum'</code> 表示什么？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 计算平均值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 计算总和</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 计算个数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 计算最大值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'aggfunc=sum 表示对分组后的数值求总和。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>aggfunc=sum 表示对分组后的数值求总和。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">在透视表中，<code>index</code> 参数控制的是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 表格最上方的列标题</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 表格最左边的行分组</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 要汇总的数值列</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 表格的标题</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'index 参数指定行方向的分组字段，会出现在表格最左边。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>index 参数指定行方向的分组字段，会出现在表格最左边。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">想要透视表自动显示"总计"行和"总计"列，应该使用哪个参数？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. total=True</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. margins=True</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. sum=True</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. all=True</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'margins=True 会在透视表底部和右侧添加总计。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>margins=True 会在透视表底部和右侧添加总计。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text"><code>pd.crosstab()</code> 默认的聚合方式是什么？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. sum（求和）</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. mean（平均）</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. count（计数）</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. max（最大）</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 2, 'crosstab 默认统计出现的频次，即 count。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>crosstab 默认统计出现的频次，即 count。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">多级索引就是把多个字段同时放到 index 参数中，用列表传入。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'true', 'index=["地区","城市"] 会生成多级索引，先按地区分组，再按城市分组。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>index=["地区","城市"] 会生成多级索引，先按地区分组，再按城市分组。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">在 <code>pivot_table</code> 中，<code>columns</code> 参数对应的是表格的 ______ 方向。</div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '列', 'columns 参数控制表格的列方向分组。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>columns 参数控制表格的列方向分组。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text"><code>fill_value=0</code> 可以把透视表中的空值（NaN）替换成 0。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', 'fill_value 参数用于填充透视表中因某些组合不存在而产生的 NaN 值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>fill_value 参数用于填充透视表中因某些组合不存在而产生的 NaN 值。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p6')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p6')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了数据透视表的核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>pivot_table()</code> 是 pandas 里的"Excel透视表"，可以快速按维度汇总数据。</li>
+                    <li><code>index</code> 控制行分组，<code>columns</code> 控制列分组，<code>values</code> 指定要计算的数值列。</li>
+                    <li><code>aggfunc</code> 可以选择 sum、mean、count 等多种聚合方式。</li>
+                    <li><code>margins=True</code> 一键添加总计，非常方便。</li>
+                    <li>多级索引让分组更精细，比如同时按地区和城市分组。</li>
+                    <li><code>crosstab()</code> 适合快速做频次统计和占比分析。</li>
+                </ul>
+                <p>掌握透视表后，面对成千上万行数据，你也能在几秒钟内得到清晰的汇总报表！</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p5.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：数据合并与连接</a>
+                <a href="p7.html" style="color:var(--primary);font-weight:500;">下一项目：时间序列数据处理 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

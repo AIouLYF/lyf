@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第8章 供应链可视化报告 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第8章
+    </div>
+
+    <h2>第8章 供应链可视化报告</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论2课时 + 上机2课时</p>
+
+    <div class="knowledge-card">
+      <h3>8.1 仪表板设计原则</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>一页看完</strong>：核心信息集中展示，避免翻页</li>
+        <li><strong>重点突出</strong>：KPI用大数字卡片，异常用颜色预警</li>
+        <li><strong>颜色统一</strong>：使用统一的配色方案</li>
+        <li><strong>交互简单</strong>：筛选和下钻操作直观易懂</li>
+      </ul>
+      <p>KPI用大数字卡片，趋势用折线图，占比用饼图/环形图。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.2 常用供应链KPI看板</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>库存类</strong>：库存周转率、库存周转天数、安全库存达成率</li>
+        <li><strong>采购类</strong>：采购成本节约率、供应商准时交货率</li>
+        <li><strong>物流类</strong>：准时送达率、吨公里成本、单订单物流成本</li>
+        <li><strong>综合类</strong>：订单满足率、供应链总成本占比</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.3 报告撰写结构</h3>
+      <ol style="padding-left:20px;list-style:decimal;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>背景说明</strong>：分析目的、时间范围、数据来源</li>
+        <li><strong>分析方法</strong>：使用的分析工具和方法</li>
+        <li><strong>核心发现</strong>：关键数据和图表</li>
+        <li><strong>改进建议</strong>：基于数据的可落地建议</li>
+        <li><strong>附录</strong>：数据明细、计算过程</li>
+      </ol>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.4 数据可视化禁忌</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>3D饼图</strong>：难比较，角度扭曲</li>
+        <li><strong>颜色过多</strong>：分散注意力，降低可读性</li>
+        <li><strong>信息过载</strong>：一页放太多图表</li>
+        <li><strong>没有标题和说明</strong>：读者看不懂</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>8.5 工具选择</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>Excel</strong>：适合快速出图，操作简单</li>
+        <li><strong>PowerBI</strong>：适合交互式仪表板，支持多种数据源</li>
+        <li><strong>Python matplotlib</strong>：适合定制化图表，灵活性高</li>
+      </ul>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>仪表板和普通报表有什么区别？</li>
+        <li>为什么3D饼图不被推荐？</li>
+        <li>一份好的数据分析报告应该包含哪几个部分？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>工具安装：PowerBI Desktop（免费下载：官网）</li>
+        <li>线上教程：B站搜索"PowerBI仪表板教程"，跟做1~2个案例</li>
+        <li>阅读材料：搜索"数据可视化最佳实践"，了解配色和布局原则</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch8">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch8-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">供应链KPI仪表板中，大数字卡片通常用于展示？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch8-q1',0)"><div class="option-radio"></div><span class="option-label">A. 详细明细数据</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch8-q1',1)"><div class="option-radio"></div><span class="option-label">B. 核心指标当前值</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch8-q1',2)"><div class="option-radio"></div><span class="option-label">C. 历史对比曲线</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch8-q1',3)"><div class="option-radio"></div><span class="option-label">D. 异常预警列表</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q1',1,'大数字卡片用于突出展示核心指标的当前值。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 核心指标当前值</strong>。大数字卡片是仪表板中最醒目的元素，用于展示核心KPI的当前值（如库存周转率8.5次、准时率92%等），让管理者一眼看到关键数据。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch8-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下哪项不是数据可视化的基本原则？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch8-q2',0)"><div class="option-radio"></div><span class="option-label">A. 一页看完重点</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch8-q2',1)"><div class="option-radio"></div><span class="option-label">B. 颜色越多越好</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch8-q2',2)"><div class="option-radio"></div><span class="option-label">C. 图表有标题和说明</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch8-q2',3)"><div class="option-radio"></div><span class="option-label">D. 信息层次分明</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q2',1,'颜色过多会分散注意力，降低可读性。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 颜色越多越好</strong>。颜色过多会分散注意力，降低可读性。数据可视化应使用统一的配色方案，通常不超过5~6种颜色。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch8-q3" data-type="choice">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">数据可视化中，不适合展示占比的图表是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch8-q3',0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch8-q3',1)"><div class="option-radio"></div><span class="option-label">B. 环形图</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch8-q3',2)"><div class="option-radio"></div><span class="option-label">C. 瀑布图</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch8-q3',3)"><div class="option-radio"></div><span class="option-label">D. 堆叠柱状图</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q3',2,'瀑布图展示增减变化过程，不是占比。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>C. 瀑布图</strong>。瀑布图展示的是数值的增减变化过程（如成本从采购到最终总成本的累加过程），不是各项的占比。饼图、环形图和堆叠柱状图都适合展示占比。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch8-q4" data-type="tf">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">3D饼图比普通饼图更直观，推荐使用。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch8-q4','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch8-q4','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q4','false','3D饼图会扭曲角度，不利于准确比较。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。3D饼图会因透视角度扭曲各扇区的大小比例，导致视觉上的误判，不利于准确比较各部分占比。推荐使用普通饼图或环形图。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch8-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">一份好的数据分析报告应该包含背景说明、数据发现、改进建议等部分。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch8-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch8-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q5','true','报告结构应包含背景、方法、发现、建议、附录。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>正确</strong>。一份完整的供应链数据分析报告应包含：背景说明、数据来源、分析方法、核心发现（配图表）、改进建议、附录等部分。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch8')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch8')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch7.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第7章 供应链成本分析</a>
+      <a href="exam4.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：单元四考查 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

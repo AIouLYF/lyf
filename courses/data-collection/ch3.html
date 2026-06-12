@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3章 API数据获取 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第3章 API数据获取</span>
+                </div>
+                <h2>第3章 API数据获取</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论4课时 + 上机4课时 | 难度：中等</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>3.1 什么是API</h3>
+                    <p>API（Application Programming Interface，应用程序编程接口）就是网站或服务商提供的一个"数据窗口"。<strong>打个比方：</strong>你去餐厅吃饭，菜单就是API接口文档，你点菜（发送请求）后，厨房（服务器）做好菜（数据）端给你（返回响应）。API让程序之间可以互相传递数据，比直接爬网页更规范、更稳定。</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>3.2 JSON数据格式</h3>
+                    <p>JSON是API返回数据最常用的格式，长得像Python的字典。特点是：键值对形式、轻量易读、跨语言通用。</p>
+                <div class="code-block"># JSON示例
+{
+    "city": "广州",
+    "temperature": 28,
+    "weather": "晴",
+    "forecast": [
+        {"date": "周一", "temp": 29},
+        {"date": "周二", "temp": 27}
+    ]
+}</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>3.3 调用API的基本步骤</h3>
+                    <p></p>
+                <div class="code-block">import requests
+import json
+
+# 第1步：找到API地址和参数
+url = 'https://api.example.com/weather'
+params = {
+    'city': '广州',
+    'appkey': '你的密钥'  # 很多API需要密钥
+}
+
+# 第2步：发送请求
+response = requests.get(url, params=params)
+
+# 第3步：解析JSON数据
+data = response.json()
+
+# 第4步：提取需要的字段
+city = data['city']
+temp = data['temperature']
+print(f'{city}当前温度：{temp}℃')</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>3.4 API认证方式</h3>
+                    <p><strong>API Key：</strong>在URL参数或请求头中附带一个密钥字符串。
+<strong>Token：</strong>先登录获取token，后续请求在Header中带上token。
+<strong>OAuth 2.0：</strong>第三方授权，比如用微信/QQ登录其他网站。</p>
+                <div class="code-block"># 在Header中传递API Key
+headers = {
+    'Authorization': 'Bearer your_api_key_here'
+}
+response = requests.get(url, headers=headers)
+
+# 在URL参数中传递
+response = requests.get(url, params={'apikey': 'your_key'})</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>3.5 处理分页数据</h3>
+                    <p>很多API一次不会返回全部数据，而是分多页返回。需要循环请求每一页。</p>
+                <div class="code-block">all_data = []
+for page in range(1, 11):  # 请求前10页
+    params = {
+        "page": page,
+        "pageSize": 20
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    all_data.extend(data['list'])
+    
+    # 友好一点，每次请求间隔1秒
+    import time
+    time.sleep(1)
+
+print(f"共获取{len(all_data)}条数据")</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>3.6 保存API数据到CSV</h3>
+                    <p></p>
+                <div class="code-block">import pandas as pd
+
+# 假设data_list是从API获取的数据列表
+df = pd.DataFrame(data_list)
+df.to_csv('api_data.csv', index=False, encoding='utf-8-sig')
+print('数据已保存到api_data.csv')</div>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>免费API练习：聚合数据（www.juhe.cn）提供免费试用API（天气、新闻等）</li>
+                    <li>免费API练习：和风天气开发平台（dev.qweather.com）</li>
+                    <li>工具：Postman（API调试工具，免费版够用）</li>
+                    <li>阅读材料：RESTful API设计指南（理解URL设计规范）</li>
+                    <li>实训数据集：使用免费天气API获取一周天气数据作为练习</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>API和直接爬网页有什么区别？各有什么优缺点？</li>
+                    <li>JSON数据和Python字典有什么相似和不同之处？</li>
+                    <li>调用API时常见的认证方式有哪几种？</li>
+                    <li>为什么获取分页数据时要在循环里加time.sleep()？</li>
+                    <li>如果API返回的数据是嵌套的多层JSON，你应该怎么提取深层字段？</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch3">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q3_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">API返回的数据格式最常见的是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q3_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">XML</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">HTML</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">JSON</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">CSV</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q3_1', 2, `JSON是API返回数据最常用的格式，轻量易读、跨语言通用。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            JSON是API返回数据最常用的格式，轻量易读、跨语言通用。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q3_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">调用API时，time.sleep()的作用是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q3_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加速请求</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">防止请求过快被封IP</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加密数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">解析JSON</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q3_2', 1, `time.sleep()用于在请求之间添加延时，防止请求过快导致被封IP。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            time.sleep()用于在请求之间添加延时，防止请求过快导致被封IP。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q3_3" data-type="tf">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">API的认证方式中，OAuth 2.0是一种第三方授权机制。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q3_3', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q3_3', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q3_3', 'true', `OAuth 2.0确实是第三方授权机制，比如用微信/QQ登录其他网站就是使用OAuth 2.0。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            OAuth 2.0确实是第三方授权机制，比如用微信/QQ登录其他网站就是使用OAuth 2.0。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q3_4" data-type="fill">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">JSON数据格式中，键和值之间用______分隔，键值对之间用______分隔。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q3_4', '冒号（:）；逗号（,）', `JSON使用冒号分隔键和值，使用逗号分隔不同的键值对。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            JSON使用冒号分隔键和值，使用逗号分隔不同的键值对。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q3_5" data-type="choice">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">response.json()的作用是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q3_5', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">获取响应文本</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3_5', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">将响应内容解析为Python字典</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3_5', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">获取响应头</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3_5', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">获取状态码</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q3_5', 1, `response.json()将JSON格式的响应内容自动解析为Python的字典或列表对象。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            response.json()将JSON格式的响应内容自动解析为Python的字典或列表对象。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch3')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch3')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="ch2.html">上一章</a>
+                    <a href="ch4.html">下一章</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

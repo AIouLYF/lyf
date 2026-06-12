@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2章 关系数据库基础 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / 关系数据库基础
+    </div>
+
+    <h2>第2章 关系数据库基础</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>2.1 关系（Relation）</h3>
+      <p><strong>关系</strong>就是一张二维表。如"学生表"就是一个关系。每个关系有一个关系名。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.2 元组（Tuple）</h3>
+      <p><strong>元组</strong>是表中的一行，即一条记录。如学生表中的一行代表一个学生的完整信息。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.3 属性（Attribute）</h3>
+      <p><strong>属性</strong>是表中的一列。如"学号""姓名""性别"都是属性。每个属性有属性名和属性值。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.4 主键（Primary Key）</h3>
+      <p><strong>主键</strong>是能唯一标识每一行记录的字段或字段组合。如学号可以作为主键。</p>
+      <p>主键的特点：</p>
+      <ul>
+        <li><strong>唯一性：</strong>主键值不能重复</li>
+        <li><strong>非空性：</strong>主键值不能为NULL</li>
+        <li>一个表只能有一个主键（可以是组合主键）</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.5 外键（Foreign Key）</h3>
+      <p><strong>外键</strong>是一个表中的字段引用另一个表的主键，用于建立表间联系。如成绩表中的"学号"引用学生表的学号。</p>
+      <p>外键的作用：保证参照完整性，维护表间数据的一致性。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.6 域（Domain）</h3>
+      <p><strong>域</strong>是属性的取值范围。如性别域为{男, 女}，年龄域为正整数等。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>2.7 完整性约束</h3>
+      <p>关系模型中有三类完整性约束：</p>
+      <ul>
+        <li><strong>实体完整性（Entity Integrity）：</strong>主键不能为空且不能重复。保证每条记录可以被唯一标识。</li>
+        <li><strong>参照完整性（Referential Integrity）：</strong>外键的值必须是被引用表主键的有效值或空值。保证表间关联数据的一致性。</li>
+        <li><strong>用户定义完整性（User-defined Integrity）：</strong>针对具体应用领域的约束条件，如年龄必须大于0且小于150，成绩在0-100之间等。</li>
+      </ul>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>主键和外键的作用分别是什么？一个表可以有多个主键吗？</li>
+        <li>实体完整性和参照完整性分别约束什么？</li>
+        <li>如果成绩表中有一条记录的学号在学生表中不存在，违反了什么完整性？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.bilibili.com/video/BV1Kb411s7cs" target="_blank">B站：关系数据库基础概念讲解</a></li>
+        <li>阅读材料：《数据库系统概论》第2章（王珊主编，高等教育出版社）</li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch2">
+      <div class="quiz-header">
+        <div class="quiz-title">第2章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q2_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">在关系数据库中，一个二维表称为一个（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q2_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">字段</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q2_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">关系</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q2_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">记录</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q2_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">属性</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q2_1', 1, `正确答案：B（关系）。在关系模型中，一个二维表就是一个关系，一行是元组/记录，一列是属性/字段。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（关系）。在关系模型中，一个二维表就是一个关系，一行是元组/记录，一列是属性/字段。
+        </div>
+      </div>
+      <div class="quiz-question" id="q2_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">能唯一标识表中每条记录的字段或字段组合称为（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q2_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">外键</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q2_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">索引</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q2_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">主键</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q2_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">候选键</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q2_2', 2, `正确答案：C（主键）。主键具有唯一性和非空性，用于唯一标识表中的每一行记录。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（主键）。主键具有唯一性和非空性，用于唯一标识表中的每一行记录。
+        </div>
+      </div>
+      <div class="quiz-question" id="q2_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下不属于关系完整性约束的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q2_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">实体完整性</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q2_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">参照完整性</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q2_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">数据完整性</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q2_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">用户定义完整性</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q2_3', 2, `正确答案：C（数据完整性）。三大完整性约束是：实体完整性、参照完整性、用户定义完整性。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（数据完整性）。三大完整性约束是：实体完整性、参照完整性、用户定义完整性。
+        </div>
+      </div>
+      <div class="quiz-question" id="q2_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">成绩表中的学号引用学生表的学号，该学号在成绩表中称为（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q2_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">主键</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q2_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">外键</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q2_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">候选键</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q2_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">超键</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q2_4', 1, `正确答案：B（外键）。外键是一个表中的字段引用另一个表的主键，用于建立表间联系。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（外键）。外键是一个表中的字段引用另一个表的主键，用于建立表间联系。
+        </div>
+      </div>
+      <div class="quiz-question" id="q2_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">主键必须满足的条件是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q2_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">可以为空</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q2_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">唯一且非空</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q2_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">可以重复</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q2_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">可以是任意类型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q2_5', 1, `正确答案：B（唯一且非空）。主键具有唯一性和非空性两个基本约束。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（唯一且非空）。主键具有唯一性和非空性两个基本约束。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch2')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch2')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch1.html" class="nav-prev">&laquo; 第1章 数据库概述</a>
+<a href="ch3.html" class="nav-next">第3章 SQL数据定义语言DDL &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

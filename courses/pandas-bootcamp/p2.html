@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目2：数据清洗与预处理 - pandas数据分析实战训练营</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">pandas数据分析实战训练营</a> &gt;
+                <span>项目2：数据清洗与预处理</span>
+            </div>
+
+            <h2>项目2：数据清洗与预处理</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">数据集：电商订单数据 | 难度：入门 | 预计用时：50分钟</p>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>识别并处理缺失值（删除、填充、标记）</li>
+                    <li>检测并处理重复数据</li>
+                    <li>识别并处理异常值</li>
+                    <li>掌握列重命名和数据类型转换</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. 为什么要清洗数据？</strong></p>
+                <p>真实世界的数据往往很"脏"：有缺失、有重复、有错误。如果不清洗，分析结果就会出错。数据清洗通常占数据分析工作的60%-80%时间。</p>
+
+                <p style="margin-top:16px;"><strong>2. 缺失值处理</strong></p>
+                <p>缺失值就是表格里空着的格子。pandas用NaN（Not a Number）表示缺失。</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>df.isnull().sum()</code>：统计每列有多少个缺失值</li>
+                    <li><code>df.dropna()</code>：删除包含缺失值的行</li>
+                    <li><code>df['列名'].fillna(值)</code>：用指定值填充缺失</li>
+                    <li><code>df['列名'].fillna(df['列名'].mean())</code>：用平均值填充</li>
+                </ul>
+
+                <p style="margin-top:16px;"><strong>3. 重复值处理</strong></p>
+                <p>重复数据会影响统计结果，需要删除。</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>df.duplicated().sum()</code>：统计重复行数量</li>
+                    <li><code>df.drop_duplicates()</code>：删除重复行，保留第一个</li>
+                    <li><code>df.drop_duplicates(subset=['列A','列B'])</code>：按指定列判断重复</li>
+                </ul>
+
+                <p style="margin-top:16px;"><strong>4. 异常值处理</strong></p>
+                <p>异常值是明显不合理的数据，比如年龄200岁、订单金额-100元。</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>用describe()看最大最小值，发现异常</li>
+                    <li>用条件筛选找出异常值：<code>df[df['年龄'] > 150]</code></li>
+                    <li>删除异常值：<code>df = df[df['年龄'] <= 150]</code></li>
+                    <li>或用clip限制范围：<code>df['年龄'].clip(0, 120)</code></li>
+                </ul>
+
+                <p style="margin-top:16px;"><strong>5. 列重命名</strong></p>
+                <p>有时候列名是英文或缩写，需要改成中文方便理解：</p>
+                <div class="code-block">df.rename(columns={'old_name': '新名称', 'price': '价格'}, inplace=True)</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+
+# 读取电商订单数据
+df = pd.read_csv('orders.csv')
+
+# ===== 第一步：查看缺失值 =====
+print("=== 每列缺失值数量 ===")
+print(df.isnull().sum())
+
+# 删除缺失严重的列（缺失超过50%）
+thresh = len(df) * 0.5
+df = df.dropna(axis=1, thresh=thresh)
+
+# 用平均值填充'金额'列的缺失值
+df['金额'] = df['金额'].fillna(df['金额'].mean())
+
+# 用众数填充'省份'列的缺失值（最常见的省份）
+mode_province = df['省份'].mode()[0]
+df['省份'] = df['省份'].fillna(mode_province)
+
+# ===== 第二步：处理重复值 =====
+print("\n=== 重复行数量 ===")
+print(df.duplicated().sum())
+
+# 删除完全重复的行
+df = df.drop_duplicates()
+
+# 按订单号去重（保留最后一条）
+df = df.drop_duplicates(subset=['订单号'], keep='last')
+
+# ===== 第三步：处理异常值 =====
+print("\n=== 金额列统计 ===")
+print(df['金额'].describe())
+
+# 找出金额为负数或过大的异常订单
+abnormal = df[(df['金额'] < 0) | (df['金额'] > 100000)]
+print("\n=== 异常订单 ===")
+print(abnormal)
+
+# 删除金额小于等于0的订单
+df = df[df['金额'] > 0]
+
+# 将金额限制在合理范围（0, 50000）
+df['金额'] = df['金额'].clip(0, 50000)
+
+# ===== 第四步：列重命名 =====
+df.rename(columns={
+    'order_id': '订单号',
+    'amount': '金额',
+    'province': '省份',
+    'create_time': '下单时间'
+}, inplace=True)
+
+print("\n=== 清洗后的数据 ===")
+print(df.head())
+print(df.info())</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <ol class="step-list">
+                    <li>读取orders.csv数据，用 <code>df.isnull().sum()</code> 检查缺失情况</li>
+                    <li>对缺失比例超过50%的列，用 <code>dropna(axis=1, thresh=...)</code> 删除</li>
+                    <li>对数值列（如金额），用该列平均值填充缺失值</li>
+                    <li>对分类列（如省份），用众数（出现最多的值）填充缺失值</li>
+                    <li>用 <code>duplicated().sum()</code> 检查重复行数量</li>
+                    <li>用 <code>drop_duplicates()</code> 删除完全重复的行</li>
+                    <li>用 <code>describe()</code> 查看数值列的统计信息，发现异常值</li>
+                    <li>用条件筛选删除不合理的异常数据（如金额为负数）</li>
+                    <li>用 <code>rename()</code> 将英文列名改为中文，方便后续分析</li>
+                </ol>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>配套数据集：orders.csv</h3>
+                <div class="code-block">订单号,用户ID,金额,省份,下单时间
+A001,U100,299.5,广东,2024-01-15
+A002,U101,150.0,,2024-01-16
+A003,U102,-50.0,浙江,2024-01-16
+A004,U103,899.0,江苏,2024-01-17
+A005,U100,299.5,广东,2024-01-15
+A006,U104,,广东,2024-01-18
+A007,U105,120000.0,北京,2024-01-19
+A008,U106,45.0,四川,2024-01-20
+A009,U107,678.0,,2024-01-21
+A010,U108,0.0,上海,2024-01-22</div>
+            </div>
+
+            <div class="quiz-container" id="quiz-p2">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习题</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="p2-q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">统计每列缺失值数量应该使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p2-q1', 0)"><div class="option-radio"></div><span class="option-label">A. df.isnull()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p2-q1', 1)"><div class="option-radio"></div><span class="option-label">B. df.isnull().sum()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p2-q1', 2)"><div class="option-radio"></div><span class="option-label">C. df.missing()</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p2-q1', 3)"><div class="option-radio"></div><span class="option-label">D. df.na_count()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q1', 1, 'isnull()返回布尔表，sum()对True计数，得到每列缺失值数量。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>isnull()</code>返回布尔表，<code>sum()</code>对True计数，得到每列缺失值数量。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p2-q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">用平均值填充某列缺失值，正确的写法是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p2-q2', 0)"><div class="option-radio"></div><span class="option-label">A. df['列'].fill(df['列'].mean())</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p2-q2', 1)"><div class="option-radio"></div><span class="option-label">B. df['列'].fillna(df['列'].mean())</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p2-q2', 2)"><div class="option-radio"></div><span class="option-label">C. df['列'].replace_na(df['列'].mean())</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p2-q2', 3)"><div class="option-radio"></div><span class="option-label">D. df['列'].fill_mean()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q2', 1, 'fillna()是pandas填充缺失值的标准方法。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>fillna()</code>是pandas填充缺失值的标准方法。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p2-q3" data-type="tf" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">df.drop_duplicates() 会删除所有重复的行，一个都不保留。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('p2-q3', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('p2-q3', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q3', 'false', 'drop_duplicates()默认保留第一个重复项，删除后面的。可以用keep参数控制。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>drop_duplicates()</code>默认保留第一个重复项，删除后面的。可以用<code>keep</code>参数控制保留哪一个。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p2-q4" data-type="choice" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">删除包含缺失值的行，应该使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p2-q4', 0)"><div class="option-radio"></div><span class="option-label">A. df.drop_null()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p2-q4', 1)"><div class="option-radio"></div><span class="option-label">B. df.remove_na()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p2-q4', 2)"><div class="option-radio"></div><span class="option-label">C. df.dropna()</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p2-q4', 3)"><div class="option-radio"></div><span class="option-label">D. df.delete_na()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q4', 2, 'dropna()是删除缺失值的标准方法，默认删除包含任何缺失值的行。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>dropna()</code>是删除缺失值的标准方法，默认删除包含任何缺失值的行。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p2-q5" data-type="fill" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">将列名'price'重命名为'价格'，应写为：df.rename(columns={'price': '价格'}, inplace=<input class="fill-input" placeholder="?" style="width:60px;display:inline;">)</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q5', 'True', 'inplace=True表示直接修改原数据框，而不是返回一个新副本。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>inplace=True</code>表示直接修改原数据框，而不是返回一个新副本。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p2-q6" data-type="choice" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">将数值限制在0到100之间，应该使用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p2-q6', 0)"><div class="option-radio"></div><span class="option-label">A. df['列'].limit(0, 100)</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p2-q6', 1)"><div class="option-radio"></div><span class="option-label">B. df['列'].clip(0, 100)</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p2-q6', 2)"><div class="option-radio"></div><span class="option-label">C. df['列'].bound(0, 100)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p2-q6', 3)"><div class="option-radio"></div><span class="option-label">D. df['列'].restrict(0, 100)</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q6', 1, 'clip()方法会将小于下限的值设为下限，大于上限的值设为上限。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>clip()</code>方法会将小于下限的值设为下限，大于上限的值设为上限。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p2-q7" data-type="tf" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">数据清洗通常只占数据分析工作很小的一部分时间。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('p2-q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('p2-q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q7', 'false', '数据清洗通常占数据分析工作的60%-80%时间，是非常重要的一步。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>数据清洗通常占数据分析工作的60%-80%时间，是非常重要的一步。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p2')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p2')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了数据清洗的核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>用 <code>isnull().sum()</code> 检查缺失值分布</li>
+                    <li>用 <code>dropna()</code> 删除缺失严重的列或行</li>
+                    <li>用 <code>fillna()</code> 填充缺失值（均值、众数等）</li>
+                    <li>用 <code>duplicated()</code> 和 <code>drop_duplicates()</code> 处理重复</li>
+                    <li>用 <code>describe()</code> 和条件筛选发现异常值</li>
+                    <li>用 <code>clip()</code> 限制数值范围</li>
+                    <li>用 <code>rename()</code> 规范列名</li>
+                </ul>
+                <p style="margin-top:12px;">数据清洗是数据分析中最重要也最耗时的环节，掌握这些技能，你的分析结果才会准确可靠。</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p1.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：数据读取与基础操作</a>
+                <a href="p3.html" style="color:var(--primary);font-weight:500;">下一项目：数据筛选与查询 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

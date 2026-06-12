@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第6章 SQL数据查询语言DQL（嵌套查询/子查询） - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / SQL数据查询语言DQL（嵌套查询/子查询）
+    </div>
+
+    <h2>第6章 SQL数据查询语言DQL（嵌套查询/子查询）</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>6.1 子查询概念</h3>
+      <p>在一个SELECT语句中嵌套另一个SELECT语句，内层查询的结果作为外层查询的条件。子查询可以出现在WHERE、HAVING、FROM等子句中。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.2 单行子查询</h3>
+      <p>子查询返回单行单列结果，可用=、&gt;、&lt;等比较运算符。</p>
+      <div class="code-block">-- 查询与"张三"同系的学生
+SELECT * FROM student
+WHERE sdept = (SELECT sdept FROM student WHERE sname='张三');</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.3 多行子查询</h3>
+      <p>子查询返回多行结果，需用IN、ANY、ALL运算符。</p>
+      <div class="code-block">-- 查询选修了"数据库"课程的学生
+SELECT sname FROM student WHERE sno IN
+  (SELECT sno FROM sc WHERE cno IN
+    (SELECT cno FROM course WHERE cname='数据库'));</div>
+      <p><strong>IN：</strong>等于子查询结果中的任意一个值</p>
+      <p><strong>ANY：</strong>满足子查询结果中的任意一个条件</p>
+      <p><strong>ALL：</strong>满足子查询结果中的所有条件</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.4 EXISTS</h3>
+      <p>EXISTS判断子查询是否返回记录，返回布尔值（true/false）。</p>
+      <div class="code-block">-- 查询有选课记录的学生
+SELECT sname FROM student s
+WHERE EXISTS (SELECT 1 FROM sc WHERE sc.sno = s.sno);
+
+-- 查询没有选课记录的学生
+SELECT sname FROM student s
+WHERE NOT EXISTS (SELECT 1 FROM sc WHERE sc.sno = s.sno);</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>6.5 子查询 vs 连接</h3>
+      <p>很多子查询可以改写成连接，各有优劣：</p>
+      <ul>
+        <li><strong>连接查询：</strong>通常效率更高，适合简单关联</li>
+        <li><strong>子查询：</strong>逻辑更清晰，适合复杂条件判断</li>
+      </ul>
+      <div class="code-block">-- 子查询写法
+SELECT * FROM student
+WHERE sage > (SELECT AVG(sage) FROM student);
+
+-- 等价的连接写法
+SELECT s.* FROM student s
+JOIN (SELECT AVG(sage) AS avg_age FROM student) t
+ON s.sage > t.avg_age;</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>IN和EXISTS有什么区别？什么情况下用EXISTS更好？</li>
+        <li>子查询可以嵌套几层？嵌套过多会有什么问题？</li>
+        <li>将下面的子查询改写为连接查询：SELECT * FROM A WHERE id IN (SELECT aid FROM B WHERE bid=1);</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.runoob.com/mysql/mysql-subquery.html" target="_blank">菜鸟教程：MySQL子查询</a></li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch6">
+      <div class="quiz-header">
+        <div class="quiz-title">第6章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q6_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">子查询返回多行结果时，外层查询应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q6_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">=</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q6_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">></span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q6_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">IN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q6_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">以上都可以</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q6_1', 2, `正确答案：C（IN）。多行子查询需要使用IN、ANY或ALL运算符，不能用=直接比较。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（IN）。多行子查询需要使用IN、ANY或ALL运算符，不能用=直接比较。
+        </div>
+      </div>
+      <div class="quiz-question" id="q6_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">EXISTS的作用是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q6_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">判断子查询结果是否为空</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q6_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">返回子查询的所有行</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q6_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">删除子查询结果</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q6_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">创建临时表</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q6_2', 0, `正确答案：A。EXISTS判断子查询是否返回记录，返回布尔值。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：A。EXISTS判断子查询是否返回记录，返回布尔值。
+        </div>
+      </div>
+      <div class="quiz-question" id="q6_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">以下关于子查询和连接的说法，正确的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q6_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">子查询效率一定比连接高</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q6_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['连接通常效率更高']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q6_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">两者完全等价</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q6_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">子查询不能改写为连接</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q6_3', 1, `正确答案：B。通常连接查询效率更高，但子查询逻辑更清晰。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。通常连接查询效率更高，但子查询逻辑更清晰。
+        </div>
+      </div>
+      <div class="quiz-question" id="q6_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">查询比平均年龄大的学生，WHERE子句应为（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q6_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">WHERE sage > AVG(sage)</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q6_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['WHERE sage > (SELECT AVG(sage) FROM student)']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q6_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">WHERE sage > AVG FROM student</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q6_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">WHERE sage > AVG</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q6_4', 1, `正确答案：B。聚合函数不能直接用在WHERE中，需要通过子查询获取。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。聚合函数不能直接用在WHERE中，需要通过子查询获取。
+        </div>
+      </div>
+      <div class="quiz-question" id="q6_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">NOT EXISTS的作用是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q6_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">子查询返回记录时条件为真</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q6_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['子查询不返回记录时条件为真']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q6_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">删除子查询结果</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q6_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">创建索引</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q6_5', 1, `正确答案：B。NOT EXISTS在子查询没有返回任何记录时为真。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。NOT EXISTS在子查询没有返回任何记录时为真。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch6')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch6')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch5.html" class="nav-prev">&laquo; 第5章 SQL数据查询语言DQL（多表连接查询）</a>
+<a href="ch7.html" class="nav-next">第7章 SQL数据操作语言DML &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

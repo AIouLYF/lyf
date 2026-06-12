@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1章 Python概述与安装 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                <a href="#">单元一：基础入门</a> &gt;
+                第1章 Python概述与安装
+            </div>
+            <h2>第1章 Python概述与安装</h2>
+            <div class="knowledge-card"><h3>核心知识点</h3><ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;"><li><strong>Python是什么：</strong>一种简单易学、功能强大的编程语言，广泛应用于数据分析、人工智能、Web开发。</li><li><strong>为什么选择Python做商务数据分析：</strong>语法像英语、有大量现成的数据处理库（pandas、numpy）、社区资料丰富。</li><li><strong>安装Anaconda：</strong>Anaconda是一个"大礼包"，里面包含了Python、Jupyter Notebook、常用库，一键安装即可。</li><li><strong>Jupyter Notebook基本操作：</strong>新建文件、运行代码单元格（Shift+Enter）、保存、导出。</li><li><strong>第一个程序：</strong><code>print("Hello, Python!")</code></li></ul></div><div class="knowledge-card"><h3>代码示例</h3><div class="code-block"># 第一个Python程序
+print("Hello, Python!")
+print("欢迎学习Python数据分析！")
+print(1 + 1)
+print("2 * 3 =", 2 * 3)</div></div><div class="resource-list"><h4>自学拓展素材</h4><ul><li><a href="https://www.anaconda.com/download" target="_blank">Anaconda官方下载页面</a></li><li>B站搜索"Anaconda安装教程"</li><li>菜鸟教程：<a href="https://www.runoob.com/python3/python3-tutorial.html" target="_blank">Python3教程</a></li></ul></div><div class="self-check"><h4>自学自检小问题</h4><ol><li>我能在自己的电脑上成功运行 print("Hello, Python!") 吗？</li><li>我能说出Jupyter Notebook里，绿色边框和蓝色边框的单元格分别代表什么状态吗？</li><li>我知道.py文件和.ipynb文件的区别吗？</li></ol></div>
+            <div class="quiz-container" id="quiz-ch1">
+                <div class="quiz-header">
+                    <div class="quiz-title">本章配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/6</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">Python文件的扩展名通常是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. .java</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. .py</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. .cpp</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. .html</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'Python源文件扩展名是.py。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python源文件扩展名是.py。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">以下哪个是Python的集成开发环境？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. Visual Studio</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. Eclipse</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. Jupyter Notebook</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. Photoshop</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 2, 'Jupyter Notebook是Python常用的交互式开发环境。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Jupyter Notebook是Python常用的交互式开发环境。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q3" data-type="choice" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">在Jupyter Notebook中，运行当前代码单元格的快捷键是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q3', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. Ctrl+Enter</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q3', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. Shift+Enter</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q3', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. Alt+Enter</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q3', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. Tab+Enter</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'Shift+Enter运行并跳到下一个单元格。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Shift+Enter运行并跳到下一个单元格。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q4" data-type="fill" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">Python中用 ______ 函数在屏幕上输出内容。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 'print', 'print()是Python内置输出函数。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>print()是Python内置输出函数。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q5" data-type="tf" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">Python是一种编译型语言。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'false', 'Python是解释型语言。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python是解释型语言。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q6" data-type="tf" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">Anaconda包含了Python解释器和常用的第三方库。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q6', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q6', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q6', 'true', 'Anaconda包含解释器、conda和大量科学计算库。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Anaconda包含解释器、conda和大量科学计算库。</p>
+    </div>
+</div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch1')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-ch1')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/6</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <span></span>
+                <a href="ch2.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">下一章 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

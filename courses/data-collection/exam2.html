@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理 - 单元考查卷（二） - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>数据采集与处理 - 单元考查卷（二）</span>
+                </div>
+                <h2>数据采集与处理 - 单元考查卷（二）</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">考查范围：第4-5章 | 满分100分 | 考试时间90分钟</p>
+
+                <div class="exam-container" id="exam2">
+                    <div class="exam-paper-header">
+                        <div class="exam-paper-title">数据采集与处理 - 单元考查卷（二）</div>
+                        <div class="exam-paper-info">
+                            <span>考查范围：第4-5章 | 满分100分 | 考试时间90分钟</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="exam2_q1" data-type="choice" data-score="3">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">Pandas中，删除含有缺失值的行应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam2_q1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.fillna()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam2_q1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.dropna()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam2_q1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.isnull()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam2_q1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.replace()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q1', 1, `dropna()用于删除包含缺失值的行。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            dropna()用于删除包含缺失值的行。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q2" data-type="choice" data-score="3">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">以下哪个函数用于按指定列对DataFrame进行分组？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam2_q2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">merge()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam2_q2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">concat()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam2_q2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">groupby()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam2_q2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pivot()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q2', 2, `groupby()用于分组操作。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            groupby()用于分组操作。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q3" data-type="choice" data-score="3">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">将两个DataFrame按共同列横向拼接，应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam2_q3', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pd.concat()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam2_q3', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pd.merge()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam2_q3', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.join()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam2_q3', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.append()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q3', 1, `pd.merge()按共同列横向拼接。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            pd.merge()按共同列横向拼接。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q4" data-type="choice" data-score="3">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">Min-Max归一化后，数据的范围是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam2_q4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">(-1, 1)</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam2_q4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">(0, 1)</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam2_q4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">均值为0</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam2_q4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">标准差为1</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q4', 1, `Min-Max归一化将数据缩放到0到1之间。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            Min-Max归一化将数据缩放到0到1之间。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q5" data-type="choice" data-score="3">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">选择题 (3分)</span>
+                        <div class="question-text">df.pivot_table中的aggfunc='mean'表示？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('exam2_q5', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求和</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('exam2_q5', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">计数</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('exam2_q5', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求平均值</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('exam2_q5', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">求最大值</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q5', 2, `aggfunc='mean'表示求平均值。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            aggfunc='mean'表示求平均值。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q6" data-type="fill" data-score="6">
+                        <span class="question-number">第6题</span>
+                        <span class="question-type-badge">填空题 (6分)</span>
+                        <div class="question-text">Pandas中，检测缺失值的函数是 ______，填充缺失值的函数是 ______。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q6', 'isnull()；fillna()', `isnull()或isna()检测缺失值，fillna()填充缺失值。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            isnull()或isna()检测缺失值，fillna()填充缺失值。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q7" data-type="fill" data-score="3">
+                        <span class="question-number">第7题</span>
+                        <span class="question-type-badge">填空题 (3分)</span>
+                        <div class="question-text">merge函数的how='left'表示 ______ 连接。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q7', '左', `how='left'表示左连接，保留左表全部记录。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            how='left'表示左连接，保留左表全部记录。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q8" data-type="fill" data-score="6">
+                        <span class="question-number">第8题</span>
+                        <span class="question-type-badge">填空题 (6分)</span>
+                        <div class="question-text">groupby之后常用的聚合函数有 ______、______、______（写出3个即可）。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('exam2_q8', 'mean', `常用聚合函数：mean(平均)、sum(求和)、count(计数)、max(最大)、min(最小)、std(标准差)等，任写3个即可。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            常用聚合函数：mean(平均)、sum(求和)、count(计数)、max(最大)、min(最小)、std(标准差)等，任写3个即可。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q9" data-type="code" data-score="25">
+                        <span class="question-number">第9题</span>
+                        <span class="question-type-badge">实操题 (25分)</span>
+                        <div class="question-text">给定一个包含学生姓名、班级、语文、数学、英语成绩的CSV文件，请使用Pandas完成：1）计算每个学生的总分和平均分；2）按班级分组，计算各班平均分；3）找出总分最高的前5名学生。</div>
+                        <textarea class="code-editor-area" placeholder="在此编写你的代码..."></textarea>
+                        <button class="quiz-submit-btn" onclick="submitCodeQuestion('exam2_q9', `import pandas as pd
+
+df = pd.read_csv('students.csv')
+
+# 1. 计算总分和平均分
+df['总分'] = df[['语文', '数学', '英语']].sum(axis=1)
+df['平均分'] = df[['语文', '数学', '英语']].mean(axis=1)
+
+# 2. 按班级分组计算平均分
+class_avg = df.groupby('班级')[['语文', '数学', '英语', '总分']].mean()
+print('各班平均分：')
+print(class_avg)
+
+# 3. 总分最高的前5名
+top5 = df.nlargest(5, '总分')
+print('总分前5名：')
+print(top5)`, `评分标准：正确读取CSV(3分) + 计算总分(4分) + 计算平均分(4分) + 按班级分组(5分) + 各班平均分(4分) + 前5名(3分) + 代码规范(2分)`)">提交代码</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">参考答案与解析</div>
+                            <div class="reference-code" style="white-space:pre;"></div>
+                            评分标准：正确读取CSV(3分) + 计算总分(4分) + 计算平均分(4分) + 按班级分组(5分) + 各班平均分(4分) + 前5名(3分) + 代码规范(2分)
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="exam2_q10" data-type="code" data-score="30">
+                        <span class="question-number">第10题</span>
+                        <span class="question-type-badge">实操题 (30分)</span>
+                        <div class="question-text">有两个CSV文件：orders.csv（订单表，含订单ID、用户ID、金额）和users.csv（用户表，含用户ID、用户名、注册城市）。请使用merge合并两个表，然后：1）计算每个城市的总消费金额；2）找出消费金额最高的前3个城市。</div>
+                        <textarea class="code-editor-area" placeholder="在此编写你的代码..."></textarea>
+                        <button class="quiz-submit-btn" onclick="submitCodeQuestion('exam2_q10', `import pandas as pd
+
+orders = pd.read_csv('orders.csv')
+users = pd.read_csv('users.csv')
+
+# 合并两个表
+df = pd.merge(orders, users, on='用户ID', how='inner')
+
+# 1. 每个城市总消费金额
+city_total = df.groupby('注册城市')['金额'].sum().sort_values(ascending=False)
+print('各城市总消费：')
+print(city_total)
+
+# 2. 消费最高的前3个城市
+top3 = city_total.head(3)
+print('消费最高的前3个城市：')
+print(top3)`, `评分标准：正确读取两个CSV(4分) + merge合并(8分) + 按城市分组(5分) + 计算总消费(5分) + 前3名(5分) + 代码规范(3分)`)">提交代码</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">参考答案与解析</div>
+                            <div class="reference-code" style="white-space:pre;"></div>
+                            评分标准：正确读取两个CSV(4分) + merge合并(8分) + 按城市分组(5分) + 计算总消费(5分) + 前3名(5分) + 代码规范(3分)
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitExam('exam2')">提交试卷</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam2')">重置试卷</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="index.html">返回总览</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

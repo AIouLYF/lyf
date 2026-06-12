@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据预处理与清洗 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第2章 数据预处理与清洗</span>
+            </div>
+            <h2>第2章 数据预处理与清洗</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点2.1：数据质量四维度</h3>
+                <p>好数据要满足四个标准：</p>
+                <ul class="check-list">
+                    <li><strong>完整性</strong>：数据没有大面积缺失。比如100条客户记录，手机号只有30条有值，完整性就差。</li>
+                    <li><strong>一致性</strong>：同一含义的数据格式统一。比如日期格式不统一。</li>
+                    <li><strong>准确性</strong>：数据真实可靠。比如年龄填了200岁，明显是错误数据。</li>
+                    <li><strong>时效性</strong>：数据是近期的、有效的。用3年前的数据预测明年，时效性不足。</li>
+                </ul>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点2.2：缺失值处理</h3>
+                <ul class="check-list">
+                    <li><strong>删除法</strong>：缺失比例很小（如&lt;5%）时，直接删除有缺失的行。</li>
+                    <li><strong>填充法</strong>：用均值/中位数/众数填补缺失。</li>
+                    <li><strong>标记法</strong>：新增一列标记"是否缺失"。</li>
+                </ul>
+                <div class="tip-box"><div class="tip-box-title">选择技巧</div><p>数据分布对称时用均值填充；分布偏斜时用中位数填充更稳健。</p></div>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点2.3：异常值检测</h3>
+                <p><strong>3sigma原则</strong>：约99.7%的数据落在（均值 +/- 3 x 标准差）范围内，超出视为异常值。</p>
+                <p><strong>箱线图法（IQR法）</strong>：小于Q1 - 1.5 x IQR 或 大于Q3 + 1.5 x IQR 的值视为异常值。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点2.4：Python pandas数据清洗入门</h3>
+                <div class="code-block">
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+df = pd.read_csv(<span class="string">'sales.csv'</span>)
+print(df.isnull().sum())
+df[<span class="string">'销售额'</span>].fillna(df[<span class="string">'销售额'</span>].mean(), inplace=<span class="keyword">True</span>)
+df.dropna(axis=1, thresh=len(df)*0.5, inplace=<span class="keyword">True</span>)
+df.drop_duplicates(inplace=<span class="keyword">True</span>)
+                </div>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：B站"莫烦Python"pandas入门（前5集）</li>
+                    <li>数据集：Kaggle "Titanic"数据集（经典清洗练习）</li>
+                    <li>工具安装：Anaconda（含Python+pandas）</li>
+                    <li>阅读材料：和鲸社区"数据清洗实战手册"（免费PDF）</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch2">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch2-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">下列哪项不属于数据质量评估维度？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch2-q1',0)"><div class="option-radio"></div><span class="option-label">A. 完整性</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch2-q1',1)"><div class="option-radio"></div><span class="option-label">B. 一致性</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch2-q1',2)"><div class="option-radio"></div><span class="option-label">C. 复杂性</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch2-q1',3)"><div class="option-radio"></div><span class="option-label">D. 准确性</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q1',2,'数据质量四维度是完整性、一致性、准确性和时效性，不包含复杂性。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>数据质量四维度是完整性、一致性、准确性和时效性，不包含复杂性。</div>
+                </div>
+                <div class="quiz-question" id="ch2-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">某列数据缺失比例为2%，最合适的处理方法是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch2-q2',0)"><div class="option-radio"></div><span class="option-label">A. 直接删除该行</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch2-q2',1)"><div class="option-radio"></div><span class="option-label">B. 用均值填充</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch2-q2',2)"><div class="option-radio"></div><span class="option-label">C. 用回归预测填充</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch2-q2',3)"><div class="option-radio"></div><span class="option-label">D. 不做处理</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q2',0,'缺失比例很小（&lt;5%）时，直接删除缺失行最简单有效。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>缺失比例很小（&lt;5%）时，直接删除缺失行最简单有效。</div>
+                </div>
+                <div class="quiz-question" id="ch2-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">数据分布右偏时，用什么填充缺失值更稳健？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch2-q3',0)"><div class="option-radio"></div><span class="option-label">A. 均值填充</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch2-q3',1)"><div class="option-radio"></div><span class="option-label">B. 中位数填充</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch2-q3',2)"><div class="option-radio"></div><span class="option-label">C. 最大值填充</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch2-q3',3)"><div class="option-radio"></div><span class="option-label">D. 最小值填充</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q3',1,'右偏分布有极端大值，均值会被拉高，中位数更稳健。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>右偏分布有极端大值，均值会被拉高，中位数更稳健。</div>
+                </div>
+                <div class="quiz-question" id="ch2-q4" data-type="choice">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">箱线图中，IQR指的是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch2-q4',0)"><div class="option-radio"></div><span class="option-label">A. 最大值-最小值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch2-q4',1)"><div class="option-radio"></div><span class="option-label">B. Q3-Q1</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch2-q4',2)"><div class="option-radio"></div><span class="option-label">C. Q2-Q1</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch2-q4',3)"><div class="option-radio"></div><span class="option-label">D. 均值-中位数</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q4',1,'IQR（四分位距）= Q3 - Q1。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>IQR（四分位距）= Q3 - Q1。</div>
+                </div>
+                <div class="quiz-question" id="ch2-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">异常值一定是错误数据，必须删除。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch2-q5','false','错误。异常值不一定是错误数据，可能是真实的极端情况，需要先核实。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>错误。异常值不一定是错误数据，可能是真实的极端情况，需要先核实。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch2')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch2')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch1.html" style="color:var(--primary);font-weight:500;">← 上一章：第1章</a>
+                <a href="ch3.html" style="color:var(--primary);font-weight:500;">下一章：第3章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

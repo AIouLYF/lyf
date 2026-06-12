@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第9章 异常处理 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                <a href="#">单元三：进阶应用</a> &gt;
+                第9章 异常处理
+            </div>
+            <h2>第9章 异常处理</h2>
+            <div class="knowledge-card"><h3>核心知识点</h3><ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;"><li><strong>异常：</strong>程序出错会抛出异常，不处理就崩溃。</li><li><strong>try/except：</strong>可能出错的代码放try，出错后在except处理。</li><li><strong>else：</strong>没出错时执行。<strong>finally：</strong>无论是否出错都执行。</li><li>常见异常：<code>ValueError</code>、<code>FileNotFoundError</code>、<code>ZeroDivisionError</code>。</li></ul></div><div class="knowledge-card"><h3>代码示例</h3><div class="code-block">try:
+    num = int(input("请输入一个数字："))
+    result = 100 / num
+    print("结果：", result)
+except ValueError:
+    print("输入的不是有效数字！")
+except ZeroDivisionError:
+    print("不能除以零！")
+except Exception as e:
+    print("发生未知错误：", e)
+finally:
+    print("程序执行完毕。")</div></div><div class="self-check"><h4>自学自检小问题</h4><ol><li>如果try里的代码没有报错，except会执行吗？</li><li>finally里的代码什么时候会执行？</li><li>我能说出至少3种常见的Python异常名称吗？</li></ol></div>
+            <div class="quiz-container" id="quiz-ch9">
+                <div class="quiz-header">
+                    <div class="quiz-title">本章配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/6</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">表示"除以零"的异常类型是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. ValueError</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. TypeError</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. ZeroDivisionError</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. FileNotFoundError</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 2, 'ZeroDivisionError是除零错误。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>ZeroDivisionError是除零错误。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">捕获所有异常类型的写法是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. except Error:</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. except:</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. except All:</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. except Exception:</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 3, 'except Exception:是推荐写法。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>except Exception:是推荐写法。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q3" data-type="fill" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">异常处理中，无论是否异常都执行的块是 ______。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 'finally', 'finally块始终执行。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>finally块始终执行。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q4" data-type="fill" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">从模块中导入指定函数的语句是 ______。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 'from', 'from模块名import函数名。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>from模块名import函数名。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q5" data-type="tf" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">try块后面必须跟except块。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'true', 'try后面至少需要except或finally。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>try后面至少需要except或finally。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q6" data-type="tf" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">如果try里的代码没有报错，except块会执行。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q6', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q6', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q6', 'false', 'except只在发生异常时执行。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>except只在发生异常时执行。</p>
+    </div>
+</div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch9')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-ch9')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/6</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch8.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">&larr; 上一章</a>
+                <a href="exam3.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">单元三考查 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

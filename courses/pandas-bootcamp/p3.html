@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目3：数据筛选与查询 - pandas数据分析实战训练营</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">pandas数据分析实战训练营</a> &gt;
+                <span>项目3：数据筛选与查询</span>
+            </div>
+
+            <h2>项目3：数据筛选与查询</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">数据集：员工信息表 | 难度：进阶 | 预计用时：55分钟</p>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>掌握单条件和多条件数据筛选</li>
+                    <li>理解loc和iloc的区别与用法</li>
+                    <li>学会字符串匹配筛选</li>
+                    <li>掌握范围查询和isin查询</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. 条件筛选</strong></p>
+                <p>筛选就像Excel里的"筛选"按钮，只不过用代码写。基本思路是：先写条件，再把条件放进中括号里。</p>
+                <div class="code-block"># 筛选出年龄大于30岁的员工
+df[df['年龄'] > 30]
+
+# 筛选出部门是"销售部"的员工
+df[df['部门'] == '销售部']</div>
+
+                <p style="margin-top:16px;"><strong>2. 多条件组合</strong></p>
+                <p>多个条件组合时，用 <code>&</code> 表示"且"，用 <code>|</code> 表示"或"。注意每个条件要用圆括号括起来。</p>
+                <div class="code-block"># 年龄大于30 且 部门是销售部
+df[(df['年龄'] > 30) & (df['部门'] == '销售部')]
+
+# 部门是销售部 或 部门是市场部
+df[(df['部门'] == '销售部') | (df['部门'] == '市场部')]
+
+# 年龄不在25到35之间
+df[~((df['年龄'] >= 25) & (df['年龄'] <= 35))]</div>
+
+                <p style="margin-top:16px;"><strong>3. loc和iloc</strong></p>
+                <p>这两个是pandas里最重要的定位工具：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>loc</code>：按"标签"（行名/列名）定位，比如 <code>df.loc[0:5, ['姓名','年龄']]</code></li>
+                    <li><code>iloc</code>：按"位置"（第几行/第几列）定位，从0开始数，比如 <code>df.iloc[0:5, 0:3]</code></li>
+                </ul>
+                <p style="margin-top:8px;">简单记忆：loc带"名字"，iloc带"数字"。</p>
+
+                <p style="margin-top:16px;"><strong>4. 字符串匹配</strong></p>
+                <p>当需要按文字内容模糊匹配时，用str方法：</p>
+                <div class="code-block"># 姓名中包含"张"的员工
+df[df['姓名'].str.contains('张')]
+
+# 姓名以"李"开头
+df[df['姓名'].str.startswith('李')]
+
+# 姓名以"伟"结尾
+df[df['姓名'].str.endswith('伟')]
+
+# 忽略大小写匹配
+df[df['职位'].str.contains('经理', case=False)]</div>
+
+                <p style="margin-top:16px;"><strong>5. 范围查询和isin</strong></p>
+                <div class="code-block"># 年龄在25到35之间（包含边界）
+df[df['年龄'].between(25, 35)]
+
+# 部门属于指定列表
+df[df['部门'].isin(['销售部', '市场部', '技术部'])]
+
+# 工资在前10名
+df[df['工资'].isin(df['工资'].nlargest(10))]</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+
+# 读取员工信息表
+df = pd.read_csv('employees.csv')
+
+# ===== 单条件筛选 =====
+print("=== 年龄大于30岁的员工 ===")
+print(df[df['年龄'] > 30])
+
+print("\n=== 部门是技术部的员工 ===")
+print(df[df['部门'] == '技术部'])
+
+# ===== 多条件组合 =====
+print("\n=== 技术部且年龄大于28岁的员工 ===")
+print(df[(df['部门'] == '技术部') & (df['年龄'] > 28)])
+
+print("\n=== 工资高于8000或入职年限大于3年的员工 ===")
+print(df[(df['工资'] > 8000) | (df['入职年限'] > 3)])
+
+# ===== loc用法 =====
+print("\n=== 用loc选取前5行的姓名和工资 ===")
+print(df.loc[0:4, ['姓名', '工资']])
+
+# 用loc修改数据
+df.loc[df['部门'] == '销售部', '绩效奖金'] = 500
+
+# ===== iloc用法 =====
+print("\n=== 用iloc选取前3行、前4列 ===")
+print(df.iloc[0:3, 0:4])
+
+# ===== 字符串匹配 =====
+print("\n=== 姓名中包含'张'的员工 ===")
+print(df[df['姓名'].str.contains('张', na=False)])
+
+print("\n=== 职位以'高级'开头的员工 ===")
+print(df[df['职位'].str.startswith('高级')])
+
+# ===== 范围查询 =====
+print("\n=== 年龄在25到35之间的员工 ===")
+print(df[df['年龄'].between(25, 35)])
+
+print("\n=== 部门属于销售部或市场部的员工 ===")
+print(df[df['部门'].isin(['销售部', '市场部'])])</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <ol class="step-list">
+                    <li>读取employees.csv，用 <code>df.head()</code> 查看数据结构</li>
+                    <li>练习单条件筛选：找出所有工资大于6000的员工</li>
+                    <li>练习多条件"且"：找出技术部且年龄大于28岁的员工</li>
+                    <li>练习多条件"或"：找出销售部或市场部的员工</li>
+                    <li>用 <code>loc</code> 选取指定列（如姓名、部门、工资）</li>
+                    <li>用 <code>iloc</code> 选取前10行、前3列</li>
+                    <li>用 <code>str.contains()</code> 查找姓名中包含某个字的员工</li>
+                    <li>用 <code>between()</code> 筛选年龄在某个范围的员工</li>
+                    <li>用 <code>isin()</code> 筛选部门属于指定列表的员工</li>
+                </ol>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>配套数据集：employees.csv</h3>
+                <div class="code-block">姓名,年龄,部门,职位,工资,入职年限
+张伟,32,技术部,高级工程师,12000,5
+李娜,28,销售部,销售经理,8500,3
+王强,35,市场部,市场总监,15000,8
+赵敏,26,技术部,工程师,7000,2
+钱多多,30,销售部,销售代表,6000,4
+孙丽,29,人事部,人事专员,5500,3
+周杰,33,技术部,技术主管,11000,6
+吴芳,27,市场部,市场专员,6500,2
+郑华,31,财务部,财务经理,9000,5
+陈静,24,销售部,销售助理,4500,1</div>
+            </div>
+
+            <div class="quiz-container" id="quiz-p3">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习题</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="p3-q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">筛选年龄大于25岁的员工，正确的写法是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p3-q1', 0)"><div class="option-radio"></div><span class="option-label">A. df['年龄' > 25]</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p3-q1', 1)"><div class="option-radio"></div><span class="option-label">B. df[df['年龄'] > 25]</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p3-q1', 2)"><div class="option-radio"></div><span class="option-label">C. df.filter('年龄' > 25)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p3-q1', 3)"><div class="option-radio"></div><span class="option-label">D. df.select('年龄' > 25)</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q1', 1, '条件筛选的语法是df[条件]，条件内部要写df[列名] > 值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>条件筛选的语法是<code>df[条件]</code>，条件内部要写<code>df['列名'] > 值</code>。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p3-q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">多条件"且"的组合，应该使用哪个符号？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p3-q2', 0)"><div class="option-radio"></div><span class="option-label">A. and</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p3-q2', 1)"><div class="option-radio"></div><span class="option-label">B. &&</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p3-q2', 2)"><div class="option-radio"></div><span class="option-label">C. &</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p3-q2', 3)"><div class="option-radio"></div><span class="option-label">D. +</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q2', 2, 'pandas中多条件组合用&表示且，|表示或，每个条件要用圆括号括起来。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pandas中多条件组合用<code>&</code>表示"且"，<code>|</code>表示"或"，每个条件要用圆括号括起来。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p3-q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">loc和iloc的主要区别是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p3-q3', 0)"><div class="option-radio"></div><span class="option-label">A. loc按位置，iloc按标签</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p3-q3', 1)"><div class="option-radio"></div><span class="option-label">B. loc按标签，iloc按位置</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p3-q3', 2)"><div class="option-radio"></div><span class="option-label">C. loc只能取行，iloc只能取列</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p3-q3', 3)"><div class="option-radio"></div><span class="option-label">D. 两者没有区别</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q3', 1, 'loc按标签（行名/列名）定位，iloc按整数位置（第几行/第几列）定位。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>loc</code>按标签（行名/列名）定位，<code>iloc</code>按整数位置（第几行/第几列）定位。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p3-q4" data-type="fill" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">筛选姓名中包含"张"的员工，应写为：df[df['姓名'].str.<input class="fill-input" placeholder="?" style="width:120px;display:inline;">('张', na=False)]</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q4', 'contains', 'str.contains()用于判断字符串是否包含指定子串，na=False表示对缺失值返回False而不是报错。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>str.contains()</code>用于判断字符串是否包含指定子串，<code>na=False</code>表示对缺失值返回False而不是报错。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p3-q5" data-type="choice" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">筛选部门属于['销售部','市场部']的员工，应该用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p3-q5', 0)"><div class="option-radio"></div><span class="option-label">A. df['部门'].in(['销售部','市场部'])</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p3-q5', 1)"><div class="option-radio"></div><span class="option-label">B. df['部门'].isin(['销售部','市场部'])</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p3-q5', 2)"><div class="option-radio"></div><span class="option-label">C. df['部门'].include(['销售部','市场部'])</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p3-q5', 3)"><div class="option-radio"></div><span class="option-label">D. df['部门'].has(['销售部','市场部'])</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q5', 1, 'isin()用于判断元素是否属于指定列表，相当于SQL中的IN操作。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>isin()</code>用于判断元素是否属于指定列表，相当于SQL中的IN操作。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p3-q6" data-type="tf" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">df.iloc[0:3, 0:2] 会选取第0、1、2行和第0、1列。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('p3-q6', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('p3-q6', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q6', 'true', 'iloc切片遵循Python左闭右开规则，0:3表示索引0、1、2，0:2表示索引0、1。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>iloc</code>切片遵循Python左闭右开规则，<code>0:3</code>表示索引0、1、2，<code>0:2</code>表示索引0、1。</p></div>
+                </div>
+
+                <div class="quiz-question" id="p3-q7" data-type="choice" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">筛选年龄在25到35之间（包含边界），应该用？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('p3-q7', 0)"><div class="option-radio"></div><span class="option-label">A. df['年龄'].range(25, 35)</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('p3-q7', 1)"><div class="option-radio"></div><span class="option-label">B. df['年龄'].between(25, 35)</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('p3-q7', 2)"><div class="option-radio"></div><span class="option-label">C. df['年龄'].inrange(25, 35)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('p3-q7', 3)"><div class="option-radio"></div><span class="option-label">D. df['年龄'].scope(25, 35)</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('p3-q7', 1, 'between()方法用于判断数值是否在指定范围内，默认包含边界。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>between()</code>方法用于判断数值是否在指定范围内，默认包含边界。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p3')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p3')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了数据筛选与查询的核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>用 <code>df[条件]</code> 进行单条件筛选</li>
+                    <li>用 <code>&</code> 和 <code>|</code> 进行多条件组合筛选</li>
+                    <li>用 <code>loc</code> 按标签名选取行列</li>
+                    <li>用 <code>iloc</code> 按位置索引选取行列</li>
+                    <li>用 <code>str.contains()</code>、<code>str.startswith()</code> 进行字符串匹配</li>
+                    <li>用 <code>between()</code> 进行范围查询</li>
+                    <li>用 <code>isin()</code> 进行列表包含查询</li>
+                </ul>
+                <p style="margin-top:12px;">掌握了筛选查询，你就能从海量数据中精准找到需要的信息，是数据分析的核心能力之一。</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p2.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：数据清洗与预处理</a>
+                <a href="p4.html" style="color:var(--primary);font-weight:500;">下一项目：数据分组与聚合分析 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

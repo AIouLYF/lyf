@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目9 电商销售数据分析实战 - Pandas数据分析实战训练营 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">Pandas数据分析实战训练营</a> &gt;
+                项目9 电商销售数据分析实战
+            </div>
+            <h2>项目9 电商销售数据分析实战</h2>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>完成从数据读取到分析报告的完整流程</li>
+                    <li>掌握 RFM 客户价值分析模型</li>
+                    <li>学会销售趋势分析和预测思路</li>
+                    <li>掌握品类分析和地区分析的方法</li>
+                    <li>能够撰写一份完整的电商数据分析报告</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. 什么是 RFM 模型？</strong></p>
+                <p>RFM 是客户价值分析的经典模型，三个字母分别代表：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><strong>R（Recency）：</strong>最近一次购买距今天数，越近越好</li>
+                    <li><strong>F（Frequency）：</strong>购买频次，越多越好</li>
+                    <li><strong>M（Monetary）：</strong>累计消费金额，越多越好</li>
+                </ul>
+                <p>根据 RFM 三个维度给客户打分，可以把客户分成不同群体：重要价值客户、重要保持客户、新客户、流失客户等。</p>
+
+                <p><strong>2. 销售趋势分析</strong></p>
+                <p>通过时间序列分析，观察销售额的月度/季度变化，识别旺季和淡季，为库存和营销决策提供依据。</p>
+
+                <p><strong>3. 品类分析</strong></p>
+                <p>分析各品类的销售额、销量、利润贡献，找出"明星品类"和"问题品类"。</p>
+
+                <p><strong>4. 地区分析</strong></p>
+                <p>按地区汇总销售数据，识别核心市场和潜力市场。</p>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# ========== 1. 创建模拟电商销售数据 ==========
+np.random.seed(42)
+n = 1000
+
+# 生成订单数据
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
+
+print("数据概览：")
+print(orders.head(10))
+print(f"\n数据形状：{orders.shape}")
+print(f"\n数据时间范围：{orders['日期'].min()} 至 {orders['日期'].max()}")
+
+# ========== 2. 数据清洗 ==========
+print("\n【数据清洗】")
+print(f"缺失值数量：{orders.isnull().sum().sum()}")
+print(f"重复订单数：{orders['订单号'].duplicated().sum()}")
+
+# 日期解析
+orders['日期'] = pd.to_datetime(orders['日期'])
+orders['年份'] = orders['日期'].dt.year
+orders['月份'] = orders['日期'].dt.month
+orders['年月'] = orders['日期'].dt.strftime('%Y-%m')
+
+# ========== 3. 整体销售概况 ==========
+print("\n【整体销售概况】")
+print(f"总订单数：{len(orders)}")
+print(f"总销售额：{orders['销售额'].sum():,.0f} 元")
+print(f"平均客单价：{orders['销售额'].mean():.2f} 元")
+print(f"总销量：{orders['数量'].sum()} 件")
+
+# ========== 4. 销售趋势分析 ==========
+print("\n【月度销售趋势】")
+monthly = orders.groupby('年月')['销售额'].sum()
+print(monthly.tail(10))
+
+# 画趋势图
+plt.figure(figsize=(12, 5))
+monthly.plot(kind='line', marker='o', color='#2563eb')
+plt.title('月度销售额趋势', fontsize=14, fontweight='bold')
+plt.ylabel('销售额（元）')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+# ========== 5. 品类分析 ==========
+print("\n【品类销售分析】")
+category = orders.groupby('品类').agg({
+    '销售额': 'sum',
+    '数量': 'sum',
+    '订单号': 'count'
+}).rename(columns={'订单号': '订单数'})
+category['销售额占比'] = (category['销售额'] / category['销售额'].sum() * 100).round(2)
+category = category.sort_values('销售额', ascending=False)
+print(category)
+
+# 品类柱状图
+plt.figure(figsize=(10, 5))
+category['销售额'].plot(kind='bar', color=['#2563eb', '#0ea5e9', '#8b5cf6', '#f59e0b', '#ef4444'])
+plt.title('各品类销售额对比', fontsize=14, fontweight='bold')
+plt.ylabel('销售额（元）')
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
+# ========== 6. 地区分析 ==========
+print("\n【地区销售分析】")
+region = orders.groupby('地区')['销售额'].sum().sort_values(ascending=False)
+print(region)
+
+# 地区饼图
+plt.figure(figsize=(8, 8))
+plt.pie(region, labels=region.index, autopct='%1.1f%%', startangle=90)
+plt.title('各地区销售额占比', fontsize=14, fontweight='bold')
+plt.show()
+
+# ========== 7. RFM 客户分析 ==========
+print("\n【RFM 客户价值分析】")
+
+# 计算 RFM 指标
+analysis_date = orders['日期'].max() + pd.Timedelta(days=1)
+
+rfm = orders.groupby('客户ID').agg({
+    '日期': lambda x: (analysis_date - x.max()).days,  # Recency
+    '订单号': 'count',                                  # Frequency
+    '销售额': 'sum'                                     # Monetary
+}).rename(columns={'日期': 'R', '订单号': 'F', '销售额': 'M'})
+
+print("RFM 指标预览：")
+print(rfm.head(10))
+
+# RFM 打分（按五分位）
+rfm['R_score'] = pd.qcut(rfm['R'], 5, labels=[5,4,3,2,1])  # R越小越好，所以倒序
+rfm['F_score'] = pd.qcut(rfm['F'].rank(method='first'), 5, labels=[1,2,3,4,5])
+rfm['M_score'] = pd.qcut(rfm['M'].rank(method='first'), 5, labels=[1,2,3,4,5])
+
+# 合并 RFM 得分
+rfm['RFM_score'] = rfm['R_score'].astype(str) + rfm['F_score'].astype(str) + rfm['M_score'].astype(str)
+
+print("\nRFM 打分预览：")
+print(rfm[['R', 'F', 'M', 'R_score', 'F_score', 'M_score', 'RFM_score']].head(10))
+
+# 客户分层（简化版）
+def rfm_segment(row):
+    r, f, m = int(row['R_score']), int(row['F_score']), int(row['M_score'])
+    if r >= 4 and f >= 4 and m >= 4:
+        return '重要价值客户'
+    elif r >= 3 and f >= 3 and m >= 3:
+        return '重要保持客户'
+    elif r >= 4 and f <= 2:
+        return '新客户'
+    elif r <= 2 and f >= 3:
+        return '重要挽留客户'
+    else:
+        return '一般客户'
+
+rfm['客户类型'] = rfm.apply(rfm_segment, axis=1)
+print("\n客户分层统计：")
+print(rfm['客户类型'].value_counts())
+
+# 客户类型饼图
+plt.figure(figsize=(8, 8))
+rfm['客户类型'].value_counts().plot(kind='pie', autopct='%1.1f%%', startangle=90)
+plt.title('客户价值分层', fontsize=14, fontweight='bold')
+plt.ylabel('')
+plt.show()
+
+# ========== 8. 输出分析报告摘要 ==========
+print("\n" + "="*50)
+print("【电商销售数据分析报告摘要】")
+print("="*50)
+print(f"1. 数据期间：{orders['日期'].min().strftime('%Y-%m-%d')} 至 {orders['日期'].max().strftime('%Y-%m-%d')}")
+print(f"2. 总销售额：{orders['销售额'].sum():,.0f} 元，订单数：{len(orders)} 单")
+print(f"3. 最畅销品类：{category.index[0]}，销售额 {category.iloc[0]['销售额']:,.0f} 元")
+print(f"4. 最大市场：{region.index[0]}，占比 {region.iloc[0]/region.sum()*100:.1f}%")
+print(f"5. 客户总数：{rfm.shape[0]} 人")
+print(f"6. 重要价值客户：{(rfm['客户类型']=='重要价值客户').sum()} 人，是核心维护对象")
+print("="*50)
+</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <p><strong>步骤1：</strong>新建 Notebook，运行数据生成代码，创建 1000 条电商订单数据。</p>
+                <p><strong>步骤2：</strong>进行数据清洗：检查缺失值、重复值，解析日期，提取年份、月份。</p>
+                <p><strong>步骤3：</strong>计算整体销售概况：总销售额、平均客单价、总订单数。</p>
+                <p><strong>步骤4：</strong>按月汇总销售额，画出折线图，观察销售趋势，找出旺季和淡季。</p>
+                <p><strong>步骤5：</strong>按品类分组汇总，计算各品类的销售额、销量、订单数和占比，画出柱状图。</p>
+                <p><strong>步骤6：</strong>按地区分组汇总，画出饼图，观察各地区市场份额。</p>
+                <p><strong>步骤7：</strong>计算每个客户的 R、F、M 指标，用 qcut 打分，进行客户分层。</p>
+                <p><strong>步骤8：</strong>统计各客户类型的数量和占比，画出饼图，识别核心客户群体。</p>
+                <p><strong>步骤9：</strong>整理分析结论，撰写一份简短的电商数据分析报告。</p>
+            </div>
+
+            <div class="quiz-container" id="quiz-p9">
+                <div class="quiz-header">
+                    <div class="quiz-title">项目9 配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">RFM 模型中的 "F" 代表什么？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 最近一次购买时间</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 购买频次</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 累计消费金额</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 客户注册时间</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'F = Frequency，代表客户的购买频次。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>F = Frequency，代表客户的购买频次。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">在 RFM 模型中，R 值越小代表什么？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 客户越久远没购买</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 客户最近刚购买过</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 客户消费金额越少</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 客户购买频次越低</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'R 是距今天数，越小说明客户最近刚购买过，价值越高。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>R 是距今天数，越小说明客户最近刚购买过，价值越高。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">给客户 RFM 打分时，通常使用什么方法把客户分成5档？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. groupby</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. qcut</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. cut</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. pivot_table</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'qcut 按分位数切分，保证每档客户数量大致相等，是 RFM 打分的标准做法。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>qcut 按分位数切分，保证每档客户数量大致相等，是 RFM 打分的标准做法。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">以下哪个指标可以反映客户的"忠诚度"？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. R（最近一次购买）</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. F（购买频次）</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. M（消费金额）</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. 客单价</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, '购买频次 F 越高，说明客户越频繁地回来购买，忠诚度越高。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>购买频次 F 越高，说明客户越频繁地回来购买，忠诚度越高。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">在 RFM 打分中，R 的分数越高代表客户越有价值。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'false', 'R 是距今天数，数值越小越好。所以打分时要倒序：pd.qcut(rfm[\'R\'], 5, labels=[5,4,3,2,1])。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>R 是距今天数，数值越小越好。所以打分时要倒序：pd.qcut(rfm['R'], 5, labels=[5,4,3,2,1])。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">RFM 模型中，M 代表客户的累计 ______ 。</div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '消费金额', 'M = Monetary，代表客户的累计消费金额。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>M = Monetary，代表客户的累计消费金额。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">电商数据分析报告中，品类分析可以帮助我们找出哪些产品卖得好、哪些需要优化。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', '品类分析是电商分析的核心内容之一，能指导选品和库存决策。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>品类分析是电商分析的核心内容之一，能指导选品和库存决策。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p9')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p9')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们完成了一次完整的电商数据分析实战：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><strong>数据清洗：</strong>处理缺失值、重复值，解析日期，提取时间特征。</li>
+                    <li><strong>销售趋势：</strong>按月汇总，识别旺季淡季，为运营决策提供依据。</li>
+                    <li><strong>品类分析：</strong>找出明星品类和问题品类，指导选品策略。</li>
+                    <li><strong>地区分析：</strong>识别核心市场和潜力市场，优化区域投放。</li>
+                    <li><strong>RFM 分析：</strong>通过 R（最近购买）、F（频次）、M（金额）三个维度给客户打分分层。</li>
+                    <li><strong>客户分层：</strong>识别重要价值客户、重要保持客户、新客户、流失客户等群体。</li>
+                </ul>
+                <p>一份好的数据分析报告，不仅要有数据，更要有结论和行动建议。记住：数据分析的最终目的是辅助决策！</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p8.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：数据可视化入门</a>
+                <a href="p10.html" style="color:var(--primary);font-weight:500;">下一项目：综合实战：客户价值分析 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

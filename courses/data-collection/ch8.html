@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第8章 爬虫反爬与合规 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第8章 爬虫反爬与合规</span>
+                </div>
+                <h2>第8章 爬虫反爬与合规</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论2课时 + 上机2课时 | 难度：入门</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>8.1 常见反爬机制</h3>
+                    <p>网站为了保护自己的数据，会设置各种"障碍"阻止爬虫。了解这些机制，才能合法合规地采集数据。
+
+<strong>User-Agent检测：</strong>检查请求来自浏览器还是程序，程序直接拒绝。
+<strong>IP封禁：</strong>同一个IP请求太频繁，直接拉黑一段时间。
+<strong>验证码：</strong>要求输入图片中的文字或点击特定图案。
+<strong>动态加载：</strong>网页内容不是一次加载完，而是滚动或点击后才加载（Ajax）。
+<strong>登录限制：</strong>必须登录后才能看到数据。</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>8.2 设置User-Agent</h3>
+                    <p>User-Agent是请求头中的一个字段，告诉服务器"我是谁"。默认Python请求的User-Agent会暴露你是程序，需要改成浏览器的。</p>
+                <div class="code-block">import requests
+
+# 设置请求头，模拟Chrome浏览器
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+}
+
+response = requests.get('https://www.example.com', headers=headers)
+print(response.status_code)
+
+# 更完整的请求头（更像真实浏览器）
+headers_full = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive'
+}</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>8.3 请求频率控制</h3>
+                    <p>爬得太快会被封IP。合理控制请求频率，既保护对方服务器，也保护自己的采集任务能持续运行。</p>
+                <div class="code-block">import requests
+import time
+import random
+
+headers = {'User-Agent': 'Mozilla/5.0 ...'}
+
+for page in range(1, 11):
+    url = f'https://example.com/list?page={page}'
+    response = requests.get(url, headers=headers)
+    
+    # 解析数据...
+    
+    # 每次请求后暂停1-3秒（随机，更像真人）
+    sleep_time = random.uniform(1, 3)
+    time.sleep(sleep_time)
+    print(f'第{page}页完成，暂停{sleep_time:.2f}秒')
+
+# 更友好的策略：遇到错误时多等一会
+if response.status_code != 200:
+    time.sleep(10)  # 出错后等10秒再试</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>8.4 Robots协议</h3>
+                    <p>Robots协议是网站告诉爬虫"哪些页面可以爬，哪些不可以"的约定。文件位于网站根目录的robots.txt。遵守robots协议是爬虫的基本道德和法律要求。</p>
+                <div class="code-block"># 查看网站的robots.txt
+# 直接在浏览器访问： https://目标网站.com/robots.txt
+
+# robots.txt 示例内容：
+# User-agent: *           # 对所有爬虫生效
+# Disallow: /admin/       # 禁止爬/admin/目录
+# Disallow: /private/     # 禁止爬/private/目录
+# Allow: /public/         # 允许爬/public/目录
+# Crawl-delay: 5          # 每次请求间隔至少5秒
+
+# Python读取robots.txt
+import requests
+robots = requests.get('https://www.example.com/robots.txt').text
+print(robots)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>8.5 数据采集合规使用</h3>
+                    <p>采集数据不仅要技术可行，更要合法合规。以下红线不能碰：
+
+<strong>1. 个人隐私：</strong>不采集姓名、身份证号、手机号、住址等敏感个人信息。
+<strong>2. 商业秘密：</strong>不采集企业的内部数据、未公开的经营信息。
+<strong>3. 著作权：</strong>采集的文章、图片等受版权保护的内容，不能商用。
+<strong>4. 服务器压力：</strong>不能高频请求导致对方服务器瘫痪（可能构成破坏计算机信息系统罪）。
+<strong>5. 用途正当：</strong>采集的数据用于正当的学习、研究、分析目的。</p>
+                <div class="code-block"># 合规 checklist（写代码前先确认）
+# 1. 目标网站允许爬虫访问吗？→ 查看robots.txt
+# 2. 采集的是公开数据吗？→ 不碰登录后才能看的内部数据
+# 3. 包含个人信息吗？→ 有则脱敏或放弃
+# 4. 请求频率合理吗？→ 加延时，不高于正常用户浏览速度
+# 5. 数据用途正当吗？→ 仅用于学习/分析，不用于非法竞争</div>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>法律法规：《中华人民共和国网络安全法》《数据安全法》《个人信息保护法》相关条款</li>
+                    <li>阅读材料：搜索"爬虫违法案例"，了解真实判例（如顺丰数据泄露案）</li>
+                    <li>技术博客：搜索"反爬虫技术总结"，了解更高级的反爬手段</li>
+                    <li>工具：robotparser模块（Python标准库，解析robots.txt）</li>
+                    <li>讨论：在班级群讨论"采集公开商品信息是否合法？"</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>常见的反爬机制有哪些？各举一个应对方法。</li>
+                    <li>User-Agent的作用是什么？为什么爬虫要设置它？</li>
+                    <li>robots.txt文件放在网站的哪个位置？它有什么法律效力？</li>
+                    <li>采集数据时涉及个人隐私信息，应该怎么做？</li>
+                    <li>如果一个网站robots.txt写了Disallow: /，你还能爬吗？为什么？</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch8">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q8_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">robots.txt文件的主要作用是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q8_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加速网页加载</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q8_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">告诉爬虫哪些页面可以访问</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q8_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加密网站数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q8_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">记录用户访问日志</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q8_1', 1, `robots.txt是网站告诉爬虫哪些页面可以访问、哪些不可以的约定文件。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            robots.txt是网站告诉爬虫哪些页面可以访问、哪些不可以的约定文件。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q8_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">爬虫设置User-Agent的主要目的是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q8_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">加快请求速度</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q8_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">模拟浏览器，绕过检测</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q8_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">压缩响应数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q8_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">缓存网页内容</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q8_2', 1, `设置User-Agent是为了模拟真实浏览器发送请求，避免被网站识别为爬虫程序而拒绝访问。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            设置User-Agent是为了模拟真实浏览器发送请求，避免被网站识别为爬虫程序而拒绝访问。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q8_3" data-type="choice">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">以下哪种行为可能违反数据采集合规要求？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q8_3', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">采集公开的商品价格信息用于学习</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q8_3', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">遵守robots协议，控制请求频率</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q8_3', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">采集用户的身份证号并出售</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q8_3', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">使用API获取授权数据</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q8_3', 2, `采集并出售用户身份证号严重违反《个人信息保护法》，属于违法行为。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            采集并出售用户身份证号严重违反《个人信息保护法》，属于违法行为。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q8_4" data-type="tf">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">robots.txt具有法律强制力，违反会被判刑。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q8_4', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q8_4', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q8_4', 'false', `robots.txt是行业约定，没有法律强制力。但违反它可能涉及其他法律问题（如侵犯著作权、非法获取计算机信息等）。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            robots.txt是行业约定，没有法律强制力。但违反它可能涉及其他法律问题（如侵犯著作权、非法获取计算机信息等）。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q8_5" data-type="fill">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">robots.txt文件应该放在网站的______目录下。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q8_5', '根', `robots.txt文件必须放在网站根目录下，即 https://目标网站.com/robots.txt。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            robots.txt文件必须放在网站根目录下，即 https://目标网站.com/robots.txt。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch8')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch8')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="ch7.html">上一章</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

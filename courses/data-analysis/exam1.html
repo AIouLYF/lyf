@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单元考查卷（一） - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>单元考查卷（一）</span>
+            </div>
+            <h2>单元考查卷（一）</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">第1-2章（数据分析概述 + 数据预处理与清洗）</p>
+            <div class="exam-container" id="exam1">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">数据分析技术 · 单元考查卷（一）</div>
+                    <div class="exam-paper-info">
+                        <span>考查范围：第1-2章（数据分析概述 + 数据预处理与清洗）</span>
+                        <span>满分：100分</span>
+                        <span>时间：90分钟</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="e1-q1" data-type="choice" data-score="3">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">数据分析流程的第一步是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q1',0)"><div class="option-radio"></div><span class="option-label">A. 收集数据</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q1',1)"><div class="option-radio"></div><span class="option-label">B. 明确问题</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q1',2)"><div class="option-radio"></div><span class="option-label">C. 清洗处理</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q1',3)"><div class="option-radio"></div><span class="option-label">D. 可视化呈现</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q1',1,'第一步是明确问题。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>第一步是明确问题。</div>
+                </div>
+                <div class="quiz-question" id="e1-q2" data-type="choice" data-score="3">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">下列哪项不属于数据质量评估维度？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q2',0)"><div class="option-radio"></div><span class="option-label">A. 完整性</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q2',1)"><div class="option-radio"></div><span class="option-label">B. 一致性</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q2',2)"><div class="option-radio"></div><span class="option-label">C. 复杂性</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q2',3)"><div class="option-radio"></div><span class="option-label">D. 准确性</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q2',2,'数据质量四维度不含复杂性。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>数据质量四维度不含复杂性。</div>
+                </div>
+                <div class="quiz-question" id="e1-q3" data-type="choice" data-score="3">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">某列数据缺失比例为2%，最合适的处理方法是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q3',0)"><div class="option-radio"></div><span class="option-label">A. 直接删除该行</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q3',1)"><div class="option-radio"></div><span class="option-label">B. 用均值填充</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q3',2)"><div class="option-radio"></div><span class="option-label">C. 用回归预测填充</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q3',3)"><div class="option-radio"></div><span class="option-label">D. 不做处理</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q3',0,'缺失比例很小时直接删除最简单有效。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>缺失比例很小时直接删除最简单有效。</div>
+                </div>
+                <div class="quiz-question" id="e1-q4" data-type="choice" data-score="3">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">箱线图中，IQR指的是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q4',0)"><div class="option-radio"></div><span class="option-label">A. 最大值-最小值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q4',1)"><div class="option-radio"></div><span class="option-label">B. Q3-Q1</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q4',2)"><div class="option-radio"></div><span class="option-label">C. Q2-Q1</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q4',3)"><div class="option-radio"></div><span class="option-label">D. 均值-中位数</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q4',1,'IQR = Q3 - Q1。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>IQR = Q3 - Q1。</div>
+                </div>
+                <div class="quiz-question" id="e1-q5" data-type="choice" data-score="3">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">Python pandas中，查看缺失值数量的方法是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q5',0)"><div class="option-radio"></div><span class="option-label">A. df.null()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q5',1)"><div class="option-radio"></div><span class="option-label">B. df.isnull().sum()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q5',2)"><div class="option-radio"></div><span class="option-label">C. df.missing()</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q5',3)"><div class="option-radio"></div><span class="option-label">D. df.na().count()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q5',1,'df.isnull().sum()统计每列缺失值数量。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>df.isnull().sum()统计每列缺失值数量。</div>
+                </div>
+                <div class="quiz-question" id="e1-q6" data-type="choice" data-score="3">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">数据分布右偏时，用什么填充缺失值更稳健？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q6',0)"><div class="option-radio"></div><span class="option-label">A. 均值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q6',1)"><div class="option-radio"></div><span class="option-label">B. 中位数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q6',2)"><div class="option-radio"></div><span class="option-label">C. 最大值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q6',3)"><div class="option-radio"></div><span class="option-label">D. 最小值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q6',1,'右偏分布用中位数填充更稳健。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>右偏分布用中位数填充更稳健。</div>
+                </div>
+                <div class="quiz-question" id="e1-q7" data-type="choice" data-score="3">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">3sigma原则中，约多少%的数据落在均值+/-3倍标准差范围内？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q7',0)"><div class="option-radio"></div><span class="option-label">A. 68%</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q7',1)"><div class="option-radio"></div><span class="option-label">B. 95%</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q7',2)"><div class="option-radio"></div><span class="option-label">C. 99.7%</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q7',3)"><div class="option-radio"></div><span class="option-label">D. 100%</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q7',2,'3sigma原则约99.7%。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>3sigma原则约99.7%。</div>
+                </div>
+                <div class="quiz-question" id="e1-q8" data-type="choice" data-score="3">
+                    <span class="question-number">第8题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">商务数据分析师的核心工具不包括？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q8',0)"><div class="option-radio"></div><span class="option-label">A. Excel</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q8',1)"><div class="option-radio"></div><span class="option-label">B. SQL</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q8',2)"><div class="option-radio"></div><span class="option-label">C. Photoshop</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q8',3)"><div class="option-radio"></div><span class="option-label">D. Python</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q8',2,'Photoshop不是数据分析核心工具。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Photoshop不是数据分析核心工具。</div>
+                </div>
+                <div class="quiz-question" id="e1-q9" data-type="choice" data-score="3">
+                    <span class="question-number">第9题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">删除重复行的pandas命令是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q9',0)"><div class="option-radio"></div><span class="option-label">A. df.drop_null()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q9',1)"><div class="option-radio"></div><span class="option-label">B. df.drop_duplicates()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q9',2)"><div class="option-radio"></div><span class="option-label">C. df.remove_dup()</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q9',3)"><div class="option-radio"></div><span class="option-label">D. df.unique()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q9',1,'df.drop_duplicates()删除重复行。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>df.drop_duplicates()删除重复行。</div>
+                </div>
+                <div class="quiz-question" id="e1-q10" data-type="choice" data-score="3">
+                    <span class="question-number">第10题</span>
+                    <span class="question-type-badge">选择题 (3分)</span>
+                    <div class="question-text">数据清洗的主要目的不包括？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('e1-q10',0)"><div class="option-radio"></div><span class="option-label">A. 提高数据质量</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('e1-q10',1)"><div class="option-radio"></div><span class="option-label">B. 删除所有缺失值</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('e1-q10',2)"><div class="option-radio"></div><span class="option-label">C. 修正错误数据</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('e1-q10',3)"><div class="option-radio"></div><span class="option-label">D. 统一数据格式</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q10',1,'不是删除所有缺失值，而是根据情况处理。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>不是删除所有缺失值，而是根据情况处理。</div>
+                </div>
+                <div class="quiz-question" id="e1-q11" data-type="tf" data-score="2">
+                    <span class="question-number">第11题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">数据分析的最后一步是可视化呈现。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e1-q11','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e1-q11','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q11','false','最后一步是输出建议。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>最后一步是输出建议。</div>
+                </div>
+                <div class="quiz-question" id="e1-q12" data-type="tf" data-score="2">
+                    <span class="question-number">第12题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">缺失值比例超过50%的列建议直接删除。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e1-q12','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e1-q12','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q12','true','缺失比例过高时填充不可靠，建议删除。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>缺失比例过高时填充不可靠，建议删除。</div>
+                </div>
+                <div class="quiz-question" id="e1-q13" data-type="tf" data-score="2">
+                    <span class="question-number">第13题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">异常值一定是错误数据，必须删除。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e1-q13','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e1-q13','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q13','false','异常值不一定是错误，可能是真实极端情况。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>异常值不一定是错误，可能是真实极端情况。</div>
+                </div>
+                <div class="quiz-question" id="e1-q14" data-type="tf" data-score="2">
+                    <span class="question-number">第14题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">Tableau Public是免费的数据可视化工具。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e1-q14','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e1-q14','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q14','true','Tableau Public是免费版本。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Tableau Public是免费版本。</div>
+                </div>
+                <div class="quiz-question" id="e1-q15" data-type="tf" data-score="2">
+                    <span class="question-number">第15题</span>
+                    <span class="question-type-badge">判断题 (2分)</span>
+                    <div class="question-text">数据一致性要求同一含义的数据格式统一。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('e1-q15','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('e1-q15','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('e1-q15','true','一致性要求格式统一。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>一致性要求格式统一。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/100分</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitExam('exam1')">提交试卷</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam1')">重置试卷</button>
+                </div>
+            </div>
+
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="index.html" style="color:var(--primary);font-weight:500;">← 返回课程总览</a>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

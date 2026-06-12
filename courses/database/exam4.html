@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单元四考查 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">数据库原理与应用</a> / 单元四考查（第7-10章）
+    </div>
+
+        <div class="exam-container" id="exam1">
+      <div class="exam-paper-header">
+        <div class="exam-paper-title">单元四考查卷：数据库设计与安全管理</div>
+        <div class="exam-paper-info"><span>满分：100分</span><span>时间：60分钟</span><span>闭卷</span></div>
+      </div>      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">一、选择题（每题5分，共20分）</h3>
+      <div class="quiz-question" id="e4_q1" data-type="choice" data-score="5">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">E-R图中，实体用（ ）表示</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e4_q1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 椭圆</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e4_q1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 矩形</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e4_q1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 菱形</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e4_q1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 三角形</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q1', 1, `正确答案：B（矩形）。实体用矩形，属性用椭圆，联系用菱形。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（矩形）。实体用矩形，属性用椭圆，联系用菱形。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q2" data-type="choice" data-score="5">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">学生和课程之间的'选修'联系属于（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e4_q2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 一对一</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e4_q2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 一对多</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e4_q2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 多对多</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e4_q2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 以上都不是</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q2', 2, `正确答案：C（多对多）。一个学生选多门课，一门课被多个学生选。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（多对多）。一个学生选多门课，一门课被多个学生选。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q3" data-type="choice" data-score="5">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">MySQL备份命令是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e4_q3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. mysqlbackup</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e4_q3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. mysqldump</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e4_q3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. mysqlbackup</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e4_q3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. sqldump</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q3', 1, `正确答案：B（mysqldump）。mysqldump是MySQL自带的逻辑备份工具。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（mysqldump）。mysqldump是MySQL自带的逻辑备份工具。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q4" data-type="choice" data-score="5">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">事务的ACID特性不包括（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e4_q4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 原子性</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e4_q4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 一致性</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e4_q4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 并发性</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e4_q4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 持久性</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q4', 2, `正确答案：C（并发性）。ACID：原子性、一致性、隔离性、持久性。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（并发性）。ACID：原子性、一致性、隔离性、持久性。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">二、填空题（每空5分，共20分）</h3>
+      <div class="quiz-question" id="e4_q5" data-type="fill" data-score="5">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">数据库设计三大范式分别是________、________、________。（填写第一个空）</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q5', '第一范式', `正确答案：第一范式(1NF)、第二范式(2NF)、第三范式(3NF)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：第一范式(1NF)、第二范式(2NF)、第三范式(3NF)。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q6" data-type="fill" data-score="5">
+        <span class="question-number">第6题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">MySQL备份命令是________，恢复命令使用________工具。（填写第一个空）</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q6', 'mysqldump', `正确答案：mysqldump备份，mysql恢复。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：mysqldump备份，mysql恢复。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q7" data-type="fill" data-score="5">
+        <span class="question-number">第7题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">E-R图的三要素是实体、________和联系。</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q7', '属性', `正确答案：属性（Attribute）。实体用矩形，属性用椭圆，联系用菱形。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：属性（Attribute）。实体用矩形，属性用椭圆，联系用菱形。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q8" data-type="fill" data-score="5">
+        <span class="question-number">第8题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">事务提交使用的关键字是________，回滚使用的关键字是________。（填写第一个空）</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q8', 'COMMIT', `正确答案：COMMIT提交，ROLLBACK回滚。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：COMMIT提交，ROLLBACK回滚。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">三、判断题（每题5分，共15分）</h3>
+      <div class="quiz-question" id="e4_q9" data-type="tf" data-score="5">
+        <span class="question-number">第9题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">视图中的数据是实际存储在数据库中的。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e4_q9', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e4_q9', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q9', false, `正确答案：错误。视图是虚拟表，数据不实际存储，每次查询时执行定义的SQL。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。视图是虚拟表，数据不实际存储，每次查询时执行定义的SQL。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q10" data-type="tf" data-score="5">
+        <span class="question-number">第10题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">索引越多，查询速度越快，所以应该给所有字段都建索引。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e4_q10', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e4_q10', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q10', false, `正确答案：错误。索引虽然加快查询，但会降低写入效率，且占用存储空间。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。索引虽然加快查询，但会降低写入效率，且占用存储空间。
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q11" data-type="tf" data-score="5">
+        <span class="question-number">第11题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">TRUNCATE TABLE比DELETE FROM更高效，但不可回滚。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e4_q11', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e4_q11', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4_q11', true, `正确答案：正确。TRUNCATE是DDL操作，速度快但不可回滚。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。TRUNCATE是DDL操作，速度快但不可回滚。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">四、SQL实操题（45分）</h3>
+      <div class="quiz-question" id="e4_q12" data-type="code" data-score="15">
+        <span class="question-number">第12题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">某医院门诊管理系统包含：科室(dept_id,dept_name,location)、医生(doc_id,doc_name,title,dept_id)。请用SQL创建department表和doctor表（含外键）。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e4_q12', `CREATE TABLE department (\n  dept_id INT PRIMARY KEY,\n  dept_name VARCHAR(50),\n  location VARCHAR(50)\n);\n\nCREATE TABLE doctor (\n  doc_id INT PRIMARY KEY,\n  doc_name VARCHAR(50),\n  title VARCHAR(20),\n  dept_id INT,\n  FOREIGN KEY (dept_id) REFERENCES department(dept_id)\n);`, `评分：department表(5分)、doctor表(5分)、外键正确(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：department表(5分)、doctor表(5分)、外键正确(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q13" data-type="code" data-score="15">
+        <span class="question-number">第13题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">写出创建用户'test'并授予对hospital数据库所有表查询权限的SQL语句。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e4_q13', `CREATE USER 'test'@'localhost' IDENTIFIED BY 'password123';\nGRANT SELECT ON hospital.* TO 'test'@'localhost';\nFLUSH PRIVILEGES;`, `评分：CREATE USER(5分)、GRANT SELECT(5分)、FLUSH PRIVILEGES(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：CREATE USER(5分)、GRANT SELECT(5分)、FLUSH PRIVILEGES(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div class="quiz-question" id="e4_q14" data-type="code" data-score="15">
+        <span class="question-number">第14题</span>
+        <span class="question-type-badge">实操题 (15分)</span>
+        <div class="question-text">写出使用mysqldump备份hospital数据库的命令，以及创建一个视图v_doctor_dept显示医生姓名和所属科室名称。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e4_q14', `-- 备份数据库\nmysqldump -u root -p hospital > hospital_backup.sql\n\n-- 创建视图\nCREATE VIEW v_doctor_dept AS\nSELECT d.doc_name, dp.dept_name\nFROM doctor d\nJOIN department dp ON d.dept_id = dp.dept_id;`, `评分：mysqldump命令(5分)、CREATE VIEW语法(5分)、JOIN连接(5分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分：mysqldump命令(5分)、CREATE VIEW语法(5分)、JOIN连接(5分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button class="quiz-submit-btn" onclick="submitExam('exam1')">提交试卷</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam1')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav" style="margin-top:32px;">
+      <a href="index.html" class="nav-prev">&laquo; 返回课程总览</a>
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

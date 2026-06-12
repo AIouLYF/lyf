@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第4章 物流数据分析 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第4章
+    </div>
+
+    <h2>第4章 物流数据分析</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论4课时 + 上机6课时</p>
+
+    <div class="knowledge-card">
+      <h3>4.1 物流成本结构</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>运输成本</strong>（最大头，通常占50%~60%）</li>
+        <li><strong>仓储成本</strong></li>
+        <li><strong>包装成本</strong></li>
+        <li><strong>装卸搬运成本</strong></li>
+        <li><strong>管理成本</strong></li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.2 吨公里成本</h3>
+      <p><strong>吨公里成本</strong> = 运输总成本 / (货物吨数 x 运输公里数)</p>
+      <p>用来比较不同运输方式的效率。单位是元/(吨*公里)。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.3 配送时效分析</h3>
+      <p>计算订单从出库到签收的时间，统计平均时效、准时率、超时时长分布。</p>
+      <p><strong>准时送达率</strong> = 准时送达订单数 / 总配送订单数 x 100%</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.4 物流路径优化（简化版）</h3>
+      <p>给定几个配送点和距离，用<strong>"最近邻法"</strong>（每次去最近的未访问点）找一条较短的路线。不是最优解，但简单实用。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.5 物流KPI</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li>准时送达率</li>
+        <li>破损率</li>
+        <li>每单配送成本</li>
+        <li>车辆装载率</li>
+      </ul>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>4.6 Python示例：计算吨公里成本和平均配送时效</h3>
+      <div class="code-block">import pandas as pd
+
+df = pd.read_csv("物流数据.csv")
+df["吨公里成本"] = df["运输成本"] / (df["货物重量"] * df["运输距离"])
+df["配送时效"] = (pd.to_datetime(df["签收时间"]) - pd.to_datetime(df["出库时间"])).dt.days
+
+print("平均吨公里成本:", df["吨公里成本"].mean())
+print("平均配送时效(天):", df["配送时效"].mean())
+print("准时率:", (df["配送时效"] &lt;= df["承诺时效"]).mean())</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>吨公里成本越低说明什么？是不是一定越好？</li>
+        <li>配送时效分析中，"准时率"怎么计算？</li>
+        <li>最近邻法找路径有什么缺点？（提示：可能不是全局最优）</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>实训数据集：自建15行物流数据（订单号、货物重量、运输距离、运输成本、出库时间、签收时间、承诺时效）</li>
+        <li>工具安装：PowerBI Desktop（微软官网免费下载），用于做配送热力图</li>
+        <li>线上教程：B站搜索"PowerBI地图可视化"，学习做配送热力图</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch4">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch4-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">吨公里成本的单位是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch4-q1',0)"><div class="option-radio"></div><span class="option-label">A. 元/吨</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch4-q1',1)"><div class="option-radio"></div><span class="option-label">B. 元/公里</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch4-q1',2)"><div class="option-radio"></div><span class="option-label">C. 元/(吨*公里)</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch4-q1',3)"><div class="option-radio"></div><span class="option-label">D. 吨/元</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q1',2,'吨公里成本 = 运输总成本 / (货物吨数 x 运输公里数)。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>C. 元/(吨*公里)</strong>。吨公里成本 = 运输总成本 / (货物吨数 x 运输公里数)，反映单位运输工作量的成本水平。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch4-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">物流成本中占比最大的是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch4-q2',0)"><div class="option-radio"></div><span class="option-label">A. 仓储成本</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch4-q2',1)"><div class="option-radio"></div><span class="option-label">B. 运输成本</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch4-q2',2)"><div class="option-radio"></div><span class="option-label">C. 包装成本</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch4-q2',3)"><div class="option-radio"></div><span class="option-label">D. 管理成本</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q2',1,'运输成本通常占物流总成本的50%~60%。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 运输成本</strong>。运输成本是物流成本中最大的一块，通常占总物流成本的50%~60%。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch4-q3" data-type="fill">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">填空题</span>
+        <div class="question-text">吨公里成本 = 运输总成本 / (________ x 运输公里数)。</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q3','货物吨数','吨公里是运输行业常用的工作量单位。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>货物吨数</strong>（或货物重量）。吨公里是运输行业常用的工作量单位，吨公里成本反映单位运输工作量的成本水平，便于横向比较不同运输任务。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch4-q4" data-type="fill">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">填空题</span>
+        <div class="question-text">配送时效分析中，准时送达率 = ________ / 总配送订单数 x 100%。</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q4','准时送达订单数','准时率是衡量物流服务质量的重要指标。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>准时送达订单数</strong>。准时送达率 = 准时送达订单数 / 总配送订单数 x 100%，是衡量物流服务质量的核心指标之一。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch4-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">最近邻法一定能找到全局最优的配送路径。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch4-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch4-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch4-q5','false','最近邻法是贪心算法，不保证全局最优。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>错误</strong>。最近邻法是一种贪心算法，每次选择最近的未访问点，简单实用但<strong>不保证全局最优</strong>。可能因为早期选择导致后续路径较长。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch4')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch4')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch3.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第3章 库存数据分析</a>
+      <a href="ch5.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第5章 需求预测分析 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

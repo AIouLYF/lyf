@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第4章 数据清洗与预处理 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第4章 数据清洗与预处理</span>
+                </div>
+                <h2>第4章 数据清洗与预处理</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论4课时 + 上机6课时 | 难度：核心重点</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>4.1 为什么需要数据清洗</h3>
+                    <p>从各种渠道采集来的原始数据往往"很脏"：有些值缺失了、有些值明显填错了、有些记录重复了、格式也不统一。如果不清洗就直接分析，结果会不准确甚至完全错误。<strong>数据清洗就是给数据"洗澡"，让它变得干净、规范、可用。</strong></p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>4.2 安装Pandas</h3>
+                    <p></p>
+                <div class="code-block"># 安装pandas
+pip install pandas openpyxl
+
+# 验证安装</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>4.3 用Pandas读取数据</h3>
+                    <p>Pandas可以读取多种格式的数据文件，最常用的有CSV和Excel两种。</p>
+                <div class="code-block">import pandas as pd
+
+# 读取CSV文件
+df = pd.read_csv('data.csv')
+print(df.head())  # 查看前5行
+
+# 读取Excel文件
+df = pd.read_excel('data.xlsx', sheet_name='Sheet1')
+
+# 查看数据基本信息
+print(df.shape)   # 行数和列数
+print(df.columns) # 列名
+print(df.dtypes)  # 每列的数据类型</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>4.4 缺失值处理</h3>
+                    <p><strong>缺失值</strong>就是表格里空着的格子，在Pandas里显示为NaN（Not a Number）。缺失值会影响统计结果，需要检测并处理。</p>
+                <div class="code-block"># 检测缺失值
+print(df.isnull().sum())  # 每列有多少个缺失值
+
+# 删除含有缺失值的行
+df_clean = df.dropna()
+
+# 填充缺失值：用固定值填充
+df['年龄'].fillna(0, inplace=True)
+
+# 填充缺失值：用平均值填充
+df['成绩'].fillna(df['成绩'].mean(), inplace=True)
+
+# 填充缺失值：用前一个有效值填充（前向填充）
+df['日期'].fillna(method='ffill', inplace=True)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>4.5 重复值处理</h3>
+                    <p>数据采集时可能会重复抓取同一条记录，导致数据重复。重复数据会干扰统计结果，需要去重。</p>
+                <div class="code-block"># 检测重复行
+print(df.duplicated().sum())  # 有多少行完全重复
+
+# 查看重复的行
+duplicates = df[df.duplicated(keep=False)]
+print(duplicates)
+
+# 删除重复行（保留第一条）
+df_unique = df.drop_duplicates()
+
+# 按指定列去重
+df_unique = df.drop_duplicates(subset=['姓名', '手机号'])</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>4.6 异常值检测</h3>
+                    <p><strong>异常值</strong>就是明显不合理的数据，比如年龄填了200岁，或者温度是-999度。常用检测方法有：箱线图法（IQR）和3sigma原则。</p>
+                <div class="code-block"># 方法1：箱线图法（IQR）
+Q1 = df['成绩'].quantile(0.25)  # 第1四分位数
+Q3 = df['成绩'].quantile(0.75)  # 第3四分位数
+IQR = Q3 - Q1
+
+# 异常值范围：小于 Q1-1.5*IQR 或 大于 Q3+1.5*IQR
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+# 标记异常值
+outliers = df[(df['成绩'] < lower) | (df['成绩'] > upper)]
+print(f'发现{len(outliers)}个异常值')
+
+# 方法2：用条件过滤替换异常值
+df.loc[df['年龄'] > 120, '年龄'] = None  # 年龄超过120设为缺失
+df.loc[df['年龄'] < 0, '年龄'] = None    # 负数年龄设为缺失</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>4.7 数据类型转换</h3>
+                    <p>数据读取后，列的类型可能不对。比如日期读成了字符串，数字读成了文本。需要转换成正确的类型才能计算。</p>
+                <div class="code-block"># 查看当前数据类型
+print(df.dtypes)
+
+# 转换数据类型
+df['年龄'] = df['年龄'].astype(int)           # 转为整数
+df['价格'] = df['价格'].astype(float)         # 转为浮点数
+df['日期'] = pd.to_datetime(df['日期'])        # 转为日期时间
+df['类别'] = df['类别'].astype('category')     # 转为分类类型
+
+# 去掉字符串中的空格
+df['姓名'] = df['姓名'].str.strip()
+
+# 字符串转小写
+df['邮箱'] = df['邮箱'].str.lower()</div>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>官方文档：Pandas用户指南（pandas.pydata.org/docs/user_guide/）</li>
+                    <li>视频教程：B站搜索"Pandas数据清洗实战"，推荐Datawhale开源教程</li>
+                    <li>练习数据集：Kaggle的Titanic数据集（经典清洗练习）</li>
+                    <li>在线练习：和鲸社区（www.heywhale.com）有Pandas实战项目</li>
+                    <li>书籍推荐：《利用Python进行数据分析》（第2版）第7章</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>df.isnull().sum() 这个命令的作用是什么？</li>
+                    <li>缺失值有哪些处理方式？什么时候该删除，什么时候该填充？</li>
+                    <li>如何用箱线图法（IQR）找出异常值？写出核心代码。</li>
+                    <li>如果一列日期数据被读成了字符串，应该怎么转换？</li>
+                    <li>drop_duplicates() 默认保留哪一条重复记录？</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch4">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q4_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">Pandas中用于检测缺失值的函数是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q4_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.empty()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.isnull()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.dropna()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.fillna()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q4_1', 1, `isnull()返回布尔值表示是否缺失。dropna()是删除缺失值，fillna()是填充缺失值。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            isnull()返回布尔值表示是否缺失。dropna()是删除缺失值，fillna()是填充缺失值。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q4_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">Pandas中，删除含有缺失值的行应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q4_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.fillna()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.dropna()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.isnull()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">df.replace()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q4_2', 1, `dropna()用于删除包含缺失值的行或列。fillna()用于填充缺失值。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            dropna()用于删除包含缺失值的行或列。fillna()用于填充缺失值。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q4_3" data-type="tf">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">df.drop_duplicates()会删除所有重复的行，一条都不保留。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q4_3', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q4_3', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q4_3', 'false', `默认保留第一条重复记录（keep='first'），只删除后续的重复项。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            默认保留第一条重复记录（keep='first'），只删除后续的重复项。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q4_4" data-type="choice">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">箱线图法中，异常值的判定范围是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q4_4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">大于均值的数据</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4_4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">小于Q1-1.5*IQR或大于Q3+1.5*IQR</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4_4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">等于中位数的数据</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4_4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">标准差大于1的数据</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q4_4', 1, `箱线图法（IQR）将异常值定义为小于Q1-1.5*IQR或大于Q3+1.5*IQR的数据。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            箱线图法（IQR）将异常值定义为小于Q1-1.5*IQR或大于Q3+1.5*IQR的数据。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q4_5" data-type="fill">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">将字符串列转为日期时间类型的Pandas函数是 pd.______() <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q4_5', 'to_datetime', `pd.to_datetime()可以将字符串、数字等转换为Pandas的日期时间类型。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            pd.to_datetime()可以将字符串、数字等转换为Pandas的日期时间类型。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch4')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch4')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="ch3.html">上一章</a>
+                    <a href="ch5.html">下一章</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

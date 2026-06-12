@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单元四考查（第7~8章） - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 单元四考查
+    </div>
+
+    <h2>单元四考查卷</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">第7~8章：供应链成本分析 + 供应链可视化报告</p>
+
+    <div class="exam-container" id="exam4">
+      <div class="exam-paper-header">
+        <div class="exam-paper-title">供应链数据分析 · 单元四考查</div>
+        <div class="exam-paper-info">
+          <span>满分：100分</span>
+          <span>时间：90分钟</span>
+          <span>闭卷</span>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom:16px;">一、单项选择题（每题3分，共30分）</h3>
+
+      <div class="quiz-question" id="e4-q1" data-type="choice" data-score="3">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">总拥有成本（TCO）不包括（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q1',0)"><div class="option-radio"></div><span class="option-label">A. 采购价格</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q1',1)"><div class="option-radio"></div><span class="option-label">B. 运输费用</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q1',2)"><div class="option-radio"></div><span class="option-label">C. 员工工资</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q1',3)"><div class="option-radio"></div><span class="option-label">D. 质量检验费用</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q1',2,'员工工资属于企业固定成本，不计入特定物料的TCO。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>C</strong>。员工工资属于企业固定成本，一般不计入特定物料的TCO。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e4-q2" data-type="choice" data-score="3">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">成本结构分析最适合用哪种图表（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q2',0)"><div class="option-radio"></div><span class="option-label">A. 折线图</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q2',1)"><div class="option-radio"></div><span class="option-label">B. 饼图或环形图</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q2',2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q2',3)"><div class="option-radio"></div><span class="option-label">D. 雷达图</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q2',1,'饼图/环形图适合展示各项成本的占比。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。饼图或环形图适合展示各项成本的占比。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e4-q3" data-type="choice" data-score="3">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">瀑布图最适合展示（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q3',0)"><div class="option-radio"></div><span class="option-label">A. 时间序列趋势</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q3',1)"><div class="option-radio"></div><span class="option-label">B. 成本增减变化过程</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q3',2)"><div class="option-radio"></div><span class="option-label">C. 地理分布</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q3',3)"><div class="option-radio"></div><span class="option-label">D. 相关性关系</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q3',1,'瀑布图展示增减变化过程。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。瀑布图展示成本增减变化过程。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e4-q4" data-type="choice" data-score="3">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">供应链KPI仪表板中，大数字卡片通常用于展示（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q4',0)"><div class="option-radio"></div><span class="option-label">A. 详细明细数据</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q4',1)"><div class="option-radio"></div><span class="option-label">B. 核心指标当前值</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q4',2)"><div class="option-radio"></div><span class="option-label">C. 历史对比曲线</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q4',3)"><div class="option-radio"></div><span class="option-label">D. 异常预警列表</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q4',1,'大数字卡片用于突出展示核心指标的当前值。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。大数字卡片用于突出展示核心指标的当前值。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e4-q5" data-type="choice" data-score="3">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">选择题 3分</span>
+        <div class="question-text">以下哪项不是数据可视化的基本原则（ ）</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q5',0)"><div class="option-radio"></div><span class="option-label">A. 一页看完重点</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q5',1)"><div class="option-radio"></div><span class="option-label">B. 颜色越多越好</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q5',2)"><div class="option-radio"></div><span class="option-label">C. 图表有标题和说明</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q5',3)"><div class="option-radio"></div><span class="option-label">D. 信息层次分明</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q5',1,'颜色过多会分散注意力，降低可读性。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。颜色过多会分散注意力，降低可读性。
+        </div>
+      </div>
+
+      <h3 style="margin:24px 0 16px;">二、简答题（每题10分，共20分）</h3>
+
+      <div class="quiz-question" id="e4-q6" data-type="choice" data-score="10">
+        <span class="question-number">6</span>
+        <span class="question-type-badge">简答题 10分</span>
+        <div class="question-text">以下关于TCO（总拥有成本）分析的描述，哪项是正确的？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q6',0)"><div class="option-radio"></div><span class="option-label">A. TCO只包括采购价格</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q6',1)"><div class="option-radio"></div><span class="option-label">B. TCO帮助识别真正的"低成本"供应商</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q6',2)"><div class="option-radio"></div><span class="option-label">C. TCO分析只适用于制造业</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q6',3)"><div class="option-radio"></div><span class="option-label">D. TCO越低说明采购价越低</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q6',1,'TCO分析的意义在于全面考虑所有相关成本，帮助识别真正的低成本供应商。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。TCO分析的意义在于避免只看采购价的短视行为，全面考虑所有相关成本，帮助企业识别真正的"低成本"供应商。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e4-q7" data-type="choice" data-score="10">
+        <span class="question-number">7</span>
+        <span class="question-type-badge">简答题 10分</span>
+        <div class="question-text">设计供应链KPI仪表板时，以下哪组指标组合最全面？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q7',0)"><div class="option-radio"></div><span class="option-label">A. 只有库存周转率</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q7',1)"><div class="option-radio"></div><span class="option-label">B. 库存周转率+准时交货率+物流成本占比+采购节约率</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q7',2)"><div class="option-radio"></div><span class="option-label">C. 只有销售额和利润率</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q7',3)"><div class="option-radio"></div><span class="option-label">D. 只有物流成本</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q7',1,'应从库存、采购、物流、综合等多维度选择KPI。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。供应链KPI应涵盖库存类、采购类、物流类、综合类指标，才能全面反映供应链运营状况。
+        </div>
+      </div>
+
+      <h3 style="margin:24px 0 16px;">三、实操大题（共50分）</h3>
+
+      <div class="quiz-question" id="e4-q8" data-type="choice" data-score="25">
+        <span class="question-number">8</span>
+        <span class="question-type-badge">实操题 25分</span>
+        <div class="question-text">
+          <strong>成本结构分析：</strong>某企业供应链年度成本数据：采购500万、运输200万、仓储100万、包装50万、管理80万、质检30万、其他40万。<br><br>
+          总成本为1000万元，采购成本占比为多少？
+        </div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q8',0)"><div class="option-radio"></div><span class="option-label">A. 30%</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q8',1)"><div class="option-radio"></div><span class="option-label">B. 40%</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q8',2)"><div class="option-radio"></div><span class="option-label">C. 50%</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q8',3)"><div class="option-radio"></div><span class="option-label">D. 60%</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q8',2,'采购成本占比 = 500/1000 = 50%。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>C. 50%</strong>。<br>
+          总成本 = 500+200+100+50+80+30+40 = 1000万元<br>
+          采购成本占比 = 500/1000 = <strong>50%</strong>，是占比最高的成本项目。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="e4-q9" data-type="choice" data-score="25">
+        <span class="question-number">9</span>
+        <span class="question-type-badge">实操题 25分</span>
+        <div class="question-text">
+          <strong>数据分析报告撰写：</strong>一份完整的供应链数据分析报告应包含以下哪些部分？<br><br>
+          选择最完整、最正确的组合：
+        </div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('e4-q9',0)"><div class="option-radio"></div><span class="option-label">A. 只有数据表格</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('e4-q9',1)"><div class="option-radio"></div><span class="option-label">B. 背景+数据发现+原因分析+改进建议+结论</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('e4-q9',2)"><div class="option-radio"></div><span class="option-label">C. 只有图表</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('e4-q9',3)"><div class="option-radio"></div><span class="option-label">D. 只有结论</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e4-q9',1,'完整报告应包含背景、数据发现、原因分析、改进建议、结论。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：<strong>B</strong>。一份完整的供应链数据分析报告应包含：背景说明、数据发现、原因分析、改进建议、结论等部分，语言简洁，适合向管理层汇报。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button class="quiz-submit-btn" onclick="submitExam('exam4')">提交试卷</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam4')">重置试卷</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/100</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="exam3.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 单元三考查</a>
+      <a href="final.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：期末综合考查 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

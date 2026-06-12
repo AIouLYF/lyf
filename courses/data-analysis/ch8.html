@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业智能报告撰写 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第8章 商业智能报告撰写</span>
+            </div>
+            <h2>第8章 商业智能报告撰写</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点8.1：报告标准结构</h3>
+                <ol class="step-list">
+                    <li><strong>背景与目的</strong>：为什么做这次分析？（1页）</li>
+                    <li><strong>数据来源与方法</strong>：数据从哪来？用了什么方法？（1页）</li>
+                    <li><strong>核心发现</strong>：3-5个最重要的发现，每个配一张图。（3-5页）</li>
+                    <li><strong>结论与建议</strong>：可执行的业务建议。（1-2页）</li>
+                    <li><strong>附录</strong>：详细数据表格、补充图表。（可选）</li>
+                </ol>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点8.2：数据故事化表达</h3>
+                <ul class="check-list">
+                    <li><strong>SCQA框架</strong>：Situation→Complication→Question→Answer</li>
+                    <li>每页PPT只讲一个观点，标题就是结论</li>
+                    <li>图表是主角，文字是配角</li>
+                    <li>用颜色引导注意力</li>
+                </ul>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点8.3：常见错误与规避</h3>
+                <table class="data-table">
+                    <tr><th>常见错误</th><th>正确做法</th></tr>
+                    <tr><td>图表没有标题或标题模糊</td><td>标题直接写结论</td></tr>
+                    <tr><td>Y轴不从0开始</td><td>柱状图Y轴必须从0开始</td></tr>
+                    <tr><td>颜色太多太杂</td><td>同一页面不超过3种主色</td></tr>
+                    <tr><td>只有数据没有建议</td><td>每个发现对应一条建议</td></tr>
+                    <tr><td>报告太长</td><td>Executive Summary放在最前面</td></tr>
+                </table>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：B站"数据分析报告撰写"专题</li>
+                    <li>模板资源：OfficePlus.cn免费PPT模板</li>
+                    <li>阅读材料：《用数据讲故事》（Cole Nussbaumer）</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch8">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch8-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">数据分析报告的核心结构不包括？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch8-q1',0)"><div class="option-radio"></div><span class="option-label">A. 背景与目的</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch8-q1',1)"><div class="option-radio"></div><span class="option-label">B. 数据来源</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch8-q1',2)"><div class="option-radio"></div><span class="option-label">C. 详细代码</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch8-q1',3)"><div class="option-radio"></div><span class="option-label">D. 结论与建议</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q1',2,'详细代码不属于报告核心结构。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>详细代码不属于报告核心结构。</div>
+                </div>
+                <div class="quiz-question" id="ch8-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">SCQA框架中的Q代表？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch8-q2',0)"><div class="option-radio"></div><span class="option-label">A. Quality</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch8-q2',1)"><div class="option-radio"></div><span class="option-label">B. Question</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch8-q2',2)"><div class="option-radio"></div><span class="option-label">C. Quantity</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch8-q2',3)"><div class="option-radio"></div><span class="option-label">D. Query</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q2',1,'SCQA = Situation-Complication-Question-Answer。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>SCQA = Situation-Complication-Question-Answer。</div>
+                </div>
+                <div class="quiz-question" id="ch8-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">下列哪项不是好的数据报告标题？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch8-q3',0)"><div class="option-radio"></div><span class="option-label">A. "Q3销售额同比增长15%"</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch8-q3',1)"><div class="option-radio"></div><span class="option-label">B. "销售额分析"</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch8-q3',2)"><div class="option-radio"></div><span class="option-label">C. "新品上线后转化率提升22%"</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch8-q3',3)"><div class="option-radio"></div><span class="option-label">D. "华东区客户流失率降至5%"</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q3',1,'"销售额分析"太笼统，好的标题应直接写结论。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>"销售额分析"太笼统，好的标题应直接写结论。</div>
+                </div>
+                <div class="quiz-question" id="ch8-q4" data-type="fill">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">SCQA中C代表Complication（<input class='fill-input' style='width:120px;'>），A代表Answer（<input class='fill-input' style='width:120px;'>）。</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q4','冲突/问题','C=Complication（冲突/问题），A=Answer（答案/建议）。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>C=Complication（冲突/问题），A=Answer（答案/建议）。</div>
+                </div>
+                <div class="quiz-question" id="ch8-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">Executive Summary应该放在报告的最前面。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch8-q5','true','正确。Executive Summary放在最前面，让读者快速了解报告要点。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。Executive Summary放在最前面，让读者快速了解报告要点。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch8')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch8')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch7.html" style="color:var(--primary);font-weight:500;">← 上一章：第7章</a>
+                <span style="color:var(--text-lighter);">下一章：无（本章为最后一章）</span>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!-- 左侧导航栏组件（通过JS动态插入） -->
+<button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.querySelector('.sidebar-overlay').classList.toggle('show');">
+    <span></span>
+</button>
+<div class="sidebar-overlay" onclick="document.querySelector('.sidebar').classList.remove('open');this.classList.remove('show');"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <a href="index.html" class="sidebar-logo">
+            <div class="sidebar-logo-icon">李</div>
+            <div>
+                <div class="sidebar-logo-text">李优发</div>
+                <div class="sidebar-logo-sub">广科院 · 商学院</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 全局导航 -->
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">全局导航</div>
+        <ul class="sidebar-nav">
+            <li><a href="index.html"><span class="nav-icon">🏠</span> 首页</a></li>
+        </ul>
+    </div>
+
+    <!-- 课程列表 -->
+    <div class="sidebar-section">
+        <div class="sidebar-section-title">我的课程</div>
+        <ul class="sidebar-nav">
+            <li><a href="courses/pandas-bootcamp/index.html"><span class="nav-icon">🐼</span> Pandas训练项目</a></li>
+
+            <li class="sidebar-expandable">
+                <a><span class="nav-icon">🐍</span> Python基础</a>
+                <ul class="sidebar-submenu">
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元一：基础入门</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/python/ch1.html">第1章 Python概述与安装</a></li>
+                            <li><a href="courses/python/ch2.html">第2章 数据类型与变量</a></li>
+                            <li><a href="courses/python/ch3.html">第3章 运算符与表达式</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元二：数据结构</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/python/ch4.html">第4章 流程控制</a></li>
+                            <li><a href="courses/python/ch5.html">第5章 列表与元组</a></li>
+                            <li><a href="courses/python/ch6.html">第6章 字典与集合</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元三：进阶应用</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/python/ch7.html">第7章 函数与模块</a></li>
+                            <li><a href="courses/python/ch8.html">第8章 文件操作</a></li>
+                            <li><a href="courses/python/ch9.html">第9章 异常处理</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="courses/python/exam1.html">📝 单元一考查</a></li>
+                    <li><a href="courses/python/exam2.html">📝 单元二考查</a></li>
+                    <li><a href="courses/python/exam3.html">📝 单元三考查</a></li>
+                    <li><a href="courses/python/final.html">📋 期末考查</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-expandable">
+                <a><span class="nav-icon">📊</span> 数据分析技术</a>
+                <ul class="sidebar-submenu">
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元一：分析基础</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-analysis/ch1.html">第1章 数据分析概述</a></li>
+                            <li><a href="courses/data-analysis/ch2.html">第2章 数据预处理与清洗</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元二：统计与可视化</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-analysis/ch3.html">第3章 描述性统计分析</a></li>
+                            <li><a href="courses/data-analysis/ch4.html">第4章 数据可视化</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元三：推断与回归</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-analysis/ch5.html">第5章 统计推断基础</a></li>
+                            <li><a href="courses/data-analysis/ch6.html">第6章 回归分析入门</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元四：综合应用</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-analysis/ch7.html">第7章 时间序列分析</a></li>
+                            <li><a href="courses/data-analysis/ch8.html">第8章 商业智能报告</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="courses/data-analysis/exam1.html">📝 单元一考查</a></li>
+                    <li><a href="courses/data-analysis/exam2.html">📝 单元二考查</a></li>
+                    <li><a href="courses/data-analysis/exam3.html">📝 单元三考查</a></li>
+                    <li><a href="courses/data-analysis/exam4.html">📝 单元四考查</a></li>
+                    <li><a href="courses/data-analysis/final.html">📋 期末考查</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-expandable">
+                <a><span class="nav-icon">🌐</span> 数据采集与处理</a>
+                <ul class="sidebar-submenu">
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元一：采集技术</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-collection/ch1.html">第1章 数据采集概述</a></li>
+                            <li><a href="courses/data-collection/ch2.html">第2章 网络爬虫基础</a></li>
+                            <li><a href="courses/data-collection/ch3.html">第3章 API数据获取</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元二：数据处理</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-collection/ch4.html">第4章 数据清洗与预处理</a></li>
+                            <li><a href="courses/data-collection/ch5.html">第5章 数据转换与整合</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元三：质量管理</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/data-collection/ch6.html">第6章 数据质量评估</a></li>
+                            <li><a href="courses/data-collection/ch7.html">第7章 数据存储与管理</a></li>
+                            <li><a href="courses/data-collection/ch8.html">第8章 爬虫反爬与合规</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="courses/data-collection/exam1.html">📝 单元一考查</a></li>
+                    <li><a href="courses/data-collection/exam2.html">📝 单元二考查</a></li>
+                    <li><a href="courses/data-collection/exam3.html">📝 单元三考查</a></li>
+                    <li><a href="courses/data-collection/final.html">📋 期末考查</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-expandable">
+                <a><span class="nav-icon">🚚</span> 供应链数据分析</a>
+                <ul class="sidebar-submenu">
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元一：供应链基础</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/supply-chain/ch1.html">第1章 供应链概述</a></li>
+                            <li><a href="courses/supply-chain/ch2.html">第2章 采购数据分析</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元二：库存与物流</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/supply-chain/ch3.html">第3章 库存数据分析</a></li>
+                            <li><a href="courses/supply-chain/ch4.html">第4章 物流数据分析</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元三：预测与评估</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/supply-chain/ch5.html">第5章 需求预测分析</a></li>
+                            <li><a href="courses/supply-chain/ch6.html">第6章 供应商评估分析</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元四：成本与报告</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/supply-chain/ch7.html">第7章 供应链成本分析</a></li>
+                            <li><a href="courses/supply-chain/ch8.html">第8章 供应链可视化报告</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="courses/supply-chain/exam1.html">📝 单元一考查</a></li>
+                    <li><a href="courses/supply-chain/exam2.html">📝 单元二考查</a></li>
+                    <li><a href="courses/supply-chain/exam3.html">📝 单元三考查</a></li>
+                    <li><a href="courses/supply-chain/exam4.html">📝 单元四考查</a></li>
+                    <li><a href="courses/supply-chain/final.html">📋 期末考查</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-expandable">
+                <a><span class="nav-icon">🗄️</span> 数据库原理与应用</a>
+                <ul class="sidebar-submenu">
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元一：数据库基础</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/database/ch1.html">第1章 数据库概述</a></li>
+                            <li><a href="courses/database/ch2.html">第2章 关系数据库基础</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元二：SQL语言</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/database/ch3.html">第3章 DDL数据定义</a></li>
+                            <li><a href="courses/database/ch4.html">第4章 DQL单表查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元三：高级查询</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/database/ch5.html">第5章 DQL多表连接</a></li>
+                            <li><a href="courses/database/ch6.html">第6章 DQL嵌套查询</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-expandable">
+                        <a><span class="nav-icon">📖</span> 单元四：设计与管理</a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="courses/database/ch7.html">第7章 DML数据操作</a></li>
+                            <li><a href="courses/database/ch8.html">第8章 数据库设计E-R图</a></li>
+                            <li><a href="courses/database/ch9.html">第9章 MySQL管理</a></li>
+                            <li><a href="courses/database/ch10.html">第10章 安全与备份</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="courses/database/exam1.html">📝 单元一考查</a></li>
+                    <li><a href="courses/database/exam2.html">📝 单元二考查</a></li>
+                    <li><a href="courses/database/exam3.html">📝 单元三考查</a></li>
+                    <li><a href="courses/database/exam4.html">📝 单元四考查</a></li>
+                    <li><a href="courses/database/final.html">📋 期末考查</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidebar-footer">
+        <p>&copy; 2026 李优发</p>
+        <p>广东科学技术职业学院 · 商学院</p>
+    </div>
+</aside>

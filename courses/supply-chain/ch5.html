@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第5章 需求预测分析 - 供应链数据分析</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="course-page">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">供应链数据分析</a> / 第5章
+    </div>
+
+    <h2>第5章 需求预测分析</h2>
+    <p style="font-size:0.9375rem;color:var(--text-light);margin-bottom:24px;">理论6课时 + 上机6课时</p>
+
+    <div class="knowledge-card">
+      <h3>5.1 为什么需要预测</h3>
+      <p>供应链各环节都要提前准备（采购、生产、库存），所以需要估计未来的需求量。准确的需求预测能帮助企业合理安排生产和采购，降低库存成本，减少缺货风险。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.2 简单移动平均法</h3>
+      <p>用最近N期的平均值作为下一期预测值。</p>
+      <p><strong>公式</strong>：F(t+1) = (A(t) + A(t-1) + ... + A(t-N+1)) / N</p>
+      <p>N越大越平滑，但对变化反应越慢；N越小越敏感，但波动大。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.3 加权移动平均法</h3>
+      <p>给近期数据更高的权重。例如最近一期权重0.5，前两期0.3，三期0.2。</p>
+      <p><strong>优点</strong>：比简单移动平均更重视近期数据，预测更贴近实际。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.4 指数平滑法</h3>
+      <p>只用一个平滑系数 alpha（0~1）。</p>
+      <p><strong>公式</strong>：新预测 = alpha x 实际值 + (1-alpha) x 上期预测</p>
+      <p>alpha越大，对最新变化越敏感；alpha越小，预测越平稳。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.5 预测误差指标</h3>
+      <ul style="padding-left:20px;list-style:disc;font-size:0.9375rem;line-height:2;color:var(--text);">
+        <li><strong>MAE（平均绝对误差）</strong> = |实际-预测|的平均值</li>
+        <li><strong>RMSE（均方根误差）</strong> = sqrt(sum((实际-预测)^2)/n)</li>
+      </ul>
+      <p>越小说明预测越准。RMSE对异常值更敏感（因为平方放大效应）。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.6 季节性分析（了解）</h3>
+      <p>如果数据有明显的淡旺季，可以计算季节指数，把趋势和季节分开预测。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.7 Python示例：移动平均和指数平滑预测</h3>
+      <div class="code-block">import pandas as pd
+import numpy as np
+
+sales = [120, 135, 128, 142, 150, 138, 160, 155]
+# 3期简单移动平均
+ma3 = pd.Series(sales).rolling(window=3).mean()
+print("3期移动平均:", ma3.tolist())
+
+# 指数平滑（alpha=0.3）
+alpha = 0.3
+forecast = [sales[0]]  # 初始预测值
+for actual in sales[1:]:
+    f = alpha * actual + (1 - alpha) * forecast[-1]
+    forecast.append(f)
+print("指数平滑预测:", [round(x,1) for x in forecast])
+
+# 计算MAE
+mae = np.mean([abs(a-f) for a,f in zip(sales, forecast)])
+print("MAE:", round(mae,2))</div>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol style="padding-left:20px;">
+        <li>移动平均的期数N选大一点好还是小一点好？各有什么优缺点？</li>
+        <li>指数平滑中，alpha=0.9和alpha=0.1有什么区别？</li>
+        <li>MAE和RMSE都是误差指标，RMSE对异常值更敏感，为什么？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习素材</h4>
+      <ul style="padding-left:20px;">
+        <li>实训数据集：用Excel自建24个月的历史销售数据，用于练习各种预测方法</li>
+        <li>工具安装：Python matplotlib（pip install matplotlib），用于画预测曲线</li>
+        <li>线上教程：B站搜索"Excel预测功能"，学习用Excel内置的预测工作表</li>
+      </ul>
+    </div>
+
+    <!-- 基础巩固练习 -->
+    <div class="quiz-container" id="quiz-ch5">
+      <div class="quiz-header">
+        <div class="quiz-title">基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch5-q1" data-type="choice">
+        <span class="question-number">1</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">指数平滑法中，平滑系数 alpha 的取值范围是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch5-q1',0)"><div class="option-radio"></div><span class="option-label">A. 0 &lt; alpha &lt; 1</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch5-q1',1)"><div class="option-radio"></div><span class="option-label">B. alpha &gt; 1</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch5-q1',2)"><div class="option-radio"></div><span class="option-label">C. alpha &lt; 0</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch5-q1',3)"><div class="option-radio"></div><span class="option-label">D. 任意实数</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q1',0,'alpha在0到1之间。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>A. 0 &lt; alpha &lt; 1</strong>。alpha在0到1之间。alpha越接近1，预测越跟随最新实际值；alpha越接近0，预测越平稳，受最新值影响越小。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch5-q2" data-type="choice">
+        <span class="question-number">2</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">3期简单移动平均预测第4期，用的是哪几期的数据？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch5-q2',0)"><div class="option-radio"></div><span class="option-label">A. 第1、2、3期</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch5-q2',1)"><div class="option-radio"></div><span class="option-label">B. 第2、3、4期</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch5-q2',2)"><div class="option-radio"></div><span class="option-label">C. 第1、2、4期</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch5-q2',3)"><div class="option-radio"></div><span class="option-label">D. 第4、5、6期</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q2',0,'用第1、2、3期的平均值预测第4期。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>A. 第1、2、3期</strong>。3期简单移动平均预测第4期，使用的是第1、2、3期的实际值的平均。即 F4 = (A1+A2+A3)/3。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch5-q3" data-type="choice">
+        <span class="question-number">3</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">MAE（平均绝对误差）的计算公式是？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch5-q3',0)"><div class="option-radio"></div><span class="option-label">A. sum((实际-预测)^2)/n</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch5-q3',1)"><div class="option-radio"></div><span class="option-label">B. sum|实际-预测|/n</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch5-q3',2)"><div class="option-radio"></div><span class="option-label">C. sqrt(sum((实际-预测)^2)/n)</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch5-q3',3)"><div class="option-radio"></div><span class="option-label">D. sum(实际-预测)/n</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q3',1,'MAE = sum|实际-预测|/n，即绝对误差的平均值。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B</strong>。MAE（Mean Absolute Error）= sum|实际-预测|/n，即各期绝对误差的平均值。A是MSE，C是RMSE，D是平均偏差（不是误差）。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch5-q4" data-type="choice">
+        <span class="question-number">4</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">指数平滑法中，alpha越大说明？</div>
+        <div class="question-options">
+          <div class="question-option" data-index="0" onclick="selectOption('ch5-q4',0)"><div class="option-radio"></div><span class="option-label">A. 预测越平稳</span></div>
+          <div class="question-option" data-index="1" onclick="selectOption('ch5-q4',1)"><div class="option-radio"></div><span class="option-label">B. 对最新变化越敏感</span></div>
+          <div class="question-option" data-index="2" onclick="selectOption('ch5-q4',2)"><div class="option-radio"></div><span class="option-label">C. 预测误差越小</span></div>
+          <div class="question-option" data-index="3" onclick="selectOption('ch5-q4',3)"><div class="option-radio"></div><span class="option-label">D. 不需要历史数据</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q4',1,'alpha越大，最新实际值权重越高，预测越跟随最新变化。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>B. 对最新变化越敏感</strong>。alpha越大，最新实际值在预测中的权重越高，预测越紧跟最新变化。alpha=0.9时预测几乎等于上期实际值。
+        </div>
+      </div>
+
+      <div class="quiz-question" id="ch5-q5" data-type="tf">
+        <span class="question-number">5</span>
+        <span class="question-type-badge">判断题</span>
+        <div class="question-text">MAE和RMSE都是预测误差指标，RMSE对异常值更敏感。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('ch5-q5','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+          <div class="tf-option" data-value="false" onclick="selectTF('ch5-q5','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('ch5-q5','true','RMSE对大的误差有平方放大效应。')">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案是 <strong>正确</strong>。RMSE在计算时对误差先平方再开方，因此对大的异常误差有放大效应，比MAE更敏感。当需要重点关注大误差时，应优先看RMSE。
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch5')">提交全部练习</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch5')">重置练习</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/5</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border);">
+      <a href="ch4.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">← 上一章：第4章 物流数据分析</a>
+      <a href="ch6.html" style="color:var(--primary);font-weight:500;font-size:0.875rem;">下一章：第6章 供应商评估分析 →</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html").then(r => r.text()).then(html => {
+    document.getElementById("sidebar-container").innerHTML = html;
+  });
+</script>
+</body>
+</html>

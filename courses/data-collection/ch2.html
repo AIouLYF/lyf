@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第2章 网络爬虫基础（Requests/BeautifulSoup） - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第2章 网络爬虫基础（Requests/BeautifulSoup）</span>
+                </div>
+                <h2>第2章 网络爬虫基础（Requests/BeautifulSoup）</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论6课时 + 上机6课时 | 难度：核心重点</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>2.1 HTTP协议基础（通俗版）</h3>
+                    <p>HTTP就是浏览器和网站服务器之间"对话"的规则。你输入网址回车，浏览器就会发送一个<strong>请求（Request）</strong>给服务器，服务器收到后返回一个<strong>响应（Response）</strong>，里面包含网页内容。
+
+常见的请求方法：
+<strong>GET：</strong>向服务器"要"数据，比如打开一个网页。
+<strong>POST：</strong>向服务器"提交"数据，比如登录时提交用户名密码。</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.2 安装Requests库</h3>
+                    <p>Requests是Python里用来发送HTTP请求的第三方库，使用非常简单。</p>
+                <div class="code-block"># 打开命令提示符（CMD）或终端，输入：
+pip install requests
+
+# 验证安装成功
+python -c "import requests; print(requests.__version__)"</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.3 使用Requests发送GET请求</h3>
+                    <p></p>
+                <div class="code-block">import requests
+
+# 发送GET请求获取网页
+url = "https://www.example.com"
+response = requests.get(url)
+
+# 查看响应状态码：200表示成功
+print(response.status_code)
+
+# 查看网页内容（文本形式）
+print(response.text)
+
+# 设置编码（防止中文乱码）
+response.encoding = 'utf-8'</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.4 安装BeautifulSoup4</h3>
+                    <p></p>
+                <div class="code-block"># 安装BeautifulSoup4和解析器
+pip install beautifulsoup4 lxml
+
+# 验证安装
+python -c "from bs4 import BeautifulSoup; print('安装成功')"</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.5 使用BeautifulSoup解析HTML</h3>
+                    <p></p>
+                <div class="code-block">from bs4 import BeautifulSoup
+import requests
+
+url = "https://www.example.com"
+response = requests.get(url)
+response.encoding = 'utf-8'
+
+# 创建BeautifulSoup对象
+soup = BeautifulSoup(response.text, 'lxml')
+
+# 获取网页标题
+title = soup.find('title').text
+print("标题：", title)
+
+# 获取所有段落文字
+paragraphs = soup.find_all('p')
+for p in paragraphs:
+    print(p.text)</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.6 CSS选择器定位元素</h3>
+                    <p>CSS选择器是用来"选中"网页中特定元素的方法，就像你用手指指着说"我要这个"。</p>
+                <div class="code-block"># 通过标签名查找
+soup.find('h1')          # 找第一个h1标签
+soup.find_all('a')       # 找所有a标签（链接）
+
+# 通过class查找
+soup.find('div', class_='content')
+
+# 通过id查找
+soup.find('div', id='main')
+
+# 使用CSS选择器（更灵活）
+soup.select('.title')    # 找class为title的元素
+soup.select('#header')   # 找id为header的元素
+soup.select('div p')     # 找div里面的p标签</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.7 处理请求异常</h3>
+                    <p></p>
+                <div class="code-block">import requests
+from requests.exceptions import RequestException
+
+url = 'https://www.example.com'
+try:
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()  # 如果状态码不是200，会抛出异常
+    print('请求成功')
+except RequestException as e:
+    print(f'请求出错：{e}')</div>
+                </div>
+                <div class="knowledge-card">
+                    <h3>2.8 保存数据到文件</h3>
+                    <p></p>
+                <div class="code-block"># 保存为文本文件
+with open('data.txt', 'w', encoding='utf-8') as f:
+    f.write(response.text)
+
+# 保存为CSV文件（需要import csv）
+import csv
+
+with open('data.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    writer.writerow(['标题', '链接'])  # 写入表头
+    for item in data_list:
+        writer.writerow([item['title'], item['link']])</div>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>免费教程：Requests官方文档（requests.readthedocs.io，有中文社区翻译版）</li>
+                    <li>免费教程：BeautifulSoup官方文档（www.crummy.com/software/BeautifulSoup/bs4/doc/）</li>
+                    <li>视频教程：B站搜索"Python爬虫入门"，推荐播放量高的实战系列</li>
+                    <li>实训数据集：以各大新闻网站、电商网站为练习目标（注意遵守robots协议）</li>
+                    <li>推荐练习网站：httpbin.org（测试HTTP请求的各种接口）</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>GET和POST请求有什么区别？什么时候用GET，什么时候用POST？</li>
+                    <li>状态码200、404、500分别代表什么意思？</li>
+                    <li>写出一段代码：用Requests获取百度首页，并打印出网页标题。</li>
+                    <li>BeautifulSoup的find()和find_all()有什么区别？</li>
+                    <li>如果网页出现中文乱码，应该怎么解决？</li>
+                    <li>如何用CSS选择器选中class为"item"的所有div元素？</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch2">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/7</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q2_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">HTTP状态码200表示什么意思？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q2_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">服务器内部错误</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">请求成功</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">页面未找到</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">请求被禁止</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_1', 1, `200表示请求已成功处理。A是500，C是404，D是403。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            200表示请求已成功处理。A是500，C是404，D是403。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q2_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">以下哪个Python库用于解析HTML文档？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q2_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">requests</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">pandas</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">BeautifulSoup</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">numpy</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_2', 2, `BeautifulSoup专门用于解析HTML/XML。requests用于发送HTTP请求，pandas用于数据处理，numpy用于数值计算。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            BeautifulSoup专门用于解析HTML/XML。requests用于发送HTTP请求，pandas用于数据处理，numpy用于数值计算。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q2_3" data-type="choice">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">BeautifulSoup中，查找所有匹配元素的方法是？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q2_3', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">find()</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2_3', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">find_all()</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2_3', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">select_one()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2_3', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">get()</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_3', 1, `find_all()返回所有匹配元素的列表。find()只返回第一个匹配元素。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            find_all()返回所有匹配元素的列表。find()只返回第一个匹配元素。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q2_4" data-type="choice">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">requests.get()返回的响应对象中，获取文本内容应使用？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q2_4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">response.content</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2_4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">response.text</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2_4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">response.json()</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2_4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">response.headers</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_4', 1, `response.text返回响应的文本内容（字符串形式）。response.content返回字节形式，response.json()返回解析后的JSON对象。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            response.text返回响应的文本内容（字符串形式）。response.content返回字节形式，response.json()返回解析后的JSON对象。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q2_5" data-type="tf">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">CSS选择器中，#header表示选中class为header的元素。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q2_5', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q2_5', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_5', 'false', `#header表示选中id为header的元素。.header才表示选中class为header的元素。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            #header表示选中id为header的元素。.header才表示选中class为header的元素。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q2_6" data-type="tf">
+                        <span class="question-number">第6题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">GET请求可以携带请求体（body）发送数据。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q2_6', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q2_6', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_6', 'false', `GET请求的数据放在URL参数中，POST请求才放在请求体中。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            GET请求的数据放在URL参数中，POST请求才放在请求体中。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q2_7" data-type="fill">
+                        <span class="question-number">第7题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">设置请求编码防止中文乱码的代码是 response.encoding = ______ <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q2_7', 'utf-8', `将响应编码设置为utf-8可以正确显示中文。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            将响应编码设置为utf-8可以正确显示中文。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch2')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch2')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="ch1.html">上一章</a>
+                    <a href="ch3.html">下一章</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

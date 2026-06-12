@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单元一考查 - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="index.html">数据库原理与应用</a> / 单元一考查（第1-2章）
+    </div>
+
+        <div class="exam-container" id="exam1">
+      <div class="exam-paper-header">
+        <div class="exam-paper-title">单元一考查卷：数据库概述与关系数据库基础</div>
+        <div class="exam-paper-info"><span>满分：100分</span><span>时间：60分钟</span><span>闭卷</span></div>
+      </div>      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">一、选择题（每题5分，共25分）</h3>
+      <div class="quiz-question" id="e1_q1" data-type="choice" data-score="5">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">数据库系统的核心是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e1_q1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 数据库</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e1_q1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 数据库管理系统</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e1_q1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 数据模型</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e1_q1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 软件工具</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q1', 1, `正确答案：B（数据库管理系统DBMS）。DBMS是数据库系统的核心软件，负责管理数据库的数据。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（数据库管理系统DBMS）。DBMS是数据库系统的核心软件，负责管理数据库的数据。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q2" data-type="choice" data-score="5">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">在关系模型中，一个关系对应（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e1_q2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 一个字段</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e1_q2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 一条记录</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e1_q2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 一张二维表</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e1_q2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 一个索引</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q2', 2, `正确答案：C（一张二维表）。在关系模型中，关系就是二维表。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（一张二维表）。在关系模型中，关系就是二维表。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q3" data-type="choice" data-score="5">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">以下不属于关系完整性约束的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e1_q3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 实体完整性</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e1_q3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 参照完整性</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e1_q3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 数据完整性</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e1_q3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 用户定义完整性</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q3', 2, `正确答案：C（数据完整性）。三大完整性约束是：实体完整性、参照完整性、用户定义完整性。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（数据完整性）。三大完整性约束是：实体完整性、参照完整性、用户定义完整性。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q4" data-type="choice" data-score="5">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">以下不属于数据库管理系统的是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e1_q4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. MySQL</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e1_q4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. Oracle</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e1_q4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. Excel</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e1_q4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. SQL Server</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q4', 2, `正确答案：C（Excel）。Excel是电子表格软件，不是DBMS。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（Excel）。Excel是电子表格软件，不是DBMS。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q5" data-type="choice" data-score="5">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题 (5分)</span>
+        <div class="question-text">目前主流的数据库数据模型是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('e1_q5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">A. 层次模型</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('e1_q5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">B. 网状模型</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('e1_q5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">C. 关系模型</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('e1_q5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">D. 面向对象模型</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q5', 2, `正确答案：C（关系模型）。关系模型以二维表为基础，是目前最广泛使用的数据模型。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（关系模型）。关系模型以二维表为基础，是目前最广泛使用的数据模型。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">二、判断题（每题5分，共25分）</h3>
+      <div class="quiz-question" id="e1_q6" data-type="tf" data-score="5">
+        <span class="question-number">第6题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">一个表只能有一个主键，但可以有多个外键。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e1_q6', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e1_q6', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q6', true, `正确答案：正确。一个表只能有一个主键（可以是组合主键），但可以有多个外键分别引用不同表。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。一个表只能有一个主键（可以是组合主键），但可以有多个外键分别引用不同表。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q7" data-type="tf" data-score="5">
+        <span class="question-number">第7题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">数据库（DB）就是数据库管理系统（DBMS）。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e1_q7', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e1_q7', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q7', false, `正确答案：错误。DB是数据的集合，DBMS是管理DB的软件。DBS = DB + DBMS + 应用程序 + 用户。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。DB是数据的集合，DBMS是管理DB的软件。DBS = DB + DBMS + 应用程序 + 用户。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q8" data-type="tf" data-score="5">
+        <span class="question-number">第8题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">外键的值必须是被引用表主键的有效值或空值。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e1_q8', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e1_q8', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q8', true, `正确答案：正确。这是参照完整性的要求，保证表间数据一致性。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。这是参照完整性的要求，保证表间数据一致性。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q9" data-type="tf" data-score="5">
+        <span class="question-number">第9题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">关系模型中，表的一行称为属性，一列称为元组。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e1_q9', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e1_q9', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q9', false, `正确答案：错误。表的一行称为元组（记录），一列称为属性（字段）。说反了。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：错误。表的一行称为元组（记录），一列称为属性（字段）。说反了。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q10" data-type="tf" data-score="5">
+        <span class="question-number">第10题</span>
+        <span class="question-type-badge">判断题 (5分)</span>
+        <div class="question-text">VARCHAR类型比CHAR类型更节省存储空间。</div>
+        <div class="tf-options">
+          <div class="tf-option" data-value="true" onclick="selectTF('e1_q10', 'true')">正确</div>
+          <div class="tf-option" data-value="false" onclick="selectTF('e1_q10', 'false')">错误</div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q10', true, `正确答案：正确。VARCHAR是变长存储，按实际长度存储；CHAR是定长存储，不足补空格。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：正确。VARCHAR是变长存储，按实际长度存储；CHAR是定长存储，不足补空格。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">三、填空题（每空5分，共20分）</h3>
+      <div class="quiz-question" id="e1_q11" data-type="fill" data-score="5">
+        <span class="question-number">第11题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">数据库管理系统英文缩写为________。</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q11', 'DBMS', `正确答案：DBMS（Database Management System）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：DBMS（Database Management System）。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q12" data-type="fill" data-score="5">
+        <span class="question-number">第12题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">关系数据库中，表的一行称为________，一列称为________。（填写第一个空）</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q12', '元组', `正确答案：元组（Tuple），也叫记录（Record）。一列称为属性（Attribute），也叫字段（Field）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：元组（Tuple），也叫记录（Record）。一列称为属性（Attribute），也叫字段（Field）。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q13" data-type="fill" data-score="5">
+        <span class="question-number">第13题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">能唯一标识表中每条记录的字段称为________，用于建立表间关联的字段称为________。（填写第一个空）</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q13', '主键', `正确答案：第一个空：主键（Primary Key）；第二个空：外键（Foreign Key）。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：第一个空：主键（Primary Key）；第二个空：外键（Foreign Key）。
+        </div>
+      </div>
+      <div class="quiz-question" id="e1_q14" data-type="fill" data-score="5">
+        <span class="question-number">第14题</span>
+        <span class="question-type-badge">填空题 (5分)</span>
+        <div class="question-text">三大数据模型分别是层次模型、网状模型和________。</div>
+        <input type="text" class="fill-input" placeholder="请输入答案">
+        <button class="quiz-submit-btn" onclick="submitQuestion('e1_q14', '关系模型', `正确答案：关系模型。关系模型是目前主流的数据模型。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：关系模型。关系模型是目前主流的数据模型。
+        </div>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border);">四、实操题（30分）</h3>
+      <div class="quiz-question" id="e1_q15" data-type="code" data-score="30">
+        <span class="question-number">第15题</span>
+        <span class="question-type-badge">实操题 (30分)</span>
+        <div class="question-text">某学校需要管理学生选课信息，已知：学生（学号、姓名、性别、年龄、所在系），课程（课程号、课程名、学分），选课（学号、课程号、成绩）。请用SQL语句创建student表，要求设置主键和适当的约束。</div>
+        <textarea class="code-editor-area" placeholder="在此编写SQL语句..."></textarea>
+        <button class="quiz-submit-btn" onclick="submitCodeQuestion('e1_q15', `CREATE TABLE student (\n  sno CHAR(10) PRIMARY KEY,\n  sname VARCHAR(20) NOT NULL,\n  ssex CHAR(2),\n  sage INT,\n  sdept VARCHAR(20)\n);`, `评分要点：主键定义正确(8分)、数据类型合理(8分)、NOT NULL约束(4分)、语法正确(10分)。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">参考答案与解析</div>
+          <p>评分要点：主键定义正确(8分)、数据类型合理(8分)、NOT NULL约束(4分)、语法正确(10分)。</p>
+          <p><strong>参考答案：</strong></p>
+          <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto;font-family:'Courier New',monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button class="quiz-submit-btn" onclick="submitExam('exam1')">提交试卷</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('exam1')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav" style="margin-top:32px;">
+      <a href="index.html" class="nav-prev">&laquo; 返回课程总览</a>
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

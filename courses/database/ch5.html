@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第5章 SQL数据查询语言DQL（多表连接查询） - 数据库原理与应用</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../sidebar.css">
+</head>
+<body class="has-sidebar">
+
+<div id="sidebar-container"></div>
+
+<div class="main-content">
+  <div class="chapter-content-area">
+    <div class="chapter-breadcrumb">
+      <a href="../../index.html">首页</a> / <a href="../database/index.html">数据库原理与应用</a> / SQL数据查询语言DQL（多表连接查询）
+    </div>
+
+    <h2>第5章 SQL数据查询语言DQL（多表连接查询）</h2>
+
+    
+    <div class="knowledge-card">
+      <h3>5.1 为什么需要多表查询</h3>
+      <p>实际业务数据分散在多个表中，需要关联查询获取完整信息。例如，要查询学生姓名和课程名称，就需要连接student、sc和course三张表。</p>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.2 内连接（INNER JOIN）</h3>
+      <p>只返回两个表中匹配的记录。不匹配的记录不会出现在结果中。</p>
+      <div class="code-block">SELECT s.sname, c.cname, sc.grade
+FROM student s
+INNER JOIN sc ON s.sno = sc.sno
+INNER JOIN course c ON sc.cno = c.cno;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.3 左连接（LEFT JOIN）</h3>
+      <p>返回左表所有记录，右表不匹配的记录用NULL填充。</p>
+      <div class="code-block">-- 查询所有学生及其选课信息（包括没选课的学生）
+SELECT s.sname, c.cname, sc.grade
+FROM student s
+LEFT JOIN sc ON s.sno = sc.sno
+LEFT JOIN course c ON sc.cno = c.cno;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.4 右连接（RIGHT JOIN）</h3>
+      <p>返回右表所有记录，左表不匹配的记录用NULL填充。</p>
+      <div class="code-block">-- 查询所有课程及选课学生（包括没人选的课程）
+SELECT c.cname, s.sname, sc.grade
+FROM student s
+RIGHT JOIN sc ON s.sno = sc.sno
+RIGHT JOIN course c ON sc.cno = c.cno;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.5 笛卡尔积</h3>
+      <p>没有连接条件的两表相乘，结果集行数=表1行数 x 表2行数，通常需要避免。</p>
+      <div class="code-block">-- 笛卡尔积（应避免）
+SELECT * FROM student, sc;  -- 没有WHERE条件</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.6 表别名</h3>
+      <p>给表起短名简化书写。</p>
+      <div class="code-block">SELECT s.sname, c.cname
+FROM student s
+JOIN sc ON s.sno = sc.sno
+JOIN course c ON sc.cno = c.cno;</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.7 自连接</h3>
+      <p>一个表与自身连接，常用于查询层级关系数据。</p>
+      <div class="code-block">-- 查询与"张三"同系的学生
+SELECT s2.sname
+FROM student s1
+JOIN student s2 ON s1.sdept = s2.sdept
+WHERE s1.sname = '张三' AND s2.sname != '张三';</div>
+    </div>
+
+    <div class="knowledge-card">
+      <h3>5.8 连接类型对比（Venn图理解）</h3>
+      <ul>
+        <li><strong>INNER JOIN：</strong>两个圆的交集部分</li>
+        <li><strong>LEFT JOIN：</strong>左圆全部 + 交集</li>
+        <li><strong>RIGHT JOIN：</strong>右圆全部 + 交集</li>
+      </ul>
+    </div>
+
+    <div class="self-check">
+      <h4>自学自检小问题</h4>
+      <ol>
+        <li>INNER JOIN和LEFT JOIN的结果有什么区别？</li>
+        <li>三表连接时，需要写几个JOIN条件？</li>
+        <li>什么情况下会产生笛卡尔积？如何避免？</li>
+      </ol>
+    </div>
+
+    <div class="resource-list">
+      <h4>拓展学习资源</h4>
+      <ul>
+        <li><a href="https://www.runoob.com/mysql/mysql-join.html" target="_blank">菜鸟教程：MySQL连接查询</a></li>
+        <li>实训数据集：学生表、课程表、成绩表、教师表</li>
+      </ul>
+    </div>
+
+    <div class="quiz-container" id="quiz_ch5">
+      <div class="quiz-header">
+        <div class="quiz-title">第5章 基础巩固练习</div>
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+          <span class="quiz-progress-text">0/5</span>
+        </div>
+      </div>
+      <div class="quiz-question" id="q5_1" data-type="choice">
+        <span class="question-number">第1题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">在SQL中，内连接使用的关键字是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q5_1', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">LEFT JOIN</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q5_1', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">RIGHT JOIN</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q5_1', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">INNER JOIN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q5_1', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">FULL JOIN</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q5_1', 2, `正确答案：C（INNER JOIN）。INNER JOIN返回两个表中匹配的记录。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：C（INNER JOIN）。INNER JOIN返回两个表中匹配的记录。
+        </div>
+      </div>
+      <div class="quiz-question" id="q5_2" data-type="choice">
+        <span class="question-number">第2题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">要返回左表所有记录，右表不匹配的记录用NULL填充，应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q5_2', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">INNER JOIN</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q5_2', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">LEFT JOIN</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q5_2', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">RIGHT JOIN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q5_2', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">CROSS JOIN</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q5_2', 1, `正确答案：B（LEFT JOIN）。LEFT JOIN保证左表所有记录都出现在结果中。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（LEFT JOIN）。LEFT JOIN保证左表所有记录都出现在结果中。
+        </div>
+      </div>
+      <div class="quiz-question" id="q5_3" data-type="choice">
+        <span class="question-number">第3题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">三表连接查询时，至少需要几个JOIN条件？（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q5_3', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">1个</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q5_3', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">2个</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q5_3', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">3个</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q5_3', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">不需要</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q5_3', 1, `正确答案：B（2个）。N个表连接至少需要N-1个连接条件。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（2个）。N个表连接至少需要N-1个连接条件。
+        </div>
+      </div>
+      <div class="quiz-question" id="q5_4" data-type="choice">
+        <span class="question-number">第4题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">笛卡尔积产生的原因是（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q5_4', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">使用了INNER JOIN</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q5_4', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">['没有写连接条件']</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q5_4', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">使用了LEFT JOIN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q5_4', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">使用了WHERE</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q5_4', 1, `正确答案：B（没有写连接条件）。没有连接条件时，每张表的每行都会与其他表的每行组合。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B（没有写连接条件）。没有连接条件时，每张表的每行都会与其他表的每行组合。
+        </div>
+      </div>
+      <div class="quiz-question" id="q5_5" data-type="choice">
+        <span class="question-number">第5题</span>
+        <span class="question-type-badge">选择题</span>
+        <div class="question-text">查询没有选修任何课程的学生，应使用（ ）</div>
+        <div class="question-options">
+        <div class="question-option" data-index="0" onclick="selectOption('q5_5', 0)">
+          <div class="option-radio"></div>
+          <span class="option-label">INNER JOIN</span>
+        </div>
+        <div class="question-option" data-index="1" onclick="selectOption('q5_5', 1)">
+          <div class="option-radio"></div>
+          <span class="option-label">LEFT JOIN ... WHERE ... IS NULL</span>
+        </div>
+        <div class="question-option" data-index="2" onclick="selectOption('q5_5', 2)">
+          <div class="option-radio"></div>
+          <span class="option-label">RIGHT JOIN</span>
+        </div>
+        <div class="question-option" data-index="3" onclick="selectOption('q5_5', 3)">
+          <div class="option-radio"></div>
+          <span class="option-label">CROSS JOIN</span>
+        </div>
+        </div>
+        <button class="quiz-submit-btn" onclick="submitQuestion('q5_5', 1, `正确答案：B。LEFT JOIN左表所有记录，右表不匹配的为NULL，通过IS NULL筛选即可。`)">提交答案</button>
+        <div class="answer-explanation">
+          <div class="answer-explanation-title">答案解析</div>
+          正确答案：B。LEFT JOIN左表所有记录，右表不匹配的为NULL，通过IS NULL筛选即可。
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch5')">提交全部答案</button>
+        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch5')">重新作答</button>
+      </div>
+      <div class="quiz-score">
+        <div class="quiz-score-number">0/0</div>
+        <div class="quiz-score-label"></div>
+      </div>
+    </div>
+
+    <div class="chapter-nav">
+      <a href="ch4.html" class="nav-prev">&laquo; 第4章 SQL数据查询语言DQL（单表查询）</a>
+<a href="ch6.html" class="nav-next">第6章 SQL数据查询语言DQL（嵌套查询/子查询） &raquo;</a>
+
+    </div>
+  </div>
+</div>
+
+<script src="../../sidebar.js"></script>
+<script>
+  fetch("../../sidebar.html")
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById("sidebar-container").innerHTML = html;
+      if (typeof initSidebar === "function") initSidebar();
+    });
+</script>
+</body>
+</html>

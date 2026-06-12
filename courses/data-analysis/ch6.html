@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回归分析入门 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第6章 回归分析入门</span>
+            </div>
+            <h2>第6章 回归分析入门</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点6.1：相关 vs 回归</h3>
+                <p><strong>相关分析</strong>：衡量两个变量关系的强弱和方向。r范围-1到1。</p>
+                <p><strong>回归分析</strong>：用一个变量预测另一个变量。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点6.2：一元线性回归模型</h3>
+                <p>模型公式：Y = a + bX + epsilon</p>
+                <ul class="check-list">
+                    <li><strong>Y</strong>：因变量（被预测的变量）</li>
+                    <li><strong>X</strong>：自变量（用来预测的变量）</li>
+                    <li><strong>a</strong>：截距</li>
+                    <li><strong>b</strong>：斜率，X每增加1单位Y平均变化b单位</li>
+                </ul>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点6.3：最小二乘法</h3>
+                <p>让所有数据点到回归线的垂直距离的平方和最小。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点6.4：R-squared（决定系数）</h3>
+                <p>R-squared表示"自变量X能解释因变量Y多少比例的变异"。</p>
+                <p>R-squared = 0.85表示Y的变化中85%可由X解释。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点6.5：Excel与Python回归分析</h3>
+                <p>Excel：数据→数据分析→回归→选择Y和X区域→确定。</p>
+                <div class="code-block">
+<span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression
+model = LinearRegression()
+model.fit(X, y)
+print("R-squared:", model.score(X, y))
+                </div>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：B站"菜菜的机器学习"线性回归专题</li>
+                    <li>数据集：Kaggle "Advertising"数据集</li>
+                    <li>工具：Excel数据分析工具包 + Python sklearn</li>
+                    <li>阅读材料：《深入浅出数据分析》回归分析章节</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch6">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch6-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">回归方程 Y = 50 + 2X 中，R-squared = 0.81，说明？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch6-q1',0)"><div class="option-radio"></div><span class="option-label">A. X每增加1，Y增加50</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch6-q1',1)"><div class="option-radio"></div><span class="option-label">B. X能解释Y 81%的变异</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch6-q1',2)"><div class="option-radio"></div><span class="option-label">C. X和Y完全无关</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch6-q1',3)"><div class="option-radio"></div><span class="option-label">D. 预测一定准确</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q1',1,'R-squared=0.81表示X可以解释Y 81%的变异。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>R-squared=0.81表示X可以解释Y 81%的变异。</div>
+                </div>
+                <div class="quiz-question" id="ch6-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">回归方程 Y = 10 + 3X 中，X=5时的预测值是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch6-q2',0)"><div class="option-radio"></div><span class="option-label">A. 15</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch6-q2',1)"><div class="option-radio"></div><span class="option-label">B. 25</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch6-q2',2)"><div class="option-radio"></div><span class="option-label">C. 30</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch6-q2',3)"><div class="option-radio"></div><span class="option-label">D. 50</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q2',1,'Y = 10 + 3 x 5 = 25。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>Y = 10 + 3 x 5 = 25。</div>
+                </div>
+                <div class="quiz-question" id="ch6-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">相关系数r = -0.9 表示？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch6-q3',0)"><div class="option-radio"></div><span class="option-label">A. 强正相关</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch6-q3',1)"><div class="option-radio"></div><span class="option-label">B. 强负相关</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch6-q3',2)"><div class="option-radio"></div><span class="option-label">C. 弱相关</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch6-q3',3)"><div class="option-radio"></div><span class="option-label">D. 无相关</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q3',1,'r=-0.9接近-1，是强负相关。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>r=-0.9接近-1，是强负相关。</div>
+                </div>
+                <div class="quiz-question" id="ch6-q4" data-type="fill">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">回归方程 Y = 100 + 5X 中，X是广告费（千元），Y是销售额（万元）。广告费增加1千元，销售额平均增加<input class='fill-input' style='width:80px;'>万元。</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q4','5','斜率b=5，X每增加1千元，Y平均增加5万元。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>斜率b=5，X每增加1千元，Y平均增加5万元。</div>
+                </div>
+                <div class="quiz-question" id="ch6-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">R-squared高就代表X是Y的因果关系。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch6-q5','false','错误。R-squared高只说明模型拟合好，不代表因果关系成立。相关不等于因果。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>错误。R-squared高只说明模型拟合好，不代表因果关系成立。相关不等于因果。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch6')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch6')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch5.html" style="color:var(--primary);font-weight:500;">← 上一章：第5章</a>
+                <a href="ch7.html" style="color:var(--primary);font-weight:500;">下一章：第7章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

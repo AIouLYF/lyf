@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python基础 期末综合考查卷 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                Python基础 期末综合考查卷
+            </div>
+            <div class="exam-container">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">Python基础 期末综合考查卷</div>
+                    <div class="exam-paper-info">
+                        <span>满分：100分</span>
+                        <span>时间：90分钟</span>
+                        <span>闭卷</span>
+                    </div>
+                    <p style="margin-top:8px;font-size:0.875rem;color:var(--text-light);">满分100分，时间120分钟，闭卷（上机实操部分开卷查文档）</p>
+                </div>
+                <div class="quiz-container" id="final_exam">
+                    <h3 style="margin-top:24px;margin-bottom:16px;font-size:1.125rem;">一、单项选择题（每题2分，共20分）</h3>
+<div class="quiz-question" id="eqf_1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">以下哪个不是合法标识符？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. _value</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. value2</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 2value</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. value_2</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_1', 2, '2value以数字开头不合法。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>2value以数字开头不合法。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">3 + 5 * 2 的结果是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 16</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 13</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 11</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 10</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_2', 1, '乘法优先，5*2=10，3+10=13。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>乘法优先，5*2=10，3+10=13。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_3" data-type="choice" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">x=[1,2,3]; y=x; y[0]=99; print(x[0]) 输出？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_3', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 1</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_3', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 99</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_3', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 报错</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_3', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. None</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_3', 1, 'y=x指向同一对象。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>y=x指向同一对象。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_4" data-type="choice" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">哪个函数可以将列表按降序排列？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_4', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. sort()</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_4', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. sorted(list, reverse=True)</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_4', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. reverse()</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_4', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. order()</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_4', 1, 'sorted(list, reverse=True)。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>sorted(list, reverse=True)。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_5" data-type="choice" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">d={"a":1,"b":2}，d.get("c", 0) 的结果是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_5', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 报错</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_5', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. None</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_5', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 0</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_5', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. "c"</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_5', 2, 'get()返回默认值0。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>get()返回默认值0。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_6" data-type="choice" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">接收不定数量位置参数的是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_6', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. *args</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_6', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. **kwargs</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_6', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. @args</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_6', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. &args</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_6', 0, '*args。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>*args。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_7" data-type="choice" data-score="2">
+    <span class="question-number">第7题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">不会覆盖原有内容的是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_7', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. "w"</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_7', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. "r"</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_7', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. "a"</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_7', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. B和C</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_7', 3, '"r"只读，"a"追加。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>"r"只读，"a"追加。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_8" data-type="choice" data-score="2">
+    <span class="question-number">第8题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">for i in range(2,6,2): print(i) 输出？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_8', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 2 4 6</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_8', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. 2 4</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_8', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. 2 3 4 5</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_8', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 2 4 6 8</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_8', 1, 'range(2,6,2)生成2,4。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>range(2,6,2)生成2,4。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_9" data-type="choice" data-score="2">
+    <span class="question-number">第9题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">t = (1) 的类型是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_9', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. tuple</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_9', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. int</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_9', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. list</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_9', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. str</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_9', 1, 't=(1)是int，需(1,)才是tuple。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>t=(1)是int，需(1,)才是tuple。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_10" data-type="choice" data-score="2">
+    <span class="question-number">第10题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">捕获所有异常的写法是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('eqf_10', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. except Error:</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('eqf_10', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. except:</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('eqf_10', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. except All:</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('eqf_10', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. except Exception:</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_10', 3, 'except Exception:。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>except Exception:。</p>
+    </div>
+</div>
+<h3 style="margin-top:24px;margin-bottom:16px;font-size:1.125rem;">二、填空题（每空2分，共20分）</h3>
+<div class="quiz-question" id="eqf_11" data-type="fill" data-score="2">
+    <span class="question-number">第11题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">使用 ______ 函数获取用户键盘输入。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_11', 'input', 'input()获取键盘输入。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>input()获取键盘输入。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_12" data-type="fill" data-score="2">
+    <span class="question-number">第12题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">列表推导式核心是 ______。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_12', 'for', 'for...in结构。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>for...in结构。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_13" data-type="fill" data-score="2">
+    <span class="question-number">第13题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">"{}".format() 和 ______ 是两种格式化方式。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_13', 'f-string', 'f-string和.format()。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>f-string和.format()。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_14" data-type="fill" data-score="2">
+    <span class="question-number">第14题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">______ 函数可以查看模块的所有属性和方法。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_14', 'dir', 'dir()查看属性和方法。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>dir()查看属性和方法。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_15" data-type="fill" data-score="2">
+    <span class="question-number">第15题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">字典中 ______ 方法获取所有的键。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_15', 'keys', 'dict.keys()。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>dict.keys()。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_16" data-type="fill" data-score="2">
+    <span class="question-number">第16题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">______ 语句导入datetime模块中的datetime类。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_16', 'from', 'from datetime import datetime。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>from datetime import datetime。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_17" data-type="fill" data-score="2">
+    <span class="question-number">第17题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">文件对象的 ______ 方法可以逐行读取。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_17', 'readline', 'readline()逐行读取。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>readline()逐行读取。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_18" data-type="fill" data-score="2">
+    <span class="question-number">第18题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">[1,2,3] + [4,5] 的结果是 ______。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_18', '[1, 2, 3, 4, 5]', '列表+合并。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>列表+合并。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_19" data-type="fill" data-score="2">
+    <span class="question-number">第19题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">______ 可以将列表转换为集合，自动去重。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_19', 'set', 'set()转集合去重。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>set()转集合去重。</p>
+    </div>
+</div>
+<div class="quiz-question" id="eqf_20" data-type="fill" data-score="2">
+    <span class="question-number">第20题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">函数内部使用 ______ 关键字返回值。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('eqf_20', 'return', 'return返回值。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>return返回值。</p>
+    </div>
+</div>
+<h3 style="margin-top:24px;margin-bottom:16px;font-size:1.125rem;">三、大型综合实操案例（60分）</h3>
+<div class="quiz-question" id="eqf_21" data-type="code" data-score="60">
+    <span class="question-number">综合实操题</span>
+    <span class="question-type-badge">编程题（60分）</span>
+    <div class="question-text">
+        <p><strong>超市销售数据分析系统（60分）</strong></p>
+        <p>sales_data.csv格式：门店,日期,商品,单价,销量。要求：1.数据读取与验证(10分) 2.数据清洗与计算(15分) 3.门店统计(15分) 4.商品分析(10分) 5.结果输出(10分)。附加分：注释(+3)、函数封装(+3)</p>
+    </div>
+    <textarea class="code-editor-area" placeholder="在此编写你的代码..."></textarea>
+    <button class="quiz-submit-btn" onclick="submitCodeQuestion('eqf_21', `import csv\n\ndef read_data(filepath):\n    data = []\n    try:\n        with open(filepath, "r", encoding="utf-8") as f:\n            reader = csv.DictReader(f)\n            for row in reader:\n                try:\n                    price = float(row["单价"])\n                    qty = int(row["销量"])\n                    if price <= 0 or qty <= 0:\n                        continue\n                    row["销售额"] = round(price * qty, 2)\n                    data.append(row)\n                except ValueError:\n                    pass\n    except FileNotFoundError:\n        print("找不到数据文件！")\n    return data\n\ndef store_summary(data):\n    stats = {}\n    for row in data:\n        store = row["门店"]\n        if store not in stats:\n            stats[store] = {"总销售额": 0, "总销量": 0, "笔数": 0}\n        stats[store]["总销售额"] += row["销售额"]\n        stats[store]["总销量"] += int(row["销量"])\n        stats[store]["笔数"] += 1\n    best = max(stats.items(), key=lambda x: x[1]["总销售额"])\n    return stats, best\n\ndef product_summary(data):\n    products = {}\n    for row in data:\n        p = row["商品"]\n        products[p] = products.get(p, 0) + int(row["销量"])\n    top3 = sorted(products.items(), key=lambda x: x[1], reverse=True)[:3]\n    return products, top3\n\nif __name__ == "__main__":\n    data = read_data("sales_data.csv")\n    if data:\n        s_stats, best_store = store_summary(data)\n        p_stats, top3 = product_summary(data)\n        print("最佳门店:", best_store)\n        print("销量Top3:", top3)`, '评分标准：数据读取与验证（10分）、数据清洗与计算（15分）、门店统计（15分）、商品分析（10分）、结果输出（10分）')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">参考答案</div>
+        <p>评分标准：数据读取与验证（10分）、数据清洗与计算（15分）、门店统计（15分）、商品分析（10分）、结果输出（10分）</p>
+        <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:8px;margin-top:8px;font-family:Courier New,monospace;font-size:0.8125rem;white-space:pre-wrap;"></pre>
+    </div>
+</div>
+
+                    <div style="text-align:center;margin-top:24px;">
+                        <button class="quiz-submit-btn" onclick="submitExam('final_exam')">提交试卷</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('final_exam')">重置</button>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/100</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

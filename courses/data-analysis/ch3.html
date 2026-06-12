@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>描述性统计分析 - 数据分析技术</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+        <div class="chapter-content-area">
+
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> / <a href="index.html">数据分析技术</a> / <span>第3章 描述性统计分析</span>
+            </div>
+            <h2>第3章 描述性统计分析</h2>
+            <p style="color:var(--text-light);margin-bottom:24px;">&nbsp;</p>
+            
+            <div class="knowledge-card">
+                <h3>知识点3.1：集中趋势度量</h3>
+                <ul class="check-list">
+                    <li><strong>均值</strong>：所有数据加起来除以个数。最常用，但容易被极端值拉偏。</li>
+                    <li><strong>中位数</strong>：排序后位于中间位置的值。不受极端值影响。</li>
+                    <li><strong>众数</strong>：出现次数最多的值。适合分类数据。</li>
+                </ul>
+                <div class="tip-box warning"><div class="tip-box-title">注意</div><p>收入数据通常用中位数而不是均值。少数富豪会把平均收入拉得很高。</p></div>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点3.2：离散程度度量</h3>
+                <ul class="check-list">
+                    <li><strong>极差</strong>：最大值 - 最小值。简单但不稳定。</li>
+                    <li><strong>方差</strong>：每个数据与均值差的平方的平均。</li>
+                    <li><strong>标准差</strong>：方差的平方根。与原始数据同单位，最常用。</li>
+                    <li><strong>四分位距（IQR）</strong>：Q3 - Q1。对异常值不敏感。</li>
+                </ul>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点3.3：分布形态</h3>
+                <p><strong>偏度</strong>：偏度&gt;0右偏（长尾在右边），偏度&lt;0左偏，偏度约等于0大致对称。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>知识点3.4：Excel与Python实操</h3>
+                <div class="code-block" style="background:#f1f5f9;color:#1e293b;">
+Excel: =AVERAGE() =MEDIAN() =MODE.SNGL() =STDEV.S()
+Python: df['col'].describe() / .mean() / .median() / .std()
+                </div>
+            </div>
+            <div class="resource-list">
+                <h4>配套自学素材</h4>
+                <ul>
+                    <li>免费教程：可汗学院"描述统计"中文视频（B站搬运）</li>
+                    <li>数据集：国家统计局"居民收入调查数据"</li>
+                    <li>工具：Excel 2016及以上版本</li>
+                    <li>阅读材料：《商务与经济统计》第3章</li>
+                </ul>
+            </div>
+            <div class="quiz-container" id="quiz-ch3">
+                <div class="quiz-header">
+                    <div class="quiz-title">交互式练习</div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                        <span class="quiz-progress-text">0/5</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="ch3-q1" data-type="choice">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">下列哪个指标最容易受极端值影响？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch3-q1',0)"><div class="option-radio"></div><span class="option-label">A. 中位数</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch3-q1',1)"><div class="option-radio"></div><span class="option-label">B. 众数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch3-q1',2)"><div class="option-radio"></div><span class="option-label">C. 均值</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch3-q1',3)"><div class="option-radio"></div><span class="option-label">D. 四分位数</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q1',2,'均值是所有数据的平均值，极端值会直接拉高或拉低均值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>均值是所有数据的平均值，极端值会直接拉高或拉低均值。</div>
+                </div>
+                <div class="quiz-question" id="ch3-q2" data-type="choice">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">标准差越大，说明数据？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch3-q2',0)"><div class="option-radio"></div><span class="option-label">A. 越集中</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch3-q2',1)"><div class="option-radio"></div><span class="option-label">B. 越分散</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch3-q2',2)"><div class="option-radio"></div><span class="option-label">C. 越对称</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch3-q2',3)"><div class="option-radio"></div><span class="option-label">D. 样本量越大</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q2',1,'标准差衡量数据偏离均值的程度，越大越分散。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>标准差衡量数据偏离均值的程度，越大越分散。</div>
+                </div>
+                <div class="quiz-question" id="ch3-q3" data-type="choice">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">下列哪个指标最适合描述分类数据的集中趋势？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('ch3-q3',0)"><div class="option-radio"></div><span class="option-label">A. 均值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('ch3-q3',1)"><div class="option-radio"></div><span class="option-label">B. 中位数</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('ch3-q3',2)"><div class="option-radio"></div><span class="option-label">C. 众数</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('ch3-q3',3)"><div class="option-radio"></div><span class="option-label">D. 标准差</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q3',2,'众数是出现次数最多的值，适合分类数据。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>众数是出现次数最多的值，适合分类数据。</div>
+                </div>
+                <div class="quiz-question" id="ch3-q4" data-type="fill">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">标准差是<input class='fill-input' placeholder='填写答案'>的平方根，它与原始数据具有相同的<input class='fill-input' placeholder='填写答案'>。</div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q4','方差','标准差是方差的平方根，与原始数据单位一致。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>标准差是方差的平方根，与原始数据单位一致。</div>
+                </div>
+                <div class="quiz-question" id="ch3-q5" data-type="tf">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">偏度大于0表示数据分布右偏（长尾在右边）。（ ）</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('{qid}','true')"><div class="option-radio"></div><span class="option-label">正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('{qid}','false')"><div class="option-radio"></div><span class="option-label">错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('ch3-q5','true','正确。偏度&gt;0表示右偏分布，如收入分布。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">解析</div>正确。偏度&gt;0表示右偏分布，如收入分布。</div>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/5</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:16px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch3')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz-ch3')">重置练习</button>
+                </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch2.html" style="color:var(--primary);font-weight:500;">← 上一章：第2章</a>
+                <a href="ch4.html" style="color:var(--primary);font-weight:500;">下一章：第4章 →</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch("../../sidebar.html")
+            .then(r => r.text())
+            .then(html => {{
+                document.getElementById("sidebar-container").innerHTML = html;
+                if (typeof initSidebar === "function") initSidebar();
+            }});
+    </script>
+</body>
+</html>

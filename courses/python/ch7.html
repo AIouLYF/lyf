@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第7章 函数与模块 - Python基础 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="../python/index.html">Python基础</a> &gt;
+                <a href="#">单元三：进阶应用</a> &gt;
+                第7章 函数与模块
+            </div>
+            <h2>第7章 函数与模块</h2>
+            <div class="knowledge-card"><h3>核心知识点</h3><ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;"><li><strong>函数：</strong>用 <code>def</code> 定义，打包常用代码。</li><li><strong>参数：</strong>接收外部数据。<strong>返回值：</strong>交回结果。</li><li><strong>内置模块：</strong><code>math</code>、<code>random</code>、<code>datetime</code>。</li><li><strong>导入：</strong><code>import 模块名</code> 或 <code>from 模块名 import 函数名</code>。</li></ul></div><div class="knowledge-card"><h3>代码示例</h3><div class="code-block">def calc_discount(price, rate):
+    return price * rate
+
+final = calc_discount(200, 0.75)
+print(final)
+
+import datetime
+now = datetime.datetime.now()
+print("当前时间：", now.strftime("%Y-%m-%d %H:%M:%S"))</div></div><div class="self-check"><h4>自学自检小问题</h4><ol><li>函数定义的第一行必须以什么关键字开头？</li><li>如果函数里没有return，调用后得到的是什么？</li><li><code>import math</code> 和 <code>from math import sqrt</code> 使用时写法有什么不同？</li></ol></div>
+            <div class="quiz-container" id="quiz-ch7">
+                <div class="quiz-header">
+                    <div class="quiz-title">本章配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+    <span class="question-number">第1题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">定义函数的关键字是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q1', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. function</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q1', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. def</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q1', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. define</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q1', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. func</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'Python使用def定义函数。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python使用def定义函数。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q2" data-type="choice" data-score="2">
+    <span class="question-number">第2题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">函数没有return语句时，默认返回？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q2', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. 0</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q2', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. None</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q2', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. False</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q2', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. 报错</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, '默认返回None。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>默认返回None。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q3" data-type="choice" data-score="2">
+    <span class="question-number">第3题</span>
+    <span class="question-type-badge">选择题</span>
+    <div class="question-text">接收不定数量位置参数的是？</div>
+    <div class="question-options">
+<div class="question-option" data-index="0" onclick="selectOption('q3', 0)">
+            <div class="option-radio"></div>
+            <span class="option-label">A. *args</span>
+        </div>
+<div class="question-option" data-index="1" onclick="selectOption('q3', 1)">
+            <div class="option-radio"></div>
+            <span class="option-label">B. **kwargs</span>
+        </div>
+<div class="question-option" data-index="2" onclick="selectOption('q3', 2)">
+            <div class="option-radio"></div>
+            <span class="option-label">C. @args</span>
+        </div>
+<div class="question-option" data-index="3" onclick="selectOption('q3', 3)">
+            <div class="option-radio"></div>
+            <span class="option-label">D. &args</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 0, '*args接收任意数量位置参数。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>*args接收任意数量位置参数。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q4" data-type="fill" data-score="2">
+    <span class="question-number">第4题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">在Python中，使用 ______ 关键字定义函数。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 'def', 'def 函数名(参数):')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>def 函数名(参数):</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q5" data-type="fill" data-score="2">
+    <span class="question-number">第5题</span>
+    <span class="question-type-badge">填空题</span>
+    <div class="question-text">导入整个模块的语句是 ______。</div>
+    <input class="fill-input" placeholder="请输入答案">
+    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'import', 'import模块名。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>import模块名。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q6" data-type="tf" data-score="2">
+    <span class="question-number">第6题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">函数的参数可以有默认值。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q6', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q6', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q6', 'true', 'Python函数参数可以设默认值。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python函数参数可以设默认值。</p>
+    </div>
+</div>
+
+<div class="quiz-question" id="q7" data-type="tf" data-score="2">
+    <span class="question-number">第7题</span>
+    <span class="question-type-badge">判断题</span>
+    <div class="question-text">模块文件的后缀名也是.py。</div>
+    <div class="tf-options">
+        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')">
+            <div class="option-radio"></div>
+            <span>正确</span>
+        </div>
+        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')">
+            <div class="option-radio"></div>
+            <span>错误</span>
+        </div>
+    </div>
+    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', 'Python模块就是.py文件。')">提交答案</button>
+    <div class="answer-explanation">
+        <div class="answer-explanation-title">答案解析</div>
+        <p>Python模块就是.py文件。</p>
+    </div>
+</div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-ch7')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-ch7')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="ch6.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">&larr; 上一章</a>
+                <a href="ch8.html" class="hero-btn" style="padding:10px 24px;font-size:0.875rem;">下一章 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1章 数据采集概述 - 数据采集与处理</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .course-page { padding-top: 0 !important; }
+        body.has-sidebar .navbar { display: none; }
+        .chapter-content-area { padding: 32px 40px; max-width: 900px; }
+        .chapter-content-area h2 { font-size: 1.75rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .chapter-content-area .chapter-breadcrumb { font-size: 0.875rem; color: var(--text-light); margin-bottom: 24px; }
+        .chapter-content-area .chapter-breadcrumb a { color: var(--primary); text-decoration: none; }
+        .chapter-content-area .chapter-breadcrumb a:hover { text-decoration: underline; }
+        .knowledge-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .knowledge-card h3 { font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+        .knowledge-card p { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
+        .knowledge-card .code-block { background: #1e293b; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius); font-family: 'Courier New', monospace; font-size: 0.8125rem; line-height: 1.6; overflow-x: auto; margin: 12px 0; white-space: pre; }
+        .self-check { background: rgba(255,107,53,0.05); border: 1px solid rgba(255,107,53,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; }
+        .self-check h4 { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+        .self-check ol { padding-left: 20px; }
+        .self-check li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; margin-bottom: 4px; }
+        .resource-list { background: rgba(0,212,170,0.05); border: 1px solid rgba(0,212,170,0.2); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+        .resource-list h4 { font-size: 0.9375rem; font-weight: 600; color: var(--secondary); margin-bottom: 10px; }
+        .resource-list ul { padding-left: 20px; }
+        .resource-list li { font-size: 0.875rem; color: var(--text-light); line-height: 1.8; }
+        .resource-list a { color: #2563eb; text-decoration: underline; }
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .chapter-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--primary); font-weight: 500; text-decoration: none; transition: var(--transition); }
+        .chapter-nav a:hover { background: rgba(0,212,170,0.05); border-color: var(--primary); }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9375rem; }
+        .data-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: top; }
+        .data-table tr:hover td { background: var(--surface-light); }
+        .data-table .highlight-row { background: rgba(0,212,170,0.05); }
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .tag-item { padding: 4px 12px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .tag-theory { background: #dbeafe; color: #1d4ed8; }
+        .tag-practice { background: #dcfce7; color: var(--text-light); }
+        .tag-key { background: #fef3c7; color: #b45309; }
+        .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 24px; transition: var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); border-color: transparent; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .info-card-icon { width: 40px; height: 40px; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; font-weight: 700; }
+        .info-card-title { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="has-sidebar">
+
+    <div class="main-content">
+        <div class="course-page">
+            <div class="chapter-content-area">
+                <div class="chapter-breadcrumb">
+                    <a href="../../index.html">首页</a> / <a href="index.html">数据采集与处理</a> / <span>第1章 数据采集概述</span>
+                </div>
+                <h2>第1章 数据采集概述</h2>
+                <p style="font-size:1.0625rem; color:var(--text-light); margin-bottom:24px;">理论4课时 + 上机2课时 | 难度：入门</p>
+
+                
+                <div class="knowledge-card">
+                    <h3>1.1 什么是数据采集</h3>
+                    <p>数据采集就是从各种来源获取原始数据的过程。比如你想知道某款手机在京东上的价格变化，你需要去京东网站把价格信息"拿"下来，这个过程就是数据采集。简单来说：数据采集 = 找到数据在哪里 + 把数据取回来。</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>1.2 数据的三种类型</h3>
+                    <p><strong>结构化数据：</strong>像Excel表格那样，行列整齐，比如数据库里的订单表（订单号、商品名、价格、时间各一列）。
+<strong>半结构化数据：</strong>有一定格式但不严格，比如XML、JSON格式的数据。
+<strong>非结构化数据：</strong>没有固定格式，比如网页文章、图片、视频、音频等。</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>1.3 数据来源有哪些</h3>
+                    <p><strong>内部数据：</strong>企业自己的数据库、业务系统、日志文件。
+<strong>外部公开数据：</strong>政府开放数据平台、行业报告、公开API。
+<strong>网络数据：</strong>网页内容、社交媒体、电商平台、新闻网站。
+<strong>传感器数据：</strong>物联网设备、监控设备等产生的数据。</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>1.4 数据采集的基本流程</h3>
+                    <p>第1步：明确采集目标（要采什么数据？）→ 第2步：确定数据来源（从哪里采？）→ 第3步：选择采集工具/方法（怎么采？）→ 第4步：执行采集 → 第5步：验证数据完整性 → 第6步：存储数据</p>
+                </div>
+                <div class="knowledge-card">
+                    <h3>1.5 常用采集工具简介</h3>
+                    <p><strong>八爪鱼采集器：</strong>可视化操作，不用写代码，适合新手。
+<strong>Python+Requests/BeautifulSoup：</strong>写代码采集，灵活强大，是本课程重点。
+<strong>浏览器开发者工具：</strong>按F12打开，查看网页结构和网络请求。</p>
+                </div>
+                
+                <div class="resource-list">
+                    <h4>自学拓展素材</h4>
+                    <ul>                    <li>免费教程：B站搜索"数据采集入门"，推荐尚硅谷、黑马程序员相关视频</li>
+                    <li>在线工具体验：注册八爪鱼采集器免费版，完成一个简单采集任务</li>
+                    <li>阅读材料：浏览国家数据开放平台（data.stats.gov.cn），了解公开数据资源</li>
+                    <li>实训数据集：本章暂无代码数据集，以概念理解为主</li>
+                    </ul>
+                </div>
+                
+                <div class="self-check">
+                    <h4>自学自检小问题</h4>
+                    <ol>                    <li>你能说出三种不同类型的数据，并各举一个生活中的例子吗？</li>
+                    <li>数据采集的6个基本步骤是什么？按顺序说一遍。</li>
+                    <li>打开任意一个网页，按F12打开开发者工具，找到"Elements"标签，你能看到网页的HTML结构吗？</li>
+                    <li>结构化数据和非结构化数据的区别是什么？</li>
+                    </ol>
+                </div>
+                
+                <div class="quiz-container" id="quiz_ch1">
+                    <div class="quiz-header">
+                        <div class="quiz-title">基础巩固层练习</div>
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                            <span class="quiz-progress-text">0/5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="q1_1" data-type="choice">
+                        <span class="question-number">第1题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">以下哪种数据属于结构化数据？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q1_1', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">网页新闻文章</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1_1', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">数据库中的订单表</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1_1', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">微信语音消息</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1_1', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">产品宣传视频</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q1_1', 1, `数据库中的订单表是典型的结构化数据，有明确的行列结构。网页文章是非结构化数据，语音和视频也是非结构化数据。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            数据库中的订单表是典型的结构化数据，有明确的行列结构。网页文章是非结构化数据，语音和视频也是非结构化数据。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q1_2" data-type="choice">
+                        <span class="question-number">第2题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">数据采集的基本流程中，第一步应该做什么？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q1_2', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">选择采集工具</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1_2', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">明确采集目标</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1_2', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">执行采集</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1_2', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">存储数据</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q1_2', 1, `数据采集的第一步是明确采集目标，确定需要采集什么数据，然后才能确定来源和方法。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            数据采集的第一步是明确采集目标，确定需要采集什么数据，然后才能确定来源和方法。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q1_3" data-type="tf">
+                        <span class="question-number">第3题</span>
+                        <span class="question-type-badge">判断题</span>
+                        <div class="question-text">JSON格式的数据属于结构化数据。</div>
+                        <div class="tf-options">
+                            <div class="tf-option" data-value="true" onclick="selectTF('q1_3', 'true')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">正确</span>
+                            </div>
+                            <div class="tf-option" data-value="false" onclick="selectTF('q1_3', 'false')">
+                                <div class="option-radio"></div>
+                                <span class="option-label">错误</span>
+                            </div>
+                        </div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q1_3', 'false', `JSON属于半结构化数据。它有一定格式（键值对），但不像数据库表那样有严格的行列结构。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            JSON属于半结构化数据。它有一定格式（键值对），但不像数据库表那样有严格的行列结构。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q1_4" data-type="choice">
+                        <span class="question-number">第4题</span>
+                        <span class="question-type-badge">选择题</span>
+                        <div class="question-text">以下哪个工具是可视化数据采集工具，不需要写代码？</div>
+                        <div class="question-options">                        <div class="question-option" data-index="0" onclick="selectOption('q1_4', 0)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">Requests</span>
+                        </div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1_4', 1)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">BeautifulSoup</span>
+                        </div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1_4', 2)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">八爪鱼采集器</span>
+                        </div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1_4', 3)">
+                            <div class="option-radio"></div>
+                            <span class="option-label">Pandas</span>
+                        </div>
+</div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q1_4', 2, `八爪鱼采集器是可视化操作的数据采集工具，不需要编写代码，适合新手使用。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            八爪鱼采集器是可视化操作的数据采集工具，不需要编写代码，适合新手使用。
+                        </div>
+                    </div>
+                    <div class="quiz-question" id="q1_5" data-type="fill">
+                        <span class="question-number">第5题</span>
+                        <span class="question-type-badge">填空题</span>
+                        <div class="question-text">按F12可以打开浏览器的______工具，用于查看网页结构。 <input type="text" class="fill-input" placeholder="请输入答案"></div>
+                        <button class="quiz-submit-btn" onclick="submitQuestion('q1_5', '开发者', `按F12可以打开浏览器开发者工具（Developer Tools），其中Elements标签可以查看网页的HTML结构。`)">提交答案</button>
+                        <div class="answer-explanation">
+                            <div class="answer-explanation-title">答案解析</div>
+                            按F12可以打开浏览器开发者工具（Developer Tools），其中Elements标签可以查看网页的HTML结构。
+                        </div>
+                    </div>
+                    <div class="quiz-score">
+                        <div class="quiz-score-number">0/0</div>
+                        <div class="quiz-score-label"></div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:16px;">
+                        <button class="quiz-submit-btn" onclick="submitQuiz('quiz_ch1')">提交全部</button>
+                        <button class="quiz-submit-btn" style="background:#64748b;" onclick="resetQuiz('quiz_ch1')">重置练习</button>
+                    </div>
+                </div>
+
+                <div class="chapter-nav">
+                    <a href="index.html">返回总览</a>
+                    <a href="ch2.html">下一章</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r => r.text()).then(html => {
+            document.body.insertAdjacentHTML('afterbegin', html);
+        });
+    </script>
+</body>
+</html>

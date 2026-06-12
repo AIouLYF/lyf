@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目10 综合项目与期末考查 - Pandas数据分析实战训练营 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">Pandas数据分析实战训练营</a> &gt;
+                项目10 综合项目与期末考查
+            </div>
+            <h2>项目10 综合项目与期末考查</h2>
+
+            <div class="knowledge-card">
+                <h3>综合实战项目：超市经营数据分析</h3>
+                <p>本项目是一个综合实战大项目，要求你运用前面学到的所有技能，完成一份完整的超市经营数据分析报告。</p>
+                <p><strong>项目要求：</strong></p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>数据读取与清洗（处理缺失值、重复值、类型转换）</li>
+                    <li>描述性统计分析（均值、中位数、标准差等）</li>
+                    <li>数据透视表分析（按地区、品类、时间多维度汇总）</li>
+                    <li>时间序列分析（月度趋势、同比环比）</li>
+                    <li>数据可视化（至少3种不同类型的图表）</li>
+                    <li>撰写分析结论与建议</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>综合项目数据集与参考代码</h3>
+                <div class="code-block">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# ========== 1. 创建综合超市数据集 ==========
+np.random.seed(2024)
+n = 2000
+
+df = pd.DataFrame({
+    '订单号': [f'SA{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'V{i:04d}' for i in range(1, 501)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n,
+                          p=[0.30, 0.25, 0.20, 0.15, 0.10]),
+    '城市': np.random.choice(['上海', '广州', '北京', '成都', '西安', '杭州', '深圳', '武汉'], n),
+    '品类': np.random.choice(['生鲜', '食品', '饮料', '日用品', '家电', '服装'], n),
+    '销售额': np.random.randint(20, 3000, n),
+    '成本': np.random.randint(10, 2000, n),
+    '数量': np.random.randint(1, 15, n),
+    '支付方式': np.random.choice(['现金', '微信', '支付宝', '刷卡'], n)
+})
+
+# 引入一些缺失值和异常值用于清洗练习
+df.loc[np.random.choice(df.index, 20, replace=False), '销售额'] = np.nan
+df.loc[np.random.choice(df.index, 5, replace=False), '销售额'] = -100
+df.loc[np.random.choice(df.index, 10, replace=False), '品类'] = np.nan
+
+print("原始数据预览：")
+print(df.head())
+print(f"\n数据形状：{df.shape}")
+
+# ========== 2. 数据清洗 ==========
+print("\n【数据清洗】")
+print(f"清洗前缺失值：\n{df.isnull().sum()}")
+
+# 删除品类缺失的行
+df = df.dropna(subset=['品类'])
+# 销售额缺失用中位数填充
+df['销售额'] = df['销售额'].fillna(df['销售额'].median())
+# 销售额为负数的视为异常值，用中位数替换
+df.loc[df['销售额'] < 0, '销售额'] = df['销售额'].median()
+
+print(f"\n清洗后缺失值：\n{df.isnull().sum()}")
+print(f"清洗后数据量：{len(df)}")
+
+# 添加利润列
+df['利润'] = df['销售额'] - df['成本']
+df['利润率'] = (df['利润'] / df['销售额'] * 100).round(2)
+
+# 日期解析
+df['日期'] = pd.to_datetime(df['日期'])
+df['年份'] = df['日期'].dt.year
+df['月份'] = df['日期'].dt.month
+df['年月'] = df['日期'].dt.strftime('%Y-%m')
+
+# ========== 3. 描述性统计 ==========
+print("\n【描述性统计】")
+print(df[['销售额', '成本', '利润', '数量']].describe().round(2))
+
+# ========== 4. 透视表分析 ==========
+print("\n【地区 × 品类 销售额透视表】")
+pt = df.pivot_table(values='销售额', index='地区', columns='品类',
+                    aggfunc='sum', margins=True, fill_value=0)
+print(pt)
+
+# ========== 5. 时间序列分析 ==========
+print("\n【月度销售趋势】")
+monthly = df.groupby('年月')['销售额'].sum()
+print(monthly.tail(10))
+
+# ========== 6. 可视化 ==========
+# 月度趋势图
+plt.figure(figsize=(12, 5))
+monthly.plot(kind='line', marker='o', color='#2563eb')
+plt.title('月度销售额趋势', fontsize=14, fontweight='bold')
+plt.ylabel('销售额（元）')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+# 品类销售额柱状图
+cat_sales = df.groupby('品类')['销售额'].sum().sort_values(ascending=False)
+plt.figure(figsize=(10, 5))
+cat_sales.plot(kind='bar', color=['#2563eb', '#0ea5e9', '#8b5cf6', '#f59e0b', '#ef4444', '#10b981'])
+plt.title('各品类销售额对比', fontsize=14, fontweight='bold')
+plt.ylabel('销售额（元）')
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
+# 地区饼图
+region_sales = df.groupby('地区')['销售额'].sum()
+plt.figure(figsize=(8, 8))
+plt.pie(region_sales, labels=region_sales.index, autopct='%1.1f%%', startangle=90)
+plt.title('各地区销售额占比', fontsize=14, fontweight='bold')
+plt.show()
+</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>期末考查说明</h3>
+                <p>本试卷满分 100 分，其中理论题 40 分，实操题 60 分。请认真作答，全部完成后点击"提交试卷"按钮。</p>
+                <p><strong>考查范围：</strong>数据读取与清洗、索引与选择、数据清洗、分组聚合、透视表、时间序列、数据可视化、综合应用。</p>
+            </div>
+
+            <div class="exam-container" id="exam-final">
+                <div class="exam-paper-header">
+                    <div class="exam-paper-title">Pandas数据分析实战训练营 · 期末考查</div>
+                    <div class="exam-paper-info">
+                        <span>满分 100 分</span>
+                        <span>理论 40 分 + 实操 60 分</span>
+                        <span>时间 90 分钟</span>
+                    </div>
+                </div>
+
+                <div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--primary);">一、选择题（每题 4 分，共 20 分）</div>
+
+                <div class="quiz-question" id="eq1" data-type="choice" data-score="4">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">以下哪个方法可以读取 Excel 文件？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('eq1', 0)"><div class="option-radio"></div><span class="option-label">A. pd.read_csv()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('eq1', 1)"><div class="option-radio"></div><span class="option-label">B. pd.read_excel()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('eq1', 2)"><div class="option-radio"></div><span class="option-label">C. pd.read_json()</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('eq1', 3)"><div class="option-radio"></div><span class="option-label">D. pd.read_html()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq1', 1, 'pd.read_excel() 专门用于读取 Excel 文件。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pd.read_excel() 专门用于读取 Excel 文件。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq2" data-type="choice" data-score="4">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text"><code>df.groupby('品类')['销售额'].sum()</code> 的作用是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('eq2', 0)"><div class="option-radio"></div><span class="option-label">A. 计算所有销售额的总和</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('eq2', 1)"><div class="option-radio"></div><span class="option-label">B. 按品类分组后计算每组的销售额总和</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('eq2', 2)"><div class="option-radio"></div><span class="option-label">C. 计算每个品类的平均销售额</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('eq2', 3)"><div class="option-radio"></div><span class="option-label">D. 按销售额排序</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq2', 1, 'groupby 按品类分组，然后对每组的销售额求和。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>groupby 按品类分组，然后对每组的销售额求和。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq3" data-type="choice" data-score="4">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">在透视表中，添加总计行和总计列的参数是？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('eq3', 0)"><div class="option-radio"></div><span class="option-label">A. total=True</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('eq3', 1)"><div class="option-radio"></div><span class="option-label">B. margins=True</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('eq3', 2)"><div class="option-radio"></div><span class="option-label">C. all=True</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('eq3', 3)"><div class="option-radio"></div><span class="option-label">D. sum=True</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq3', 1, 'margins=True 会在透视表底部和右侧添加总计。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>margins=True 会在透视表底部和右侧添加总计。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq4" data-type="choice" data-score="4">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">计算环比增长率应该使用哪个方法？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('eq4', 0)"><div class="option-radio"></div><span class="option-label">A. .diff()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('eq4', 1)"><div class="option-radio"></div><span class="option-label">B. .pct_change()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('eq4', 2)"><div class="option-radio"></div><span class="option-label">C. .shift(1)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('eq4', 3)"><div class="option-radio"></div><span class="option-label">D. .cumsum()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq4', 1, 'pct_change() 计算当前值相对前一个值的变化百分比。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pct_change() 计算当前值相对前一个值的变化百分比。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq5" data-type="choice" data-score="4">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">以下哪种图表最适合展示数据随时间的变化趋势？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('eq5', 0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('eq5', 1)"><div class="option-radio"></div><span class="option-label">B. 柱状图</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('eq5', 2)"><div class="option-radio"></div><span class="option-label">C. 折线图</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('eq5', 3)"><div class="option-radio"></div><span class="option-label">D. 散点图</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq5', 2, '折线图最适合展示数据随时间变化的趋势。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>折线图最适合展示数据随时间变化的趋势。</p></div>
+                </div>
+
+                <div style="font-size:1rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--primary);">二、判断题（每题 4 分，共 12 分）</div>
+
+                <div class="quiz-question" id="eq6" data-type="tf" data-score="4">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text"><code>df.dropna()</code> 默认会删除包含任何缺失值的行。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('eq6', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('eq6', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq6', 'true', 'dropna() 默认删除包含任何 NaN 的行，可以用 how=\'all\' 改为只删除全空的行。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>dropna() 默认删除包含任何 NaN 的行，可以用 how='all' 改为只删除全空的行。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq7" data-type="tf" data-score="4">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text"><code>pd.crosstab()</code> 默认的聚合方式是求和（sum）。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('eq7', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('eq7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq7', 'false', 'crosstab 默认统计频次（count），不是 sum。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>crosstab 默认统计频次（count），不是 sum。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq8" data-type="tf" data-score="4">
+                    <span class="question-number">第8题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">在 RFM 模型中，R 值越大代表客户最近刚购买过，价值越高。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('eq8', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('eq8', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq8', 'false', 'R 是距今天数，越小越好。R 越大说明越久没购买。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>R 是距今天数，越小越好。R 越大说明越久没购买。</p></div>
+                </div>
+
+                <div style="font-size:1rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--primary);">三、填空题（每题 4 分，共 8 分）</div>
+
+                <div class="quiz-question" id="eq9" data-type="fill" data-score="4">
+                    <span class="question-number">第9题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">在 pandas 中，<code>df['销售额'].______()</code> 可以计算平均值。</div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq9', 'mean', 'mean() 是计算平均值的方法。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>mean() 是计算平均值的方法。</p></div>
+                </div>
+
+                <div class="quiz-question" id="eq10" data-type="fill" data-score="4">
+                    <span class="question-number">第10题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text"><code>resample('______')</code> 表示按季度进行重采样。</div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('eq10', 'Q', 'Q 代表 Quarter，按季度进行重采样。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>Q 代表 Quarter，按季度进行重采样。</p></div>
+                </div>
+
+                <div style="font-size:1rem;font-weight:600;color:var(--text);margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--primary);">四、实操题（每题 20 分，共 60 分）</div>
+
+                <div class="quiz-question" id="eq11" data-type="code" data-score="20">
+                    <span class="question-number">第11题</span>
+                    <span class="question-type-badge">实操题</span>
+                    <div class="question-text"><strong>数据清洗（20分）</strong><br>给定以下 DataFrame，请写出代码完成以下操作：<br>1. 删除"品类"为空的行（5分）<br>2. 用中位数填充"销售额"的缺失值（5分）<br>3. 将"销售额"列中的负数替换为中位数（5分）<br>4. 将"日期"列转换为 datetime 类型（5分）</div>
+                    <textarea class="code-editor-area" placeholder="请在此编写代码..."></textarea>
+                    <button class="quiz-submit-btn" onclick="submitCodeQuestion('eq11', `df = df.dropna(subset=['品类'])
+df['销售额'] = df['销售额'].fillna(df['销售额'].median())
+df.loc[df['销售额'] < 0, '销售额'] = df['销售额'].median()
+df['日期'] = pd.to_datetime(df['日期'])`, '本题考查数据清洗的四个基本操作：删除缺失、填充缺失、异常值处理、类型转换。')">提交答案</button>
+                    <div class="answer-explanation">
+                        <div class="answer-explanation-title">参考答案</div>
+                        <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow-x:auto;font-size:0.8125rem;"></pre>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="eq12" data-type="code" data-score="20">
+                    <span class="question-number">第12题</span>
+                    <span class="question-type-badge">实操题</span>
+                    <div class="question-text"><strong>分组聚合与透视表（20分）</strong><br>请写出代码完成以下操作：<br>1. 按"地区"分组，计算每个地区的销售额总和和平均利润（8分）<br>2. 创建一个透视表：index='地区'，columns='品类'，values='销售额'，aggfunc='sum'，并添加总计（12分）</div>
+                    <textarea class="code-editor-area" placeholder="请在此编写代码..."></textarea>
+                    <button class="quiz-submit-btn" onclick="submitCodeQuestion('eq12', `# 1. 按地区分组聚合
+region_stats = df.groupby('地区').agg({
+    '销售额': 'sum',
+    '利润': 'mean'
+})
+
+# 2. 透视表
+pt = df.pivot_table(
+    values='销售额',
+    index='地区',
+    columns='品类',
+    aggfunc='sum',
+    margins=True,
+    fill_value=0
+)`, 'groupby + agg 用于多指标分组聚合；pivot_table 用于二维交叉分析，margins=True 添加总计。')">提交答案</button>
+                    <div class="answer-explanation">
+                        <div class="answer-explanation-title">参考答案</div>
+                        <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow-x:auto;font-size:0.8125rem;"></pre>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="eq13" data-type="code" data-score="20">
+                    <span class="question-number">第13题</span>
+                    <span class="question-type-badge">实操题</span>
+                    <div class="question-text"><strong>时间序列与可视化（20分）</strong><br>假设 df 已包含"日期"（datetime类型）和"销售额"列，请写出代码：<br>1. 按月汇总销售额，并计算月度环比增长率（10分）<br>2. 绘制月度销售额折线图（标题、坐标轴标签、网格线）（10分）</div>
+                    <textarea class="code-editor-area" placeholder="请在此编写代码..."></textarea>
+                    <button class="quiz-submit-btn" onclick="submitCodeQuestion('eq13', `# 1. 按月汇总 + 环比
+monthly = df.resample('M', on='日期')['销售额'].sum()
+monthly_df = monthly.to_frame(name='销售额')
+monthly_df['环比'] = monthly_df['销售额'].pct_change()
+
+# 2. 绘制折线图
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 5))
+monthly.plot(kind='line', marker='o')
+plt.title('月度销售额趋势')
+plt.xlabel('月份')
+plt.ylabel('销售额（元）')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()`, 'resample + pct_change 用于时间序列汇总和环比计算；plot 用于快速绘图，记得设置标题和标签。')">提交答案</button>
+                    <div class="answer-explanation">
+                        <div class="answer-explanation-title">参考答案</div>
+                        <pre class="reference-code" style="background:#1e293b;color:#e2e8f0;padding:12px;border-radius:6px;overflow-x:auto;font-size:0.8125rem;"></pre>
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin-top:24px;">
+                    <button class="quiz-submit-btn" onclick="submitExam('exam-final')">提交试卷</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('exam-final')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/100</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>参考答案汇总</h3>
+                <p><strong>一、选择题</strong></p>
+                <p>1. B &nbsp; 2. B &nbsp; 3. B &nbsp; 4. B &nbsp; 5. C</p>
+                <p><strong>二、判断题</strong></p>
+                <p>6. 正确 &nbsp; 7. 错误 &nbsp; 8. 错误</p>
+                <p><strong>三、填空题</strong></p>
+                <p>9. mean &nbsp; 10. Q</p>
+                <p><strong>四、实操题</strong></p>
+                <p>详见各题提交后显示的参考答案。</p>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>恭喜你完成了 Pandas 数据分析实战训练营的全部 10 个项目！</p>
+                <p>通过本课程，你掌握了以下核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>数据读取与清洗（CSV/Excel、缺失值、重复值、异常值）</li>
+                    <li>数据选择与过滤（索引、切片、条件筛选）</li>
+                    <li>数据转换（新增列、类型转换、字符串处理）</li>
+                    <li>分组聚合与透视表（groupby、pivot_table、crosstab）</li>
+                    <li>时间序列分析（resample、rolling、同比环比）</li>
+                    <li>数据可视化（Matplotlib、Seaborn、pandas 内置绘图）</li>
+                    <li>综合实战（RFM 客户分析、电商销售分析、超市经营分析）</li>
+                </ul>
+                <p>数据分析是一项需要不断实践的技能，希望你能在今后的学习和工作中多加练习，真正让数据为你所用！</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p9.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：综合实战：销售数据分析报告</a>
+                <a href="index.html" style="color:var(--primary);font-weight:500;">返回训练营首页 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>

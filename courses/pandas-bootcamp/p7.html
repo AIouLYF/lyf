@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目7 时间序列数据分析 - Pandas数据分析实战训练营 - 李优发</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="has-sidebar">
+    <div id="sidebar-container"></div>
+    <div class="main-content course-page">
+        <div class="chapter-content-area">
+            <div class="chapter-breadcrumb">
+                <a href="../../index.html">首页</a> &gt;
+                <a href="index.html">Pandas数据分析实战训练营</a> &gt;
+                项目7 时间序列数据分析
+            </div>
+            <h2>项目7 时间序列数据分析</h2>
+
+            <div class="knowledge-card">
+                <h3>学习目标</h3>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li>理解时间序列数据的概念和特点</li>
+                    <li>掌握日期解析和DatetimeIndex的创建</li>
+                    <li>学会使用 <code>resample()</code> 进行重采样</li>
+                    <li>掌握滚动窗口 <code>rolling()</code> 的计算方法</li>
+                    <li>学会计算同比和环比</li>
+                    <li>能够分析月度销售额和移动平均趋势</li>
+                </ul>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>知识点讲解</h3>
+                <p><strong>1. 什么是时间序列数据？</strong></p>
+                <p>时间序列数据就是按时间顺序排列的数据，比如每天的销售额、每小时的气温、每分钟的股票价格。时间序列分析的核心就是研究数据随时间变化的趋势和规律。</p>
+
+                <p><strong>2. 日期解析与DatetimeIndex</strong></p>
+                <p>pandas 可以把字符串自动转换成日期格式，最常见的方法是 <code>pd.to_datetime()</code>。转换后，可以把日期列设为索引，方便后续的时间操作。</p>
+                <div class="code-block"># 日期解析
+df['日期'] = pd.to_datetime(df['日期'])
+# 设为时间索引
+df.set_index('日期', inplace=True)</div>
+
+                <p><strong>3. resample 重采样</strong></p>
+                <p>重采样就像"时间聚合"，可以把高频数据变成低频数据。比如把日数据汇总成月数据、周数据。常用规则：'D'日、'W'周、'M'月末、'Q'季末、'Y'年末。</p>
+                <div class="code-block"># 按月汇总销售额
+monthly = df.resample('M')['销售额'].sum()</div>
+
+                <p><strong>4. rolling 滚动窗口</strong></p>
+                <p>滚动窗口就是"滑动的平均值"。比如 7 日移动平均，就是每一天都取前面 7 天的平均值，这样画出来的曲线更平滑，能看出长期趋势。</p>
+                <div class="code-block"># 7日移动平均
+df['销售额'].rolling(window=7).mean()</div>
+
+                <p><strong>5. 同比与环比</strong></p>
+                <p>同比是和去年同期比，环比是和上一个统计周期比。比如今年3月 vs 去年3月是同比，今年3月 vs 今年2月是环比。</p>
+                <div class="code-block"># 环比 = 本期 / 上期 - 1
+df['环比'] = df['销售额'].pct_change()
+# 同比需要按月份对齐，通常用 shift(12) 对月度数据</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>完整代码示例</h3>
+                <div class="code-block">import pandas as pd
+import numpy as np
+
+# ========== 1. 创建模拟日销售数据 ==========
+np.random.seed(42)
+dates = pd.date_range(start='2023-01-01', end='2024-06-30', freq='D')
+n = len(dates)
+
+# 模拟销售额：带趋势+季节性+随机波动
+trend = np.linspace(5000, 8000, n)
+seasonal = 1000 * np.sin(2 * np.pi * np.arange(n) / 365.25)
+noise = np.random.normal(0, 500, n)
+sales = trend + seasonal + noise
+sales = np.clip(sales, 2000, 15000).astype(int)
+
+df = pd.DataFrame({
+    '日期': dates,
+    '销售额': sales,
+    '订单数': np.random.randint(50, 300, n)
+})
+
+# 日期解析并设为索引
+df['日期'] = pd.to_datetime(df['日期'])
+df.set_index('日期', inplace=True)
+print("数据预览：")
+print(df.head(10))
+print(f"\n数据时间范围：{df.index.min()} 至 {df.index.max()}")
+
+# ========== 2. 按月重采样汇总 ==========
+print("\n【按月汇总销售额】")
+monthly_sales = df.resample('M')['销售额'].sum()
+print(monthly_sales.head(10))
+
+# 同时汇总多个指标
+print("\n【按月汇总：销售额总和 + 订单数总和 + 日均销售额】")
+monthly_multi = df.resample('M').agg({
+    '销售额': 'sum',
+    '订单数': 'sum',
+    '销售额': ['sum', 'mean']
+})
+print(monthly_multi.head())
+
+# ========== 3. 按周汇总 ==========
+print("\n【按周汇总销售额（周一开始）】")
+weekly_sales = df.resample('W-MON')['销售额'].sum()
+print(weekly_sales.head(8))
+
+# ========== 4. 7日移动平均 ==========
+print("\n【7日移动平均销售额】")
+df['MA7'] = df['销售额'].rolling(window=7).mean().round(2)
+print(df[['销售额', 'MA7']].head(14))
+
+# ========== 5. 30日移动平均 ==========
+print("\n【30日移动平均销售额】")
+df['MA30'] = df['销售额'].rolling(window=30).mean().round(2)
+print(df[['销售额', 'MA7', 'MA30']].tail(10))
+
+# ========== 6. 环比计算 ==========
+print("\n【月度销售额环比】")
+monthly = df.resample('M')['销售额'].sum()
+monthly_df = monthly.to_frame(name='销售额')
+monthly_df['环比'] = monthly_df['销售额'].pct_change().round(4)
+monthly_df['环比_百分比'] = (monthly_df['环比'] * 100).round(2).astype(str) + '%'
+print(monthly_df.head(10))
+
+# ========== 7. 同比计算（需要两年数据） ==========
+print("\n【月度销售额同比（2024 vs 2023）】")
+# 提取年月
+monthly_df['年月'] = monthly_df.index.strftime('%Y-%m')
+monthly_df['月份'] = monthly_df.index.month
+monthly_df['年份'] = monthly_df.index.year
+
+# 只取完整月份做同比
+compare = monthly_df[monthly_df['年份'].isin([2023, 2024])].copy()
+pivot_year = compare.pivot(index='月份', columns='年份', values='销售额')
+pivot_year['同比'] = ((pivot_year[2024] - pivot_year[2023]) / pivot_year[2023]).round(4)
+print(pivot_year)
+
+# ========== 8. 季度汇总 ==========
+print("\n【季度销售额汇总】")
+quarterly = df.resample('Q')['销售额'].sum()
+print(quarterly)
+
+# ========== 9. 年初至今累计 ==========
+print("\n【2024年每月累计销售额】")
+df_2024 = df[df.index.year == 2024]
+monthly_2024 = df_2024.resample('M')['销售额'].sum()
+monthly_2024_cum = monthly_2024.cumsum()
+print(pd.DataFrame({'当月': monthly_2024, '累计': monthly_2024_cum}))
+</div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>实操步骤</h3>
+                <p><strong>步骤1：</strong>新建 Notebook，运行数据生成代码，创建 2023-01-01 到 2024-06-30 的日销售数据。</p>
+                <p><strong>步骤2：</strong>用 <code>pd.to_datetime()</code> 把日期列转成日期格式，再用 <code>set_index()</code> 设为索引。</p>
+                <p><strong>步骤3：</strong>用 <code>resample('M')</code> 按月汇总销售额，观察输出结果。</p>
+                <p><strong>步骤4：</strong>尝试 <code>resample('W-MON')</code> 按周（周一开始）汇总，对比月度和周度结果。</p>
+                <p><strong>步骤5：</strong>计算 7 日移动平均，观察 MA7 曲线如何平滑原始数据的波动。</p>
+                <p><strong>步骤6：</strong>计算月度环比，用 <code>pct_change()</code> 方法，观察哪个月增长最快、哪个月下降。</p>
+                <p><strong>步骤7：</strong>筛选 2023 和 2024 两年的数据，计算每个月的同比增长率。</p>
+                <p><strong>步骤8：</strong>用 <code>cumsum()</code> 计算 2024 年的累计销售额，看看到 6 月底累计了多少。</p>
+            </div>
+
+            <div class="quiz-container" id="quiz-p7">
+                <div class="quiz-header">
+                    <div class="quiz-title">项目7 配套练习</div>
+                    <div class="quiz-progress">
+                        <span class="quiz-progress-text">0/7</span>
+                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
+                    <span class="question-number">第1题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text"><code>resample('M')</code> 表示按什么周期重采样？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 按天</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 按周</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 按月（月末）</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 按年</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 2, 'M 代表 Month，按月末进行重采样聚合。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>M 代表 Month，按月末进行重采样聚合。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
+                    <span class="question-number">第2题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text"><code>rolling(window=7).mean()</code> 计算的是什么？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 7天前的数值</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 7日移动平均值</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 每7天的总和</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 7天后的预测值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'rolling(window=7).mean() 表示取当前及前6天共7天的平均值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>rolling(window=7).mean() 表示取当前及前6天共7天的平均值。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
+                    <span class="question-number">第3题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">计算环比应该使用哪个方法？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. .diff()</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. .pct_change()</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. .shift(1)</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. .cumsum()</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'pct_change() 计算当前值相对前一个值的变化百分比，即环比。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pct_change() 计算当前值相对前一个值的变化百分比，即环比。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
+                    <span class="question-number">第4题</span>
+                    <span class="question-type-badge">选择题</span>
+                    <div class="question-text">同比是指与什么时间的数据进行比较？</div>
+                    <div class="question-options">
+                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. 上一个统计周期</span></div>
+                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. 去年同期</span></div>
+                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. 数据起始日</span></div>
+                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. 预测值</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, '同比是与去年同期相比，环比是与上一个统计周期相比。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>同比是与去年同期相比，环比是与上一个统计周期相比。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
+                    <span class="question-number">第5题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text"><code>pd.to_datetime()</code> 可以把字符串格式的日期转换成 pandas 的日期类型。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'true', 'pd.to_datetime() 是 pandas 中最常用的日期解析函数。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pd.to_datetime() 是 pandas 中最常用的日期解析函数。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
+                    <span class="question-number">第6题</span>
+                    <span class="question-type-badge">填空题</span>
+                    <div class="question-text">在 resample 中，<code>'Q'</code> 代表按 ______ 进行重采样。</div>
+                    <input class="fill-input" placeholder="请输入答案">
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '季度', 'Q 代表 Quarter，按季度末进行重采样。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>Q 代表 Quarter，按季度末进行重采样。</p></div>
+                </div>
+
+                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
+                    <span class="question-number">第7题</span>
+                    <span class="question-type-badge">判断题</span>
+                    <div class="question-text">移动窗口计算时，窗口最前面的几个值会因为数据不足而显示为 NaN。</div>
+                    <div class="tf-options">
+                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
+                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                    </div>
+                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', '例如 window=7 时，前6个数据点不足7个，rolling结果会是NaN，从第7个点开始才有值。')">提交答案</button>
+                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>例如 window=7 时，前6个数据点不足7个，rolling结果会是NaN，从第7个点开始才有值。</p></div>
+                </div>
+
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p7')">提交全部</button>
+                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p7')">重置</button>
+                </div>
+                <div class="quiz-score">
+                    <div class="quiz-score-number">0/7</div>
+                    <div class="quiz-score-label"></div>
+                </div>
+            </div>
+
+            <div class="knowledge-card">
+                <h3>项目小结</h3>
+                <p>本项目我们学习了时间序列分析的核心技能：</p>
+                <ul style="padding-left:20px;font-size:0.9375rem;line-height:1.8;">
+                    <li><code>pd.to_datetime()</code> 把字符串转成日期，<code>set_index()</code> 把日期设为索引。</li>
+                    <li><code>resample()</code> 是时间序列的"分组聚合"，'M'月、'W'周、'Q'季、'Y'年。</li>
+                    <li><code>rolling(window=n).mean()</code> 计算 n 期移动平均，平滑短期波动。</li>
+                    <li><code>pct_change()</code> 计算环比增长率，即本期相对上期的变化。</li>
+                    <li>同比需要把不同年份的同期数据对齐后计算。</li>
+                    <li><code>cumsum()</code> 可以计算累计值，常用于年初至今统计。</li>
+                </ul>
+                <p>时间序列分析是商务数据分析中最常见的场景之一，掌握这些技能，你就能轻松分析销售趋势、预测未来走势！</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);">
+                <a href="p6.html" style="color:var(--primary);font-weight:500;">&larr; 上一项目：数据透视表与交叉分析</a>
+                <a href="p8.html" style="color:var(--primary);font-weight:500;">下一项目：数据可视化入门 &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../sidebar.js"></script>
+    <script>
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            highlightCurrentNav();
+        });
+    </script>
+</body>
+</html>
