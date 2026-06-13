@@ -192,14 +192,15 @@
   width: 48px;
   padding: 14px 8px 14px 0;
   text-align: right;
-  color: #7A7A7A;
+  color: #555555;
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 20.8px;  /* 13px * 1.6 = 20.8px */
   user-select: none;
   overflow: hidden;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
   background: #0A0A0A;
+  white-space: pre;
 }
 
 .code-lab-textarea {
@@ -210,7 +211,7 @@
   color: #e8e8e8;
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 20.8px;  /* 固定值，与行号一致 */
   border: 1px solid rgba(255,255,255,0.06);
   outline: none;
   resize: vertical;

@@ -205,37 +205,14 @@ print(f&quot;数据类型：{type(df.index).__name__}&quot;)">
         <div class="code-lab-toolbar">
             <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
             <div class="code-lab-actions">
-                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-7')">▶ 运行代码</button>
-                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-7')">✕ 清除内容</button>
-                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-7')">◉ 参考答案</button>
+                <button class="code-lab-btn code-lab-btn-run">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref">◉ 参考答案</button>
             </div>
         </div>
         <div class="code-lab-textarea-wrap">
             <div class="code-lab-line-numbers"></div>
-            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
-import numpy as np
-
-# 创建模拟日销售数据
-np.random.seed(42)
-dates = pd.date_range(start='2023-01-01', end='2024-06-30', freq='D')
-n = len(dates)
-
-trend = np.linspace(5000, 8000, n)
-seasonal = 1000 * np.sin(2 * np.pi * np.arange(n) / 365.25)
-noise = np.random.normal(0, 500, n)
-sales = trend + seasonal + noise
-sales = np.clip(sales, 2000, 15000).astype(int)
-
-df = pd.DataFrame({
-    '日期': dates,
-    '销售额': sales,
-    '订单数': np.random.randint(50, 300, n)
-})
-
-# TODO: 用 pd.to_datetime() 解析日期列
-# TODO: 用 set_index() 将日期设为索引
-# TODO: 打印 df.head() 和时间范围
-</textarea>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码..."></textarea>
         </div>
     </div>
     <div class="code-lab-output">
@@ -288,34 +265,14 @@ print(df[['销售额', 'MA7', 'MA30']].tail())">
         <div class="code-lab-toolbar">
             <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
             <div class="code-lab-actions">
-                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-8')">▶ 运行代码</button>
-                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-8')">✕ 清除内容</button>
-                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-8')">◉ 参考答案</button>
+                <button class="code-lab-btn code-lab-btn-run">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref">◉ 参考答案</button>
             </div>
         </div>
         <div class="code-lab-textarea-wrap">
             <div class="code-lab-line-numbers"></div>
-            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
-import numpy as np
-
-# 创建数据（已设好时间索引）
-np.random.seed(42)
-dates = pd.date_range(start='2023-01-01', end='2024-06-30', freq='D')
-n = len(dates)
-trend = np.linspace(5000, 8000, n)
-seasonal = 1000 * np.sin(2 * np.pi * np.arange(n) / 365.25)
-noise = np.random.normal(0, 500, n)
-sales = (trend + seasonal + noise).clip(2000, 15000).astype(int)
-
-df = pd.DataFrame({'日期': dates, '销售额': sales})
-df['日期'] = pd.to_datetime(df['日期'])
-df.set_index('日期', inplace=True)
-
-# TODO: 用 resample('M') 按月汇总销售额
-# TODO: 用 rolling(window=7) 计算7日移动平均
-# TODO: 用 rolling(window=30) 计算30日移动平均
-# TODO: 打印结果对比
-</textarea>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码..."></textarea>
         </div>
     </div>
     <div class="code-lab-output">
@@ -372,33 +329,14 @@ for idx, row in monthly_df.head(6).iterrows():
         <div class="code-lab-toolbar">
             <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
             <div class="code-lab-actions">
-                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-9')">▶ 运行代码</button>
-                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-9')">✕ 清除内容</button>
-                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-9')">◉ 参考答案</button>
+                <button class="code-lab-btn code-lab-btn-run">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref">◉ 参考答案</button>
             </div>
         </div>
         <div class="code-lab-textarea-wrap">
             <div class="code-lab-line-numbers"></div>
-            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
-import numpy as np
-
-# 创建数据（已设好时间索引）
-np.random.seed(42)
-dates = pd.date_range(start='2023-01-01', end='2024-06-30', freq='D')
-n = len(dates)
-trend = np.linspace(5000, 8000, n)
-seasonal = 1000 * np.sin(2 * np.pi * np.arange(n) / 365.25)
-noise = np.random.normal(0, 500, n)
-sales = (trend + seasonal + noise).clip(2000, 15000).astype(int)
-
-df = pd.DataFrame({'日期': dates, '销售额': sales})
-df['日期'] = pd.to_datetime(df['日期'])
-df.set_index('日期', inplace=True)
-
-# TODO: 用 resample('M') 按月汇总
-# TODO: 用 pct_change() 计算环比
-# TODO: 用文本柱状图展示月度趋势
-</textarea>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码..."></textarea>
         </div>
     </div>
     <div class="code-lab-output">
