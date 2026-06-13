@@ -2,47 +2,59 @@
  * 全局左侧导航栏 + 交互式练习系统
  */
 
+// 防重复绑定标记
+var _sidebarInitialized = false;
+var _smoothNavInitialized = false;
+
 // ===== 侧边栏逻辑 =====
 function initSidebar() {
     const toggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
 
-    if (toggle && sidebar) {
-        toggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            if (overlay) overlay.classList.toggle('show');
+    // 只绑定一次 toggle 和 overlay 事件
+    if (!_sidebarInitialized) {
+        _sidebarInitialized = true;
+
+        if (toggle && sidebar) {
+            toggle.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+                if (overlay) overlay.classList.toggle('show');
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('show');
+            });
+        }
+
+        // 可展开菜单 - 使用事件委托，只绑定一次
+        document.addEventListener('click', (e) => {
+            const expandLink = e.target.closest('.sidebar-expandable > a');
+            if (expandLink) {
+                e.preventDefault();
+                e.stopPropagation();
+                const parent = expandLink.parentElement;
+                parent.classList.toggle('open');
+            }
         });
+
+        // SPA式导航：只绑定一次
+        enableSmoothNavigation();
     }
 
-    if (overlay) {
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('show');
-        });
-    }
-
-    // 可展开菜单
-    document.querySelectorAll('.sidebar-expandable > a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const parent = link.parentElement;
-            parent.classList.toggle('open');
-        });
-    });
-
-    // 修正侧边栏链接路径
+    // 每次都执行的操作
     fixSidebarLinks();
-
-    // 高亮当前页面
     highlightCurrentNav();
-
-    // SPA式导航：点击链接时不刷新整个页面
-    enableSmoothNavigation();
 }
 
 // SPA式导航：fetch加载页面内容，不刷新侧边栏
 function enableSmoothNavigation() {
+    if (_smoothNavInitialized) return;
+    _smoothNavInitialized = true;
+
     const sidebar = document.querySelector('.sidebar');
     if (!sidebar) return;
 
