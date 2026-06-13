@@ -233,6 +233,8 @@ function toggleReference(id) {
     } else {
         if (refBody && !refBody.textContent.trim()) {
             var answer = lab.getAttribute('data-answer') || '暂无参考答案';
+            // 将 \n 转为真正的换行符
+            answer = answer.replace(/\\n/g, '\n');
             refBody.textContent = answer;
         }
         refPanel.classList.add('is-visible');
