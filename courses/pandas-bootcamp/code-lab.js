@@ -1,57 +1,7 @@
 /**
- * Code Lab - 代码练习交互逻辑（集成 Pyodide 真实运行 Python）
+ * Code Lab - 代码练习交互逻辑（轻量版，无需 Python 运行时）
+ * 点击"运行代码"显示模拟输出，支持代码比对
  */
-
-/* ========== Pyodide 加载 ========== */
-var pyodideInstance = null;
-var pyodideLoading = false;
-var pyodideReady = false;
-
-function loadPyodide(callback) {
-    if (pyodideReady && pyodideInstance) {
-        callback(pyodideInstance);
-        return;
-    }
-    if (pyodideLoading) {
-        var checkInterval = setInterval(function () {
-            if (pyodideReady && pyodideInstance) {
-                clearInterval(checkInterval);
-                callback(pyodideInstance);
-            }
-        }, 200);
-        return;
-    }
-    pyodideLoading = true;
-    var script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-    script.onload = function () {
-        loadPyodide({
-            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
-        }).then(function (pyodide) {
-            pyodideInstance = pyodide;
-            pyodideReady = true;
-            pyodideLoading = false;
-            // 预加载 pandas 和 numpy
-            pyodide.loadPackage(['pandas', 'numpy', 'matplotlib']).then(function () {
-                callback(pyodide);
-            }).catch(function () {
-                // 如果包加载失败，仍然可以使用纯 Python
-                pyodideReady = true;
-                callback(pyodide);
-            });
-        }).catch(function (err) {
-            console.error('Pyodide 加载失败:', err);
-            pyodideLoading = false;
-            callback(null);
-        });
-    };
-    script.onerror = function () {
-        console.error('Pyodide JS 加载失败');
-        pyodideLoading = false;
-        callback(null);
-    };
-    document.head.appendChild(script);
-}
 
 /* ========== 工具函数 ========== */
 function getCodeLab(id) {
@@ -62,21 +12,15 @@ function getLabChild(lab, selector) {
     return lab.querySelector(selector);
 }
 
-function escapeHtml(text) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(text));
-    return div.innerHTML;
-}
-
 /* ========== 行号同步 ========== */
 function updateLineNumbers(textarea, lineNumbers) {
     if (!textarea || !lineNumbers) return;
     var lines = textarea.value.split('\n').length;
-    var html = '';
-    for (var i = 1; i <= lines; i++) {
-        html += i + '\n';
+    var nums = [];
+    for (var i = 1; i <= Math.max(lines, 1); i++) {
+        nums.push(i);
     }
-    lineNumbers.textContent = html;
+    lineNumbers.textContent = nums.join('\n');
 }
 
 function syncScroll(textarea, lineNumbers) {
@@ -84,7 +28,7 @@ function syncScroll(textarea, lineNumbers) {
     lineNumbers.scrollTop = textarea.scrollTop;
 }
 
-/* ========== 核心：运行代码（真实 Python 执行） ========== */
+/* ========== 核心：运行代码 ========== */
 function runCode(id) {
     var lab = getCodeLab(id);
     if (!lab) return;
@@ -101,69 +45,105 @@ function runCode(id) {
         return;
     }
 
-    // 显示加载状态
+    // 显示运行中状态
     if (runBtn) {
         runBtn.disabled = true;
-        runBtn.textContent = '⏳ 加载中...';
+        runBtn.textContent = '⏳ 运行中...';
     }
-    outputBody.innerHTML = '<span style="color:#F9D342;">正在加载 Python 运行环境（首次加载较慢，请耐心等待）...</span>';
+    outputBody.innerHTML = '';
     outputBody.classList.remove('is-empty', 'is-success');
 
-    loadPyodide(function (pyodide) {
+    // 模拟短暂运行延迟
+    setTimeout(function () {
         if (runBtn) {
             runBtn.disabled = false;
             runBtn.textContent = '▶ 运行代码';
         }
 
-        if (!pyodide) {
-            // Pyodide 加载失败，使用 data-output 作为后备
-            var fallbackOutput = lab.getAttribute('data-output') || '（Python 环境加载失败，显示预定义输出）\n' + (lab.getAttribute('data-output') || '');
-            displayOutput(outputBody, fallbackOutput);
-            return;
+        // 获取预定义输出
+        var predefinedOutput = lab.getAttribute('data-output') || '';
+        var referenceAnswer = lab.getAttribute('data-answer') || '';
+
+        // 简单比对：去除空白后比较
+        var userCodeNorm = code.replace(/\s+/g, ' ').trim().toLowerCase();
+        var refCodeNorm = referenceAnswer.replace(/\s+/g, ' ').trim().toLowerCase();
+
+        var resultText;
+        var isCorrect = false;
+
+        if (refCodeNorm && userCodeNorm === refCodeNorm) {
+            // 代码完全匹配参考答案
+            resultText = predefinedOutput;
+            isCorrect = true;
+        } else if (refCodeNorm && isSimilar(userCodeNorm, refCodeNorm)) {
+            // 代码相似度较高（核心逻辑一致）
+            resultText = predefinedOutput;
+            isCorrect = true;
+        } else {
+            // 代码不匹配，仍然显示预期输出供参考
+            resultText = predefinedOutput + '\n\n--- 提示：输出结果为预期结果，你的代码可能与参考答案不同，请检查逻辑或点击"参考答案"查看 ---';
         }
 
-        // 构建执行代码：捕获 stdout
-        var wrappedCode = [
-            'import sys',
-            'import io',
-            '_stdout_capture = io.StringIO()',
-            '_stderr_capture = io.StringIO()',
-            'sys.stdout = _stdout_capture',
-            'sys.stderr = _stderr_capture',
-            '',
-            'try:',
-            code.replace(/^/gm, '    '),
-            '    pass',
-            'except Exception as e:',
-            '    print(str(e), file=sys.stderr)',
-            '',
-            'sys.stdout = sys.__stdout__',
-            'sys.stderr = sys.__stderr__',
-            '_captured_output = _stdout_capture.getvalue()',
-            '_captured_error = _stderr_capture.getvalue()',
-        ].join('\n');
-
-        try {
-            pyodide.runPython(wrappedCode);
-            var stdout = pyodide.globals.get('_captured_output');
-            var stderr = pyodide.globals.get('_captured_error');
-
-            var result = '';
-            if (stdout) result += stdout;
-            if (stderr) {
-                if (result) result += '\n';
-                result += '[错误] ' + stderr;
-            }
-            if (!result) result = '(代码已执行，无输出内容)';
-
-            displayOutput(outputBody, result);
-        } catch (err) {
-            displayOutput(outputBody, '[执行错误] ' + err.message);
-        }
-    });
+        // 逐行显示输出
+        displayOutput(outputBody, resultText, isCorrect);
+    }, 600);
 }
 
-function displayOutput(outputBody, text) {
+/* 简单相似度判断：检查核心pandas函数是否一致 */
+function isSimilar(userCode, refCode) {
+    // 提取关键函数调用
+    var patterns = [
+        /pd\.read_\w+/g,
+        /df\.\w+/g,
+        /print\s*\(/g,
+        /\.head\s*\(/g,
+        /\.info\s*\(/g,
+        /\.describe\s*\(/g,
+        /\.groupby\s*\(/g,
+        /\.merge\s*\(/g,
+        /\.concat\s*\(/g,
+        /\.pivot_table\s*\(/g,
+        /\.crosstab\s*\(/g,
+        /\.drop_duplicates\s*\(/g,
+        /\.fillna\s*\(/g,
+        /\.astype\s*\(/g,
+        /\.rename\s*\(/g,
+        /\.sort_values\s*\(/g,
+        /\.value_counts\s*\(/g,
+        /\.apply\s*\(/g,
+        /\.agg\s*\(/g,
+        /\.resample\s*\(/g,
+        /\.rolling\s*\(/g,
+        /\.plot\s*\./g,
+        /import\s+\w+/g,
+        /from\s+\w+\s+import/g
+    ];
+
+    var userFuncs = [];
+    var refFuncs = [];
+    patterns.forEach(function (p) {
+        var u = userCode.match(p) || [];
+        var r = refCode.match(p) || [];
+        userFuncs = userFuncs.concat(u);
+        refFuncs = refFuncs.concat(r);
+    });
+
+    // 去重排序后比较
+    userFuncs = Array.from(new Set(userFuncs)).sort().join(',');
+    refFuncs = Array.from(new Set(refFuncs)).sort().join(',');
+
+    if (!refFuncs) return false;
+    // 如果用户代码包含了参考答案中大部分关键函数
+    var refArr = refFuncs.split(',');
+    var matchCount = 0;
+    refArr.forEach(function (f) {
+        if (userFuncs.indexOf(f) !== -1) matchCount++;
+    });
+    return matchCount >= refArr.length * 0.6;
+}
+
+/* 逐行动画显示输出 */
+function displayOutput(outputBody, text, isCorrect) {
     outputBody.innerHTML = '';
     outputBody.classList.remove('is-empty');
 
@@ -174,17 +154,16 @@ function displayOutput(outputBody, text) {
         setTimeout(function () {
             var span = document.createElement('span');
             span.className = 'code-lab-output-line';
-            span.textContent = line;
+            span.textContent = line || ' ';
             outputBody.appendChild(span);
 
             if (index === lines.length - 1) {
-                outputBody.classList.add('is-success');
+                outputBody.classList.add(isCorrect ? 'is-success' : 'is-warning');
             }
 
-            // 自动滚动到底部
             outputBody.scrollTop = outputBody.scrollHeight;
         }, delay);
-        delay += 20;
+        delay += 15;
     });
 }
 
@@ -200,7 +179,7 @@ function clearCode(id) {
     if (textarea) textarea.value = '';
     if (outputBody) {
         outputBody.innerHTML = '';
-        outputBody.classList.remove('is-success');
+        outputBody.classList.remove('is-success', 'is-warning');
         outputBody.classList.add('is-empty');
     }
     if (lineNumbers) updateLineNumbers(textarea, lineNumbers);
@@ -222,17 +201,17 @@ function toggleReference(id) {
     if (isVisible) {
         refPanel.classList.remove('is-visible');
         if (refBtn) {
-            refBtn.innerHTML = '◉ 参考答案';
+            refBtn.textContent = '◉ 参考答案';
             refBtn.classList.remove('is-active');
         }
     } else {
         if (refBody && !refBody.textContent.trim()) {
-            var answer = lab.getAttribute('data-answer') || '';
+            var answer = lab.getAttribute('data-answer') || '暂无参考答案';
             refBody.textContent = answer;
         }
         refPanel.classList.add('is-visible');
         if (refBtn) {
-            refBtn.innerHTML = '◉ 隐藏答案';
+            refBtn.textContent = '◉ 隐藏答案';
             refBtn.classList.add('is-active');
         }
     }
@@ -260,7 +239,7 @@ function initCodeLabs() {
             });
         }
 
-        // Tab 键支持
+        // Tab 键支持（插入4空格）
         if (textarea) {
             textarea.addEventListener('keydown', function (e) {
                 if (e.key === 'Tab') {
@@ -274,7 +253,7 @@ function initCodeLabs() {
             });
         }
 
-        // 按钮事件
+        // 按钮事件绑定
         var labId = lab.id;
         if (runBtn) runBtn.addEventListener('click', function () { runCode(labId); });
         if (clearBtn) clearBtn.addEventListener('click', function () { clearCode(labId); });
