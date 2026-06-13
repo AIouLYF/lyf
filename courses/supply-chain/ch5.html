@@ -214,9 +214,11 @@ print("MAE:", round(mae,2))</div>
 
 <script src="../../sidebar.js"></script>
 <script>
-  fetch("../../sidebar.html").then(r => r.text()).then(html => {
-    document.getElementById("sidebar-container").innerHTML = html;
-  });
+  fetch("../../sidebar.html").then(r=>r.text()).then(html=>{
+    document.getElementById("sidebar-container").outerHTML = html;
+    if(typeof initSidebar==='function') initSidebar();
+    if(typeof highlightCurrentNav==='function') highlightCurrentNav();
+});
 </script>
 </body>
 </html>

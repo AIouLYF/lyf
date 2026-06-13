@@ -50,6 +50,7 @@
     </style>
 </head>
 <body class="has-sidebar">
+    <div id="sidebar-container"></div>
 
     <div class="main-content">
         <div class="course-page">
@@ -188,8 +189,10 @@
     </div>
     <script src="../../sidebar.js"></script>
     <script>
-        fetch('../../sidebar.html').then(r => r.text()).then(html => {
-            document.body.insertAdjacentHTML('afterbegin', html);
+        fetch('../../sidebar.html').then(r=>r.text()).then(html=>{
+            document.getElementById('sidebar-container').outerHTML = html;
+            if(typeof initSidebar==='function') initSidebar();
+            if(typeof highlightCurrentNav==='function') highlightCurrentNav();
         });
     </script>
 </body>

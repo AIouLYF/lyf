@@ -72,6 +72,31 @@
   margin-bottom: 4px;
 }
 
+/* ---------- 发光圆点 ---------- */
+.code-lab-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #F9D342;
+    box-shadow: 0 0 6px rgba(249, 211, 66, 0.6);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ---------- 空状态提示 ---------- */
+.code-lab-empty-state {
+    color: #555555;
+    font-style: italic;
+    font-size: 13px;
+    padding: 20px;
+    text-align: center;
+}
+
 /* ---------- 代码编辑区 ---------- */
 .code-lab-editor {
   display: flex;
@@ -348,27 +373,27 @@
 }
 
 /* ---------- 滚动条美化 ---------- */
-.code-lab-textarea-wrapper::-webkit-scrollbar,
+.code-lab-textarea-wrap::-webkit-scrollbar,
 .code-lab-output-body::-webkit-scrollbar,
 .code-lab-reference-body::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.code-lab-textarea-wrapper::-webkit-scrollbar-track,
+.code-lab-textarea-wrap::-webkit-scrollbar-track,
 .code-lab-output-body::-webkit-scrollbar-track,
 .code-lab-reference-body::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.code-lab-textarea-wrapper::-webkit-scrollbar-thumb,
+.code-lab-textarea-wrap::-webkit-scrollbar-thumb,
 .code-lab-output-body::-webkit-scrollbar-thumb,
 .code-lab-reference-body::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 3px;
 }
 
-.code-lab-textarea-wrapper::-webkit-scrollbar-thumb:hover,
+.code-lab-textarea-wrap::-webkit-scrollbar-thumb:hover,
 .code-lab-output-body::-webkit-scrollbar-thumb:hover,
 .code-lab-reference-body::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);

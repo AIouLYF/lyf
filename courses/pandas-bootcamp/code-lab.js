@@ -25,6 +25,8 @@ function preloadPyodide() {
             // 预加载 pandas 和 numpy
             return pyodide.loadPackage(['pandas', 'numpy']).then(function () {
                 console.log('Python 运行环境已就绪（含 pandas/numpy）');
+            }).catch(function (pkgErr) {
+                console.warn('pandas/numpy 加载失败:', pkgErr);
             });
         }).catch(function (err) {
             console.warn('Pyodide 加载失败，将使用模拟输出:', err);

@@ -193,9 +193,11 @@ print("准时率:", (df["配送时效"] &lt;= df["承诺时效"]).mean())</div>
 
 <script src="../../sidebar.js"></script>
 <script>
-  fetch("../../sidebar.html").then(r => r.text()).then(html => {
-    document.getElementById("sidebar-container").innerHTML = html;
-  });
+  fetch("../../sidebar.html").then(r=>r.text()).then(html=>{
+    document.getElementById("sidebar-container").outerHTML = html;
+    if(typeof initSidebar==='function') initSidebar();
+    if(typeof highlightCurrentNav==='function') highlightCurrentNav();
+});
 </script>
 </body>
 </html>

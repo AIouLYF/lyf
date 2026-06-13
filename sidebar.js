@@ -43,7 +43,6 @@ function fixSidebarLinks() {
     const path = window.location.pathname;
     // 判断当前页面是否在 courses/ 子目录中
     const inCourses = path.includes('/courses/');
-    const depth = (path.match(/\//g) || []).length;
     // 计算需要回退几层：courses/python/ch1.html -> 需要回退到根目录
     const sidebar = document.querySelector('.sidebar');
     if (!sidebar) return;

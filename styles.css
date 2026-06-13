@@ -1243,6 +1243,10 @@ ul {
         grid-template-columns: 1fr;
     }
 
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
     .about-content {
         grid-template-columns: 1fr;
         gap: 32px;
