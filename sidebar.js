@@ -36,6 +36,99 @@ function initSidebar() {
 
     // 高亮当前页面
     highlightCurrentNav();
+
+    // SPA式导航：点击链接时不刷新整个页面
+    enableSmoothNavigation();
+}
+
+// SPA式导航：fetch加载页面内容，不刷新侧边栏
+function enableSmoothNavigation() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    sidebar.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('javascript')) return;
+
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // 在移动端自动关闭侧边栏
+            const sidebarEl = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            if (sidebarEl) sidebarEl.classList.remove('open');
+            if (overlay) overlay.classList.remove('show');
+
+            // 显示加载状态
+            const mainContent = document.querySelector('.main-content') || document.querySelector('main') || document.body;
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.id = 'page-loading';
+            loadingOverlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(18,18,18,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;';
+            loadingOverlay.innerHTML = '<div style="color:#F9D342;font-size:14px;letter-spacing:0.1em;">页面加载中...</div>';
+            document.body.appendChild(loadingOverlay);
+
+            // fetch加载目标页面
+            fetch(href)
+                .then(function (response) {
+                    if (!response.ok) throw new Error('页面不存在');
+                    return response.text();
+                })
+                .then(function (html) {
+                    // 解析HTML，提取主要内容区域
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // 更新页面标题
+                    document.title = doc.title;
+
+                    // 替换body内容（保留sidebar）
+                    const newBody = doc.body;
+                    // 找到主内容区域（排除sidebar）
+                    const oldSidebar = document.querySelector('.sidebar');
+                    const newSidebar = newBody.querySelector('.sidebar');
+
+                    // 移除旧sidebar
+                    if (oldSidebar) oldSidebar.remove();
+                    if (newSidebar) newSidebar.remove();
+
+                    // 替换body内容
+                    document.body.innerHTML = newBody.innerHTML;
+
+                    // 重新插入sidebar
+                    if (oldSidebar) {
+                        document.body.prepend(oldSidebar);
+                    }
+
+                    // 更新URL（不刷新）
+                    history.pushState({}, '', href);
+
+                    // 重新初始化sidebar
+                    if (typeof initSidebar === 'function') initSidebar();
+
+                    // 重新初始化code-lab（如果有的话）
+                    if (typeof initCodeLabs === 'function') initCodeLabs();
+
+                    // 滚动到顶部
+                    window.scrollTo(0, 0);
+
+                    // 移除加载状态
+                    const loading = document.getElementById('page-loading');
+                    if (loading) loading.remove();
+                })
+                .catch(function (err) {
+                    // 加载失败，回退到普通跳转
+                    console.warn('SPA导航失败，回退到普通跳转:', err);
+                    const loading = document.getElementById('page-loading');
+                    if (loading) loading.remove();
+                    window.location.href = href;
+                });
+        });
+    });
+
+    // 处理浏览器前进/后退
+    window.addEventListener('popstate', function () {
+        window.location.reload();
+    });
 }
 
 // 根据当前页面深度修正侧边栏中的链接路径
