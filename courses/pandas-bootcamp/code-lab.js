@@ -1,7 +1,42 @@
 /**
- * Code Lab - 代码练习交互逻辑（轻量版，无需 Python 运行时）
- * 点击"运行代码"显示模拟输出，支持代码比对
+ * Code Lab - 代码练习交互逻辑（Pyodide 后台预加载版）
+ * 页面加载时自动在后台下载 Python 运行环境
+ * 用户点击"运行代码"时环境已就绪，无需等待
  */
+
+/* ========== Pyodide 后台预加载 ========== */
+var pyodideInstance = null;
+var pyodideReady = false;
+var pyodideFailed = false;
+var pyodideLoadStarted = false;
+
+function preloadPyodide() {
+    if (pyodideLoadStarted) return;
+    pyodideLoadStarted = true;
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+    script.onload = function () {
+        loadPyodide({
+            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
+        }).then(function (pyodide) {
+            pyodideInstance = pyodide;
+            pyodideReady = true;
+            // 预加载 pandas 和 numpy
+            return pyodide.loadPackage(['pandas', 'numpy']).then(function () {
+                console.log('Python 运行环境已就绪（含 pandas/numpy）');
+            });
+        }).catch(function (err) {
+            console.warn('Pyodide 加载失败，将使用模拟输出:', err);
+            pyodideFailed = true;
+        });
+    };
+    script.onerror = function () {
+        console.warn('Pyodide 脚本加载失败，将使用模拟输出');
+        pyodideFailed = true;
+    };
+    document.head.appendChild(script);
+}
 
 /* ========== 工具函数 ========== */
 function getCodeLab(id) {
@@ -28,7 +63,7 @@ function syncScroll(textarea, lineNumbers) {
     lineNumbers.scrollTop = textarea.scrollTop;
 }
 
-/* ========== 核心：运行代码 ========== */
+/* ========== 核心：运行代码（真实 Python 执行） ========== */
 function runCode(id) {
     var lab = getCodeLab(id);
     if (!lab) return;
@@ -41,109 +76,101 @@ function runCode(id) {
     var code = textarea.value.trim();
     if (!code) {
         outputBody.innerHTML = '<span style="color:#7A7A7A;font-style:italic;">请先编写代码再运行</span>';
-        outputBody.classList.remove('is-empty', 'is-success');
+        outputBody.classList.remove('is-empty', 'is-success', 'is-warning');
         return;
     }
 
-    // 显示运行中状态
+    // 按钮状态
     if (runBtn) {
         runBtn.disabled = true;
-        runBtn.textContent = '⏳ 运行中...';
     }
     outputBody.innerHTML = '';
-    outputBody.classList.remove('is-empty', 'is-success');
+    outputBody.classList.remove('is-empty', 'is-success', 'is-warning');
 
-    // 模拟短暂运行延迟
-    setTimeout(function () {
-        if (runBtn) {
-            runBtn.disabled = false;
-            runBtn.textContent = '▶ 运行代码';
-        }
-
-        // 获取预定义输出
-        var predefinedOutput = lab.getAttribute('data-output') || '';
-        var referenceAnswer = lab.getAttribute('data-answer') || '';
-
-        // 简单比对：去除空白后比较
-        var userCodeNorm = code.replace(/\s+/g, ' ').trim().toLowerCase();
-        var refCodeNorm = referenceAnswer.replace(/\s+/g, ' ').trim().toLowerCase();
-
-        var resultText;
-        var isCorrect = false;
-
-        if (refCodeNorm && userCodeNorm === refCodeNorm) {
-            // 代码完全匹配参考答案
-            resultText = predefinedOutput;
-            isCorrect = true;
-        } else if (refCodeNorm && isSimilar(userCodeNorm, refCodeNorm)) {
-            // 代码相似度较高（核心逻辑一致）
-            resultText = predefinedOutput;
-            isCorrect = true;
-        } else {
-            // 代码不匹配，仍然显示预期输出供参考
-            resultText = predefinedOutput + '\n\n--- 提示：输出结果为预期结果，你的代码可能与参考答案不同，请检查逻辑或点击"参考答案"查看 ---';
-        }
-
-        // 逐行显示输出
-        displayOutput(outputBody, resultText, isCorrect);
-    }, 600);
+    if (pyodideReady && pyodideInstance) {
+        // 环境已就绪，直接运行
+        executePython(lab, code, outputBody, runBtn);
+    } else if (pyodideFailed) {
+        // 加载失败，使用模拟输出
+        runBtn.disabled = false;
+        runWithFallback(lab, code, outputBody);
+    } else {
+        // 正在加载中，等待
+        outputBody.innerHTML = '<span style="color:#F9D342;">⏳ Python 环境正在后台加载，请稍候...</span>';
+        waitForPyodide(function () {
+            if (pyodideReady && pyodideInstance) {
+                executePython(lab, code, outputBody, runBtn);
+            } else {
+                runBtn.disabled = false;
+                runWithFallback(lab, code, outputBody);
+            }
+        });
+    }
 }
 
-/* 简单相似度判断：检查核心pandas函数是否一致 */
-function isSimilar(userCode, refCode) {
-    // 提取关键函数调用
-    var patterns = [
-        /pd\.read_\w+/g,
-        /df\.\w+/g,
-        /print\s*\(/g,
-        /\.head\s*\(/g,
-        /\.info\s*\(/g,
-        /\.describe\s*\(/g,
-        /\.groupby\s*\(/g,
-        /\.merge\s*\(/g,
-        /\.concat\s*\(/g,
-        /\.pivot_table\s*\(/g,
-        /\.crosstab\s*\(/g,
-        /\.drop_duplicates\s*\(/g,
-        /\.fillna\s*\(/g,
-        /\.astype\s*\(/g,
-        /\.rename\s*\(/g,
-        /\.sort_values\s*\(/g,
-        /\.value_counts\s*\(/g,
-        /\.apply\s*\(/g,
-        /\.agg\s*\(/g,
-        /\.resample\s*\(/g,
-        /\.rolling\s*\(/g,
-        /\.plot\s*\./g,
-        /import\s+\w+/g,
-        /from\s+\w+\s+import/g
-    ];
+function waitForPyodide(callback) {
+    var maxWait = 30000; // 最多等30秒
+    var start = Date.now();
+    var check = setInterval(function () {
+        if (pyodideReady || pyodideFailed || (Date.now() - start) > maxWait) {
+            clearInterval(check);
+            callback();
+        }
+    }, 500);
+}
 
-    var userFuncs = [];
-    var refFuncs = [];
-    patterns.forEach(function (p) {
-        var u = userCode.match(p) || [];
-        var r = refCode.match(p) || [];
-        userFuncs = userFuncs.concat(u);
-        refFuncs = refFuncs.concat(r);
-    });
+/* 真实执行 Python 代码 */
+function executePython(lab, code, outputBody, runBtn) {
+    try {
+        // 构建代码：捕获 stdout/stderr
+        var wrappedCode = [
+            'import sys, io',
+            '_out = io.StringIO()',
+            '_err = io.StringIO()',
+            'sys.stdout = _out',
+            'sys.stderr = _err',
+            'try:',
+            code.replace(/^/gm, '    '),
+            'except Exception as e:',
+            '    print(repr(e), file=sys.stderr)',
+            'sys.stdout = sys.__stdout__',
+            'sys.stderr = sys.__stderr__',
+            '_result_out = _out.getvalue()',
+            '_result_err = _err.getvalue()',
+        ].join('\n');
 
-    // 去重排序后比较
-    userFuncs = Array.from(new Set(userFuncs)).sort().join(',');
-    refFuncs = Array.from(new Set(refFuncs)).sort().join(',');
+        pyodideInstance.runPython(wrappedCode);
 
-    if (!refFuncs) return false;
-    // 如果用户代码包含了参考答案中大部分关键函数
-    var refArr = refFuncs.split(',');
-    var matchCount = 0;
-    refArr.forEach(function (f) {
-        if (userFuncs.indexOf(f) !== -1) matchCount++;
-    });
-    return matchCount >= refArr.length * 0.6;
+        var stdout = pyodideInstance.globals.get('_result_out') || '';
+        var stderr = pyodideInstance.globals.get('_result_err') || '';
+
+        var result = '';
+        if (stdout) result += stdout;
+        if (stderr) {
+            if (result) result += '\n';
+            result += '[错误] ' + stderr;
+        }
+        if (!result) result = '(代码已执行，无输出内容)';
+
+        displayOutput(outputBody, result, true);
+    } catch (err) {
+        displayOutput(outputBody, '[执行错误] ' + err.message, false);
+    }
+
+    if (runBtn) {
+        runBtn.disabled = false;
+        runBtn.textContent = '▶ 运行代码';
+    }
+}
+
+/* 后备方案：模拟输出 */
+function runWithFallback(lab, code, outputBody) {
+    var predefinedOutput = lab.getAttribute('data-output') || '（运行环境不可用）';
+    displayOutput(outputBody, predefinedOutput + '\n\n--- 提示：Python 环境加载失败，显示预期输出 ---', false);
 }
 
 /* 逐行动画显示输出 */
-function displayOutput(outputBody, text, isCorrect) {
+function displayOutput(outputBody, text, isSuccess) {
     outputBody.innerHTML = '';
     outputBody.classList.remove('is-empty');
 
@@ -158,9 +185,8 @@ function displayOutput(outputBody, text, isCorrect) {
             outputBody.appendChild(span);
 
             if (index === lines.length - 1) {
-                outputBody.classList.add(isCorrect ? 'is-success' : 'is-warning');
+                outputBody.classList.add(isSuccess ? 'is-success' : 'is-warning');
             }
-
             outputBody.scrollTop = outputBody.scrollHeight;
         }, delay);
         delay += 15;
@@ -219,6 +245,10 @@ function toggleReference(id) {
 
 /* ========== 初始化 ========== */
 function initCodeLabs() {
+    // 后台预加载 Python 运行环境
+    preloadPyodide();
+
+    // 初始化所有代码练习
     var labs = document.querySelectorAll('.code-lab');
 
     labs.forEach(function (lab) {
@@ -239,7 +269,7 @@ function initCodeLabs() {
             });
         }
 
-        // Tab 键支持（插入4空格）
+        // Tab 键支持
         if (textarea) {
             textarea.addEventListener('keydown', function (e) {
                 if (e.key === 'Tab') {
@@ -253,7 +283,7 @@ function initCodeLabs() {
             });
         }
 
-        // 按钮事件绑定
+        // 按钮事件
         var labId = lab.id;
         if (runBtn) runBtn.addEventListener('click', function () { runCode(labId); });
         if (clearBtn) clearBtn.addEventListener('click', function () { clearCode(labId); });
