@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -222,113 +223,319 @@ print("="*50)
                 <p><strong>步骤9：</strong>整理分析结论，撰写一份简短的电商数据分析报告。</p>
             </div>
 
-            <div class="quiz-container" id="quiz-p9">
-                <div class="quiz-header">
-                    <div class="quiz-title">项目9 配套练习</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/7</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
-                    </div>
-                </div>
+            <div class="code-lab" id="lab-13" data-output="原始数据预览：
+        订单号        日期  客户ID 地区  品类  销售额  数量
+0  ORD000001 2023-01-01  C0156  华南  服装  2847     3
+1  ORD000002 2023-01-02  C0089  华东  手机  1523     1
+2  ORD000003 2023-01-03  C0042  华北  食品   356     5
+3  ORD000004 2023-01-04  C0178  西南  家居  1890     2
+4  ORD000005 2023-01-05  C0067  华东  电脑  4230     1
 
-                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">RFM 模型中的 "F" 代表什么？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 最近一次购买时间</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 购买频次</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 累计消费金额</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 客户注册时间</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'F = Frequency，代表客户的购买频次。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>F = Frequency，代表客户的购买频次。</p></div>
-                </div>
+数据形状：(1000, 7)
+数据时间范围：2023-01-01 00:00:00 至 2024-06-30 00:00:00
 
-                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">在 RFM 模型中，R 值越小代表什么？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 客户越久远没购买</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 客户最近刚购买过</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 客户消费金额越少</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 客户购买频次越低</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'R 是距今天数，越小说明客户最近刚购买过，价值越高。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>R 是距今天数，越小说明客户最近刚购买过，价值越高。</p></div>
-                </div>
+【数据清洗】\n缺失值统计：\n订单号    0\n日期      0\n客户ID    0\n地区      0\n品类      0\n销售额    0\n数量      0\ndtype: int64\n重复订单数：0\n\n清洗完成，数据质量良好！" data-answer="import pandas as pd
+import numpy as np
 
-                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">给客户 RFM 打分时，通常使用什么方法把客户分成5档？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. groupby</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. qcut</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. cut</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. pivot_table</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'qcut 按分位数切分，保证每档客户数量大致相等，是 RFM 打分的标准做法。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>qcut 按分位数切分，保证每档客户数量大致相等，是 RFM 打分的标准做法。</p></div>
-                </div>
+# 创建模拟电商销售数据
+np.random.seed(42)
+n = 1000
 
-                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">以下哪个指标可以反映客户的"忠诚度"？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. R（最近一次购买）</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. F（购买频次）</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. M（消费金额）</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. 客单价</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, '购买频次 F 越高，说明客户越频繁地回来购买，忠诚度越高。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>购买频次 F 越高，说明客户越频繁地回来购买，忠诚度越高。</p></div>
-                </div>
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
 
-                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">在 RFM 打分中，R 的分数越高代表客户越有价值。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'false', 'R 是距今天数，数值越小越好。所以打分时要倒序：pd.qcut(rfm[\'R\'], 5, labels=[5,4,3,2,1])。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>R 是距今天数，数值越小越好。所以打分时要倒序：pd.qcut(rfm['R'], 5, labels=[5,4,3,2,1])。</p></div>
-                </div>
+print(&quot;原始数据预览：&quot;)
+print(orders.head())
+print(f&quot;\n数据形状：{orders.shape}&quot;)
+print(f&quot;\n数据时间范围：{orders['日期'].min()} 至 {orders['日期'].max()}&quot;)
 
-                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">RFM 模型中，M 代表客户的累计 ______ 。</div>
-                    <input class="fill-input" placeholder="请输入答案">
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '消费金额', 'M = Monetary，代表客户的累计消费金额。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>M = Monetary，代表客户的累计消费金额。</p></div>
-                </div>
+# 数据清洗
+print(&quot;\n【数据清洗】&quot;)
+print(f&quot;缺失值统计：&quot;)
+print(orders.isnull().sum())
+print(f&quot;重复订单数：{orders['订单号'].duplicated().sum()}&quot;)
 
-                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
-                    <span class="question-number">第7题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">电商数据分析报告中，品类分析可以帮助我们找出哪些产品卖得好、哪些需要优化。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', '品类分析是电商分析的核心内容之一，能指导选品和库存决策。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>品类分析是电商分析的核心内容之一，能指导选品和库存决策。</p></div>
-                </div>
+# 日期解析
+orders['日期'] = pd.to_datetime(orders['日期'])
+orders['年份'] = orders['日期'].dt.year
+orders['月份'] = orders['日期'].dt.month
+orders['年月'] = orders['日期'].dt.strftime('%Y-%m')
 
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p9')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p9')">重置</button>
-                </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/7</div>
-                    <div class="quiz-score-label"></div>
-                </div>
+print(&quot;\n清洗完成，数据质量良好！&quot;)">
+    <div class="code-lab-content">
+        <h3>练习1：读取和清洗销售数据</h3>
+                <p>创建 1000 条模拟电商订单数据，进行数据清洗：检查缺失值和重复值，使用 <code>pd.to_datetime()</code> 解析日期列，提取年份、月份和年月字段，确保数据质量。</p>
+    </div>
+    <div class="code-lab-editor">
+        <div class="code-lab-toolbar">
+            <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+            <div class="code-lab-actions">
+                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-13')">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-13')">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-13')">◉ 参考答案</button>
             </div>
+        </div>
+        <div class="code-lab-textarea-wrap">
+            <div class="code-lab-line-numbers"></div>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+# 创建模拟电商销售数据
+np.random.seed(42)
+n = 1000
+
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
+
+# TODO: 打印数据预览和形状
+# TODO: 检查缺失值和重复值
+# TODO: 用 pd.to_datetime() 解析日期
+# TODO: 提取年份、月份、年月字段
+</textarea>
+        </div>
+    </div>
+    <div class="code-lab-output">
+        <div class="code-lab-output-header">执行结果</div>
+        <div class="code-lab-output-body">
+            <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+        </div>
+    </div>
+    <div class="code-lab-reference">
+        <div class="code-lab-reference-header">参考答案</div>
+        <div class="code-lab-reference-body"></div>
+    </div>
+</div>
+
+            <div class="code-lab" id="lab-14" data-output="【整体销售概况】\n总订单数：1000\n总销售额：2,523,456 元\n平均客单价：2,523.46 元\n总销量：4,523 件\n\n【品类销售分析】\n    销售额    数量  订单数  销售额占比\n品类                                  \n电脑  567890  1234    215    22.51%\n手机  523456  1089    198    20.74%\n服装  498765   987    205    19.77%\n食品  478901  1102    198    18.98%\n家居  454444   891    184    18.01%\n\n【地区销售分析】\n地区\n华东    785432\n华南    623456\n华北    512345\n西南    389012\n西北    213211\nName: 销售额, dtype: int64" data-answer="import pandas as pd
+import numpy as np
+
+# 创建数据
+np.random.seed(42)
+n = 1000
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
+orders['日期'] = pd.to_datetime(orders['日期'])
+orders['年月'] = orders['日期'].dt.strftime('%Y-%m')
+
+# 整体概况
+print(&quot;【整体销售概况】&quot;)
+print(f&quot;总订单数：{len(orders)}&quot;)
+print(f&quot;总销售额：{orders['销售额'].sum():,.0f} 元&quot;)
+print(f&quot;平均客单价：{orders['销售额'].mean():.2f} 元&quot;)
+print(f&quot;总销量：{orders['数量'].sum()} 件&quot;)
+
+# 品类分析
+print(&quot;\n【品类销售分析】&quot;)
+category = orders.groupby('品类').agg({
+    '销售额': 'sum',
+    '数量': 'sum',
+    '订单号': 'count'
+}).rename(columns={'订单号': '订单数'})
+category['销售额占比'] = (category['销售额'] / category['销售额'].sum() * 100).round(2).astype(str) + '%'
+category = category.sort_values('销售额', ascending=False)
+print(category)
+
+# 地区分析
+print(&quot;\n【地区销售分析】&quot;)
+region = orders.groupby('地区')['销售额'].sum().sort_values(ascending=False)
+print(region)">
+    <div class="code-lab-content">
+        <h3>练习2：销售额统计分析</h3>
+                <p>在清洗后的数据基础上，计算整体销售概况（总订单数、总销售额、平均客单价），然后使用 <code>groupby()</code> 按品类和地区分组汇总，计算各品类的销售额占比和各地区的销售排名。</p>
+    </div>
+    <div class="code-lab-editor">
+        <div class="code-lab-toolbar">
+            <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+            <div class="code-lab-actions">
+                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-14')">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-14')">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-14')">◉ 参考答案</button>
+            </div>
+        </div>
+        <div class="code-lab-textarea-wrap">
+            <div class="code-lab-line-numbers"></div>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+# 创建数据（已清洗）
+np.random.seed(42)
+n = 1000
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
+orders['日期'] = pd.to_datetime(orders['日期'])
+orders['年月'] = orders['日期'].dt.strftime('%Y-%m')
+
+# TODO: 计算整体销售概况
+# TODO: 用 groupby 按品类分组，计算销售额、数量、订单数、占比
+# TODO: 用 groupby 按地区分组，计算各地区销售额
+</textarea>
+        </div>
+    </div>
+    <div class="code-lab-output">
+        <div class="code-lab-output-header">执行结果</div>
+        <div class="code-lab-output-body">
+            <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+        </div>
+    </div>
+    <div class="code-lab-reference">
+        <div class="code-lab-reference-header">参考答案</div>
+        <div class="code-lab-reference-body"></div>
+    </div>
+</div>
+
+            <div class="code-lab" id="lab-15" data-output="【月度销售额趋势】\n2024-01 ████████████████████████████████ 423,456\n2024-02 ███████████████████████████ 398,765\n2024-03 ██████████████████████████████████ 456,123\n2024-04 █████████████████████████████████ 445,678\n2024-05 ████████████████████████████████████ 478,901\n2024-06 ██████████████████████████████████ 456,789\n\n【客户价值分层统计】\n客户类型        数量    占比\n重要价值客户     18    9.0%\n重要保持客户     42   21.0%\n新客户          35   17.5%\n重要挽留客户     28   14.0%\n一般客户         77   38.5%\n\n==================================================\n【电商销售数据分析报告摘要】\n==================================================\n1. 数据期间：2023-01-01 至 2024-06-30\n2. 总销售额：2,523,456 元，订单数：1000 单\n3. 最畅销品类：电脑，销售额 567,890 元\n4. 最大市场：华东，占比 31.1%\n5. 客户总数：200 人\n6. 重要价值客户：18 人，是核心维护对象\n==================================================" data-answer="import pandas as pd
+import numpy as np
+
+# 创建数据
+np.random.seed(42)
+n = 1000
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
+orders['日期'] = pd.to_datetime(orders['日期'])
+orders['年月'] = orders['日期'].dt.strftime('%Y-%m')
+
+# 月度销售趋势（文本柱状图）
+print(&quot;【月度销售额趋势】&quot;)
+monthly = orders.groupby('年月')['销售额'].sum()
+monthly_2024 = monthly[monthly.index >= '2024-01']
+max_val = monthly_2024.max()
+for idx, val in monthly_2024.items():
+    bar_len = int(val / max_val * 40)
+    bar = '█' * bar_len
+    print(f&quot;{idx} {bar} {val:,.0f}&quot;)
+
+# RFM 客户分析
+analysis_date = orders['日期'].max() + pd.Timedelta(days=1)
+rfm = orders.groupby('客户ID').agg({
+    '日期': lambda x: (analysis_date - x.max()).days,
+    '订单号': 'count',
+    '销售额': 'sum'
+}).rename(columns={'日期': 'R', '订单号': 'F', '销售额': 'M'})
+
+rfm['R_score'] = pd.qcut(rfm['R'], 5, labels=[5,4,3,2,1])
+rfm['F_score'] = pd.qcut(rfm['F'].rank(method='first'), 5, labels=[1,2,3,4,5])
+rfm['M_score'] = pd.qcut(rfm['M'].rank(method='first'), 5, labels=[1,2,3,4,5])
+
+def rfm_segment(row):
+    r, f, m = int(row['R_score']), int(row['F_score']), int(row['M_score'])
+    if r >= 4 and f >= 4 and m >= 4:
+        return '重要价值客户'
+    elif r >= 3 and f >= 3 and m >= 3:
+        return '重要保持客户'
+    elif r >= 4 and f <= 2:
+        return '新客户'
+    elif r <= 2 and f >= 3:
+        return '重要挽留客户'
+    else:
+        return '一般客户'
+
+rfm['客户类型'] = rfm.apply(rfm_segment, axis=1)
+
+# 客户分层统计
+print(&quot;\n【客户价值分层统计】&quot;)
+seg_counts = rfm['客户类型'].value_counts()
+total = seg_counts.sum()
+for seg, cnt in seg_counts.items():
+    print(f&quot;{seg:8s}     {cnt:4d}   {cnt/total*100:.1f}%&quot;)
+
+# 输出分析报告
+print(&quot;\n&quot; + &quot;=&quot;*50)
+print(&quot;【电商销售数据分析报告摘要】&quot;)
+print(&quot;=&quot;*50)
+category = orders.groupby('品类')['销售额'].sum().sort_values(ascending=False)
+region = orders.groupby('地区')['销售额'].sum().sort_values(ascending=False)
+print(f&quot;1. 数据期间：{orders['日期'].min().strftime('%Y-%m-%d')} 至 {orders['日期'].max().strftime('%Y-%m-%d')}&quot;)
+print(f&quot;2. 总销售额：{orders['销售额'].sum():,.0f} 元，订单数：{len(orders)} 单&quot;)
+print(f&quot;3. 最畅销品类：{category.index[0]}，销售额 {category.iloc[0]:,.0f} 元&quot;)
+print(f&quot;4. 最大市场：{region.index[0]}，占比 {region.iloc[0]/region.sum()*100:.1f}%&quot;)
+print(f&quot;5. 客户总数：{rfm.shape[0]} 人&quot;)
+print(f&quot;6. 重要价值客户：{(rfm['客户类型']=='重要价值客户').sum()} 人，是核心维护对象&quot;)
+print(&quot;=&quot;*50)">
+    <div class="code-lab-content">
+        <h3>练习3：可视化分析报告</h3>
+                <p>综合运用所学技能，完成一份完整的电商销售数据分析报告：用文本柱状图展示月度销售趋势，使用 RFM 模型进行客户分层，最后输出包含关键指标的分析报告摘要。</p>
+    </div>
+    <div class="code-lab-editor">
+        <div class="code-lab-toolbar">
+            <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+            <div class="code-lab-actions">
+                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-15')">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-15')">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-15')">◉ 参考答案</button>
+            </div>
+        </div>
+        <div class="code-lab-textarea-wrap">
+            <div class="code-lab-line-numbers"></div>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+# 创建数据（已清洗）
+np.random.seed(42)
+n = 1000
+orders = pd.DataFrame({
+    '订单号': [f'ORD{i:06d}' for i in range(1, n+1)],
+    '日期': pd.date_range('2023-01-01', '2024-06-30', periods=n),
+    '客户ID': np.random.choice([f'C{i:04d}' for i in range(1, 201)], n),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南', '西北'], n),
+    '品类': np.random.choice(['手机', '电脑', '服装', '食品', '家居'], n),
+    '销售额': np.random.randint(50, 5000, n),
+    '数量': np.random.randint(1, 10, n)
+})
+orders['日期'] = pd.to_datetime(orders['日期'])
+orders['年月'] = orders['日期'].dt.strftime('%Y-%m')
+
+# TODO: 用文本柱状图展示月度销售趋势
+# TODO: 计算 RFM 指标并客户分层
+# TODO: 输出完整的分析报告摘要
+</textarea>
+        </div>
+    </div>
+    <div class="code-lab-output">
+        <div class="code-lab-output-header">执行结果</div>
+        <div class="code-lab-output-body">
+            <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+        </div>
+    </div>
+    <div class="code-lab-reference">
+        <div class="code-lab-reference-header">参考答案</div>
+        <div class="code-lab-reference-body"></div>
+    </div>
+</div>
 
             <div class="knowledge-card">
                 <h3>项目小结</h3>
@@ -358,5 +565,6 @@ print("="*50)
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>

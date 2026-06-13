@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -140,8 +141,7 @@ print(ct2)
 # ========== 8. 归一化交叉表（占比） ==========
 print("\n【交叉表占比：每个地区的品类销售占比】")
 ct3 = pd.crosstab(df['地区'], df['品类'], normalize='index') * 100
-print(ct3.round(2))
-</div>
+print(ct3.round(2))</div>
             </div>
 
             <div class="knowledge-card">
@@ -156,111 +156,153 @@ print(ct3.round(2))
                 <p><strong>步骤8：</strong>尝试 <code>normalize='index'</code>，把交叉表变成百分比形式。</p>
             </div>
 
-            <div class="quiz-container" id="quiz-p6">
-                <div class="quiz-header">
-                    <div class="quiz-title">项目6 配套练习</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/7</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+            <div class="code-lab" id="lab-1" data-output="品类      服装    家电    日用品    饮料    食品\n地区                                          \n华东    27633  24823  19952  16793  24092\n华北    25254  23186  19448  21360  23631\n华南    27334  22190  24105  21174  23629\n西南    25811  23774  19761  22797  22758" data-answer="import pandas as pd\nimport numpy as np\n\nnp.random.seed(42)\ndata = {\n    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],\n    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),\n    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),\n    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),\n    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),\n    '销售额': np.random.randint(50, 2000, 100),\n    '数量': np.random.randint(1, 20, 100)\n}\ndf = pd.DataFrame(data)\n\n# 基础透视表：按地区和品类汇总销售额\npt = df.pivot_table(values='销售额', index='地区', columns='品类', aggfunc='sum')\nprint(pt)">
+                <div class="code-lab-content">
+                    <h3>练习1：基础 pivot_table 透视表</h3>
+                    <p>创建模拟销售数据后，使用 <code>df.pivot_table()</code> 按"地区"作为行、"品类"作为列，汇总"销售额"（求和）。观察二维透视表的结构。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-1')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-1')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-1')">&#9673; 参考答案</button>
+                        </div>
+                    </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+np.random.seed(42)
+data = {
+    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],
+    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),
+    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),
+    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),
+    '销售额': np.random.randint(50, 2000, 100),
+    '数量': np.random.randint(1, 20, 100)
+}
+df = pd.DataFrame(data)
+
+# 基础透视表：按地区和品类汇总销售额
+pt = df.pivot_table(values='销售额', index='地区', columns='品类', aggfunc='sum')
+print(pt)</textarea>
                     </div>
                 </div>
-
-                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text"><code>pivot_table()</code> 中，<code>aggfunc='sum'</code> 表示什么？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 计算平均值</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 计算总和</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 计算个数</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 计算最大值</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, 'aggfunc=sum 表示对分组后的数值求总和。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>aggfunc=sum 表示对分组后的数值求总和。</p></div>
                 </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
+                </div>
+            </div>
 
-                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">在透视表中，<code>index</code> 参数控制的是？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 表格最上方的列标题</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 表格最左边的行分组</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 要汇总的数值列</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 表格的标题</span></div>
+            <div class="code-lab" id="lab-2" data-output="品类  服装  家电  日用品  饮料  食品\n地区                              \n华东    20   19     18   16   19\n华北    18   17     17   19   18\n华南    20   17     20   19   18\n西南    19   19     17   20   18" data-answer="import pandas as pd\nimport numpy as np\n\nnp.random.seed(42)\ndata = {\n    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],\n    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),\n    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),\n    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),\n    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),\n    '销售额': np.random.randint(50, 2000, 100),\n    '数量': np.random.randint(1, 20, 100)\n}\ndf = pd.DataFrame(data)\n\n# 交叉表：统计各地区各品类的订单数量\nct = pd.crosstab(df['地区'], df['品类'])\nprint(ct)\n\n# 带销售额汇总的交叉表\nct2 = pd.crosstab(df['地区'], df['品类'], values=df['销售额'], aggfunc='sum').fillna(0)\nprint('\\n销售额汇总：')\nprint(ct2)\n\n# 占比交叉表\nct3 = pd.crosstab(df['地区'], df['品类'], normalize='index') * 100\nprint('\\n占比（%）：')\nprint(ct3.round(1))">
+                <div class="code-lab-content">
+                    <h3>练习2：交叉表 crosstab</h3>
+                    <p>使用 <code>pd.crosstab()</code> 统计各地区各品类的订单数量（默认计数），再尝试传入 <code>values</code> 和 <code>aggfunc='sum'</code> 汇总销售额，最后用 <code>normalize='index'</code> 计算每个地区的品类占比。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-2')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-2')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-2')">&#9673; 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, 'index 参数指定行方向的分组字段，会出现在表格最左边。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>index 参数指定行方向的分组字段，会出现在表格最左边。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
 
-                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">想要透视表自动显示"总计"行和"总计"列，应该使用哪个参数？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. total=True</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. margins=True</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. sum=True</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. all=True</span></div>
+np.random.seed(42)
+data = {
+    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],
+    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),
+    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),
+    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),
+    '销售额': np.random.randint(50, 2000, 100),
+    '数量': np.random.randint(1, 20, 100)
+}
+df = pd.DataFrame(data)
+
+# 交叉表：统计各地区各品类的订单数量
+ct = pd.crosstab(df['地区'], df['品类'])
+print(ct)</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 1, 'margins=True 会在透视表底部和右侧添加总计。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>margins=True 会在透视表底部和右侧添加总计。</p></div>
                 </div>
-
-                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text"><code>pd.crosstab()</code> 默认的聚合方式是什么？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. sum（求和）</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. mean（平均）</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. count（计数）</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. max（最大）</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 2, 'crosstab 默认统计出现的频次，即 count。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>crosstab 默认统计出现的频次，即 count。</p></div>
                 </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
+                </div>
+            </div>
 
-                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">多级索引就是把多个字段同时放到 index 参数中，用列表传入。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
+            <div class="code-lab" id="lab-3" data-output="                    服装    家电  日用品    饮料    食品\n地区 城市                                            \n华东 上海  14210  13141  10174  10003  12750\n    杭州  13423  11682   9778   6790  11342\n华北 北京  25254  23186  19448  21360  23631\n华南 广州  14212  11992  12047  11291  12639\n    深圳  13122  10198  12058   9883  10990\n西南 成都  25811  23774  19761  22797  22758" data-answer="import pandas as pd\nimport numpy as np\n\nnp.random.seed(42)\ndata = {\n    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],\n    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),\n    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),\n    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),\n    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),\n    '销售额': np.random.randint(50, 2000, 100),\n    '数量': np.random.randint(1, 20, 100)\n}\ndf = pd.DataFrame(data)\n\n# 多级索引透视表：地区+城市 × 品类\npt = df.pivot_table(\n    values='销售额',\n    index=['地区', '城市'],\n    columns='品类',\n    aggfunc='sum',\n    fill_value=0\n)\nprint(pt)\n\n# 带总计的透视表\npt2 = df.pivot_table(\n    values='销售额',\n    index='地区',\n    columns='品类',\n    aggfunc='sum',\n    margins=True,\n    margins_name='总计'\n)\nprint('\\n=== 带总计的透视表 ===')\nprint(pt2)">
+                <div class="code-lab-content">
+                    <h3>练习3：多级索引和边际汇总</h3>
+                    <p>使用 <code>index=['地区', '城市']</code> 创建多级索引透视表，观察行方向的二级分组效果。然后创建一个带 <code>margins=True</code> 的透视表，查看自动添加的总计行和总计列。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-3')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-3')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-3')">&#9673; 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'true', 'index=["地区","城市"] 会生成多级索引，先按地区分组，再按城市分组。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>index=["地区","城市"] 会生成多级索引，先按地区分组，再按城市分组。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
 
-                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">在 <code>pivot_table</code> 中，<code>columns</code> 参数对应的是表格的 ______ 方向。</div>
-                    <input class="fill-input" placeholder="请输入答案">
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '列', 'columns 参数控制表格的列方向分组。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>columns 参数控制表格的列方向分组。</p></div>
-                </div>
+np.random.seed(42)
+data = {
+    '订单号': [f'ORD{i:04d}' for i in range(1, 101)],
+    '日期': pd.date_range('2024-01-01', periods=100, freq='D'),
+    '地区': np.random.choice(['华东', '华南', '华北', '西南'], 100),
+    '城市': np.random.choice(['上海', '广州', '北京', '成都', '杭州', '深圳'], 100),
+    '品类': np.random.choice(['食品', '饮料', '日用品', '家电', '服装'], 100),
+    '销售额': np.random.randint(50, 2000, 100),
+    '数量': np.random.randint(1, 20, 100)
+}
+df = pd.DataFrame(data)
 
-                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
-                    <span class="question-number">第7题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text"><code>fill_value=0</code> 可以把透视表中的空值（NaN）替换成 0。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+# 多级索引透视表：地区+城市 × 品类
+pt = df.pivot_table(
+    values='销售额',
+    index=['地区', '城市'],
+    columns='品类',
+    aggfunc='sum',
+    fill_value=0
+)
+print(pt)</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', 'fill_value 参数用于填充透视表中因某些组合不存在而产生的 NaN 值。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>fill_value 参数用于填充透视表中因某些组合不存在而产生的 NaN 值。</p></div>
                 </div>
-
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p6')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p6')">重置</button>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+                    </div>
                 </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/7</div>
-                    <div class="quiz-score-label"></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
             </div>
 
@@ -292,5 +334,6 @@ print(ct3.round(2))
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>

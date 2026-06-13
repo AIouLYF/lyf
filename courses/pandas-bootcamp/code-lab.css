@@ -1,0 +1,411 @@
+/* ============================================
+   Code Lab - 终末地风格代码练习区域
+   深色主题 / 磨砂玻璃质感 / 发光边框
+   ============================================ */
+
+/* ---------- 整体容器 ---------- */
+.code-lab {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(51, 51, 51, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.code-lab:hover {
+  border-color: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.06), 0 0 60px rgba(0, 229, 255, 0.03);
+}
+
+/* ---------- 课程内容 / 知识点区域 ---------- */
+.code-lab-content {
+  padding: 20px 24px;
+  color: #B0B0B0;
+  font-size: 15px;
+  line-height: 1.7;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-lab-content h3 {
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code-lab-content h3::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #F9D342, #00E5FF);
+}
+
+.code-lab-content p {
+  margin: 0 0 8px 0;
+}
+
+.code-lab-content code {
+  background: rgba(0, 229, 255, 0.1);
+  color: #00E5FF;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+}
+
+.code-lab-content ul,
+.code-lab-content ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.code-lab-content li {
+  margin-bottom: 4px;
+}
+
+/* ---------- 代码编辑区 ---------- */
+.code-lab-editor {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 工具栏 --- */
+.code-lab-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 文件标签 */
+.code-lab-file-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #7A7A7A;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  user-select: none;
+}
+
+.code-lab-file-tab::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F9D342;
+  box-shadow: 0 0 6px rgba(249, 211, 66, 0.4);
+}
+
+/* 按钮组 */
+.code-lab-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 通用按钮基础 */
+.code-lab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.code-lab-btn:active {
+  transform: scale(0.96);
+}
+
+/* 运行代码 - 绿色 */
+.code-lab-btn--run {
+  background: #22c55e;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+}
+
+.code-lab-btn--run:hover {
+  background: #16a34a;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+/* 清除内容 - 橙色 */
+.code-lab-btn--clear {
+  background: #f97316;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
+}
+
+.code-lab-btn--clear:hover {
+  background: #ea580c;
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+}
+
+/* 参考答案 - 紫色 */
+.code-lab-btn--ref {
+  background: #a855f7;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.code-lab-btn--ref:hover {
+  background: #9333ea;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+.code-lab-btn--ref.is-active {
+  background: #7e22ce;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+/* --- 代码输入框（textarea + 行号） --- */
+.code-lab-textarea-wrapper {
+  position: relative;
+  display: flex;
+  min-height: 200px;
+  background: #0A0A0A;
+}
+
+/* 行号 */
+.code-lab-line-numbers {
+  flex-shrink: 0;
+  width: 48px;
+  padding: 14px 8px 14px 0;
+  text-align: right;
+  color: #7A7A7A;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  user-select: none;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.code-lab-textarea {
+  flex: 1;
+  width: 100%;
+  padding: 14px 16px;
+  background: transparent;
+  color: #FFFFFF;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  border: none;
+  outline: none;
+  resize: vertical;
+  min-height: 200px;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-lab-textarea::placeholder {
+  color: #7A7A7A;
+}
+
+.code-lab-textarea::selection {
+  background: rgba(0, 229, 255, 0.2);
+}
+
+/* ---------- 运行结果区 ---------- */
+.code-lab-output {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-lab-output-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #B0B0B0;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  user-select: none;
+}
+
+.code-lab-output-header::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+}
+
+.code-lab-output-body {
+  padding: 14px 16px;
+  min-height: 60px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: #0A0A0A;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #B0B0B0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 空状态提示 */
+.code-lab-output-body.is-empty::before {
+  content: '点击 "运行代码" 查看输出结果...';
+  color: #7A7A7A;
+  font-style: italic;
+}
+
+/* 运行成功状态 */
+.code-lab-output-body.is-success {
+  color: #22c55e;
+}
+
+/* 运行动画 - 逐行显示 */
+.code-lab-output-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(4px);
+  animation: codeLabFadeIn 0.15s ease forwards;
+}
+
+@keyframes codeLabFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- 参考答案区 ---------- */
+.code-lab-reference {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.code-lab-reference.is-visible {
+  max-height: 600px;
+}
+
+.code-lab-reference-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #B0B0B0;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  user-select: none;
+}
+
+.code-lab-reference-header::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+}
+
+.code-lab-reference-body {
+  padding: 14px 16px;
+  background: #111318;
+  border-left: 3px solid #a855f7;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d4d4d4;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+/* ---------- 滚动条美化 ---------- */
+.code-lab-textarea-wrapper::-webkit-scrollbar,
+.code-lab-output-body::-webkit-scrollbar,
+.code-lab-reference-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.code-lab-textarea-wrapper::-webkit-scrollbar-track,
+.code-lab-output-body::-webkit-scrollbar-track,
+.code-lab-reference-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-lab-textarea-wrapper::-webkit-scrollbar-thumb,
+.code-lab-output-body::-webkit-scrollbar-thumb,
+.code-lab-reference-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+
+.code-lab-textarea-wrapper::-webkit-scrollbar-thumb:hover,
+.code-lab-output-body::-webkit-scrollbar-thumb:hover,
+.code-lab-reference-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- 响应式适配 ---------- */
+@media (max-width: 640px) {
+  .code-lab-content {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .code-lab-toolbar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .code-lab-actions {
+    gap: 6px;
+  }
+
+  .code-lab-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .code-lab-line-numbers {
+    width: 36px;
+    font-size: 12px;
+  }
+
+  .code-lab-textarea {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .code-lab-output-body,
+  .code-lab-reference-body {
+    font-size: 12px;
+    padding: 12px;
+  }
+}

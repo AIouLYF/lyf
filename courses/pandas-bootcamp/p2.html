@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -157,110 +158,145 @@ A009,U107,678.0,,2024-01-21
 A010,U108,0.0,上海,2024-01-22</div>
             </div>
 
-            <div class="quiz-container" id="quiz-p2">
-                <div class="quiz-header">
-                    <div class="quiz-title">交互式练习题</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/7</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+            <div class="code-lab" id="lab-1" data-output="订单号      0\n用户ID     0\n金额        2\n省份        2\n下单时间     0\ndtype: int64\n\n=== 填充后的金额列 ===\n0     299.5\n1     150.0\n2     -50.0\n3     899.0\n4     299.5\n5     438.5\n6    120000.0\n7      45.0\n8     678.0\n9       0.0\nName: 金额, dtype: float64\n\n=== 填充后的省份列 ===\n0    广东\n1    广东\n2    浙江\n3    江苏\n4    广东\n5    广东\n6    北京\n7    四川\n8    广东\n9    上海\nName: 省份, dtype: object" data-answer="import pandas as pd\nimport io\ndata = '''订单号,用户ID,金额,省份,下单时间\nA001,U100,299.5,广东,2024-01-15\nA002,U101,150.0,,2024-01-16\nA003,U102,-50.0,浙江,2024-01-16\nA004,U103,899.0,江苏,2024-01-17\nA005,U100,299.5,广东,2024-01-15\nA006,U104,,广东,2024-01-18\nA007,U105,120000.0,北京,2024-01-19\nA008,U106,45.0,四川,2024-01-20\nA009,U107,678.0,,2024-01-21\nA010,U108,0.0,上海,2024-01-22'''\ndf = pd.read_csv(io.StringIO(data))\n\n# 第一步：检查每列缺失值数量\nprint(df.isnull().sum())\n\n# 第二步：用平均值填充金额列的缺失值\ndf['金额'] = df['金额'].fillna(df['金额'].mean())\nprint()\nprint('=== 填充后的金额列 ===')\nprint(df['金额'])\n\n# 第三步：用众数填充省份列的缺失值\nmode_province = df['省份'].mode()[0]\ndf['省份'] = df['省份'].fillna(mode_province)\nprint()\nprint('=== 填充后的省份列 ===')\nprint(df['省份'])">
+                <div class="code-lab-content">
+                    <h3>练习1：检查和处理缺失值</h3>
+                    <p>使用 <code>isnull().sum()</code> 检查每列的缺失值数量，然后用 <code>fillna()</code> 分别处理：金额列用平均值填充，省份列用众数填充。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-1')">▶ 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-1')">✕ 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-1')">◉ 参考答案</button>
+                        </div>
+                    </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+data = '''订单号,用户ID,金额,省份,下单时间
+A001,U100,299.5,广东,2024-01-15
+A002,U101,150.0,,2024-01-16
+A003,U102,-50.0,浙江,2024-01-16
+A004,U103,899.0,江苏,2024-01-17
+A005,U100,299.5,广东,2024-01-15
+A006,U104,,广东,2024-01-18
+A007,U105,120000.0,北京,2024-01-19
+A008,U106,45.0,四川,2024-01-20
+A009,U107,678.0,,2024-01-21
+A010,U108,0.0,上海,2024-01-22'''
+df = pd.read_csv(io.StringIO(data))
+
+# 请在此处检查缺失值并进行填充处理
+</textarea>
                     </div>
                 </div>
-
-                <div class="quiz-question" id="p2-q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">统计每列缺失值数量应该使用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p2-q1', 0)"><div class="option-radio"></div><span class="option-label">A. df.isnull()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p2-q1', 1)"><div class="option-radio"></div><span class="option-label">B. df.isnull().sum()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p2-q1', 2)"><div class="option-radio"></div><span class="option-label">C. df.missing()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p2-q1', 3)"><div class="option-radio"></div><span class="option-label">D. df.na_count()</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q1', 1, 'isnull()返回布尔表，sum()对True计数，得到每列缺失值数量。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>isnull()</code>返回布尔表，<code>sum()</code>对True计数，得到每列缺失值数量。</p></div>
                 </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
+                </div>
+            </div>
 
-                <div class="quiz-question" id="p2-q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">用平均值填充某列缺失值，正确的写法是？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p2-q2', 0)"><div class="option-radio"></div><span class="option-label">A. df['列'].fill(df['列'].mean())</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p2-q2', 1)"><div class="option-radio"></div><span class="option-label">B. df['列'].fillna(df['列'].mean())</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p2-q2', 2)"><div class="option-radio"></div><span class="option-label">C. df['列'].replace_na(df['列'].mean())</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p2-q2', 3)"><div class="option-radio"></div><span class="option-label">D. df['列'].fill_mean()</span></div>
+            <div class="code-lab" id="lab-2" data-output="=== 完全重复的行数 ===\n1\n\n=== 删除完全重复后的数据 ===\n   订单号  用户ID      金额  省份       下单时间\n0  A001   U100   299.5  广东  2024-01-15\n1  A002   U101   150.0   NaN  2024-01-16\n2  A003   U102   -50.0  浙江  2024-01-16\n3  A004   U103   899.0  江苏  2024-01-17\n5  A006   U104     NaN  广东  2024-01-18\n6  A007   U105  120000.0 北京  2024-01-19\n7  A008   U106    45.0  四川  2024-01-20\n8  A009   U107   678.0   NaN  2024-01-21\n9  A010   U108     0.0  上海  2024-01-22" data-answer="import pandas as pd\nimport io\ndata = '''订单号,用户ID,金额,省份,下单时间\nA001,U100,299.5,广东,2024-01-15\nA002,U101,150.0,,2024-01-16\nA003,U102,-50.0,浙江,2024-01-16\nA004,U103,899.0,江苏,2024-01-17\nA005,U100,299.5,广东,2024-01-15\nA006,U104,,广东,2024-01-18\nA007,U105,120000.0,北京,2024-01-19\nA008,U106,45.0,四川,2024-01-20\nA009,U107,678.0,,2024-01-21\nA010,U108,0.0,上海,2024-01-22'''\ndf = pd.read_csv(io.StringIO(data))\n\n# 第一步：统计完全重复的行数\nprint('=== 完全重复的行数 ===')\nprint(df.duplicated().sum())\n\n# 第二步：删除完全重复的行，保留第一个\ndf = df.drop_duplicates()\n\nprint()\nprint('=== 删除完全重复后的数据 ===')\nprint(df)">
+                <div class="code-lab-content">
+                    <h3>练习2：处理重复数据</h3>
+                    <p>使用 <code>duplicated().sum()</code> 统计重复行数量，然后用 <code>drop_duplicates()</code> 删除完全重复的行（保留第一个出现的）。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-2')">▶ 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-2')">✕ 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-2')">◉ 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q2', 1, 'fillna()是pandas填充缺失值的标准方法。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>fillna()</code>是pandas填充缺失值的标准方法。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+data = '''订单号,用户ID,金额,省份,下单时间
+A001,U100,299.5,广东,2024-01-15
+A002,U101,150.0,,2024-01-16
+A003,U102,-50.0,浙江,2024-01-16
+A004,U103,899.0,江苏,2024-01-17
+A005,U100,299.5,广东,2024-01-15
+A006,U104,,广东,2024-01-18
+A007,U105,120000.0,北京,2024-01-19
+A008,U106,45.0,四川,2024-01-20
+A009,U107,678.0,,2024-01-21
+A010,U108,0.0,上海,2024-01-22'''
+df = pd.read_csv(io.StringIO(data))
 
-                <div class="quiz-question" id="p2-q3" data-type="tf" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">df.drop_duplicates() 会删除所有重复的行，一个都不保留。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('p2-q3', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('p2-q3', 'false')"><div class="option-radio"></div><span>错误</span></div>
+# 请在此处检查并处理重复数据
+</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q3', 'false', 'drop_duplicates()默认保留第一个重复项，删除后面的。可以用keep参数控制。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>drop_duplicates()</code>默认保留第一个重复项，删除后面的。可以用<code>keep</code>参数控制保留哪一个。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p2-q4" data-type="choice" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">删除包含缺失值的行，应该使用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p2-q4', 0)"><div class="option-radio"></div><span class="option-label">A. df.drop_null()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p2-q4', 1)"><div class="option-radio"></div><span class="option-label">B. df.remove_na()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p2-q4', 2)"><div class="option-radio"></div><span class="option-label">C. df.dropna()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p2-q4', 3)"><div class="option-radio"></div><span class="option-label">D. df.delete_na()</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q4', 2, 'dropna()是删除缺失值的标准方法，默认删除包含任何缺失值的行。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>dropna()</code>是删除缺失值的标准方法，默认删除包含任何缺失值的行。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p2-q5" data-type="fill" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">将列名'price'重命名为'价格'，应写为：df.rename(columns={'price': '价格'}, inplace=<input class="fill-input" placeholder="?" style="width:60px;display:inline;">)</div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q5', 'True', 'inplace=True表示直接修改原数据框，而不是返回一个新副本。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>inplace=True</code>表示直接修改原数据框，而不是返回一个新副本。</p></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
+            </div>
 
-                <div class="quiz-question" id="p2-q6" data-type="choice" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">将数值限制在0到100之间，应该使用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p2-q6', 0)"><div class="option-radio"></div><span class="option-label">A. df['列'].limit(0, 100)</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p2-q6', 1)"><div class="option-radio"></div><span class="option-label">B. df['列'].clip(0, 100)</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p2-q6', 2)"><div class="option-radio"></div><span class="option-label">C. df['列'].bound(0, 100)</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p2-q6', 3)"><div class="option-radio"></div><span class="option-label">D. df['列'].restrict(0, 100)</span></div>
+            <div class="code-lab" id="lab-3" data-output="=== 转换前的数据类型 ===\n订单号      object\n用户ID     object\n金额       float64\n省份       object\n下单时间     object\ndtype: object\n\n=== 重命名后的列名 ===\nIndex(['订单号', '用户ID', '金额', '省份', '下单时间'], dtype='object')\n\n=== 转换后的数据类型 ===\n订单号      object\n用户ID     object\n金额       float64\n省份       object\n下单时间    datetime64[ns]\ndtype: object" data-answer="import pandas as pd\nimport io\ndata = '''订单号,用户ID,金额,省份,下单时间\nA001,U100,299.5,广东,2024-01-15\nA002,U101,150.0,,2024-01-16\nA003,U102,-50.0,浙江,2024-01-16\nA004,U103,899.0,江苏,2024-01-17\nA005,U100,299.5,广东,2024-01-15\nA006,U104,,广东,2024-01-18\nA007,U105,120000.0,北京,2024-01-19\nA008,U106,45.0,四川,2024-01-20\nA009,U107,678.0,,2024-01-21\nA010,U108,0.0,上海,2024-01-22'''\ndf = pd.read_csv(io.StringIO(data))\n\n# 查看转换前的数据类型\nprint('=== 转换前的数据类型 ===')\nprint(df.dtypes)\n\n# 将下单时间列转换为datetime类型\ndf['下单时间'] = pd.to_datetime(df['下单时间'])\n\nprint()\nprint('=== 重命名后的列名 ===')\nprint(df.columns)\n\n# 查看转换后的数据类型\nprint()\nprint('=== 转换后的数据类型 ===')\nprint(df.dtypes)">
+                <div class="code-lab-content">
+                    <h3>练习3：数据类型转换和列重命名</h3>
+                    <p>使用 <code>pd.to_datetime()</code> 将"下单时间"列转换为日期时间类型，然后使用 <code>rename()</code> 将列名规范化（如将英文列名改为中文），最后用 <code>dtypes</code> 查看转换后的数据类型。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-3')">▶ 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-3')">✕ 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-3')">◉ 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q6', 1, 'clip()方法会将小于下限的值设为下限，大于上限的值设为上限。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>clip()</code>方法会将小于下限的值设为下限，大于上限的值设为上限。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+data = '''订单号,用户ID,金额,省份,下单时间
+A001,U100,299.5,广东,2024-01-15
+A002,U101,150.0,,2024-01-16
+A003,U102,-50.0,浙江,2024-01-16
+A004,U103,899.0,江苏,2024-01-17
+A005,U100,299.5,广东,2024-01-15
+A006,U104,,广东,2024-01-18
+A007,U105,120000.0,北京,2024-01-19
+A008,U106,45.0,四川,2024-01-20
+A009,U107,678.0,,2024-01-21
+A010,U108,0.0,上海,2024-01-22'''
+df = pd.read_csv(io.StringIO(data))
 
-                <div class="quiz-question" id="p2-q7" data-type="tf" data-score="2">
-                    <span class="question-number">第7题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">数据清洗通常只占数据分析工作很小的一部分时间。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('p2-q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('p2-q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
+# 请在此处进行数据类型转换和列重命名
+# 提示：将下单时间转为datetime类型
+</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p2-q7', 'false', '数据清洗通常占数据分析工作的60%-80%时间，是非常重要的一步。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>数据清洗通常占数据分析工作的60%-80%时间，是非常重要的一步。</p></div>
                 </div>
-
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p2')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p2')">重置</button>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+                    </div>
                 </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/7</div>
-                    <div class="quiz-score-label"></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
             </div>
 
@@ -293,5 +329,6 @@ A010,U108,0.0,上海,2024-01-22</div>
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -169,112 +170,171 @@ S014,华北,食品,900,180
 S015,华东,服装,1900,475</div>
             </div>
 
-            <div class="quiz-container" id="quiz-p4">
-                <div class="quiz-header">
-                    <div class="quiz-title">交互式练习题</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/7</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+            <div class="code-lab" id="lab-1" data-output="地区\n华北    8300\n华东    14400\n华南    11900\nName: 销售额, dtype: int64" data-answer="import pandas as pd\nimport io\n\ndata = io.StringIO('''订单号,地区,产品类别,销售额,利润\nS001,华南,电子产品,3500,700\nS002,华北,服装,1200,300\nS003,华南,服装,1800,450\nS004,华东,电子产品,4200,840\nS005,华北,食品,800,160\nS006,华东,服装,2100,525\nS007,华南,食品,1500,300\nS008,华北,电子产品,3800,760\nS009,华东,食品,1100,220\nS010,华南,电子产品,2900,580\nS011,华北,服装,1600,400\nS012,华东,电子产品,5100,1020\nS013,华南,服装,2200,550\nS014,华北,食品,900,180\nS015,华东,服装,1900,475\n''')\ndf = pd.read_csv(data)\n\n# 按地区分组，计算销售额总和\nresult = df.groupby('地区')['销售额'].sum()\nprint(result)">
+                <div class="code-lab-content">
+                    <h3>练习1：基础 groupby 分组聚合</h3>
+                    <p>使用 groupby 按"地区"分组，计算每个地区的销售额总和。请先创建 sales.csv 数据（已提供），然后用 <code>df.groupby('地区')['销售额'].sum()</code> 完成计算。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-1')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-1')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-1')">&#9673; 参考答案</button>
+                        </div>
+                    </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+
+data = io.StringIO('''订单号,地区,产品类别,销售额,利润
+S001,华南,电子产品,3500,700
+S002,华北,服装,1200,300
+S003,华南,服装,1800,450
+S004,华东,电子产品,4200,840
+S005,华北,食品,800,160
+S006,华东,服装,2100,525
+S007,华南,食品,1500,300
+S008,华北,电子产品,3800,760
+S009,华东,食品,1100,220
+S010,华南,电子产品,2900,580
+S011,华北,服装,1600,400
+S012,华东,电子产品,5100,1020
+S013,华南,服装,2200,550
+S014,华北,食品,900,180
+S015,华东,服装,1900,475
+''')
+df = pd.read_csv(data)
+
+# 按地区分组，计算销售额总和
+result = df.groupby('地区')['销售额'].sum()
+print(result)</textarea>
                     </div>
                 </div>
-
-                <div class="quiz-question" id="p4-q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">按地区分组并计算销售额总和，正确的写法是？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p4-q1', 0)"><div class="option-radio"></div><span class="option-label">A. df.group('地区')['销售额'].sum()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p4-q1', 1)"><div class="option-radio"></div><span class="option-label">B. df.groupby('地区')['销售额'].sum()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p4-q1', 2)"><div class="option-radio"></div><span class="option-label">C. df.groupby('地区').sum('销售额')</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p4-q1', 3)"><div class="option-radio"></div><span class="option-label">D. df.group_by('地区')['销售额'].sum()</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q1', 1, 'groupby()是pandas分组的标准方法，注意没有下划线。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>groupby()</code>是pandas分组的标准方法，注意没有下划线。</p></div>
                 </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
+                </div>
+            </div>
 
-                <div class="quiz-question" id="p4-q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">groupby后计算每组记录数量，应该用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p4-q2', 0)"><div class="option-radio"></div><span class="option-label">A. size()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p4-q2', 1)"><div class="option-radio"></div><span class="option-label">B. count()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p4-q2', 2)"><div class="option-radio"></div><span class="option-label">C. length()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p4-q2', 3)"><div class="option-radio"></div><span class="option-label">D. 以上都可以</span></div>
+            <div class="code-lab" id="lab-2" data-output="            销售额    利润\n地区                          \n华北  2666.666667  400.0\n华东  3600.000000  616.25\n华南  2975.000000  516.0" data-answer="import pandas as pd\nimport io\n\ndata = io.StringIO('''订单号,地区,产品类别,销售额,利润\nS001,华南,电子产品,3500,700\nS002,华北,服装,1200,300\nS003,华南,服装,1800,450\nS004,华东,电子产品,4200,840\nS005,华北,食品,800,160\nS006,华东,服装,2100,525\nS007,华南,食品,1500,300\nS008,华北,电子产品,3800,760\nS009,华东,食品,1100,220\nS010,华南,电子产品,2900,580\nS011,华北,服装,1600,400\nS012,华东,电子产品,5100,1020\nS013,华南,服装,2200,550\nS014,华北,食品,900,180\nS015,华东,服装,1900,475\n''')\ndf = pd.read_csv(data)\n\n# 多列分组 + agg自定义聚合函数\nresult = df.groupby(['地区', '产品类别']).agg({\n    '销售额': 'sum',\n    '利润': 'mean'\n})\nprint(result)">
+                <div class="code-lab-content">
+                    <h3>练习2：多列分组和自定义聚合函数 agg()</h3>
+                    <p>按"地区"和"产品类别"两个维度分组，使用 <code>agg()</code> 对销售额求和、对利润求平均值。提示：使用 <code>df.groupby(['地区', '产品类别']).agg({'销售额': 'sum', '利润': 'mean'})</code>。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-2')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-2')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-2')">&#9673; 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q2', 3, 'size()和count()都可以计数。size()返回Series，count()对非空值计数。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>size()</code>和<code>count()</code>都可以计数。<code>size()</code>返回Series，<code>count()</code>对非空值计数。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
 
-                <div class="quiz-question" id="p4-q3" data-type="choice" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">同时对不同列应用不同的聚合函数，应该用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p4-q3', 0)"><div class="option-radio"></div><span class="option-label">A. apply()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p4-q3', 1)"><div class="option-radio"></div><span class="option-label">B. transform()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p4-q3', 2)"><div class="option-radio"></div><span class="option-label">C. agg()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p4-q3', 3)"><div class="option-radio"></div><span class="option-label">D. map()</span></div>
+data = io.StringIO('''订单号,地区,产品类别,销售额,利润
+S001,华南,电子产品,3500,700
+S002,华北,服装,1200,300
+S003,华南,服装,1800,450
+S004,华东,电子产品,4200,840
+S005,华北,食品,800,160
+S006,华东,服装,2100,525
+S007,华南,食品,1500,300
+S008,华北,电子产品,3800,760
+S009,华东,食品,1100,220
+S010,华南,电子产品,2900,580
+S011,华北,服装,1600,400
+S012,华东,电子产品,5100,1020
+S013,华南,服装,2200,550
+S014,华北,食品,900,180
+S015,华东,服装,1900,475
+''')
+df = pd.read_csv(data)
+
+# 按地区和产品类别分组，使用agg()自定义聚合
+result = df.groupby(['地区', '产品类别']).agg({
+    '销售额': 'sum',
+    '利润': 'mean'
+})
+print(result)</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q3', 2, 'agg()（aggregate的缩写）可以对不同列应用不同的聚合函数，非常灵活。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>agg()</code>（aggregate的缩写）可以对不同列应用不同的聚合函数，非常灵活。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p4-q4" data-type="tf" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">df.groupby(['地区', '产品类别']) 是按两个维度同时分组。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('p4-q4', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('p4-q4', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q4', 'true', 'groupby传入列表，会按多个列的组合进行分组，形成多级索引。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>groupby</code>传入列表，会按多个列的组合进行分组，形成多级索引。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p4-q5" data-type="fill" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">对分组结果按销售额降序排列，应写为：df.groupby('地区')['销售额'].sum().sort_values(ascending=<input class="fill-input" placeholder="?" style="width:80px;display:inline;">)</div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q5', 'False', 'ascending=False表示降序排列，ascending=True表示升序排列。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>ascending=False</code>表示降序排列，<code>ascending=True</code>表示升序排列。</p></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
+            </div>
 
-                <div class="quiz-question" id="p4-q6" data-type="choice" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">groupby后求平均值，应该用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p4-q6', 0)"><div class="option-radio"></div><span class="option-label">A. average()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p4-q6', 1)"><div class="option-radio"></div><span class="option-label">B. mean()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p4-q6', 2)"><div class="option-radio"></div><span class="option-label">C. avg()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p4-q6', 3)"><div class="option-radio"></div><span class="option-label">D. median()</span></div>
+            <div class="code-lab" id="lab-3" data-output="            销售额\n地区          \n华北  sum     8300\n      mean  2075.0\n      max    3800\n      min     800\n华东  sum    14400\n      mean  3600.0\n      max    5100\n      min    1100\n华南  sum    11900\n      mean  2975.0\n      max    3500\n      min    1500" data-answer="import pandas as pd\nimport io\n\ndata = io.StringIO('''订单号,地区,产品类别,销售额,利润\nS001,华南,电子产品,3500,700\nS002,华北,服装,1200,300\nS003,华南,服装,1800,450\nS004,华东,电子产品,4200,840\nS005,华北,食品,800,160\nS006,华东,服装,2100,525\nS007,华南,食品,1500,300\nS008,华北,电子产品,3800,760\nS009,华东,食品,1100,220\nS010,华南,电子产品,2900,580\nS011,华北,服装,1600,400\nS012,华东,电子产品,5100,1020\nS013,华南,服装,2200,550\nS014,华北,食品,900,180\nS015,华东,服装,1900,475\n''')\ndf = pd.read_csv(data)\n\n# 分组后应用不同聚合函数\nresult = df.groupby('地区')['销售额'].agg(['sum', 'mean', 'max', 'min'])\nprint(result)\n\n# 也可以自定义列名\nresult2 = df.groupby('地区')['销售额'].agg(\n    总销售额='sum',\n    平均销售额='mean',\n    最大单笔='max'\n)\nprint('\\n', result2)">
+                <div class="code-lab-content">
+                    <h3>练习3：分组后应用不同聚合函数</h3>
+                    <p>按"地区"分组，对销售额同时应用 <code>sum</code>、<code>mean</code>、<code>max</code>、<code>min</code> 四种聚合函数。然后尝试用自定义列名的方式重写（如"总销售额"、"平均销售额"、"最大单笔"）。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-3')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-3')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-3')">&#9673; 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q6', 1, 'pandas中求平均值用mean()，不是average()或avg()。median()是中位数。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pandas中求平均值用<code>mean()</code>，不是<code>average()</code>或<code>avg()</code>。<code>median()</code>是中位数。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
 
-                <div class="quiz-question" id="p4-q7" data-type="choice" data-score="2">
-                    <span class="question-number">第7题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">以下哪个不是pandas的聚合函数？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p4-q7', 0)"><div class="option-radio"></div><span class="option-label">A. sum()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p4-q7', 1)"><div class="option-radio"></div><span class="option-label">B. mean()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p4-q7', 2)"><div class="option-radio"></div><span class="option-label">C. total()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p4-q7', 3)"><div class="option-radio"></div><span class="option-label">D. max()</span></div>
+data = io.StringIO('''订单号,地区,产品类别,销售额,利润
+S001,华南,电子产品,3500,700
+S002,华北,服装,1200,300
+S003,华南,服装,1800,450
+S004,华东,电子产品,4200,840
+S005,华北,食品,800,160
+S006,华东,服装,2100,525
+S007,华南,食品,1500,300
+S008,华北,电子产品,3800,760
+S009,华东,食品,1100,220
+S010,华南,电子产品,2900,580
+S011,华北,服装,1600,400
+S012,华东,电子产品,5100,1020
+S013,华南,服装,2200,550
+S014,华北,食品,900,180
+S015,华东,服装,1900,475
+''')
+df = pd.read_csv(data)
+
+# 分组后应用多个聚合函数
+result = df.groupby('地区')['销售额'].agg(['sum', 'mean', 'max', 'min'])
+print(result)</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p4-q7', 2, 'pandas中没有total()函数，求和用sum()。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pandas中没有<code>total()</code>函数，求和用<code>sum()</code>。</p></div>
                 </div>
-
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p4')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p4')">重置</button>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+                    </div>
                 </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/7</div>
-                    <div class="quiz-score-label"></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
             </div>
 
@@ -306,5 +366,6 @@ S015,华东,服装,1900,475</div>
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>

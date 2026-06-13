@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -184,112 +185,180 @@ P003,运动手表,穿戴设备,599
 P004,平板电脑,电子产品,1999</div>
             </div>
 
-            <div class="quiz-container" id="quiz-p5">
-                <div class="quiz-header">
-                    <div class="quiz-title">交互式练习题</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/7</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+            <div class="code-lab" id="lab-1" data-output="   订单号 客户ID 商品ID  数量  订单金额\n0  O001  C001  P001   2   1998\n1  O002  C002  P003   1    599\n2  O003  C001  P002   3    897\n3  O004  C003  P001   1    999\n4  O005  C004  P002   2    598\n5  O001  C001  P001   2   1998\n6  O002  C002  P003   1    599\n7  O003  C001  P002   3    897" data-answer="import pandas as pd\nimport io\n\norders_data = io.StringIO('''订单号,客户ID,商品ID,数量,订单金额\nO001,C001,P001,2,1998\nO002,C002,P003,1,599\nO003,C001,P002,3,897\nO004,C003,P001,1,999\nO005,C004,P002,2,598\n''')\norders = pd.read_csv(orders_data)\n\n# 将订单表拆成两批\nbatch1 = orders.iloc[:3]\nbatch2 = orders.iloc[:4]\n\n# 用concat纵向拼接\nresult = pd.concat([batch1, batch2], axis=0, ignore_index=True)\nprint(result)">
+                <div class="code-lab-content">
+                    <h3>练习1：concat 拼接数据</h3>
+                    <p>将订单表拆分成两批数据，然后用 <code>pd.concat()</code> 纵向拼接（axis=0），并使用 <code>ignore_index=True</code> 重新编号索引。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-1')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-1')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-1')">&#9673; 参考答案</button>
+                        </div>
+                    </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+
+orders_data = io.StringIO('''订单号,客户ID,商品ID,数量,订单金额
+O001,C001,P001,2,1998
+O002,C002,P003,1,599
+O003,C001,P002,3,897
+O004,C003,P001,1,999
+O005,C004,P002,2,598
+''')
+orders = pd.read_csv(orders_data)
+
+# 将订单表拆成两批
+batch1 = orders.iloc[:3]
+batch2 = orders.iloc[:4]
+
+# 用concat纵向拼接
+result = pd.concat([batch1, batch2], axis=0, ignore_index=True)
+print(result)</textarea>
                     </div>
                 </div>
-
-                <div class="quiz-question" id="p5-q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">将两个结构相同的DataFrame纵向拼接（增加行），应该用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p5-q1', 0)"><div class="option-radio"></div><span class="option-label">A. pd.merge([df1, df2])</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p5-q1', 1)"><div class="option-radio"></div><span class="option-label">B. pd.concat([df1, df2], axis=0)</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p5-q1', 2)"><div class="option-radio"></div><span class="option-label">C. pd.concat([df1, df2], axis=1)</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p5-q1', 3)"><div class="option-radio"></div><span class="option-label">D. df1.append(df2)</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q1', 1, 'concat用于拼接，axis=0表示纵向（增加行），axis=1表示横向（增加列）。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>concat</code>用于拼接，<code>axis=0</code>表示纵向（增加行），<code>axis=1</code>表示横向（增加列）。</p></div>
                 </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
+                </div>
+            </div>
 
-                <div class="quiz-question" id="p5-q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">merge中保留左表所有记录，右表没有匹配的填NaN，这是哪种连接？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p5-q2', 0)"><div class="option-radio"></div><span class="option-label">A. inner</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p5-q2', 1)"><div class="option-radio"></div><span class="option-label">B. left</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p5-q2', 2)"><div class="option-radio"></div><span class="option-label">C. right</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p5-q2', 3)"><div class="option-radio"></div><span class="option-label">D. outer</span></div>
+            <div class="code-lab" id="lab-2" data-output="=== inner连接 ===\n   订单号 客户ID 商品ID  数量  订单金额 客户姓名 客户等级 注册城市\n0  O001  C001  P001   2   1998   张三   金牌   广州\n2  O003  C001  P002   3    897   张三   金牌   广州\n1  O002  C002  P003   1    599   李四   银牌   深圳\n3  O004  C003  P001   1    999   王五   铜牌   北京\n=== left连接 ===\n   订单号 客户ID 商品ID  数量  订单金额 客户姓名 客户等级 注册城市\n0  O001  C001  P001   2   1998   张三   金牌   广州\n1  O002  C002  P003   1    599   李四   银牌   深圳\n2  O003  C001  P002   3    897   张三   金牌   广州\n3  O004  C003  P001   1    999   王五   铜牌   北京\n4  O005  C004  P002   2    598   NaN   NaN   NaN\n=== right连接 ===\n   订单号 客户ID 商品ID  数量  订单金额 客户姓名 客户等级 注册城市\n0  O001  C001  P001   2   1998   张三   金牌   广州\n2  O003  C001  P002   3    897   张三   金牌   广州\n1  O002  C002  P003   1    599   李四   银牌   深圳\n3  O004  C003  P001   1    999   王五   铜牌   北京\n4   NaN  C006   NaN  NaN    NaN   赵六   金牌   上海" data-answer="import pandas as pd\nimport io\n\norders_data = io.StringIO('''订单号,客户ID,商品ID,数量,订单金额\nO001,C001,P001,2,1998\nO002,C002,P003,1,599\nO003,C001,P002,3,897\nO004,C003,P001,1,999\nO005,C004,P002,2,598\n''')\n\ncustomers_data = io.StringIO('''客户ID,客户姓名,客户等级,注册城市\nC001,张三,金牌,广州\nC002,李四,银牌,深圳\nC003,王五,铜牌,北京\nC006,赵六,金牌,上海\n''')\n\norders = pd.read_csv(orders_data)\ncustomers = pd.read_csv(customers_data)\n\n# inner连接\ninner = pd.merge(orders, customers, on='客户ID', how='inner')\nprint('=== inner连接 ===')\nprint(inner)\n\n# left连接\nleft = pd.merge(orders, customers, on='客户ID', how='left')\nprint('=== left连接 ===')\nprint(left)\n\n# right连接\nright = pd.merge(orders, customers, on='客户ID', how='right')\nprint('=== right连接 ===')\nprint(right)">
+                <div class="code-lab-content">
+                    <h3>练习2：merge 连接（inner / left / right）</h3>
+                    <p>使用 <code>pd.merge()</code> 将订单表和客户表按"客户ID"连接，分别尝试 <code>inner</code>、<code>left</code>、<code>right</code> 三种连接方式，观察结果的差异（注意 C004 和 C006 的处理）。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-2')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-2')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-2')">&#9673; 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q2', 1, 'left（左连接）保留左表所有记录，右表没有匹配的行填NaN。这是最常用的连接方式。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>left</code>（左连接）保留左表所有记录，右表没有匹配的行填NaN。这是最常用的连接方式。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
 
-                <div class="quiz-question" id="p5-q3" data-type="choice" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">merge中只保留两个表都有的记录（交集），这是哪种连接？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p5-q3', 0)"><div class="option-radio"></div><span class="option-label">A. inner</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p5-q3', 1)"><div class="option-radio"></div><span class="option-label">B. left</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p5-q3', 2)"><div class="option-radio"></div><span class="option-label">C. right</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p5-q3', 3)"><div class="option-radio"></div><span class="option-label">D. outer</span></div>
+orders_data = io.StringIO('''订单号,客户ID,商品ID,数量,订单金额
+O001,C001,P001,2,1998
+O002,C002,P003,1,599
+O003,C001,P002,3,897
+O004,C003,P001,1,999
+O005,C004,P002,2,598
+''')
+
+customers_data = io.StringIO('''客户ID,客户姓名,客户等级,注册城市
+C001,张三,金牌,广州
+C002,李四,银牌,深圳
+C003,王五,铜牌,北京
+C006,赵六,金牌,上海
+''')
+
+orders = pd.read_csv(orders_data)
+customers = pd.read_csv(customers_data)
+
+# inner连接
+inner = pd.merge(orders, customers, on='客户ID', how='inner')
+print('=== inner连接 ===')
+print(inner)
+
+# left连接
+left = pd.merge(orders, customers, on='客户ID', how='left')
+print('=== left连接 ===')
+print(left)
+
+# right连接
+right = pd.merge(orders, customers, on='客户ID', how='right')
+print('=== right连接 ===')
+print(right)</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q3', 0, 'inner（内连接）只保留两个表都有的记录，相当于集合的交集。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>inner</code>（内连接）只保留两个表都有的记录，相当于集合的交集。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p5-q4" data-type="tf" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">outer连接会保留两个表的所有记录，不会丢失任何数据。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('p5-q4', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('p5-q4', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q4', 'true', 'outer（外连接）保留两个表的所有记录，相当于集合的并集，不会丢失数据。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>outer</code>（外连接）保留两个表的所有记录，相当于集合的并集，不会丢失数据。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p5-q5" data-type="fill" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">左右表连接键名不同时，应使用 <code>pd.merge(df1, df2, left_on='A', right_on='B', how='left')</code>，其中left_on指定<input class="fill-input" placeholder="?" style="width:120px;display:inline;">表的连接键。</div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q5', '左', 'left_on指定左表的连接键列名，right_on指定右表的连接键列名。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>left_on</code>指定左表的连接键列名，<code>right_on</code>指定右表的连接键列名。</p></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
+            </div>
 
-                <div class="quiz-question" id="p5-q6" data-type="choice" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">join方法默认按什么进行连接？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p5-q6', 0)"><div class="option-radio"></div><span class="option-label">A. 按第一个列</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p5-q6', 1)"><div class="option-radio"></div><span class="option-label">B. 按索引</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p5-q6', 2)"><div class="option-radio"></div><span class="option-label">C. 按列名相同的列</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p5-q6', 3)"><div class="option-radio"></div><span class="option-label">D. 随机匹配</span></div>
+            <div class="code-lab" id="lab-3" data-output="   订单号 客户ID 商品ID  数量  订单金额 客户姓名 客户等级 注册城市  商品名称 商品类别   单价\n0  O001  C001  P001   2   1998   张三   金牌   广州  智能手机  电子产品   999\n1  O002  C002  P003   1    599   李四   银牌   深圳  运动手表  穿戴设备   599\n2  O003  C001  P002   3    897   张三   金牌   广州  蓝牙耳机  电子产品   299\n3  O004  C003  P001   1    999   王五   铜牌   北京  智能手机  电子产品   999\n4  O005  C004  P002   2    598   NaN   NaN   NaN  蓝牙耳机  电子产品   299" data-answer="import pandas as pd\nimport io\n\norders_data = io.StringIO('''订单号,客户ID,商品ID,数量,订单金额\nO001,C001,P001,2,1998\nO002,C002,P003,1,599\nO003,C001,P002,3,897\nO004,C003,P001,1,999\nO005,C004,P002,2,598\n''')\n\ncustomers_data = io.StringIO('''客户ID,客户姓名,客户等级,注册城市\nC001,张三,金牌,广州\nC002,李四,银牌,深圳\nC003,王五,铜牌,北京\nC006,赵六,金牌,上海\n''')\n\nproducts_data = io.StringIO('''商品ID,商品名称,商品类别,单价\nP001,智能手机,电子产品,999\nP002,蓝牙耳机,电子产品,299\nP003,运动手表,穿戴设备,599\nP004,平板电脑,电子产品,1999\n''')\n\norders = pd.read_csv(orders_data)\ncustomers = pd.read_csv(customers_data)\nproducts = pd.read_csv(products_data)\n\n# 三表合并：先连接客户表，再连接商品表\nstep1 = pd.merge(orders, customers, on='客户ID', how='left')\nresult = pd.merge(step1, products, on='商品ID', how='left')\nprint(result)">
+                <div class="code-lab-content">
+                    <h3>练习3：多表合并实战</h3>
+                    <p>将订单表、客户表、商品表三表依次合并，得到包含完整信息的订单视图。先合并客户表（按"客户ID"），再合并商品表（按"商品ID"），观察 C004 客户的缺失值情况。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-3')">&#9654; 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-3')">&#10005; 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-3')">&#9673; 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q6', 1, 'join()默认按索引进行连接，适合索引已经对齐的情况。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>join()</code>默认按索引进行连接，适合索引已经对齐的情况。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
 
-                <div class="quiz-question" id="p5-q7" data-type="choice" data-score="2">
-                    <span class="question-number">第7题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">pd.concat([df1, df2], axis=1) 的作用是？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p5-q7', 0)"><div class="option-radio"></div><span class="option-label">A. 纵向拼接，增加行</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p5-q7', 1)"><div class="option-radio"></div><span class="option-label">B. 横向拼接，增加列</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p5-q7', 2)"><div class="option-radio"></div><span class="option-label">C. 按列合并</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p5-q7', 3)"><div class="option-radio"></div><span class="option-label">D. 删除重复列</span></div>
+orders_data = io.StringIO('''订单号,客户ID,商品ID,数量,订单金额
+O001,C001,P001,2,1998
+O002,C002,P003,1,599
+O003,C001,P002,3,897
+O004,C003,P001,1,999
+O005,C004,P002,2,598
+''')
+
+customers_data = io.StringIO('''客户ID,客户姓名,客户等级,注册城市
+C001,张三,金牌,广州
+C002,李四,银牌,深圳
+C003,王五,铜牌,北京
+C006,赵六,金牌,上海
+''')
+
+products_data = io.StringIO('''商品ID,商品名称,商品类别,单价
+P001,智能手机,电子产品,999
+P002,蓝牙耳机,电子产品,299
+P003,运动手表,穿戴设备,599
+P004,平板电脑,电子产品,1999
+''')
+
+orders = pd.read_csv(orders_data)
+customers = pd.read_csv(customers_data)
+products = pd.read_csv(products_data)
+
+# 三表合并：先连接客户表，再连接商品表
+step1 = pd.merge(orders, customers, on='客户ID', how='left')
+result = pd.merge(step1, products, on='商品ID', how='left')
+print(result)</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p5-q7', 1, 'axis=1表示横向拼接（增加列），axis=0表示纵向拼接（增加行）。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>axis=1</code>表示横向拼接（增加列），<code>axis=0</code>表示纵向拼接（增加行）。</p></div>
                 </div>
-
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p5')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p5')">重置</button>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+                    </div>
                 </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/7</div>
-                    <div class="quiz-score-label"></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
             </div>
 
@@ -323,5 +392,6 @@ P004,平板电脑,电子产品,1999</div>
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>

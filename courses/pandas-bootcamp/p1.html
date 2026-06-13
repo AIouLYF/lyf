@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -131,99 +132,141 @@ print(df.tail(3))</div>
 吴十,80,84,82</div>
             </div>
 
-            <div class="quiz-container" id="quiz-p1">
-                <div class="quiz-header">
-                    <div class="quiz-title">交互式练习题</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/6</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
+            <div class="code-lab" id="lab-1" data-output="   姓名  语文  数学  英语\n0  张三   85   90   88\n1  李四   78   82   80\n2  王五   92   95   94\n3  赵六   65   70   68\n4  钱七   88   85   90" data-answer="import pandas as pd\n\n# 创建学生成绩数据\nimport io\ndata = '''姓名,语文,数学,英语\n张三,85,90,88\n李四,78,82,80\n王五,92,95,94\n赵六,65,70,68\n钱七,88,85,90\n孙八,74,78,76\n周九,90,92,91\n吴十,80,84,82'''\ndf = pd.read_csv(io.StringIO(data))\n\n# 查看前5行数据\nprint(df.head())">
+                <div class="code-lab-content">
+                    <h3>练习1：导入pandas并读取CSV文件，查看前5行</h3>
+                    <p>请导入pandas库，使用提供的students.csv数据创建DataFrame，然后调用 <code>head()</code> 方法查看前5行数据。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-1')">▶ 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-1')">✕ 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-1')">◉ 参考答案</button>
+                        </div>
+                    </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+
+# 创建学生成绩数据
+import io
+data = '''姓名,语文,数学,英语
+张三,85,90,88
+李四,78,82,80
+王五,92,95,94
+赵六,65,70,68
+钱七,88,85,90
+孙八,74,78,76
+周九,90,92,91
+吴十,80,84,82'''
+df = pd.read_csv(io.StringIO(data))
+
+# 请在此处查看前5行数据
+</textarea>
                     </div>
                 </div>
-
-                <div class="quiz-question" id="p1-q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">pandas通常用什么别名导入？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p1-q1', 0)"><div class="option-radio"></div><span class="option-label">A. pd</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p1-q1', 1)"><div class="option-radio"></div><span class="option-label">B. ps</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p1-q1', 2)"><div class="option-radio"></div><span class="option-label">C. pds</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p1-q1', 3)"><div class="option-radio"></div><span class="option-label">D. pan</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q1', 0, '行业惯例使用 import pandas as pd，别名pd。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>行业惯例使用 <code>import pandas as pd</code>，别名pd。</p></div>
                 </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
+                </div>
+            </div>
 
-                <div class="quiz-question" id="p1-q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">读取CSV文件应该使用哪个函数？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p1-q2', 0)"><div class="option-radio"></div><span class="option-label">A. pd.read_excel()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p1-q2', 1)"><div class="option-radio"></div><span class="option-label">B. pd.read_csv()</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p1-q2', 2)"><div class="option-radio"></div><span class="option-label">C. pd.load_csv()</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p1-q2', 3)"><div class="option-radio"></div><span class="option-label">D. pd.open_csv()</span></div>
+            <div class="code-lab" id="lab-2" data-output="&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 8 entries, 0 to 7\nData columns (total 4 columns):\n #   Column  Non-Null Count  Dtype \n---  ------  --------------  ----- \n 0   姓名      8 non-null     object\n 1   语文      8 non-null     int64 \n 2   数学      8 non-null     int64 \n 3   英语      8 non-null     int64 \ndtypes: int64(3), object(1)\nmemory usage: 292.0+ bytes\n\n       语文      数学      英语\ncount  8.000000  8.000000  8.000000\nmean  82.750000  84.750000  83.625000\nstd    8.937537  8.084749  8.625833\nmin   65.000000  70.000000  68.000000\n25%   77.000000  81.000000  79.000000\n50%   84.000000  84.500000  83.000000\n75%   89.500000  91.000000  89.500000\nmax   92.000000  95.000000  94.000000" data-answer="import pandas as pd\nimport io\ndata = '''姓名,语文,数学,英语\n张三,85,90,88\n李四,78,82,80\n王五,92,95,94\n赵六,65,70,68\n钱七,88,85,90\n孙八,74,78,76\n周九,90,92,91\n吴十,80,84,82'''\ndf = pd.read_csv(io.StringIO(data))\n\n# 查看数据基本信息\nprint(df.info())\nprint()\n\n# 查看数值列统计描述\nprint(df.describe())">
+                <div class="code-lab-content">
+                    <h3>练习2：使用info()和describe()查看数据信息</h3>
+                    <p>使用 <code>info()</code> 查看DataFrame的数据类型、非空值数量等基本信息，再使用 <code>describe()</code> 查看数值列的统计描述（均值、标准差、最值等）。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-2')">▶ 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-2')">✕ 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-2')">◉ 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q2', 1, 'pd.read_csv() 是pandas读取CSV文件的标准函数。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>pd.read_csv()</code> 是pandas读取CSV文件的标准函数。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+data = '''姓名,语文,数学,英语
+张三,85,90,88
+李四,78,82,80
+王五,92,95,94
+赵六,65,70,68
+钱七,88,85,90
+孙八,74,78,76
+周九,90,92,91
+吴十,80,84,82'''
+df = pd.read_csv(io.StringIO(data))
 
-                <div class="quiz-question" id="p1-q3" data-type="choice" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">df.head(3) 会显示什么？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p1-q3', 0)"><div class="option-radio"></div><span class="option-label">A. 最后3行</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p1-q3', 1)"><div class="option-radio"></div><span class="option-label">B. 前3行</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p1-q3', 2)"><div class="option-radio"></div><span class="option-label">C. 第3行</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p1-q3', 3)"><div class="option-radio"></div><span class="option-label">D. 前5行</span></div>
+# 请在此处使用info()和describe()查看数据信息
+</textarea>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q3', 1, 'head()显示前N行，默认5行，传入3则显示前3行。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>head()</code>显示前N行，默认5行，传入3则显示前3行。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p1-q4" data-type="tf" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">df.info() 可以查看每列的数据类型和非空值数量。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('p1-q4', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('p1-q4', 'false')"><div class="option-radio"></div><span>错误</span></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q4', 'true', 'info()方法会输出每列的名称、非空值数量和数据类型。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>info()</code>方法会输出每列的名称、非空值数量和数据类型。</p></div>
                 </div>
-
-                <div class="quiz-question" id="p1-q5" data-type="fill" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">查看数值列统计描述（均值、最大最小值等）的方法是 <code>df.______()</code></div>
-                    <input class="fill-input" placeholder="请输入答案">
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q5', 'describe', 'describe()方法会对所有数值列计算计数、均值、标准差、最小值、四分位数、最大值。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>describe()</code>方法会对所有数值列计算计数、均值、标准差、最小值、四分位数、最大值。</p></div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
+            </div>
 
-                <div class="quiz-question" id="p1-q6" data-type="choice" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">将某列转换为整数类型，应该使用？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('p1-q6', 0)"><div class="option-radio"></div><span class="option-label">A. df['列名'].to_int()</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('p1-q6', 1)"><div class="option-radio"></div><span class="option-label">B. df['列名'].astype(int)</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('p1-q6', 2)"><div class="option-radio"></div><span class="option-label">C. df['列名'].convert(int)</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('p1-q6', 3)"><div class="option-radio"></div><span class="option-label">D. df['列名'].change(int)</span></div>
+            <div class="code-lab" id="lab-3" data-output="姓名     object\n语文    float64\n数学      int64\n英语    float64\ndtype: object" data-answer="import pandas as pd\nimport io\ndata = '''姓名,语文,数学,英语\n张三,85,90,88\n李四,78,82,80\n王五,92,95,94\n赵六,65,70,68\n钱七,88,85,90\n孙八,74,78,76\n周九,90,92,91\n吴十,80,84,82'''\ndf = pd.read_csv(io.StringIO(data))\n\n# 将语文列转为float类型\ndf['语文'] = df['语文'].astype(float)\n\n# 将英语列用pd.to_numeric转换（加上errors='coerce'参数）\ndf['英语'] = pd.to_numeric(df['英语'], errors='coerce')\n\n# 查看转换后的数据类型\nprint(df.dtypes)">
+                <div class="code-lab-content">
+                    <h3>练习3：数据类型转换</h3>
+                    <p>将"语文"列使用 <code>astype(float)</code> 转换为浮点数类型，将"英语"列使用 <code>pd.to_numeric()</code> 转换，最后用 <code>dtypes</code> 查看所有列的数据类型。</p>
+                </div>
+                <div class="code-lab-editor">
+                    <div class="code-lab-toolbar">
+                        <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+                        <div class="code-lab-actions">
+                            <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-3')">▶ 运行代码</button>
+                            <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-3')">✕ 清除内容</button>
+                            <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-3')">◉ 参考答案</button>
+                        </div>
                     </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('p1-q6', 1, 'astype()是pandas中转换数据类型的标准方法。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p><code>astype()</code>是pandas中转换数据类型的标准方法。</p></div>
-                </div>
+                    <div class="code-lab-textarea-wrap">
+                        <div class="code-lab-line-numbers"></div>
+                        <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import io
+data = '''姓名,语文,数学,英语
+张三,85,90,88
+李四,78,82,80
+王五,92,95,94
+赵六,65,70,68
+钱七,88,85,90
+孙八,74,78,76
+周九,90,92,91
+吴十,80,84,82'''
+df = pd.read_csv(io.StringIO(data))
 
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p1')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p1')">重置</button>
+# 请在此处进行数据类型转换
+# 提示：将语文列转为float，英语列用pd.to_numeric转换
+</textarea>
+                    </div>
                 </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/6</div>
-                    <div class="quiz-score-label"></div>
+                <div class="code-lab-output">
+                    <div class="code-lab-output-header">执行结果</div>
+                    <div class="code-lab-output-body">
+                        <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+                    </div>
+                </div>
+                <div class="code-lab-reference">
+                    <div class="code-lab-reference-header">参考答案</div>
+                    <div class="code-lab-reference-body"></div>
                 </div>
             </div>
 
@@ -255,5 +298,6 @@ print(df.tail(3))</div>
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>

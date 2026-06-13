@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../styles.css?v=3">
     <link rel="stylesheet" href="../../sidebar.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="code-lab.css?v=3">
 </head>
 <body class="has-sidebar">
     <div id="sidebar-container"></div>
@@ -210,113 +211,221 @@ plt.show()
                 <p><strong>步骤9：</strong>尝试用 pandas 的 <code>.plot()</code> 方法快速画折线图和柱状图，对比 Matplotlib 的写法。</p>
             </div>
 
-            <div class="quiz-container" id="quiz-p8">
-                <div class="quiz-header">
-                    <div class="quiz-title">项目8 配套练习</div>
-                    <div class="quiz-progress">
-                        <span class="quiz-progress-text">0/7</span>
-                        <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:0%"></div></div>
-                    </div>
-                </div>
+            <div class="code-lab" id="lab-10" data-output="月度销售趋势（文本折线图）：\n\n  178 |                                          *\n  162 |                              *\n  155 |                          *\n  148 |                  *\n  135 |          *\n  120 |  *\n      +--------+--------+--------+--------+--------+--------\n        1月      2月      3月      4月      5月      6月\n\n销售额数据：1月=120, 2月=135, 3月=148, 4月=162, 5月=155, 6月=178\n最高月份：6月（178万元）\n最低月份：1月（120万元）\n增长幅度：48.3%" data-answer="import pandas as pd
+import numpy as np
 
-                <div class="quiz-question" id="q1" data-type="choice" data-score="2">
-                    <span class="question-number">第1题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">想要展示销售额随时间的变化趋势，应该选择哪种图表？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q1', 0)"><div class="option-radio"></div><span class="option-label">A. 饼图</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q1', 1)"><div class="option-radio"></div><span class="option-label">B. 折线图</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q1', 2)"><div class="option-radio"></div><span class="option-label">C. 散点图</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q1', 3)"><div class="option-radio"></div><span class="option-label">D. 热力图</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q1', 1, '折线图最适合展示数据随时间变化的趋势。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>折线图最适合展示数据随时间变化的趋势。</p></div>
-                </div>
+# 月度销售数据
+months = ['1月', '2月', '3月', '4月', '5月', '6月']
+sales = [120, 135, 148, 162, 155, 178]
 
-                <div class="quiz-question" id="q2" data-type="choice" data-score="2">
-                    <span class="question-number">第2题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">想要比较不同品类的销售额大小，最适合用哪种图表？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q2', 0)"><div class="option-radio"></div><span class="option-label">A. 折线图</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q2', 1)"><div class="option-radio"></div><span class="option-label">B. 柱状图</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q2', 2)"><div class="option-radio"></div><span class="option-label">C. 饼图</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q2', 3)"><div class="option-radio"></div><span class="option-label">D. 箱线图</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q2', 1, '柱状图通过柱子高度直观比较不同类别的数值大小。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>柱状图通过柱子高度直观比较不同类别的数值大小。</p></div>
-                </div>
+# 创建 DataFrame
+df = pd.DataFrame({'月份': months, '销售额': sales})
 
-                <div class="quiz-question" id="q3" data-type="choice" data-score="2">
-                    <span class="question-number">第3题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">想要看各品类销售额占总销售额的比例，应该用哪种图表？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q3', 0)"><div class="option-radio"></div><span class="option-label">A. 散点图</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q3', 1)"><div class="option-radio"></div><span class="option-label">B. 热力图</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q3', 2)"><div class="option-radio"></div><span class="option-label">C. 饼图</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q3', 3)"><div class="option-radio"></div><span class="option-label">D. 箱线图</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q3', 2, '饼图专门用于展示各部分占总体的比例关系。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>饼图专门用于展示各部分占总体的比例关系。</p></div>
-                </div>
+# 打印数据
+print(&quot;月度销售趋势（文本折线图）：\n&quot;)
 
-                <div class="quiz-question" id="q4" data-type="choice" data-score="2">
-                    <span class="question-number">第4题</span>
-                    <span class="question-type-badge">选择题</span>
-                    <div class="question-text">Seaborn 的 <code>sns.heatmap()</code> 最适合展示什么类型的数据？</div>
-                    <div class="question-options">
-                        <div class="question-option" data-index="0" onclick="selectOption('q4', 0)"><div class="option-radio"></div><span class="option-label">A. 单一变量的时间趋势</span></div>
-                        <div class="question-option" data-index="1" onclick="selectOption('q4', 1)"><div class="option-radio"></div><span class="option-label">B. 两个分类变量交叉的数值矩阵</span></div>
-                        <div class="question-option" data-index="2" onclick="selectOption('q4', 2)"><div class="option-radio"></div><span class="option-label">C. 数据的分布形状</span></div>
-                        <div class="question-option" data-index="3" onclick="selectOption('q4', 3)"><div class="option-radio"></div><span class="option-label">D. 变量间的相关关系</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q4', 1, '热力图用颜色深浅展示矩阵中每个单元格的数值大小，适合两个分类变量交叉的数据。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>热力图用颜色深浅展示矩阵中每个单元格的数值大小，适合两个分类变量交叉的数据。</p></div>
-                </div>
+# 文本折线图
+max_val = max(sales)
+min_val = min(sales)
+height = 10
 
-                <div class="quiz-question" id="q5" data-type="tf" data-score="2">
-                    <span class="question-number">第5题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">pandas 的 Series 和 DataFrame 可以直接调用 <code>.plot()</code> 方法画图。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('q5', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('q5', 'false')"><div class="option-radio"></div><span>错误</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q5', 'true', 'pandas 内置了 plot 方法，底层调用 Matplotlib，适合快速出图。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>pandas 内置了 plot 方法，底层调用 Matplotlib，适合快速出图。</p></div>
-                </div>
+for level in range(max_val, min_val - 1, -4):
+    line = f&quot;{level:4d} |&quot;
+    for s in sales:
+        if abs(s - level) &lt; 3:
+            line += &quot;    *   &quot;
+        else:
+            line += &quot;        &quot;
+    print(line)
 
-                <div class="quiz-question" id="q6" data-type="fill" data-score="2">
-                    <span class="question-number">第6题</span>
-                    <span class="question-type-badge">填空题</span>
-                    <div class="question-text">Matplotlib 中，<code>plt.rcParams['font.sans-serif']</code> 的作用是设置 ______ 。</div>
-                    <input class="fill-input" placeholder="请输入答案">
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q6', '中文字体', '设置中文字体可以解决图表中中文显示为方框的问题。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>设置中文字体可以解决图表中中文显示为方框的问题。</p></div>
-                </div>
+# X 轴
+print(&quot;      +--------+--------+--------+--------+--------+--------&quot;)
+print(&quot;        1月      2月      3月      4月      5月      6月&quot;)
 
-                <div class="quiz-question" id="q7" data-type="tf" data-score="2">
-                    <span class="question-number">第7题</span>
-                    <span class="question-type-badge">判断题</span>
-                    <div class="question-text">箱线图可以直观地看出数据的中位数、四分位数和异常值。</div>
-                    <div class="tf-options">
-                        <div class="tf-option" data-value="true" onclick="selectTF('q7', 'true')"><div class="option-radio"></div><span>正确</span></div>
-                        <div class="tf-option" data-value="false" onclick="selectTF('q7', 'false')"><div class="option-radio"></div><span>错误</span></div>
-                    </div>
-                    <button class="quiz-submit-btn" onclick="submitQuestion('q7', 'true', '箱线图中间的线是中位数，箱子上下边缘是四分位数，箱子外的点是异常值。')">提交答案</button>
-                    <div class="answer-explanation"><div class="answer-explanation-title">答案解析</div><p>箱线图中间的线是中位数，箱子上下边缘是四分位数，箱子外的点是异常值。</p></div>
-                </div>
-
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="quiz-submit-btn" onclick="submitQuiz('quiz-p8')">提交全部</button>
-                    <button class="quiz-submit-btn" style="background:#64748b;margin-left:12px;" onclick="resetQuiz('quiz-p8')">重置</button>
-                </div>
-                <div class="quiz-score">
-                    <div class="quiz-score-number">0/7</div>
-                    <div class="quiz-score-label"></div>
-                </div>
+print(f&quot;\n销售额数据：{', '.join([f'{m}={s}' for m, s in zip(months, sales)])}&quot;)
+print(f&quot;最高月份：{months[sales.index(max(sales))]}（{max(sales)}万元）&quot;)
+print(f&quot;最低月份：{months[sales.index(min(sales))]}（{min(sales)}万元）&quot;)
+print(f&quot;增长幅度：{(max(sales) - min(sales)) / min(sales) * 100:.1f}%&quot;)">
+    <div class="code-lab-content">
+        <h3>练习1：matplotlib基础折线图</h3>
+                <p>使用 pandas 创建月度销售数据，用 Matplotlib 的 <code>plt.plot()</code> 绘制折线图展示销售趋势。在代码练习环境中，我们用文本折线图模拟可视化效果，展示如何用 <code>plt.plot()</code> 绘制带标记点的折线图。</p>
+    </div>
+    <div class="code-lab-editor">
+        <div class="code-lab-toolbar">
+            <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+            <div class="code-lab-actions">
+                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-10')">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-10')">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-10')">◉ 参考答案</button>
             </div>
+        </div>
+        <div class="code-lab-textarea-wrap">
+            <div class="code-lab-line-numbers"></div>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+# 月度销售数据
+months = ['1月', '2月', '3月', '4月', '5月', '6月']
+sales = [120, 135, 148, 162, 155, 178]
+
+# TODO: 创建 DataFrame
+# TODO: 用 plt.plot() 绘制折线图（在真实环境中）
+# TODO: 在这里用文本方式模拟折线图展示
+</textarea>
+        </div>
+    </div>
+    <div class="code-lab-output">
+        <div class="code-lab-output-header">执行结果</div>
+        <div class="code-lab-output-body">
+            <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+        </div>
+    </div>
+    <div class="code-lab-reference">
+        <div class="code-lab-reference-header">参考答案</div>
+        <div class="code-lab-reference-body"></div>
+    </div>
+</div>
+
+            <div class="code-lab" id="lab-11" data-output="【各品类销售额柱状图】\n\n  食品  | ████████████████████████████████ 320万元 (24.8%)\n  饮料  | ████████████████████             210万元 (16.3%)\n  日用品 | ████████████████                180万元 (14.0%)\n  家电  | ██████████████████████████████████████████████████ 450万元 (34.9%)\n  服装  | █████████████████████████        290万元 (22.5%)\n\n总销售额：1,450万元\n最高品类：家电（450万元）\n最低品类：日用品（180万元）\n\n【各品类销售占比饼图】\n  家电  ████████████████████████ 34.9%\n  食品  ████████████████ 24.8%\n  服装  ████████████ 22.5%\n  饮料  ████████ 16.3%\n  日用品 ███████ 14.0%" data-answer="import pandas as pd
+import numpy as np
+
+# 品类销售数据
+categories = ['食品', '饮料', '日用品', '家电', '服装']
+cat_sales = [320, 210, 180, 450, 290]
+
+df = pd.DataFrame({'品类': categories, '销售额': cat_sales})
+total = sum(cat_sales)
+
+# 柱状图（文本）
+print(&quot;【各品类销售额柱状图】\n&quot;)
+max_val = max(cat_sales)
+for cat, val in zip(categories, cat_sales):
+    bar_len = int(val / max_val * 50)
+    bar = '█' * bar_len
+    pct = val / total * 100
+    print(f&quot;  {cat:4s} | {bar} {val}万元 ({pct:.1f}%)&quot;)
+
+print(f&quot;\n总销售额：{total:,}万元&quot;)
+print(f&quot;最高品类：{categories[cat_sales.index(max(cat_sales))]}（{max(cat_sales)}万元）&quot;)
+print(f&quot;最低品类：{categories[cat_sales.index(min(cat_sales))]}（{min(cat_sales)}万元）&quot;)
+
+# 饼图（文本）
+print(&quot;\n【各品类销售占比饼图】&quot;)
+sorted_data = sorted(zip(categories, cat_sales), key=lambda x: x[1], reverse=True)
+for cat, val in sorted_data:
+    pct = val / total * 100
+    block_len = int(pct / 2)
+    block = '█' * block_len
+    print(f&quot;  {cat:4s} {block} {pct:.1f}%&quot;)">
+    <div class="code-lab-content">
+        <h3>练习2：柱状图和饼图</h3>
+                <p>使用 <code>plt.bar()</code> 绘制各品类销售额柱状图，用 <code>plt.pie()</code> 绘制销售占比饼图。在代码练习环境中，我们用文本柱状图和文本饼图模拟可视化效果，展示各品类的销售对比和占比关系。</p>
+    </div>
+    <div class="code-lab-editor">
+        <div class="code-lab-toolbar">
+            <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+            <div class="code-lab-actions">
+                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-11')">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-11')">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-11')">◉ 参考答案</button>
+            </div>
+        </div>
+        <div class="code-lab-textarea-wrap">
+            <div class="code-lab-line-numbers"></div>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+# 品类销售数据
+categories = ['食品', '饮料', '日用品', '家电', '服装']
+cat_sales = [320, 210, 180, 450, 290]
+
+# TODO: 创建 DataFrame
+# TODO: 用 plt.bar() 绘制柱状图（真实环境中）
+# TODO: 用 plt.pie() 绘制饼图（真实环境中）
+# TODO: 在这里用文本方式模拟柱状图和饼图
+</textarea>
+        </div>
+    </div>
+    <div class="code-lab-output">
+        <div class="code-lab-output-header">执行结果</div>
+        <div class="code-lab-output-body">
+            <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+        </div>
+    </div>
+    <div class="code-lab-reference">
+        <div class="code-lab-reference-header">参考答案</div>
+        <div class="code-lab-reference-body"></div>
+    </div>
+</div>
+
+            <div class="code-lab" id="lab-12" data-output="【pandas 快速绘图 - 折线图】\n月份\n1月    120\n2月    135\n3月    148\n4月    162\n5月    155\n6月    178\nName: 销售额, dtype: int64\n\n【pandas 快速绘图 - 柱状图】\n月份\n1月    120\n2月    135\n3月    148\n4月    162\n5月    155\n6月    178\nName: 销售额, dtype: int64\n\n【pandas 快速绘图 - 面积图】\n月份\n1月    120\n2月    135\n3月    148\n4月    162\n5月    155\n6月    178\nName: 销售额, dtype: int64\n\n提示：在真实环境中，以上代码会分别生成折线图、柱状图和面积图。\npandas 的 .plot() 方法支持 kind 参数：line/bar/area/pie/scatter 等。" data-answer="import pandas as pd
+import numpy as np
+
+# 创建月度数据
+months = ['1月', '2月', '3月', '4月', '5月', '6月']
+sales = [120, 135, 148, 162, 155, 178]
+profit = [25, 30, 35, 40, 38, 45]
+
+df = pd.DataFrame({'月份': months, '销售额': sales, '利润': profit})
+
+# pandas 内置 plot 快速绘图
+print(&quot;【pandas 快速绘图 - 折线图】&quot;)
+df.set_index('月份')['销售额'].plot(kind='line', marker='o', title='pandas快速折线图')
+print(df.set_index('月份')['销售额'])
+
+print(&quot;\n【pandas 快速绘图 - 柱状图】&quot;)
+df.set_index('月份')['销售额'].plot(kind='bar', color='#2563eb', title='pandas快速柱状图')
+print(df.set_index('月份')['销售额'])
+
+print(&quot;\n【pandas 快速绘图 - 面积图】&quot;)
+df.set_index('月份')['销售额'].plot(kind='area', alpha=0.5, title='pandas快速面积图')
+print(df.set_index('月份')['销售额'])
+
+print(&quot;\n提示：在真实环境中，以上代码会分别生成折线图、柱状图和面积图。&quot;)
+print(&quot;pandas 的 .plot() 方法支持 kind 参数：line/bar/area/pie/scatter 等。&quot;)">
+    <div class="code-lab-content">
+        <h3>练习3：pandas内置plot快速可视化</h3>
+                <p>使用 pandas 的 <code>.plot()</code> 方法快速生成折线图、柱状图和面积图。掌握 <code>kind</code> 参数的使用：'line'折线图、'bar'柱状图、'area'面积图、'pie'饼图、'scatter'散点图。体会 pandas 快速绘图的便捷性。</p>
+    </div>
+    <div class="code-lab-editor">
+        <div class="code-lab-toolbar">
+            <div class="code-lab-tab">main.py <span class="code-lab-dot"></span></div>
+            <div class="code-lab-actions">
+                <button class="code-lab-btn code-lab-btn-run" onclick="runCode('lab-12')">▶ 运行代码</button>
+                <button class="code-lab-btn code-lab-btn-clear" onclick="clearCode('lab-12')">✕ 清除内容</button>
+                <button class="code-lab-btn code-lab-btn-ref" onclick="toggleReference('lab-12')">◉ 参考答案</button>
+            </div>
+        </div>
+        <div class="code-lab-textarea-wrap">
+            <div class="code-lab-line-numbers"></div>
+            <textarea class="code-lab-textarea" placeholder="# 在这里编写你的代码...">import pandas as pd
+import numpy as np
+
+# 创建月度数据
+months = ['1月', '2月', '3月', '4月', '5月', '6月']
+sales = [120, 135, 148, 162, 155, 178]
+profit = [25, 30, 35, 40, 38, 45]
+
+df = pd.DataFrame({'月份': months, '销售额': sales, '利润': profit})
+
+# TODO: 用 df.plot(kind='line') 画折线图
+# TODO: 用 df.plot(kind='bar') 画柱状图
+# TODO: 用 df.plot(kind='area') 画面积图
+# TODO: 打印数据，在真实环境中会显示图表
+</textarea>
+        </div>
+    </div>
+    <div class="code-lab-output">
+        <div class="code-lab-output-header">执行结果</div>
+        <div class="code-lab-output-body">
+            <div class="code-lab-empty-state">点击 "运行代码" 按钮查看执行结果</div>
+        </div>
+    </div>
+    <div class="code-lab-reference">
+        <div class="code-lab-reference-header">参考答案</div>
+        <div class="code-lab-reference-body"></div>
+    </div>
+</div>
 
             <div class="knowledge-card">
                 <h3>项目小结</h3>
@@ -346,5 +455,6 @@ plt.show()
             highlightCurrentNav();
         });
     </script>
+    <script src="code-lab.js"></script>
 </body>
 </html>
