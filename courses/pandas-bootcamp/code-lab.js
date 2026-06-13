@@ -1,296 +1,289 @@
 /**
- * Code Lab - 代码练习交互逻辑
- *
- * 功能：
- *   runCode(id)       - 运行代码，显示预定义输出
- *   clearCode(id)     - 清空代码与输出
- *   toggleReference(id) - 切换参考答案显示/隐藏
- *
- * HTML 约定：
- *   每个 .code-lab 元素需设置唯一 id（如 lab-1, lab-2 ...）
- *   预定义输出 → data-output 属性（存储在 .code-lab 上）
- *   参考答案   → data-answer 属性（存储在 .code-lab 上）
- *
- * 内部结构约定：
- *   .code-lab-textarea        → textarea
- *   .code-lab-output-body     → 输出容器
- *   .code-lab-reference       → 参考答案容器
- *   .code-lab-btn--run        → 运行按钮
- *   .code-lab-btn--clear      → 清除按钮
- *   .code-lab-btn--ref        → 参考答案按钮
- *   .code-lab-line-numbers    → 行号容器
+ * Code Lab - 代码练习交互逻辑（集成 Pyodide 真实运行 Python）
  */
+
+/* ========== Pyodide 加载 ========== */
+var pyodideInstance = null;
+var pyodideLoading = false;
+var pyodideReady = false;
+
+function loadPyodide(callback) {
+    if (pyodideReady && pyodideInstance) {
+        callback(pyodideInstance);
+        return;
+    }
+    if (pyodideLoading) {
+        var checkInterval = setInterval(function () {
+            if (pyodideReady && pyodideInstance) {
+                clearInterval(checkInterval);
+                callback(pyodideInstance);
+            }
+        }, 200);
+        return;
+    }
+    pyodideLoading = true;
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+    script.onload = function () {
+        loadPyodide({
+            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
+        }).then(function (pyodide) {
+            pyodideInstance = pyodide;
+            pyodideReady = true;
+            pyodideLoading = false;
+            // 预加载 pandas 和 numpy
+            pyodide.loadPackage(['pandas', 'numpy', 'matplotlib']).then(function () {
+                callback(pyodide);
+            }).catch(function () {
+                // 如果包加载失败，仍然可以使用纯 Python
+                pyodideReady = true;
+                callback(pyodide);
+            });
+        }).catch(function (err) {
+            console.error('Pyodide 加载失败:', err);
+            pyodideLoading = false;
+            callback(null);
+        });
+    };
+    script.onerror = function () {
+        console.error('Pyodide JS 加载失败');
+        pyodideLoading = false;
+        callback(null);
+    };
+    document.head.appendChild(script);
+}
 
 /* ========== 工具函数 ========== */
-
-/**
- * 根据练习 ID 获取根容器
- * @param {string} id - 练习 ID（如 'lab-1'）
- * @returns {HTMLElement|null}
- */
 function getCodeLab(id) {
-  return document.getElementById(id);
+    return document.getElementById(id);
 }
 
-/**
- * 获取根容器下的子元素
- * @param {HTMLElement} lab
- * @param {string} selector
- * @returns {HTMLElement|null}
- */
 function getLabChild(lab, selector) {
-  return lab.querySelector(selector);
+    return lab.querySelector(selector);
 }
 
-/**
- * 对输出文本进行简单的 HTML 转义
- * @param {string} text
- * @returns {string}
- */
 function escapeHtml(text) {
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(text));
-  return div.innerHTML;
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(text));
+    return div.innerHTML;
 }
 
 /* ========== 行号同步 ========== */
-
-/**
- * 更新行号显示
- * @param {HTMLElement} textarea
- * @param {HTMLElement} lineNumbers
- */
 function updateLineNumbers(textarea, lineNumbers) {
-  if (!textarea || !lineNumbers) return;
-
-  var lines = textarea.value.split('\n').length;
-  var html = '';
-  for (var i = 1; i <= lines; i++) {
-    html += i + '\n';
-  }
-  lineNumbers.textContent = html;
+    if (!textarea || !lineNumbers) return;
+    var lines = textarea.value.split('\n').length;
+    var html = '';
+    for (var i = 1; i <= lines; i++) {
+        html += i + '\n';
+    }
+    lineNumbers.textContent = html;
 }
 
-/**
- * 同步 textarea 与行号的滚动位置
- * @param {HTMLElement} textarea
- * @param {HTMLElement} lineNumbers
- */
 function syncScroll(textarea, lineNumbers) {
-  if (!lineNumbers) return;
-  lineNumbers.scrollTop = textarea.scrollTop;
+    if (!lineNumbers) return;
+    lineNumbers.scrollTop = textarea.scrollTop;
 }
 
-/* ========== 核心：运行代码 ========== */
-
-/**
- * 运行代码 - 显示预定义的输出结果
- * @param {string} id - 练习 ID
- */
+/* ========== 核心：运行代码（真实 Python 执行） ========== */
 function runCode(id) {
-  var lab = getCodeLab(id);
-  if (!lab) return;
+    var lab = getCodeLab(id);
+    if (!lab) return;
 
-  var textarea = getLabChild(lab, '.code-lab-textarea');
-  var outputBody = getLabChild(lab, '.code-lab-output-body');
-  if (!textarea || !outputBody) return;
+    var textarea = getLabChild(lab, '.code-lab-textarea');
+    var outputBody = getLabChild(lab, '.code-lab-output-body');
+    var runBtn = getLabChild(lab, '.code-lab-btn-run');
+    if (!textarea || !outputBody) return;
 
-  // 检查代码是否为空
-  var code = textarea.value.trim();
-  if (!code) {
-    outputBody.innerHTML = '';
+    var code = textarea.value.trim();
+    if (!code) {
+        outputBody.innerHTML = '<span style="color:#7A7A7A;font-style:italic;">请先编写代码再运行</span>';
+        outputBody.classList.remove('is-empty', 'is-success');
+        return;
+    }
+
+    // 显示加载状态
+    if (runBtn) {
+        runBtn.disabled = true;
+        runBtn.textContent = '⏳ 加载中...';
+    }
+    outputBody.innerHTML = '<span style="color:#F9D342;">正在加载 Python 运行环境（首次加载较慢，请耐心等待）...</span>';
     outputBody.classList.remove('is-empty', 'is-success');
-    outputBody.classList.add('is-empty');
-    outputBody.textContent = '';
-    // 重新触发 ::before 伪元素
-    void outputBody.offsetWidth;
-    return;
-  }
 
-  // 获取预定义输出
-  var outputText = lab.getAttribute('data-output') || '';
+    loadPyodide(function (pyodide) {
+        if (runBtn) {
+            runBtn.disabled = false;
+            runBtn.textContent = '▶ 运行代码';
+        }
 
-  // 清空之前的内容
-  outputBody.innerHTML = '';
-  outputBody.classList.remove('is-empty');
+        if (!pyodide) {
+            // Pyodide 加载失败，使用 data-output 作为后备
+            var fallbackOutput = lab.getAttribute('data-output') || '（Python 环境加载失败，显示预定义输出）\n' + (lab.getAttribute('data-output') || '');
+            displayOutput(outputBody, fallbackOutput);
+            return;
+        }
 
-  // 逐行显示输出（带动画）
-  var lines = outputText.split('\n');
-  var delay = 0;
+        // 构建执行代码：捕获 stdout
+        var wrappedCode = [
+            'import sys',
+            'import io',
+            '_stdout_capture = io.StringIO()',
+            '_stderr_capture = io.StringIO()',
+            'sys.stdout = _stdout_capture',
+            'sys.stderr = _stderr_capture',
+            '',
+            'try:',
+            code.replace(/^/gm, '    '),
+            '    pass',
+            'except Exception as e:',
+            '    print(str(e), file=sys.stderr)',
+            '',
+            'sys.stdout = sys.__stdout__',
+            'sys.stderr = sys.__stderr__',
+            '_captured_output = _stdout_capture.getvalue()',
+            '_captured_error = _stderr_capture.getvalue()',
+        ].join('\n');
 
-  lines.forEach(function (line, index) {
-    setTimeout(function () {
-      var span = document.createElement('span');
-      span.className = 'code-lab-output-line';
-      span.textContent = line;
-      // 每行错开动画延迟
-      span.style.animationDelay = '0s';
-      outputBody.appendChild(span);
+        try {
+            pyodide.runPython(wrappedCode);
+            var stdout = pyodide.globals.get('_captured_output');
+            var stderr = pyodide.globals.get('_captured_error');
 
-      // 最后一行显示完毕后标记成功
-      if (index === lines.length - 1) {
-        outputBody.classList.add('is-success');
-      }
-    }, delay);
-    delay += 40; // 每行间隔 40ms
-  });
+            var result = '';
+            if (stdout) result += stdout;
+            if (stderr) {
+                if (result) result += '\n';
+                result += '[错误] ' + stderr;
+            }
+            if (!result) result = '(代码已执行，无输出内容)';
 
-  // 如果没有预定义输出，显示提示
-  if (lines.length === 1 && lines[0] === '') {
-    setTimeout(function () {
-      outputBody.classList.add('is-success');
-      var span = document.createElement('span');
-      span.className = 'code-lab-output-line';
-      span.textContent = '(代码已执行，无输出内容)';
-      span.style.color = '#7A7A7A';
-      outputBody.appendChild(span);
-    }, delay);
-  }
+            displayOutput(outputBody, result);
+        } catch (err) {
+            displayOutput(outputBody, '[执行错误] ' + err.message);
+        }
+    });
+}
+
+function displayOutput(outputBody, text) {
+    outputBody.innerHTML = '';
+    outputBody.classList.remove('is-empty');
+
+    var lines = text.split('\n');
+    var delay = 0;
+
+    lines.forEach(function (line, index) {
+        setTimeout(function () {
+            var span = document.createElement('span');
+            span.className = 'code-lab-output-line';
+            span.textContent = line;
+            outputBody.appendChild(span);
+
+            if (index === lines.length - 1) {
+                outputBody.classList.add('is-success');
+            }
+
+            // 自动滚动到底部
+            outputBody.scrollTop = outputBody.scrollHeight;
+        }, delay);
+        delay += 20;
+    });
 }
 
 /* ========== 核心：清除代码 ========== */
-
-/**
- * 清空代码与输出
- * @param {string} id - 练习 ID
- */
 function clearCode(id) {
-  var lab = getCodeLab(id);
-  if (!lab) return;
+    var lab = getCodeLab(id);
+    if (!lab) return;
 
-  var textarea = getLabChild(lab, '.code-lab-textarea');
-  var outputBody = getLabChild(lab, '.code-lab-output-body');
-  var lineNumbers = getLabChild(lab, '.code-lab-line-numbers');
+    var textarea = getLabChild(lab, '.code-lab-textarea');
+    var outputBody = getLabChild(lab, '.code-lab-output-body');
+    var lineNumbers = getLabChild(lab, '.code-lab-line-numbers');
 
-  if (textarea) {
-    textarea.value = '';
-  }
-
-  if (outputBody) {
-    outputBody.innerHTML = '';
-    outputBody.classList.remove('is-success');
-    outputBody.classList.add('is-empty');
-  }
-
-  if (lineNumbers) {
-    updateLineNumbers(textarea, lineNumbers);
-  }
+    if (textarea) textarea.value = '';
+    if (outputBody) {
+        outputBody.innerHTML = '';
+        outputBody.classList.remove('is-success');
+        outputBody.classList.add('is-empty');
+    }
+    if (lineNumbers) updateLineNumbers(textarea, lineNumbers);
 }
 
 /* ========== 核心：切换参考答案 ========== */
-
-/**
- * 切换参考答案的显示/隐藏
- * @param {string} id - 练习 ID
- */
 function toggleReference(id) {
-  var lab = getCodeLab(id);
-  if (!lab) return;
+    var lab = getCodeLab(id);
+    if (!lab) return;
 
-  var refPanel = getLabChild(lab, '.code-lab-reference');
-  var refBtn = getLabChild(lab, '.code-lab-btn--ref');
-  var refBody = getLabChild(lab, '.code-lab-reference-body');
+    var refPanel = getLabChild(lab, '.code-lab-reference');
+    var refBtn = getLabChild(lab, '.code-lab-btn-ref');
+    var refBody = getLabChild(lab, '.code-lab-reference-body');
 
-  if (!refPanel) return;
+    if (!refPanel) return;
 
-  var isVisible = refPanel.classList.contains('is-visible');
+    var isVisible = refPanel.classList.contains('is-visible');
 
-  if (isVisible) {
-    // 隐藏
-    refPanel.classList.remove('is-visible');
-    if (refBtn) {
-      refBtn.textContent = '参考答案';
-      refBtn.classList.remove('is-active');
+    if (isVisible) {
+        refPanel.classList.remove('is-visible');
+        if (refBtn) {
+            refBtn.innerHTML = '◉ 参考答案';
+            refBtn.classList.remove('is-active');
+        }
+    } else {
+        if (refBody && !refBody.textContent.trim()) {
+            var answer = lab.getAttribute('data-answer') || '';
+            refBody.textContent = answer;
+        }
+        refPanel.classList.add('is-visible');
+        if (refBtn) {
+            refBtn.innerHTML = '◉ 隐藏答案';
+            refBtn.classList.add('is-active');
+        }
     }
-  } else {
-    // 显示
-    // 填充参考答案内容
-    if (refBody && !refBody.textContent.trim()) {
-      var answer = lab.getAttribute('data-answer') || '';
-      refBody.textContent = answer;
-    }
-    refPanel.classList.add('is-visible');
-    if (refBtn) {
-      refBtn.textContent = '隐藏答案';
-      refBtn.classList.add('is-active');
-    }
-  }
 }
 
 /* ========== 初始化 ========== */
-
-/**
- * 页面加载后自动初始化所有 code-lab 实例
- * - 绑定行号同步
- * - 绑定 Tab 键缩进
- * - 绑定按钮事件
- */
 function initCodeLabs() {
-  var labs = document.querySelectorAll('.code-lab');
+    var labs = document.querySelectorAll('.code-lab');
 
-  labs.forEach(function (lab) {
-    var textarea = getLabChild(lab, '.code-lab-textarea');
-    var lineNumbers = getLabChild(lab, '.code-lab-line-numbers');
-    var runBtn = getLabChild(lab, '.code-lab-btn--run');
-    var clearBtn = getLabChild(lab, '.code-lab-btn--clear');
-    var refBtn = getLabChild(lab, '.code-lab-btn--ref');
+    labs.forEach(function (lab) {
+        var textarea = getLabChild(lab, '.code-lab-textarea');
+        var lineNumbers = getLabChild(lab, '.code-lab-line-numbers');
+        var runBtn = getLabChild(lab, '.code-lab-btn-run');
+        var clearBtn = getLabChild(lab, '.code-lab-btn-clear');
+        var refBtn = getLabChild(lab, '.code-lab-btn-ref');
 
-    // 行号初始化与同步
-    if (textarea && lineNumbers) {
-      updateLineNumbers(textarea, lineNumbers);
-
-      textarea.addEventListener('input', function () {
-        updateLineNumbers(textarea, lineNumbers);
-      });
-
-      textarea.addEventListener('scroll', function () {
-        syncScroll(textarea, lineNumbers);
-      });
-    }
-
-    // Tab 键支持（插入 4 个空格而非跳转焦点）
-    if (textarea) {
-      textarea.addEventListener('keydown', function (e) {
-        if (e.key === 'Tab') {
-          e.preventDefault();
-          var start = this.selectionStart;
-          var end = this.selectionEnd;
-          var value = this.value;
-
-          this.value = value.substring(0, start) + '    ' + value.substring(end);
-          this.selectionStart = this.selectionEnd = start + 4;
-
-          updateLineNumbers(this, lineNumbers);
+        // 行号初始化与同步
+        if (textarea && lineNumbers) {
+            updateLineNumbers(textarea, lineNumbers);
+            textarea.addEventListener('input', function () {
+                updateLineNumbers(textarea, lineNumbers);
+            });
+            textarea.addEventListener('scroll', function () {
+                syncScroll(textarea, lineNumbers);
+            });
         }
-      });
-    }
 
-    // 绑定按钮事件
-    var labId = lab.id;
+        // Tab 键支持
+        if (textarea) {
+            textarea.addEventListener('keydown', function (e) {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    var start = this.selectionStart;
+                    var end = this.selectionEnd;
+                    this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+                    this.selectionStart = this.selectionEnd = start + 4;
+                    updateLineNumbers(this, lineNumbers);
+                }
+            });
+        }
 
-    if (runBtn) {
-      runBtn.addEventListener('click', function () {
-        runCode(labId);
-      });
-    }
-
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function () {
-        clearCode(labId);
-      });
-    }
-
-    if (refBtn) {
-      refBtn.addEventListener('click', function () {
-        toggleReference(labId);
-      });
-    }
-  });
+        // 按钮事件
+        var labId = lab.id;
+        if (runBtn) runBtn.addEventListener('click', function () { runCode(labId); });
+        if (clearBtn) clearBtn.addEventListener('click', function () { clearCode(labId); });
+        if (refBtn) refBtn.addEventListener('click', function () { toggleReference(labId); });
+    });
 }
 
-// DOM 就绪后自动初始化
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCodeLabs);
+    document.addEventListener('DOMContentLoaded', initCodeLabs);
 } else {
-  initCodeLabs();
+    initCodeLabs();
 }
