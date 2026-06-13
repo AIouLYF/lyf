@@ -91,7 +91,7 @@
 }
 
 /* 文件标签 */
-.code-lab-file-tab {
+.code-lab-tab {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -101,7 +101,7 @@
   user-select: none;
 }
 
-.code-lab-file-tab::before {
+.code-lab-tab::before {
   content: '';
   display: inline-block;
   width: 10px;
@@ -123,11 +123,12 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   cursor: pointer;
   color: #FFFFFF;
   transition: all 0.2s ease;
@@ -140,45 +141,45 @@
 }
 
 /* 运行代码 - 绿色 */
-.code-lab-btn--run {
+.code-lab-btn-run {
   background: #22c55e;
   box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
 }
 
-.code-lab-btn--run:hover {
+.code-lab-btn-run:hover {
   background: #16a34a;
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
 }
 
 /* 清除内容 - 橙色 */
-.code-lab-btn--clear {
+.code-lab-btn-clear {
   background: #f97316;
   box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
 }
 
-.code-lab-btn--clear:hover {
+.code-lab-btn-clear:hover {
   background: #ea580c;
   box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
 }
 
 /* 参考答案 - 紫色 */
-.code-lab-btn--ref {
+.code-lab-btn-ref {
   background: #a855f7;
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
 }
 
-.code-lab-btn--ref:hover {
+.code-lab-btn-ref:hover {
   background: #9333ea;
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
 }
 
-.code-lab-btn--ref.is-active {
+.code-lab-btn-ref.is-active {
   background: #7e22ce;
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
 }
 
 /* --- 代码输入框（textarea + 行号） --- */
-.code-lab-textarea-wrapper {
+.code-lab-textarea-wrap {
   position: relative;
   display: flex;
   min-height: 200px;
@@ -198,19 +199,19 @@
   user-select: none;
   overflow: hidden;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.3);
+  background: #0A0A0A;
 }
 
 .code-lab-textarea {
   flex: 1;
   width: 100%;
   padding: 14px 16px;
-  background: transparent;
-  color: #FFFFFF;
+  background: #111318;
+  color: #e8e8e8;
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 13px;
   line-height: 1.6;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.06);
   outline: none;
   resize: vertical;
   min-height: 200px;
@@ -261,7 +262,7 @@
   min-height: 60px;
   max-height: 400px;
   overflow-y: auto;
-  background: #0A0A0A;
+  background: #0D0D0D;
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 13px;
   line-height: 1.6;
